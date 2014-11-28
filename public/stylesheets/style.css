@@ -1,0 +1,185 @@
+body {
+	font: 14px "Segoe UI Light", sans-serif;
+	color:#f4f4f4;
+	background-color: #1b58b8;
+}
+
+a {
+	color: #00B7FF;
+}
+
+#header {
+	z-index:1;
+	background-color: #103570;
+}
+
+#YSESCentralText {
+	font-size:350%;
+	font-weight:normal;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+#name {
+	margin-top:10px;
+}
+
+.post {
+	margin-bottom:12px;
+	margin-top:12px;
+	color:black;
+	padding:15px;
+	overflow-wrap: break-word;
+}
+
+.post-PAD {
+	background:#f8d548;
+}
+
+.post-HR {
+	background:#70e2e1;
+}
+
+.post-Scho {
+	background:#e5af83;
+}
+
+.post-Sec {
+	background:#5ef644;
+}
+
+.post-VL {
+	background:#2faaf7;
+}
+
+.post-Exec {
+	background:#e3e3e3;
+}
+
+.post-Fin {
+	background:#ed6c5f;
+}
+
+.no-bullets {
+	list-style:none;
+	padding:0;
+}
+
+.padding-vert {
+	padding-left:5px;
+	padding-right:5px;
+}
+
+.label {
+	border-radius:0;
+	font-weight:normal;
+	margin-right:10px;
+	padding-left:10px;
+	padding-right:10px;
+	padding-top:0;
+	padding-bottom:0;
+}
+
+.label-PAD {
+	background:#e01313;
+}
+
+.label-HR {
+	background:#606ef5;
+}
+
+.label-Scho {
+	background:#f0ed00;
+}
+
+.label-Sec {
+	background:#d63ef1;
+}
+
+.label-VL {
+	background:#562c7c;
+}
+
+.label-Exec {
+	background:#585858;
+}
+
+.label-Fin {
+	background:#37c51b;
+}
+
+.title {
+	margin-top:10px;
+}
+
+.date {
+	font-size:80%;
+}
+
+.mini-pic {
+	width:50px;
+	float:left;
+	margin-right:10px;
+	margin-bottom:10px;
+}
+
+.tile-pic {
+	width:100%;
+	border:1px rgba(57,110,193,1) solid;
+}
+
+.tile {
+	padding:3px;
+}
+
+.btn-name {
+	border:0;
+	background:none;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
+.btn-name:hover {
+	background:#396ec1;
+}
+
+.metro-dropdown {
+	border:2px black solid;
+	border-radius:0;
+	top:90%;
+	box-shadow:none;
+}
+
+.bold {
+	font-weight:bold!important;
+}
+
+@media (max-width: 767px) {
+	#header	{width:100%;}
+	#announcementBox {
+		height:150px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	#header	{width:100%;}
+	#announcementBox{
+		height:193px;
+	}
+}
+  
+@media (min-width: 992px) and (max-width: 1199px) {
+	#header	{width:100%;}
+	#announcementBox{
+		height:235px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.hoverClose{
+		visibility:hidden;
+	}
+	.post:hover .hoverClose{
+		visibility:visible;
+	}
+}
