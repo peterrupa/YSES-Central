@@ -58,3 +58,8 @@ $("a.menu-icon").click(function(e) {
   }
  
 });
+
+//scroll
+$(document).ready(function(){
+	$("ul.open").niceScroll({ autohidemode: true });
+});
