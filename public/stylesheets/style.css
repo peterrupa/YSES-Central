@@ -16,8 +16,12 @@ a {
 #header {
 	z-index:1;
 	background-color: #103570;
+	position:fixed;
+	width:100%;
 }
-
+#containerMAIN	{
+	padding-top:70px;
+}
 #YSESCentralText {
 	font-size:350%;
 	font-weight:normal;
