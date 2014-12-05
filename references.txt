@@ -1,0 +1,3 @@
+chat sidebar http://www.webdesigncrowd.com/menu-transition-effects/
+
+parallax http://code.tutsplus.com/tutorials/simple-parallax-scrolling-technique--net-27641
