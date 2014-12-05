@@ -4,7 +4,6 @@ html
 		title= title
 		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
-		link(rel='stylesheet', href='/stylesheets/chat.css')
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
 	body(data-type="background",data-speed="2")
 		div#header.padding-vert(data-spy="affix",data-offset-top="60",data-offset-bottom="200")
@@ -17,14 +16,14 @@ html
 								img(src='images/cla.jpg',style='width:40px;margin-left:15px;')
 						ul.dropdown-menu.metro-dropdown(role="menu")
 							li
-								a.bold(href="1") Action
+								a.ajax.bold(href="1") Action
 							li
-								a.bold(href="2") Another action
+								a.ajax.bold(href="2") Another action
 							li
-								a.bold(href="3") Something else here
+								a.ajax.bold(href="3") Something else here
 							li.divider
 							li
-								a(href="fekyoulol") Separated link
+								a(href="logout") Log out
 					div.clearfix
 		div.container
 			div.row
@@ -62,7 +61,7 @@ html
 									button.close.hoverClose(type="button",aria-hidden="true") &times; 
 									div.row
 										img.mini-pic(src='images/jv.jpg')
-										h3.title John Vincent Sangkal
+										h3.title John Viscel Sangkal
 									p.date 11/29/14 9:03PM
 									div.row
 										p :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) 
@@ -78,8 +77,8 @@ html
 							img.tile-pic(src='images/jv.jpg')
 						div.col-lg-6.tile
 							img.tile-pic(src='images/cla.jpg')
-				script(src='javascripts/jquery-2.1.1.min.js')
-				script(src='javascripts/bootstrap.min.js')
-				script(src='javascripts/content-request.js')
-				script(src='javascripts/parallax.js')
-				script(src='javascripts/announcements.js')
+		script(src='javascripts/jquery-2.1.1.min.js')
+		script(src='javascripts/bootstrap.min.js')
+		script(src='javascripts/content-request.js')
+		script(src='javascripts/parallax.js')
+		script(src='javascripts/announcements.js')
