@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("a").click(function(){
+	$(".ajax").click(function(){
 		// use this for requested url: $(this).attr('href')
 		//insert ajax part here
 		$.ajax({
