@@ -1,7 +1,7 @@
 body {
 	font: 14px "Segoe UI Light", sans-serif;
 	color:#f4f4f4;
-	background:url('images/wallpaper.png') repeat-y center center; 
+	background:url('images/wallpaper2.png') repeat-y center center; 
 	-webkit-background-size: 100%;
 	-moz-background-size: 100%;
 	-o-background-size: 100%;
@@ -78,11 +78,11 @@ a {
 .label {
 	border-radius:0;
 	font-weight:normal;
-	margin-right:10px;
 	padding-left:10px;
 	padding-right:10px;
-	padding-top:0;
-	padding-bottom:0;
+	padding-top:5px;
+	padding-bottom:5px;
+	font-size:100%;	
 }
 
 .label-PAD {
@@ -115,6 +115,10 @@ a {
 
 .title {
 	margin-top:10px;
+}
+
+.op {
+	font-size:95%;
 }
 
 .date {
