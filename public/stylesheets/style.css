@@ -1,6 +1,11 @@
 body {
 	font: 14px "Segoe UI Light", sans-serif;
 	color:#f4f4f4;
+	background:url('images/wallpaper.png') repeat-y center center; 
+	-webkit-background-size: 100%;
+	-moz-background-size: 100%;
+	-o-background-size: 100%;
+	background-size: 100%;
 	background-color: #1b58b8;
 }
 

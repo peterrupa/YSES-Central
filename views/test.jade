@@ -1,0 +1,50 @@
+html
+	head
+		title Drag Demo
+		style(type="text/css").
+			body {background:blue;
+				 margin:0;}
+
+			.containerss {
+				margin-top: 50px;
+			}
+			#screen {
+				overflow:hidden;
+				width:150px;
+				height:150px;
+				clear:both;
+				position:relative;
+				background:white;
+				top:50px;
+				left:50px;
+				cursor:move;
+			}
+
+	body
+		div.containerss
+			div#screen
+				img#draggable.drag-image(src="images/nigger.jpg")
+		script(type="text/javascript",src="javascripts/jquery-2.1.1.min.js")
+		script(type="text/javascript",src="javascripts/jquery-ui.min.js")
+		script.
+			/* BE SURE TO MAKE IT SO THAT THERE WILL BE NO THUMBNAIL PROMPT IF HEIGHT == WIDTH */
+			$(document).ready(function(){
+				if($("#draggable").width()<$("#draggable").height()){
+					$("#draggable").width($("#screen").width());
+					$("#draggable").height("auto");
+				}
+				else{		
+					$("#draggable").width("auto");
+					$("#draggable").height($("#screen").height());
+				}
+				var xy = $("#screen").offset();
+				//be sure to take in account the pixel of the border
+				if($("#draggable").width()<=$("#draggable").height()){
+					var excess = $("#draggable").height()-$("#screen").height();
+					$("#draggable").draggable({containment:[xy.left,xy.top-excess,xy.left,xy.top]});
+				}
+				else{
+					var excess = $("#draggable").width()-$("#screen").width();
+					$("#draggable").draggable({containment:[xy.left-excess,xy.top,xy.left,xy.top]});
+				}
+			});

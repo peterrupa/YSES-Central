@@ -3,8 +3,33 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-	res.render('index', { title: 'YSES Central' });
+	var session = req.session;
+	if(session.userkey){
+		res.render('homepage', { title: 'YSES Central' });
+	}
+	else{
+		res.render('index');
+	}
 });
+
+router.get('/login', function(req, res) {
+	var session = req.session;
+	session.userkey = 'tricycle';
+	res.redirect('/');
+});
+
+router.get('/logout', function(req, res) {
+	var session = req.session;
+	session.destroy();
+	res.redirect('/');
+});
+
+/* TEST */
+router.get('/test', function(req, res) {
+	res.render('test');
+});
+
+/* CONTENT */
 
 router.get('/-content', function(req, res) {
 	res.render('index-content');

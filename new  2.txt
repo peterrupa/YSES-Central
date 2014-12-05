@@ -1,0 +1,87 @@
+Milestones:
+	- System template generated
+	- Basic routing DONE
+	- Basic homepage layout DONE
+	- Initial mobile friendliness (bootstrap)
+	- converting app into SPA
+	- Image processing integrated into system
+	- Sessions integrated into system
+	- Thumbnail selecting concept DONE
+	
+WIP
+	- everything else
+	
+System functionalities
+	- Sign up/Log in system (password encrypted in SHA 1)
+		- First name
+		- Middle name
+		- Last name
+		- Org Classification
+		- Department
+		- Student Number
+		- Username
+		- Password
+		- Org batch
+		- University batch
+		- Mentor
+		- Mentees
+		- Birthday
+		- Picture
+			- Thumbnail creator
+			- Image cropper
+		- Home Address
+		- College Address
+	- Announcement system
+		- Exec heads use their department tag to post announcements that can be seen by everyone
+		- Date and time is recorded
+	- YSES Logbook system
+		- User logged in can post that can be seen by others
+		- Date and time is recorded
+	- Chat system
+		- Contacts are displayed in a chat bar
+		- A window will pop up when a contact tile is clicked or someone messages you
+		- Imagine fb chat
+	- Department Systems
+		- PAD
+			- JPadsters Attendance and Scores system
+			- (Low prio) File Archiving System
+				- works like a cloud storage of files
+			- (Low prio) Committee Heads reporting system
+		- Sec
+			- Required events attendance
+			- (Low prio) File Archiving System
+			- (Low prio) Excuse letter system
+		- Scho
+			- Checklist System with GWA Calculator
+			- (Low prio) File Archiving System
+			- (Low prio) Random quiz generator
+			- (Low prio) Scho SOS
+		- HR
+			- Family Tree
+			- (Low prio) Trainess Information System
+			- (Low prio) HR Life Advices system
+		- Fin
+			- Member Fees Tracking record
+		- VL
+			- VL Inventory System
+		- Exec
+			- Announcement
+			- Edit Account Info
+			
+System design
+	- Mobile friendly
+	- Flowchart of SPA
+	- Flowchart of signing up/Logging in
+	- Flowchart of chat
+	- Flowchart of announcements/yses logbook
+	- Department flowcharts soon
+	
+Tech to use
+	- Github
+	- Node.js with Express
+	- Express-session
+	- GraphicsMagick
+	- socket.io
+	- jQuery and jQueryUI
+	- Bootstraps
+	- Database (mySQL)
