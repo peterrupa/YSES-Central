@@ -1,6 +1,7 @@
 var menu_head = $('ul.side-menu h2.title').height();
 var item_height = $('ul.side-menu li a').height();
 // Untoggle menu on click outside of it
+/*
 $(document).mouseup(function (e) {
   var container = $('ul.side-menu');
   if ((!container.is(e.target) && container.has(e.target).length === 0) && 
@@ -11,6 +12,7 @@ $(document).mouseup(function (e) {
     $('ul.side-menu h2').css("top", "-60px");
   }
 });
+*/ 
  
 $("a.menu-icon").click(function(e) {
   e.preventDefault();
