@@ -50,7 +50,7 @@ $("a.menu-icon").click(function(e) {
                 console.log(delayTime);
           $(this).css("left", fromLeft);
                 $(this).delay(delayTime).queue(function(){
-            $(this).css("top", fromTop);
+            $(this).css("top", fromTop+125);
             $(this).dequeue();
             });
         }

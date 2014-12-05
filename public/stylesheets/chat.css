@@ -4,13 +4,14 @@
 
 ul.side-menu {
   position: fixed;
-  top: 0;
+  top: 73px;
   right: -250px;
   width: 250px;
   height: 100%;
   background-color: #444;
   z-index: -1;
- 
+  overflow-y: auto;
+
   -webkit-transition: right .3s;
   transition: right .3s;
 }
