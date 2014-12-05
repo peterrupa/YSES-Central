@@ -1,79 +1,85 @@
-extends layout
-
-block content
-	div#header.padding-vert(data-spy="affix",data-offset-top="60",data-offset-bottom="200")
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel='stylesheet', href='/stylesheets/chat.css')
+		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
+	body(data-type="background",data-speed="2")
+		div#header.padding-vert(data-spy="affix",data-offset-top="60",data-offset-bottom="200")
+			div.container
+				div.row
+					h1#YSESCentralText(style='float:left') YSES Central
+					div.btn-group.hidden-xs.hidden-sm.hidden-md(style='float:right')
+						button.btn-name.dropdown-toggle(type="button",data-toggle="dropdown")
+							h3#name Name
+								img(src='images/cla.jpg',style='width:40px;margin-left:15px;')
+						ul.dropdown-menu.metro-dropdown(role="menu")
+							li
+								a.bold(href="1") Action
+							li
+								a.bold(href="2") Another action
+							li
+								a.bold(href="3") Something else here
+							li.divider
+							li
+								a(href="fekyoulol") Separated link
+					div.clearfix
 		div.container
 			div.row
-				h1#YSESCentralText(style='float:left') YSES Central
-				div.btn-group.hidden-xs.hidden-sm.hidden-md(style='float:right')
-					button.btn-name.dropdown-toggle(type="button",data-toggle="dropdown")
-						h3#name Name
-							img(src='images/cla.jpg',style='width:40px;margin-left:15px;')
-					ul.dropdown-menu.metro-dropdown(role="menu")
-						li
-							a.bold(href="1") Action
-						li
-							a.bold(href="2") Another action
-						li
-							a.bold(href="3") Something else here
-						li.divider
-						li
-							a(href="fekyoulol") Separated link
-				div.clearfix
-	div.container
-		div.row
-			div#content.col-lg-10
-				div.col-lg-4.padding-vert
-					h3 Announcements
-					ul.no-bullets
-						- for(var i=0;i<15;i++){
+				div#content.col-lg-10
+					div.col-lg-4.padding-vert
+						h3 Announcements
+						ul.no-bullets
+							- for(var i=0;i<15;i++){
+								li
+									div.post.post-PAD
+										button.close.hoverClose(type="button",aria-hidden="true") &times; 
+										div.row
+											h3.title
+												PF Committee Heads Survey
+										p.op Projects and Activities Department
+										p.date 11/29/14 9:03PM
+										div.row
+											p Good evening YSERS. We are here to ask you who are interested in being a committee head this coming PF 2014. Thank you!
+							- }
+							
+					div.col-lg-8.padding-vert
+						h3 Logbook
+						ul.no-bullets
 							li
-								div.post.post-PAD
+								div.post.post-Sec
 									button.close.hoverClose(type="button",aria-hidden="true") &times; 
 									div.row
-										h3.title
-											PF Committee Heads Survey
-									p.op Projects and Activities Department
+										img.mini-pic(src='images/cla.jpg')
+										h3.title Clarissa Estremos
 									p.date 11/29/14 9:03PM
 									div.row
-										p Good evening YSERS. We are here to ask you who are interested in being a committee head this coming PF 2014. Thank you!
-						- }
-						
-				div.col-lg-8.padding-vert
-					h3 Logbook
-					ul.no-bullets
-						li
-							div.post.post-Sec
-								button.close.hoverClose(type="button",aria-hidden="true") &times; 
-								div.row
-									img.mini-pic(src='images/cla.jpg')
-									h3.title Clarissa Estremos
-								p.date 11/29/14 9:03PM
-								div.row
-									p I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! 
-						li
-							div.post.post-HR
-								button.close.hoverClose(type="button",aria-hidden="true") &times; 
-								div.row
-									img.mini-pic(src='images/jv.jpg')
-									h3.title John Vincent Sangkal
-								p.date 11/29/14 9:03PM
-								div.row
-									p :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) 
-			div.col-lg-2.padding-vert.hidden-xs.hidden-sm.hidden-md
-				h3 Chat
-				div.row
-					div.col-lg-6.tile
-						img.tile-pic(src='images/cla.jpg')
-					div.col-lg-6.tile
-						img.tile-pic(src='images/jv.jpg')
-				div.row
-					div.col-lg-6.tile
-						img.tile-pic(src='images/jv.jpg')
-					div.col-lg-6.tile
-						img.tile-pic(src='images/cla.jpg')
-			script(src='javascripts/jquery-2.1.1.min.js')
-			script(src='javascripts/bootstrap.min.js')
-			script(src='javascripts/content-request.js')
-			script(src='javascripts/parallax.js')
-			script(src='javascripts/announcements.js')
+										p I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! I love penguins! 
+							li
+								div.post.post-HR
+									button.close.hoverClose(type="button",aria-hidden="true") &times; 
+									div.row
+										img.mini-pic(src='images/jv.jpg')
+										h3.title John Vincent Sangkal
+									p.date 11/29/14 9:03PM
+									div.row
+										p :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) 
+				div.col-lg-2.padding-vert.hidden-xs.hidden-sm.hidden-md
+					h3 Chat
+					div.row
+						div.col-lg-6.tile
+							img.tile-pic(src='images/cla.jpg')
+						div.col-lg-6.tile
+							img.tile-pic(src='images/jv.jpg')
+					div.row
+						div.col-lg-6.tile
+							img.tile-pic(src='images/jv.jpg')
+						div.col-lg-6.tile
+							img.tile-pic(src='images/cla.jpg')
+				script(src='javascripts/jquery-2.1.1.min.js')
+				script(src='javascripts/bootstrap.min.js')
+				script(src='javascripts/content-request.js')
+				script(src='javascripts/parallax.js')
+				script(src='javascripts/announcements.js')
