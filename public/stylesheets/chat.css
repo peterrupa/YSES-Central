@@ -9,8 +9,7 @@ ul.side-menu {
   width: 250px;
   height: 100%;
   background-color: #444;
-  z-index: -1;
-  overflow-y: auto;
+  z-index: 1;
 
   -webkit-transition: right .3s;
   transition: right .3s;

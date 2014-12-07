@@ -47,7 +47,6 @@ $("a.menu-icon").click(function(e) {
             var fromTop = menu_head + (row_i * 125);
                 var fromLeft = col_i * 125;
                 var delayTime = (row_i * 200) + Math.floor((Math.random() * 200) + 1);
-                console.log(delayTime);
           $(this).css("left", fromLeft);
                 $(this).delay(delayTime).queue(function(){
             $(this).css("top", fromTop+125);
@@ -61,5 +60,5 @@ $("a.menu-icon").click(function(e) {
 
 //scroll
 $(document).ready(function(){
-	$("ul.open").niceScroll({ autohidemode: true });
+	$("ul.side-menu").niceScroll().hide();
 });
