@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 
 //for image processing
 var fs = require('fs');
-var im = require('gm');
+var im = require('gm'); 
 var gm = im.subClass({imageMagic:true});
 
 //application dependencies
