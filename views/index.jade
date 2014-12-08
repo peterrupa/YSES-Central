@@ -3,7 +3,6 @@ html
 	head
 		title YSES Central
 		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-		link(rel='stylesheet', href='/stylesheets/index.css')
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
 	body
 		h1 Log in
@@ -15,54 +14,73 @@ html
 			input(type="submit")
 		h1 Sign up
 		form
-			p First name:
-				input(type="text",name="first-name")
-			p Middle name:
-				input(type="text",name="middle-name")
-			p Last name:
-				input(type="text",name="last-name")
-			P Org Classification:
-				select
-					option Active
-					option Inactive
-					option Alumni
-			P Department:
-				select
-					optgroup(label="Projects and Activities")
-						option Junior
-						option Senior
-					option Visuals and Logistics
-					option Secretariat
-					option Scholastics
-					option Finance
-					option Human Resources
-			p Student Number:
-				input(type="text",name="sn-year")
-				span -
-				input(type="text",name="sn-number")
-			p Username:
-				input(type="text",name="username")
-			p Password:
-				input(type="password",name="password")
-			p Organization Batch:
-				select
-					option Charter
-					option Synergy
-					option RAMpage
-			p University Batch:
-				select
-					option 1998
-					option 2012
-					option 2014
-			p Mentor:
-				input(type="text",name="mentor")
-			P Mentees:
-				input(type="text",name="username")
-			p Birthday:
-				input(type="date",name="bday")
-			p Home Address
-				input(type="text",name="homeAdd")
-			p College Address
-				input(type="text",name="collegeAdd")
+			ul.no-bullets
+				li
+					span First name:
+					input(type="text",name="first-name")
+				li
+					span Middle name:
+					input(type="text",name="middle-name")
+				li
+					span Last name:
+					input(type="text",name="last-name")
+				li
+					span Org Classification:
+					select
+						option Active
+						option Inactive
+						option Alumni
+				li
+					span Department:
+					select
+						optgroup(label="Projects and Activities")
+							option Junior
+							option Senior
+						option Visuals and Logistics
+						option Secretariat
+						option Scholastics
+						option Finance
+						option Human Resources
+				li
+					span Student Number:
+					input(type="text",name="sn-year")
+					span -
+					input(type="text",name="sn-number")
+				li
+					span Username:
+					input(type="text",name="username")
+				li
+					span Password:
+					input(type="password",name="password")
+				li
+					span Organization Batch:
+					select
+						option Charter
+						option Synergy
+						option RAMpage
+				li
+					span University Batch:
+					select
+						option 1998
+						option 2012
+						option 2014
+				li
+					span Mentor:
+					input(type="text",name="mentor")
+				li#mentees
+					span Mentees:
+					div.mentee-field
+						input.mentee-textfield(type="text",name="mentee-1")
+						input.add-mentee(type="button",value="Add")
+				li
+					span Birthday:
+					input(type="date",name="bday")
+				li
+					span Home Address
+					input(type="text",name="homeAdd")
+				li
+					span College Address
+					input(type="text",name="collegeAdd")
 			input(type="submit")
-
+	script(src='javascripts/jquery-2.1.1.min.js')
+	script(src="javascripts/signup.js")
