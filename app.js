@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var multer = require('multer');
 
 //for image processing
 var fs = require('fs');
@@ -23,18 +24,34 @@ var http = require('http').Server(app);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
+// favicon
 app.use(favicon(__dirname + '/public/favico.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//sessions
 app.use(cookieParser());
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true
 }))
+
 app.use(express.static(path.join(__dirname, 'public')));
+
+//upload
+app.use(multer({dest:'./public/uploads/',
+	rename: function(fieldname, filename){
+		return filename+Date.now();
+	},
+	onFileUploadStart:function (file){
+		console.log(file.originalname + ' is starting ...')
+	},
+	onFileUploadComplete: function(file){
+		console.log(file.fieldname + ' uploaded to  ' + file.path)
+	}
+}));
 
 app.use('/', routes);
 app.use('/users', users);

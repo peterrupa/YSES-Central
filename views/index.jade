@@ -2,7 +2,8 @@ doctype html
 html
 	head
 		title YSES Central
-		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+		link(rel='stylesheet',href='/stylesheets/bootstrap.min.css')
+		link(rel='stylesheet',href='/stylesheets/index.css')
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
 	body
 		h1 Log in
@@ -13,7 +14,7 @@ html
 			input(type="password")
 			input(type="submit")
 		h1 Sign up
-		form
+		form#signupform(action="signup",method="post",enctype="multipart/form-data")
 			ul.no-bullets
 				li
 					span First name:
@@ -81,6 +82,14 @@ html
 				li
 					span College Address
 					input(type="text",name="collegeAdd")
+				li
+					span Picture
+					input(id="photo",type="file",name="photo")
+					div#preview
+				input#imageleft(type="hidden",name="imageleft")
+				input#imagetop(type="hidden",name="imagetop")
+				input#numberofmentees(type="hidden",name="numberofmentees")
 			input(type="submit")
 	script(src='javascripts/jquery-2.1.1.min.js')
+	script(type="text/javascript",src="javascripts/jquery-ui.min.js")
 	script(src="javascripts/signup.js")

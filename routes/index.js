@@ -28,6 +28,10 @@ router.get('/logout', function(req, res) {
 router.get('/test', function(req, res) {
 	res.render('test');
 });
+router.post('/upload',function(req,res){
+	console.log(req.files);
+	res.end("File uploaded.");
+});
 
 /* CONTENT */
 

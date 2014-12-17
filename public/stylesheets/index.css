@@ -1,0 +1,9 @@
+#screen {
+	overflow:hidden;
+	width:150px;
+	height:150px;
+	clear:both;
+	position:relative;
+	background:white;
+	cursor:move;
+}
