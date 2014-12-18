@@ -3,7 +3,7 @@ $(document).ready(function(){
 	$("#mentees").on('click','.mentee-field .add-mentee',function(){
 		var newfield = '<div class="mentee-field input-group"><input class="mentee-textfield form-control" type="text" name="mentee-'+ ++numberOfMentees +'"><span class="input-group-btn"><button class="add-mentee btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></span></div>'
 		$(this).append('<span class="glyphicon glyphicon-remove"></span>');
-		$(this).find('glyphicon-plus').remove();
+		$(this).find('.glyphicon-plus').remove();
 		$(this).removeClass('add-mentee');
 		$(this).addClass('remove-mentee');
 		$("#mentees").append(newfield);
