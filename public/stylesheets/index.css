@@ -1,108 +1,184 @@
 body{
 	font: 14px "Segoe UI Light", sans-serif;
-	background:url('../images/bubble.png') repeat-y center center; 
+	background:url('../images/bubble2.png');
+	background-repeat: no-repeat;
 	-webkit-background-size: 100%;
 	-moz-background-size: 100%;
 	-o-background-size: 100%;
 	background-size: 100%;
-	background-color: #1b58b8;
+	background-color: #133c7b;
 	
 	overflow: hidden;
 }
 
-.center-block {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.navbar-brand{
+	width: 260px;
+}
+
+#logo{
+	position: relative;
+	float:left;
+	margin-left: 10px;
+	margin-right: 15px;
+	top:-6px;
+	width:35px;
+	height:auto;
+}
+
+.no-bullets {
+	list-style:	none;
+	padding: 0;
+	margin:	2px;
 }
 
 .encloseall{
 	color:white;
-}
-
-.carou{
-	float: left;
-	width:600px;
-	height: 100%;
-}
-
-.carousel-indicators{
-	position:relative;top:10px;
+	margin-top: 100px;
+	margin-bottom: 70px;
 }
 
 .box{
-	position:relative;
-	float:			left;
-	margin:			20px;
-	padding-top: 	00px;
-	
-	
-	overflow-y: auto;
+	background-color: 	rgba(0,0,50,1);
+	height:				250px;
+	padding-right:		15px;
+	padding-left:		15px;
+	margin-bottom:		5px;
 
 	-webkit-transition: right .3s;
-	transition: right .3s;
-}
-
-.sign{
-	float: 		left;
-	height:		250px;
-	width: 		250px;
-	padding-left:	20px;
-	padding-right:	20px;
-
-	background-color: rgba(100,100,100,.8);
-}
-
-.main{
-	height:		540px;
-	width: 		540px;
-
-	background: url('../images/index3.png') center center;
-	-webkit-background-size: 100%;
-	-moz-background-size: 100%;
-	-o-background-size: 100%;
-	background-size: 100%;
-	background-color: rgba(0,0,0,.8);
+	transition: 		right .3s;
 }
 
 .gallery{
-	width:540px;
-	height:250px;
-	background-color: rgba(255,255,255,1);
-}
-
-.image{
-	position: relative;
 	width:100%;
-	height: 250px;
-
+	height:100%;
+	margin:0px;
+	background-color: rgba(100,100,100,1);
 }
 
-#image1{
-	background: url('../images/oble.jpg') center center;
-	background-size: 100% 100%;
+.navbutton{
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
-#image2{
-	background: url('../images/for.jpg') center center;
-	background-size: 100% 100%;
+/*CUSTOM NAVBAR COLOR*/
+.navbar-default {
+	background-color: rgba(23,15,130,0.8);
+	border-color: rgba(16,26,95,0.5);
+}
+.navbar-default .navbar-brand {
+	color: #ecf0f1;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+	color: #bbbbbb;
+}
+.navbar-default .navbar-text {
+	color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > a {
+	color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+	color: #bbbbbb;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+	color: #bbbbbb;
+	background-color: rgba(16,26,95,0.9);
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+	color: #bbbbbb;
+	background-color: rgba(16,26,95,0.9);
+}
+.navbar-default .navbar-toggle {
+	border-color: rgba(16,26,95,0.9);
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+	background-color: rgba(16,26,95,0.9);
+}
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: #ecf0f1;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+	border-color: #ecf0f1;
+}
+.navbar-default .navbar-link {
+	color: #ecf0f1;
+}
+.navbar-default .navbar-link:hover {
+	color: #bbbbbb;
 }
 
-#image3{
-	background: url('../images/city.jpg') center center;
-	background-size: 100% 100%;
+@media (max-width: 767px) {
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+		color: #ecf0f1;
+	}
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+		color: #bbbbbb;
+	}
+	.navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+		color: #bbbbbb;
+		background-color: rgba(16,26,95,0.9);
+	}
+}
+/*-------------*/
+
+.modal, #signupModal, #loginModal{
+	position: fixed;
+	height:100%;
+	padding:0;
+	margin:0;
+}
+
+.modal-content{
+	color: white;
+	padding:9px 15px;
+	background-color: rgba(20,20,100,0.99);
+	-webkit-border-top-left-radius: 0px;
+	-webkit-border-top-right-radius: 0px;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border:0px;
+}
+
+.modal-body{
+	width: 100%;
+	max-height:300px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+.mentee-field{
+	width:175px;
+	margin: 12px;
+}
+
+.add-mentee.btn, .remove-mentee.btn{
+	width:50px;
+}
+
+ul.container{
+	padding:0%;
+	width:100%;
+}
+
+.navbutton li{
+	margin-bottom: 12px;
 }
 
 ::-webkit-scrollbar {
-    width: 12px;
+	width: 12px;
 }
  
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
+	border-radius: 10px;
 }
  
 ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2); 
 }
