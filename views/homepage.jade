@@ -25,6 +25,9 @@ html
 							li.divider
 							li
 								a(href="logout") Log out
+						div#chatbox-icon
+							a.menu-icon(href="#")
+								span.glyphicon.glyphicon-send
 					div.clearfix
 		div#containerMAIN
 			div.container
@@ -50,7 +53,7 @@ html
 							h3 Logbook
 							ul.no-bullets
 								li
-									div.post.post-Sec
+									div.post
 										button.close.hoverClose(type="button",aria-hidden="true") &times; 
 										div.row
 											img.mini-pic(src='images/cla.jpg')
@@ -59,7 +62,7 @@ html
 										div.row
 											p Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here.
 								li
-									div.post.post-HR
+									div.post
 										button.close.hoverClose(type="button",aria-hidden="true") &times; 
 										div.row
 											img.mini-pic(src='images/jv.jpg')
@@ -67,8 +70,8 @@ html
 										p.date 11/29/14 9:03PM
 										div.row
 											p :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) 
-					div.col-lg-2.padding-vert.hidden-xs.hidden-sm.hidden-md
-						a.menu-icon(href="#") Click me
+					// chatbox
+					div#chatbox.col-lg-2.padding-vert.hidden-xs.hidden-sm.hidden-md
 						ul.no-bullets.side-menu
 							li.chat-row
 								ul.no-bullets
