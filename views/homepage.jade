@@ -1,7 +1,7 @@
 doctype html
 html
 	head
-		title= title
+		title YSES Central
 		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
@@ -12,8 +12,8 @@ html
 					h1#YSESCentralText(style='float:left') YSES Central
 					div.btn-group.hidden-xs.hidden-sm.hidden-md(style='float:right')
 						button.btn-name.dropdown-toggle(type="button",data-toggle="dropdown")
-							h3#name Name
-								img(src='images/cla.jpg',style='width:40px;margin-left:15px;')
+							h3#name #{name}
+								img(src='#{picture}',style='width:40px;margin-left:15px;')
 						ul.dropdown-menu.metro-dropdown(role="menu")
 							li
 								a.ajax.bold(href="1") Action

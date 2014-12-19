@@ -7,11 +7,11 @@ html
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
 	body
 		h1 Log in
-		form(action='login',method="post")
+		form#loginform(action='login',method="post")
 			span Username:
-			input(type="text")
+			input(type="text",name="username")
 			span Password:
-			input(type="password")
+			input(type="password",name="password")
 			input(type="submit")
 		h1 Sign up
 		form#signupform(action="signup",method="post",enctype="multipart/form-data")

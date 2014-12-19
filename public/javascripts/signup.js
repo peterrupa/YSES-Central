@@ -81,7 +81,12 @@ $(document).ready(function(){
 		createPreview();
 	});
 	
-	//onsubmit
+	//onsubmit login
+	$("#loginform").on("submit",function(){
+		$("input[name='password']").val(String(CryptoJS.SHA3($("input[name='password']").val(),{ outputLength: 224 })));
+	});
+	
+	//onsubmit signup
 	$("#signupform").on("submit",function(){
 		var previewCoordinates = $("#draggable").position();
 		

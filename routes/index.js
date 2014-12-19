@@ -7,21 +7,60 @@ var multer = require('multer');
 var im = require('gm');
 var gm = im.subClass({imageMagic:true});
 
+//database
+var mysql = require('mysql');
+
 /* GET home page. */
 router.get('/', function(req, res) {
 	var session = req.session;
 	if(session.userkey){
-		res.render('homepage', { title: 'YSES Central' });
+		var connection = mysql.createConnection({
+			host : 'localhost',
+			user : 'root',
+			password : '',
+			database: 'yses_central'
+		});
+
+		connection.connect();
+		connection.query("SELECT first_name, picture FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows){
+			if(err) console.log(err);
+			else{
+				res.render('homepage',{name: rows[0]["first_name"],picture: rows[0]["picture"].substring(7)});
+			}
+		});
 	}
 	else{
 		res.render('index');
 	}
 });
 
+//profiles
+router.get('/profile/:name',function(req,res){
+	res.send(req.params.name);
+});
+
 router.post('/login', function(req, res) {
-	var session = req.session;
-	session.userkey = 'tricycle';
-	res.redirect('/');
+	var connection = mysql.createConnection({
+		host : 'localhost',
+		user : 'root',
+		password : '',
+		database: 'yses_central'
+	});
+
+	connection.connect();
+	connection.query("SELECT username FROM `accounts` WHERE username="+connection.escape(req.body["username"])+"&&password="+connection.escape(req.body["password"]),function(err,rows){
+		if(rows[0]){ //successful login
+			var session = req.session;
+			session.userkey = rows[0]["username"];
+			res.redirect("/");
+		}
+		else{ //no result
+			//insert ajax response here
+			res.send("None!");
+		}
+	});
+	
+	
 });
 
 router.post('/logout', function(req, res) {
@@ -69,15 +108,12 @@ router.post('/signup',
 		});
 		
 		//save to database
-		var mysql = require('mysql');
 		var connection = mysql.createConnection({
 			host : 'localhost',
 			user : 'root',
 			password : '',
 			database: 'yses_central'
 		});
-		
-		//connection.connect();
 		
 		var studentNumber = req.body["sn-year"]+"-"+req.body["sn-number"];
 		
@@ -137,8 +173,7 @@ router.get('/-content', function(req, res) {
 		res.render('homepage-content');
 	}
 	else{
-		//edit this
-		res.send("You are not allowed to view this page.");
+		res.redirect("/");
 	}
 });
 
@@ -149,7 +184,7 @@ router.get('/1-content', function(req, res) {
 	}
 	else{
 		//edit this
-		res.send("You are not allowed to view this page.");
+		res.redirect("/");
 	}
 });
 
@@ -160,7 +195,7 @@ router.get('/2-content', function(req, res) {
 	}
 	else{
 		//edit this
-		res.send("You are not allowed to view this page.");
+		res.redirect("/");
 	}
 });
 
@@ -171,10 +206,8 @@ router.get('/3-content', function(req, res) {
 	}
 	else{
 		//edit this
-		res.send("You are not allowed to view this page.");
+		res.redirect("/");
 	}
 });
-
-
 
 module.exports = router;
