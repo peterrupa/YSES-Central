@@ -56,6 +56,7 @@ $(document).ready(function(){
 	}
 	//add/remove mentees
 	var numberOfMentees = 1;
+	
 	$("#mentees").on('click','.mentee-field .add-mentee',function(){
 		var newfield = '<div class="mentee-field"><input class="mentee-textfield" type="text" name="mentee-'+ ++numberOfMentees +'"><input class="add-mentee" type="button" value="Add"></div>'
 		$(this).val('Remove');
@@ -83,10 +84,17 @@ $(document).ready(function(){
 	//onsubmit
 	$("#signupform").on("submit",function(){
 		var previewCoordinates = $("#draggable").position();
-		alert("woot");
+		
 		$("#imageleft").val(previewCoordinates.left);
 		$("#imagetop").val(previewCoordinates.top);
 		$("#numberofmentees").val(numberOfMentees);
+		//encrypt password
+		$("input[name='password']").val(String(CryptoJS.SHA3($("input[name='password']").val(),{ outputLength: 224 })));
+		
+		if($(".mentee-textfield[name='mentee-1']").val() == "" && numberOfMentees == 1){
+			$("#numberofmentees").val(0);
+		}
+		
 	});
 });
 

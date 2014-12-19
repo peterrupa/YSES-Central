@@ -7,7 +7,7 @@ html
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
 	body
 		h1 Log in
-		form(action='login')
+		form(action='login',method="post")
 			span Username:
 			input(type="text")
 			span Password:
@@ -27,21 +27,21 @@ html
 					input(type="text",name="last-name")
 				li
 					span Org Classification:
-					select
-						option Active
-						option Inactive
-						option Alumni
+					select(form="signupform",name="org-class")
+						option(value="Active") Active
+						option(value="Inactive") Inactive
+						option(value="Alumni") Alumni
 				li
 					span Department:
-					select
+					select(form="signupform",name="department")
 						optgroup(label="Projects and Activities")
-							option Junior
-							option Senior
-						option Visuals and Logistics
-						option Secretariat
-						option Scholastics
-						option Finance
-						option Human Resources
+							option(value="jpad") Junior
+							option(value="spad") Senior
+						option(value="vl") Visuals and Logistics
+						option(value="sec") Secretariat
+						option(value="scho") Scholastics
+						option(value="fin") Finance
+						option(value="hr") Human Resources
 				li
 					span Student Number:
 					input(type="text",name="sn-year")
@@ -55,16 +55,16 @@ html
 					input(type="password",name="password")
 				li
 					span Organization Batch:
-					select
-						option Charter
-						option Synergy
-						option RAMpage
+					select(form="signupform",name="org-batch")
+						option(value="Charter") Charter
+						option(value="Synergy") Synergy
+						option(value="RAMpage") RAMpage
 				li
 					span University Batch:
-					select
-						option 1998
-						option 2012
-						option 2014
+					select(form="signupform",name="univ-batch")
+						option(value="1998") 1998
+						option(value="2012") 2012
+						option(value="2014") 2014
 				li
 					span Mentor:
 					input(type="text",name="mentor")
@@ -92,4 +92,5 @@ html
 			input(type="submit")
 	script(src='javascripts/jquery-2.1.1.min.js')
 	script(type="text/javascript",src="javascripts/jquery-ui.min.js")
+	script(src="javascripts/sha3.js")
 	script(src="javascripts/signup.js")

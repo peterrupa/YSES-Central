@@ -23,7 +23,8 @@ html
 								a.ajax.bold(href="3") Something else here
 							li.divider
 							li
-								a(href="logout") Log out
+								form#logout(action="logout",method="post")
+								a(href="javascript:{}",onclick="$('#logout').submit()") Log out
 					div.clearfix
 		div#containerMAIN
 			div.container

@@ -6,12 +6,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var multer = require('multer');
-
-//for image processing
-var fs = require('fs');
-var im = require('gm');
-var gm = im.subClass({imageMagic:true});
 
 //application dependencies
 var routes = require('./routes/index');
@@ -40,18 +34,7 @@ app.use(session({
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-//upload
-app.use(multer({dest:'./public/uploads/',
-	rename: function(fieldname, filename){
-		return filename+Date.now();
-	},
-	onFileUploadStart:function (file){
-		console.log(file.originalname + ' is starting ...')
-	},
-	onFileUploadComplete: function(file){
-		console.log(file.fieldname + ' uploaded to  ' + file.path)
-	}
-}));
+
 
 app.use('/', routes);
 app.use('/users', users);
