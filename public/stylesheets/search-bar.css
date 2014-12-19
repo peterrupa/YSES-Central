@@ -30,6 +30,11 @@
 	width:100%;
 }
 
+#srch-button, #tags{
+	border-radius:0;
+
+}
+
 .ui-widget, #tags{
 	font-family:inherit;
 	font-size:inherit;	
