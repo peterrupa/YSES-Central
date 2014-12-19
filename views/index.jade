@@ -4,6 +4,7 @@ html
 		title YSES Central
 		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 		link(rel='stylesheet', href='/stylesheets/index.css')
+		link(rel='stylesheet', href='/stylesheets/custom-navbar.css')
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
 	
 	body(data-type="background",data-speed="")
@@ -64,9 +65,10 @@ html
 													br
 													li Student Number:
 														br
-														input.form-control(type="text",style="float:left;width:80px",maxlength="4",name="sn-year",placeholder="20XX")
-														span(style="float:left;") &nbsp;-&nbsp; 
-														input.form-control(type="text",style="float:left;width:80px",maxlength="5",name="sn-number",placeholder="XXXXX")
+														div#student-number.input-group
+															input.form-control.sn(type="text",maxlength="4",name="sn-year",placeholder="20XX")
+															span.input-group-addon.form-control - 
+															input.form-control.sn(type="text",maxlength="5",name="sn-number",placeholder="XXXXX")
 													br
 													li Username:
 														br
@@ -124,7 +126,7 @@ html
 													span.sr-only Close
 												h4.modal-title Log In
 											div.modal-body
-												div.item.form-group
+												div.form-group
 														ul.list-inline.container
 															li Username:
 																input.form-control(type="text")

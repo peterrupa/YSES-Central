@@ -4,9 +4,9 @@
 
 ul.side-menu {
 	position: fixed;
-	top: 73px;
+	top: 61px;
 	right: -250px;
-	overflow: webkit-scollbar;
+	overflow: visible;
 	width: 250px;
 	height: 100%;
 	background-color: #444;
@@ -52,7 +52,10 @@ ul.side-menu li.metro {
 	background-color: #CCC;
 }
 
-ul.side-menu li.metro.half { width: 50%; }
+ul.side-menu li.metro.half { 
+	width: 50%; 
+	z-index: 0;
+}
 ul.side-menu li.metro.full { width: 100%; }
 
 ul.side-menu h2.title {

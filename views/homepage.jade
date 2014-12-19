@@ -5,29 +5,43 @@ html
 		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		link(rel='stylesheet', href='/stylesheets/chat.css')
+		link(rel='stylesheet', href='/stylesheets/custom-navbar.css')
+		link(rel='stylesheet', href='/stylesheets/jquery-ui.css')
+		link(rel='stylesheet', href='/stylesheets/search-bar.css')
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
 	body(data-type="background",data-speed="2")
 		div#header.padding-vert
-			div.container
-				div.row
-					h1#YSESCentralText(style='float:left') YSES Central
-					div.btn-group.hidden-xs.hidden-sm.hidden-md(style='float:right')
-						button.btn-name.dropdown-toggle(type="button",data-toggle="dropdown")
-							h3#name Name
-								img(src='images/cla.jpg',style='width:40px;margin-left:15px;')
-						ul.dropdown-menu.metro-dropdown(role="menu")
-							li
-								a.ajax.bold(href="1") Action
-							li
-								a.ajax.bold(href="2") Another action
-							li
-								a.ajax.bold(href="3") Something else here
-							li.divider
-							li
-								a(href="logout") Log out
-						div#chatbox-icon
-							a.menu-icon(href="#")
-								span.glyphicon.glyphicon-send
+			nav.navbar.navbar-default.navbar-fixed-top
+				div.container
+					div.navbar-header
+						div#central-title
+							a.navbar-brand(href="#")
+								img#logo.img-responsive(src="../images/logoAllWhite.png")
+								h2(style="position:relative;margin:0px;top:-7px;") YSES-Central
+						div#search-bar.input-group.hidden-xs.hidden-sm.hidden-md
+							// label(for="tags")
+							input#tags.form-control(type="text",name="mentee-1")
+							span.input-group-btn
+								button#srch-button.btn.btn-default(type="button",value="+")
+									span.glyphicon.glyphicon-search
+						div.btn-group.hidden-xs.hidden-sm.hidden-md(style='float:right')
+							div#navigation-buttons
+								button.btn-name.dropdown-toggle(type="button",data-toggle="dropdown")
+									h3#name This is short name
+										img(src='images/cla.jpg',style='width:40px;margin-left:15px;')
+								ul.dropdown-menu.metro-dropdown(role="menu")
+									li
+										a.ajax.bold(href="1") Action
+									li
+										a.ajax.bold(href="2") Another action
+									li
+										a.ajax.bold(href="3") Something else here
+									li.divider
+									li
+										a(href="logout") Log out
+								div#chatbox-icon
+									a.menu-icon(href="#")
+										span.glyphicon.glyphicon-send
 					div.clearfix
 		div#containerMAIN
 			div.container
@@ -115,7 +129,7 @@ html
 										img.tile-pic(src='images/cla.jpg')
 									li.metro.half
 										img.tile-pic(src='images/jv.jpg')
-							
+
 		script(src='javascripts/jquery-2.1.1.min.js')
 		script(src='javascripts/bootstrap.min.js')
 		script(src='javascripts/jquery.nicescroll.js')
@@ -123,3 +137,6 @@ html
 		script(src='javascripts/parallax.js')
 		script(src='javascripts/announcements.js')
 		script(src='javascripts/chatbox.js')
+		script(src='javascripts/autocomplete.js')
+		script(src='javascripts/jquery-ui.js')
+		script(src='javascripts/jquery-ui.min.js')
