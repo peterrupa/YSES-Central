@@ -4,7 +4,7 @@ $(document).ready(function(){
 		//insert ajax part here
 		$.ajax({
 			async: false,
-			url: "/"+$(this).attr('href')+"-content",
+			url: $(this).attr('href')+"/content",
 			data: "",
 			type: "GET",
 			success: function (res) {
@@ -22,13 +22,14 @@ $(document).ready(function(){
 	window.addEventListener("popstate", function(e) {
 		$.ajax({
 			async: false,
-			url: location.pathname+"-content",
+			url: location.pathname=="/"?"http://localhost:8080/content":location.pathname+"/content",
 			data: "",
 			type: "GET",
 			success: function (res) {
 				$("#content").html(res);
 			},
 			error: function (e){
+				console.dir(location.pathname+"/content");
 				console.dir(e);
 			}
 		});

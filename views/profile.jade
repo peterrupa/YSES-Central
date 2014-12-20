@@ -1,0 +1,25 @@
+doctype html
+html
+	head
+		title Profile
+	body
+		p First name: #{rows["first_name"]}
+		p Middle name: #{rows["middle_name"]}
+		p Last name: #{rows["last_name"]}
+		p Org classification: #{rows["org_class"]}
+		p Department: #{rows["department"]}
+		p Student number: #{rows["student_number"]}
+		p Org batch: #{rows["org_batch"]}
+		p University Batch: #{rows["univ_batch"]}
+		p Mentor: #{rows["mentor"]}
+		if rows2.length > 0
+			p Mentees
+			ul
+				- var i = 0
+				while i < rows2.length
+					li= rows2[i]["mentees"]
+					- i++
+		p Birthday: #{rows["birthday"]}
+		p Home address: #{rows["home_address"]}
+		p College address : #{rows["college_address"]}
+		img(src='../#{rows["picture"]}')

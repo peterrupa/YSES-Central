@@ -16,14 +16,14 @@ html
 								img(src='#{picture}',style='width:40px;margin-left:15px;')
 						ul.dropdown-menu.metro-dropdown(role="menu")
 							li
-								a.ajax.bold(href="1") Action
+								a.ajax.bold(href="http://localhost:8080/profile/#{name}") View profile
 							li
-								a.ajax.bold(href="2") Another action
+								a.ajax.bold(href="http://localhost:8080/2") Another action
 							li
-								a.ajax.bold(href="3") Something else here
+								a.ajax.bold(href="http://localhost:8080/3") Something else here
 							li.divider
 							li
-								form#logout(action="logout",method="post")
+								form#logout(action="http://localhost:8080/logout",method="post")
 								a(href="javascript:{}",onclick="$('#logout').submit()") Log out
 					div.clearfix
 		div#containerMAIN

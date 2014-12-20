@@ -35,8 +35,56 @@ router.get('/', function(req, res) {
 });
 
 //profiles
-router.get('/profile/:name',function(req,res){
-	res.send(req.params.name);
+router.get('/profile/:name/content',function(req,res){
+	var session = req.session;
+	
+	if(session.userkey){
+		var connection = mysql.createConnection({
+			host : 'localhost',
+			user : 'root',
+			password : '',
+			database: 'yses_central'
+		});
+
+		connection.connect();
+		connection.query("SELECT first_name FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
+			if(err){
+				console.log(err);
+				res.send("Internal server error!");
+			}
+			else{
+				if(rows[0]){
+					connection.query("SELECT username, first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, mentor, birthday, home_address, college_address, picture FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
+						if(err){
+							console.log(err);
+							res.send("Internal server error!");
+						}
+						else{
+							//remove /public
+							rows[0]["picture"] = rows[0]["picture"].substring(7);
+							
+							connection.query("SELECT mentees FROM `accounts_"+rows[0]["username"]+"_mentees` WHERE 1",function(err,rowsMentees){
+								if(err){
+									console.log(err);
+									res.send("Internal server error!");
+								}
+								else{
+									res.render("profile",{rows:rows[0],rows2:rowsMentees});
+								}
+							});
+						}
+					});
+				}
+				else{
+					res.send("No profile found!");
+					connection.end();
+				}
+			}
+		});
+	}
+	else{
+		res.redirect('/');
+	}
 });
 
 router.post('/login', function(req, res) {
@@ -53,10 +101,12 @@ router.post('/login', function(req, res) {
 			var session = req.session;
 			session.userkey = rows[0]["username"];
 			res.redirect("/");
+			connection.end();
 		}
 		else{ //no result
 			//insert ajax response here
 			res.send("None!");
+			connection.end();
 		}
 	});
 	
@@ -125,11 +175,17 @@ router.post('/signup',
 		connection.connect();
 		//insert row into accounts
 		connection.query(queryAccount,function(err){
-			if(err) console.log(err);
+			if(err){
+				console.log(err);
+				res.send("Internal server error");
+			}
 			else{
 				//insert row into accounts_username_mentees
 				connection.query(queryMenteesTable,function(err){
-					if(err) console.log(err);
+					if(err){
+						console.log(err);
+						res.send("Internal server error!");
+					}
 					else{
 						if(req.body["numberofmentees"] > 0){
 							for(var i = 0 ; i < req.body["numberofmentees"]; i++){
@@ -137,7 +193,10 @@ router.post('/signup',
 								var queryMenteesRow = "INSERT INTO `"+account_username_mentees+"` (`mentees`) VALUES ("+connection.escape(req.body[variableName])+")";
 								
 								connection.query(queryMenteesRow,function(err){
-									if(err) console.log(err);
+									if(err){
+										console.log(err);
+										res.send("Internal server error!");
+									}
 								});
 							}
 							console.log("New account "+req.body["username"]+" succesfully created.");
@@ -167,7 +226,7 @@ router.post('/upload',function(req,res){
 
 /* CONTENT */
 
-router.get('/-content', function(req, res) {
+router.get('/content', function(req, res) {
 	var session = req.session;
 	if(session.userkey){
 		res.render('homepage-content');
@@ -177,7 +236,7 @@ router.get('/-content', function(req, res) {
 	}
 });
 
-router.get('/1-content', function(req, res) {
+router.get('/1/content', function(req, res) {
 	var session = req.session;
 	if(session.userkey){
 		res.render('1');
@@ -188,7 +247,7 @@ router.get('/1-content', function(req, res) {
 	}
 });
 
-router.get('/2-content', function(req, res) {
+router.get('/2/content', function(req, res) {
 	var session = req.session;
 	if(session.userkey){
 		res.render('2');
@@ -199,7 +258,7 @@ router.get('/2-content', function(req, res) {
 	}
 });
 
-router.get('/3-content', function(req, res) {
+router.get('/3/content', function(req, res) {
 	var session = req.session;
 	if(session.userkey){
 		res.render('3');
