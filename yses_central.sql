@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2014 at 07:00 AM
+-- Generation Time: Dec 20, 2014 at 10:49 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -45,6 +45,14 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `picture` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `is_exec`, `picture`) VALUES
+('tricycle', 'b3afa1d451da8bab35e52323c5fe6e19bd2cde2905529789bfe4f787', 'Peter Bernard', 'Mariano', 'Rupa', 'Active', 'jpad', '2013-45106', 'RAMpage', '2012', 'arvielimbo', '1996-11-29', 'Block 1 Lot 10 Nova Romania, Deparo, Caloocan', 'Mendoza Dorm', 0, 'public/uploads/pending/tricycle.jpg'),
+('zaizai', 'b3afa1d451da8bab35e52323c5fe6e19bd2cde2905529789bfe4f787', 'Zion Ruth', 'Borres', 'Gragasin', 'Alumni', 'hr', '2013-11111', 'RAMpage', '2014', 'tricycle', '1996-06-06', 'Deparo, Caloocan', 'PUP', 0, 'public/uploads/pending/zaizai.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -77,7 +85,25 @@ CREATE TABLE IF NOT EXISTS `accounts_pending` (
 --
 
 CREATE TABLE IF NOT EXISTS `accounts_tricycle_mentees` (
-  `mentee_username` varchar(50) NOT NULL
+  `mentees` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `accounts_tricycle_mentees`
+--
+
+INSERT INTO `accounts_tricycle_mentees` (`mentees`) VALUES
+('zaizai'),
+('tricycle');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts_zaizai_mentees`
+--
+
+CREATE TABLE IF NOT EXISTS `accounts_zaizai_mentees` (
+  `mentees` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
