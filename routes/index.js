@@ -35,6 +35,10 @@ router.get('/-content', function(req, res) {
 	res.render('index-content');
 });
 
+router.get('/profile-content',function(req,res){
+	res.render('profile');
+});
+
 router.get('/1-content', function(req, res) {
 	res.render('1');
 });

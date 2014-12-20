@@ -242,10 +242,15 @@ a {
 }
 
 span.glyphicon-send{
+	color:rgb(0,230,200);
+
 	top:15px;
 	font-size: 2em;
 }
 
+span.glyphicon-send:hover{
+	color:rgb(0,150,110);
+}
 ::-webkit-scrollbar {
 	width: 5px;
 }
