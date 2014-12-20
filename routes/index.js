@@ -215,6 +215,37 @@ router.post('/signup',
 	}
 ]);
 
+//search
+router.get('/search',function(req,res){
+	var connection = mysql.createConnection({
+		host : 'localhost',
+		user : 'root',
+		password : '',
+		database: 'yses_central'
+	});
+	var substring1 = connection.escape(req.query.substring+"%");
+	var substring2 = connection.escape("% "+req.query.substring+"%");
+	var query = "SELECT first_name, middle_name, last_name, picture from `accounts` WHERE first_name LIKE "+substring1+" || first_name LIKE "+substring2+" || middle_name LIKE "+substring1+" || middle_name LIKE "+substring2+" || last_name LIKE "+substring1+" || last_name LIKE "+substring2;
+	
+	connection.connect();
+	connection.query(query,function(err,rows){
+		if(err){
+			console.log(err);
+			res.send("Internal server error");
+		}
+		else{
+			if(rows[0]){
+				res.send(rows);
+				connection.end();
+			}
+			else{
+				res.send("0");
+				connection.end();
+			}
+		}
+	});
+});
+
 /* TEST */
 router.get('/test', function(req, res) {
 	res.render('test');

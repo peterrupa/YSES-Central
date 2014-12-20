@@ -3,7 +3,6 @@ $(document).ready(function(){
 		// use this for requested url: $(this).attr('href')
 		//insert ajax part here
 		$.ajax({
-			async: false,
 			url: $(this).attr('href')+"/content",
 			data: "",
 			type: "GET",
@@ -21,7 +20,6 @@ $(document).ready(function(){
 	
 	window.addEventListener("popstate", function(e) {
 		$.ajax({
-			async: false,
 			url: location.pathname=="/"?"http://localhost:8080/content":location.pathname+"/content",
 			data: "",
 			type: "GET",
@@ -29,7 +27,6 @@ $(document).ready(function(){
 				$("#content").html(res);
 			},
 			error: function (e){
-				console.dir(location.pathname+"/content");
 				console.dir(e);
 			}
 		});
