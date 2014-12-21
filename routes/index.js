@@ -94,7 +94,8 @@ router.post('/login', function(req, res) {
 		password : '',
 		database: 'yses_central'
 	});
-
+	console.log("Username: "+req.body["username"]);
+	console.log("Password: "+req.body["password"]);
 	connection.connect();
 	connection.query("SELECT username FROM `accounts` WHERE username="+connection.escape(req.body["username"])+"&&password="+connection.escape(req.body["password"]),function(err,rows){
 		if(rows[0]){ //successful login

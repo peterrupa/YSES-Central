@@ -16,26 +16,12 @@ a {
 #header {
 	z-index:1;
 	background-color: #103570;
-<<<<<<< HEAD
-	position:fixed;
-	width:100%;
-}
-#containerMAIN	{
-	padding-top:70px;
-}
-#YSESCentralText {
-	font-size:350%;
-	font-weight:normal;
-	margin-top:10px;
-	margin-bottom:10px;
-=======
 	position: fixed;
 	width:100%;
 }
 
 #containerMAIN{
 	padding-top: 61px;
->>>>>>> indexui
 }
 
 #name {

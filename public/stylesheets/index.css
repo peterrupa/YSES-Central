@@ -1,14 +1,4 @@
-<<<<<<< HEAD
-#screen {
-	overflow:hidden;
-	width:150px;
-	height:150px;
-	clear:both;
-	position:relative;
-	background:white;
-	cursor:move;
-}
-=======
+
 body{
 	font: 14px "Segoe UI Light", sans-serif;
 	background:url('../images/bubble2.png');
@@ -30,6 +20,20 @@ body{
 	top:-6px;
 	width:35px;
 	height:auto;
+}
+
+#screen {
+	overflow:hidden;
+	width:150px;
+	height:150px;
+	clear:both;
+	position:relative;
+	background:white;
+	cursor:move;
+}
+
+#loginform input {
+	color:black;
 }
 
 .no-bullets {
@@ -140,4 +144,3 @@ ul.container{
 	border-radius: 0px;
 	background-color:rgba(0,0,0,1);
 }
->>>>>>> indexui

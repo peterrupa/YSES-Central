@@ -83,7 +83,8 @@ $(document).ready(function(){
 	
 	//onsubmit login
 	$("#loginform").on("submit",function(){
-		$("input[name='password']").val(String(CryptoJS.SHA3($("input[name='password']").val(),{ outputLength: 224 })));
+		//alert($("#loginform input[name='password']").val());
+		$("#loginform input[name='password']").val(String(CryptoJS.SHA3($("#loginform input[name='password']").val(),{ outputLength: 224 })));
 	});
 	
 	//onsubmit signup
@@ -94,7 +95,7 @@ $(document).ready(function(){
 		$("#imagetop").val(previewCoordinates.top);
 		$("#numberofmentees").val(numberOfMentees);
 		//encrypt password
-		$("input[name='password']").val(String(CryptoJS.SHA3($("input[name='password']").val(),{ outputLength: 224 })));
+		$("#loginform input[name='password']").val(String(CryptoJS.SHA3($("#loginform input[name='password']").val(),{ outputLength: 224 })));
 		
 		if($(".mentee-textfield[name='mentee-1']").val() == "" && numberOfMentees == 1){
 			$("#numberofmentees").val(0);
