@@ -95,7 +95,7 @@ $(document).ready(function(){
 		$("#imagetop").val(previewCoordinates.top);
 		$("#numberofmentees").val(numberOfMentees);
 		//encrypt password
-		$("#loginform input[name='password']").val(String(CryptoJS.SHA3($("#loginform input[name='password']").val(),{ outputLength: 224 })));
+		$("#signupform input[name='password']").val(String(CryptoJS.SHA3($("#signupform input[name='password']").val(),{ outputLength: 224 })));
 		
 		if($(".mentee-textfield[name='mentee-1']").val() == "" && numberOfMentees == 1){
 			$("#numberofmentees").val(0);
