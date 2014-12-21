@@ -225,7 +225,7 @@ router.get('/search',function(req,res){
 	});
 	var substring1 = connection.escape(req.query.substring+"%");
 	var substring2 = connection.escape("% "+req.query.substring+"%");
-	var query = "SELECT first_name, middle_name, last_name, picture from `accounts` WHERE first_name LIKE "+substring1+" || first_name LIKE "+substring2+" || middle_name LIKE "+substring1+" || middle_name LIKE "+substring2+" || last_name LIKE "+substring1+" || last_name LIKE "+substring2;
+	var query = "SELECT full_name, picture from `accounts` WHERE full_name LIKE "+substring1+" || full_name LIKE "+substring2;
 	
 	connection.connect();
 	connection.query(query,function(err,rows){
