@@ -16,6 +16,7 @@ a {
 #header {
 	z-index:1;
 	background-color: #103570;
+<<<<<<< HEAD
 	position:fixed;
 	width:100%;
 }
@@ -27,6 +28,14 @@ a {
 	font-weight:normal;
 	margin-top:10px;
 	margin-bottom:10px;
+=======
+	position: fixed;
+	width:100%;
+}
+
+#containerMAIN{
+	padding-top: 61px;
+>>>>>>> indexui
 }
 
 #name {
@@ -39,6 +48,7 @@ a {
 	color:black;
 	padding:15px;
 	overflow-wrap: break-word;
+	background-color:rgb(210,210,210);
 }
 
 .post-PAD {
@@ -136,20 +146,17 @@ a {
 	margin-bottom:10px;
 }
 
-.tile-pic {
-	width:100%;
-	border:1px rgba(57,110,193,1) solid;
-}
-
 .tile {
 	padding:3px;
 }
 
 .btn-name {
+	width: auto;
+	height: auto;
 	border:0;
 	background:none;
-	margin-top:5px;
-	margin-bottom:5px;
+	margin-top:0px;
+	margin-bottom:0px;
 }
 
 .btn-name:hover {
@@ -157,10 +164,11 @@ a {
 }
 
 .metro-dropdown {
-	border:2px black solid;
+	border:0px black solid;
 	border-radius:0;
-	top:90%;
+	top:95%;
 	box-shadow:none;
+	z-index:10;
 }
 
 .bold {
@@ -195,4 +203,78 @@ a {
 	.post:hover .hoverClose{
 		visibility:visible;
 	}
+}
+
+.navbar-header{
+	height:60px;
+}
+
+#logo{
+	position: relative;
+	float:left;
+	margin-left: 10px;
+	margin-right: 15px;
+	top:-6px;
+	width:35px;
+	height:auto;
+}
+
+#central-title{
+	position:relative;
+	float:left;
+	top:5px;
+}
+
+#navigation-buttons{
+	position:relative;
+	float:right;
+	left:20%;
+}
+
+#chatbox{
+	background-color: black;
+	width:100%;
+	height:200px;
+	
+	z-index:10;
+	overflow-y:visible;
+}
+
+#chatbox-icon{
+	position:relative;
+	float:right;
+	
+	margin-top:5px;
+	right:-10%;
+	
+	height:50px;
+	width:50px;
+	
+	z-index:10;
+
+	max-height: 100%;
+}
+
+span.glyphicon-send{
+	color:rgb(0,230,200);
+
+	top:15px;
+	font-size: 2em;
+}
+
+span.glyphicon-send:hover{
+	color:rgb(0,150,110);
+}
+::-webkit-scrollbar {
+	width: 5px;
+}
+ 
+::-webkit-scrollbar-track {
+	background-color:rgba(255,255,255,1); 
+	border-radius: 0px;
+}
+ 
+::-webkit-scrollbar-thumb {
+	border-radius: 0px;
+	background-color:rgba(0,0,0,1);
 }

@@ -1,6 +1,7 @@
 doctype html
 html
 	head
+<<<<<<< HEAD
 		title YSES Central
 		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
@@ -25,6 +26,49 @@ html
 							li
 								form#logout(action="http://localhost:8080/logout",method="post")
 								a(href="javascript:{}",onclick="$('#logout').submit()") Log out
+=======
+		title= title
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel='stylesheet', href='/stylesheets/chat.css')
+		link(rel='stylesheet', href='/stylesheets/custom-navbar.css')
+		link(rel='stylesheet', href='/stylesheets/jquery-ui.css')
+		link(rel='stylesheet', href='/stylesheets/search-bar.css')
+		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
+	body(data-type="background",data-speed="2")
+		div#header.padding-vert
+			nav.navbar.navbar-default.navbar-fixed-top
+				div.container
+					div.navbar-header
+						div#central-title
+							a.navbar-brand(href="login")
+								img#logo.img-responsive(src="../images/logoAllWhite.png")
+								h2(style="position:relative;margin:0px;top:-7px;") YSES-Central
+						div#search-bar.input-group.hidden-xs.hidden-sm.hidden-md
+							// label(for="tags")
+							input#tags.form-control(type="text",name="mentee-1")
+							span.input-group-btn
+								button#srch-button.btn.btn-default(type="button",value="+")
+									span.glyphicon.glyphicon-search
+						div.btn-group.hidden-xs.hidden-sm.hidden-md(style='float:right')
+							div#navigation-buttons
+								button.btn-name.dropdown-toggle(type="button",data-toggle="dropdown")
+									h3#name This is short name
+										img(src='images/cla.jpg',style='width:40px;margin-left:15px;')
+								ul.dropdown-menu.metro-dropdown(role="menu")
+									li
+										a.ajax.bold(href="profile") Profile
+									li
+										a.ajax.bold(href="2") Another action
+									li
+										a.ajax.bold(href="3") Something else here
+									li.divider
+									li
+										a(href="logout") Log out
+								div#chatbox-icon
+									a.menu-icon(href="#")
+										span.glyphicon.glyphicon-send
+>>>>>>> indexui
 					div.clearfix
 		div#containerMAIN
 			div.container
@@ -50,16 +94,26 @@ html
 							h3 Logbook
 							ul.no-bullets
 								li
+<<<<<<< HEAD
 									div.post.post-Sec
+=======
+									div.post
+>>>>>>> indexui
 										button.close.hoverClose(type="button",aria-hidden="true") &times; 
 										div.row
 											img.mini-pic(src='images/cla.jpg')
 											h3.title Clarissa Estremos
 										p.date 11/29/14 9:03PM
 										div.row
+<<<<<<< HEAD
 											p Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. 
 								li
 									div.post.post-HR
+=======
+											p Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here. Some text here.
+								li
+									div.post
+>>>>>>> indexui
 										button.close.hoverClose(type="button",aria-hidden="true") &times; 
 										div.row
 											img.mini-pic(src='images/jv.jpg')
@@ -67,6 +121,7 @@ html
 										p.date 11/29/14 9:03PM
 										div.row
 											p :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) 
+<<<<<<< HEAD
 					div.col-lg-2.padding-vert.hidden-xs.hidden-sm.hidden-md
 						h3 Chat
 						div.row
@@ -86,3 +141,61 @@ html
 		script(src='javascripts/announcements.js')
 
 			<!--//NEVER COMMENT IN JADE-->
+=======
+					// chatbox
+					div.col-lg-2.padding-vert.hidden-xs.hidden-sm.hidden-md
+						ul.no-bullets.side-menu
+							li.chat-row
+								ul.no-bullets
+									li.metro.half
+										img.tile-pic(src='images/jv.jpg')
+									li.metro.half
+										img.tile-pic(src='images/cla.jpg')
+							li.chat-row
+								ul.no-bullets
+									li.metro.half
+										img.tile-pic(src='images/cla.jpg')
+									li.metro.half
+										img.tile-pic(src='images/jv.jpg')
+							li.chat-row
+								ul.no-bullets
+									li.metro.half
+										img.tile-pic(src='images/cla.jpg')
+									li.metro.half
+										img.tile-pic(src='images/jv.jpg')
+							li.chat-row
+								ul.no-bullets
+									li.metro.half
+										img.tile-pic(src='images/cla.jpg')
+									li.metro.half
+										img.tile-pic(src='images/jv.jpg')
+							li.chat-row
+								ul.no-bullets
+									li.metro.half
+										img.tile-pic(src='images/cla.jpg')
+									li.metro.half
+										img.tile-pic(src='images/jv.jpg')
+							li.chat-row
+								ul.no-bullets
+									li.metro.half
+										img.tile-pic(src='images/cla.jpg')
+									li.metro.half
+										img.tile-pic(src='images/jv.jpg')
+							li.chat-row
+								ul.no-bullets
+									li.metro.half
+										img.tile-pic(src='images/cla.jpg')
+									li.metro.half
+										img.tile-pic(src='images/jv.jpg')
+
+		script(src='javascripts/jquery-2.1.1.min.js')
+		script(src='javascripts/bootstrap.min.js')
+		script(src='javascripts/jquery.nicescroll.js')
+		script(src='javascripts/content-request.js')
+		script(src='javascripts/parallax.js')
+		script(src='javascripts/announcements.js')
+		script(src='javascripts/chatbox.js')
+		script(src='javascripts/autocomplete.js')
+		script(src='javascripts/jquery-ui.js')
+		script(src='javascripts/jquery-ui.min.js')
+>>>>>>> indexui
