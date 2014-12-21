@@ -48,9 +48,9 @@ html
 													li Org Classification:
 														br
 														select.form-control(form="signupform",name="org-class")
-														option(value="Active") Active
-														option(value="Inactive") Inactive
-														option(value="Alumni") Alumni
+															option(value="Active") Active
+															option(value="Inactive") Inactive
+															option(value="Alumni") Alumni
 													br
 													li Department:
 														select.form-control(form="signupform",name="department")
@@ -110,8 +110,7 @@ html
 													br
 													li College Address
 														input.form-control(type="text",name="collegeAdd")
-													li
-														span Picture
+													li Picture
 														input(id="photo",type="file",name="photo")
 														div#preview
 													input#imageleft(type="hidden",name="imageleft")
@@ -202,6 +201,7 @@ html
 		script(src='javascripts/jquery-2.1.1.min.js')
 		script(src='javascripts/bootstrap.min.js')
 		script(src='javascripts/jquery.nicescroll.js')
+		script(src='javascripts/jquery-ui.min.js')
 		script(src='javascripts/parallax.js')
 		script(src='javascripts/carousel.js')
 		script(src='javascripts/sha3.js')
