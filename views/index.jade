@@ -85,13 +85,6 @@ html
 															option(value="Synergy") Synergy
 															option(value="RAMpage") RAMpage
 													br
-													li University Batch:
-														br
-														select.form-control(form="signupform",name="univ-batch")
-															option(value="1998") 1998
-															option(value="2012") 2012
-															option(value="2014") 2014
-													br
 													li Mentor:
 														br
 														input.form-control(type="text",name="mentor")
@@ -115,6 +108,7 @@ html
 													input#imageleft(type="hidden",name="imageleft")
 													input#imagetop(type="hidden",name="imagetop")
 													input#numberofmentees(type="hidden",name="numberofmentees")
+													input#univbatch(type="hidden",name="univ-batch")
 											div.modal-footer
 												button.btn.btn-warning(type="button",data-dismiss="modal",data-toggle="modal",data-target="#loginModal") Existing user?
 												button.btn.btn-default(type="submit") Submit

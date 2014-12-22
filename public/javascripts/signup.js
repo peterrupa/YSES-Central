@@ -91,9 +91,16 @@ $(document).ready(function(){
 	$("#signupform").on("submit",function(){
 		var previewCoordinates = $("#draggable").position();
 
+		//assign crop coordinates
 		$("#imageleft").val(previewCoordinates.left);
 		$("#imagetop").val(previewCoordinates.top);
+
+		//assign number of mentees
 		$("#numberofmentees").val(numberOfMentees);
+
+		//assign university batch from student number
+		$("#univbatch").val($("#signupform input[name='sn-year']").val());
+
 		//encrypt password
 		$("#signupform input[name='password']").val(String(CryptoJS.SHA3($("#signupform input[name='password']").val(),{ outputLength: 224 })));
 

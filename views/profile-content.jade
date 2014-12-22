@@ -1,0 +1,88 @@
+link(rel="stylesheet",href="/stylesheets/profile-page.css")
+link(rel="stylesheet",href="/stylesheets/title-hover.css")
+
+div.container.col-lg-6
+	div.row
+		div.box-group
+			div.box
+				div.profile-content
+					img.img-responsive(src="../images/logoAllWhite.png")
+			div.box
+				div.text.text-center.profile-content
+					div.row
+						h4.lead Ma. Clarissa Estremos
+						p.department-text.small Secretariat Department
+					div.row
+						p Hi. This is text. Some text. More text. Huehue. This is some text but I don't mind
+	div.row
+		div.box-group
+			div.button
+				div.box-content
+					div.box
+						button(type="button")
+							span Go to department
+							span.glyphicon.glyphicon-edit
+					div.box
+						button(type="button")
+							span Edit profile
+							span.glyphicon.glyphicon-cog
+	// if(not user's profile) THIS_PROFILE.setVisible(false);
+div.container.col-lg-6
+	div#information
+		div.row
+			div.box-group
+				div.box.box-about
+					div.profile-content.title.text-center
+						h1 ABOUT
+				div.box.box-about
+					div.text-center.profile-content
+						div.wrapper.clearfix
+							figure.gallery-item
+								h5 Birthday
+								figcaption.img-title
+									h5 November 12, 1809
+							figure.gallery-item
+								h5 Home Address
+								figcaption.img-title
+									h5 7 SN Something Adress Street Yes
+							figure.gallery-item
+								h5 College Address
+								figcaption.img-title
+									h5 SOmething Here Is
+							figure.gallery-item
+								h5 Objective
+								figcaption.img-title
+									h5 Yes Write Here Wadup
+							figure.gallery-item
+								h5 About Here
+								figcaption.img-title
+									h5 Okay What Is This
+		div.row
+			div.box-group
+				div.box.box-mentor
+					div.profile-content.title.text-center
+						h1 MENTOR
+						p This I. Mentor
+				div.box.box-mentor
+					div.profile-content
+						img.img-responsive(src="../images/Cla.jpg")
+		div.row
+			div.box-group
+				div.box.box-mentee
+					div.profile-content
+						img.img-responsive(src="../images/JV.jpg")
+				div.box.box-mentee
+					div.profile-content.title.text-center
+						h1 MENTEE
+						p This I. Mentee
+		div.row
+			div.box-group
+				div.box.box-mentee
+					div.profile-content
+						img.img-responsive(src="../images/JV.jpg")
+				div.box.box-mentee
+					div.profile-content.title.text-center
+						h1 MENTEE
+						p This I. Alsomentee
+
+script(src='http://localhost:8080/javascripts/title-hover.js')

@@ -1,88 +1,192 @@
-link(rel="stylesheet",href="/stylesheets/profile-page.css")
-link(rel="stylesheet",href="/stylesheets/title-hover.css")
+doctype html
+html
+	head
+		title YSES Central
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel='stylesheet', href='/stylesheets/chat.css')
+		link(rel='stylesheet', href='/stylesheets/custom-navbar.css')
+		link(rel='stylesheet', href='/stylesheets/jquery-ui.css')
+		link(rel='stylesheet', href='/stylesheets/search-bar.css')
+		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
+	body(data-type="background",data-speed="2")
+		div#header.padding-vert
+			nav.navbar.navbar-default.navbar-fixed-top
+				div.container
+					div.navbar-header
+						div#central-title
+							a.ajax.navbar-brand(href="http://localhost:8080")
+								img#logo.img-responsive(src="../images/logoAllWhite.png")
+								h2(style="position:relative;margin:0px;top:-7px;") YSES Central
+						div#search-bar.input-group.hidden-xs.hidden-sm.hidden-md
+							// label(for="tags")
+							input#tags.form-control(type="text")
+							span.input-group-btn
+								button#srch-button.btn.btn-default(type="button",value="+")
+									span.glyphicon.glyphicon-search
+						div.btn-group.hidden-xs.hidden-sm.hidden-md(style='float:right')
+							div#navigation-buttons
+								button.btn-name.dropdown-toggle(type="button",data-toggle="dropdown")
+									h3#name #{name}
+										img(src='http://localhost:8080/#{picture}',style='width:40px;margin-left:15px;')
+								ul.dropdown-menu.metro-dropdown(role="menu")
+									li
+										a.ajax.bold(href="http://localhost:8080/profile/#{name}") Profile
+									li
+										a.ajax.bold(href="http://localhost:8080/2") Another action
+									li
+										a.ajax.bold(href="http://localhost:8080/3") Something else here
+									li.divider
+									li
+										form#logout(action="http://localhost:8080/logout",method="post")
+										a(href="javascript:{}",onclick="$('#logout').submit()") Log out
+								div#chatbox-icon
+									a.menu-icon(href="#")
+										span.glyphicon.glyphicon-send
+					div.clearfix
+		div#containerMAIN
+			div.container
+				div.row
+					div#content.col-lg-10
+							link(rel="stylesheet",href="/stylesheets/profile-page.css")
+							link(rel="stylesheet",href="/stylesheets/title-hover.css")
 
-div.container.col-lg-6
-	div.row
-		div.box-group
-			div.box
-				div.profile-content
-					img.img-responsive(src="../images/logoAllWhite.png")
-			div.box
-				div.text.text-center.profile-content
-					div.row
-						h4.lead Ma. Clarissa Estremos
-						p.department-text.small Secretariat Department
-					div.row
-						p Hi. This is text. Some text. More text. Huehue. This is some text but I don't mind
-	div.row
-		div.box-group
-			div.button
-				div.box-content
-					div.box
-						button(type="button")
-							span Go to department
-							span.glyphicon.glyphicon-edit
-					div.box
-						button(type="button")
-							span Edit profile
-							span.glyphicon.glyphicon-cog
-	// if(not user's profile) THIS_PROFILE.setVisible(false);
-div.container.col-lg-6
-	div#information
-		div.row
-			div.box-group
-				div.box.box-about
-					div.profile-content.title.text-center
-						h1 ABOUT
-				div.box.box-about
-					div.text-center.profile-content
-						div.wrapper.clearfix
-							figure.gallery-item
-								h5 Birthday
-								figcaption.img-title
-									h5 November 12, 1809
-							figure.gallery-item
-								h5 Home Address
-								figcaption.img-title
-									h5 7 SN Something Adress Street Yes
-							figure.gallery-item
-								h5 College Address
-								figcaption.img-title
-									h5 SOmething Here Is
-							figure.gallery-item
-								h5 Objective
-								figcaption.img-title
-									h5 Yes Write Here Wadup
-							figure.gallery-item
-								h5 About Here
-								figcaption.img-title
-									h5 Okay What Is This
-		div.row
-			div.box-group
-				div.box.box-mentor
-					div.profile-content.title.text-center
-						h1 MENTOR
-						p This I. Mentor
-				div.box.box-mentor
-					div.profile-content
-						img.img-responsive(src="../images/Cla.jpg")
-		div.row
-			div.box-group
-				div.box.box-mentee
-					div.profile-content
-						img.img-responsive(src="../images/JV.jpg")
-				div.box.box-mentee
-					div.profile-content.title.text-center
-						h1 MENTEE
-						p This I. Mentee
-		div.row
-			div.box-group
-				div.box.box-mentee
-					div.profile-content
-						img.img-responsive(src="../images/JV.jpg")
-				div.box.box-mentee
-					div.profile-content.title.text-center
-						h1 MENTEE
-						p This I. Alsomentee
-
-script(src='http://localhost:8080/javascripts/title-hover.js')
+							div.container.col-lg-6
+								div.row
+									div.box-group
+										div.box
+											div.profile-content
+												img.img-responsive(src="../images/logoAllWhite.png")
+										div.box
+											div.text.text-center.profile-content
+												div.row
+													h4.lead Ma. Clarissa Estremos
+													p.department-text.small Secretariat Department
+												div.row
+													p Hi. This is text. Some text. More text. Huehue. This is some text but I don't mind
+								div.row
+									div.box-group
+										div.button
+											div.box-content
+												div.box
+													button(type="button")
+														span Go to department
+														span.glyphicon.glyphicon-edit
+												div.box
+													button(type="button")
+														span Edit profile
+														span.glyphicon.glyphicon-cog
+								// if(not user's profile) THIS_PROFILE.setVisible(false);
+							div.container.col-lg-6
+								div#information
+									div.row
+										div.box-group
+											div.box.box-about
+												div.profile-content.title.text-center
+													h1 ABOUT
+											div.box.box-about
+												div.text-center.profile-content
+													div.wrapper.clearfix
+														figure.gallery-item
+															h5 Birthday
+															figcaption.img-title
+																h5 November 12, 1809
+														figure.gallery-item
+															h5 Home Address
+															figcaption.img-title
+																h5 7 SN Something Adress Street Yes
+														figure.gallery-item
+															h5 College Address
+															figcaption.img-title
+																h5 SOmething Here Is
+														figure.gallery-item
+															h5 Objective
+															figcaption.img-title
+																h5 Yes Write Here Wadup
+														figure.gallery-item
+															h5 About Here
+															figcaption.img-title
+																h5 Okay What Is This
+									div.row
+										div.box-group
+											div.box.box-mentor
+												div.profile-content.title.text-center
+													h1 MENTOR
+													p This I. Mentor
+											div.box.box-mentor
+												div.profile-content
+													img.img-responsive(src="../images/Cla.jpg")
+									div.row
+										div.box-group
+											div.box.box-mentee
+												div.profile-content
+													img.img-responsive(src="../images/JV.jpg")
+											div.box.box-mentee
+												div.profile-content.title.text-center
+													h1 MENTEE
+													p This I. Mentee
+									div.row
+										div.box-group
+											div.box.box-mentee
+												div.profile-content
+													img.img-responsive(src="../images/JV.jpg")
+											div.box.box-mentee
+												div.profile-content.title.text-center
+													h1 MENTEE
+													p This I. Alsomentee
+					// chatbox
+					div.col-lg-2.padding-vert.hidden-xs.hidden-sm.hidden-md
+						ul.no-bullets.side-menu
+							li.chat-row
+								ul.no-bullets
+									li.metro.half
+										img.tile-pic(src='../images/jv.jpg')
+									li.metro.half
+										img.tile-pic(src='../images/cla.jpg')
+							li.chat-row
+								ul.no-bullets
+									li.metro.half
+										img.tile-pic(src='../images/cla.jpg')
+									li.metro.half
+										img.tile-pic(src='../images/jv.jpg')
+							li.chat-row
+								ul.no-bullets
+									li.metro.half
+										img.tile-pic(src='../images/cla.jpg')
+									li.metro.half
+										img.tile-pic(src='../images/jv.jpg')
+							li.chat-row
+								ul.no-bullets
+									li.metro.half
+										img.tile-pic(src='../images/cla.jpg')
+									li.metro.half
+										img.tile-pic(src='../images/jv.jpg')
+							li.chat-row
+								ul.no-bullets
+									li.metro.half
+										img.tile-pic(src='../images/cla.jpg')
+									li.metro.half
+										img.tile-pic(src='../images/jv.jpg')
+							li.chat-row
+								ul.no-bullets
+									li.metro.half
+										img.tile-pic(src='../images/cla.jpg')
+									li.metro.half
+										img.tile-pic(src='../images/jv.jpg')
+							li.chat-row
+								ul.no-bullets
+									li.metro.half
+										img.tile-pic(src='../images/cla.jpg')
+									li.metro.half
+										img.tile-pic(src='../images/jv.jpg')     
+		script(src='http://localhost:8080/javascripts/jquery-2.1.1.min.js')
+		script(src='http://localhost:8080/javascripts/bootstrap.min.js')
+		script(src='http://localhost:8080/javascripts/jquery.nicescroll.js')
+		script(src='http://localhost:8080/javascripts/content-request.js')
+		script(src='http://localhost:8080/javascripts/parallax.js')
+		script(src='http://localhost:8080/javascripts/announcements.js')
+		script(src='http://localhost:8080/javascripts/chatbox.js')
+		script(src='http://localhost:8080/javascripts/autocomplete.js')
+		script(src='http://localhost:8080/javascripts/jquery-ui.js')
+		script(src='http://localhost:8080/javascripts/jquery-ui.min.js')
+		script(src='http://localhost:8080/javascripts/title-hover.js')
