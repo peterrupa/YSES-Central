@@ -6,7 +6,7 @@ html
 		link(rel='stylesheet', href='/stylesheets/index.css')
 		link(rel='stylesheet', href='/stylesheets/custom-navbar.css')
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
-	
+
 	body(data-type="background",data-speed="")
 		// top bar
 		nav.navbar.navbar-default.navbar-fixed-top
@@ -34,6 +34,8 @@ html
 													span(aria-hidden="true") &times;
 													span.sr-only Close
 												h4.modal-title Sign Up
+												input(id="photo",type="file",name="photo")
+												div#preview
 											div.modal-body
 												ul.list-inline.container
 													li First name:
@@ -110,9 +112,6 @@ html
 													br
 													li College Address
 														input.form-control(type="text",name="collegeAdd")
-													li Picture
-														input(id="photo",type="file",name="photo")
-														div#preview
 													input#imageleft(type="hidden",name="imageleft")
 													input#imagetop(type="hidden",name="imagetop")
 													input#numberofmentees(type="hidden",name="numberofmentees")

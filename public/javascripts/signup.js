@@ -2,9 +2,9 @@ $(document).ready(function(){
 	function createPreview(){
 		var file = $("#photo")[0].files[0];
 		var imageType = /image.*/;
-		
+
 		$("#preview").empty();
-		
+
 		if (file.type.match(imageType)) {
 			var reader = new FileReader();
 
@@ -27,7 +27,7 @@ $(document).ready(function(){
 				$("#draggable").width($("#screen").width());
 				$("#draggable").height("auto");
 			}
-			else{		
+			else{
 				$("#draggable").width("auto");
 				$("#draggable").height($("#screen").height());
 			}
@@ -44,12 +44,12 @@ $(document).ready(function(){
 		  }
 
 		  reader.readAsDataURL(file);
-		  
+
 		} else {
 		  $("#preview").append("File not supported!");
 		}
 	}
-	
+
 	//preview image in case browser clicked back
 	if($("#photo").val()){
 		createPreview();
@@ -73,33 +73,33 @@ $(document).ready(function(){
 			$(this).children(".mentee-textfield").attr("name","mentee-"+temp);
 		});
 		$(this).parent().parent().remove();
-		
+
 		numberOfMentees--;
 	});
-	
+
 	$("#photo").on("change",function(){
 		createPreview();
 	});
-	
+
 	//onsubmit login
 	$("#loginform").on("submit",function(){
 		//alert($("#loginform input[name='password']").val());
 		$("#loginform input[name='password']").val(String(CryptoJS.SHA3($("#loginform input[name='password']").val(),{ outputLength: 224 })));
 	});
-	
+
 	//onsubmit signup
 	$("#signupform").on("submit",function(){
 		var previewCoordinates = $("#draggable").position();
-		
+
 		$("#imageleft").val(previewCoordinates.left);
 		$("#imagetop").val(previewCoordinates.top);
 		$("#numberofmentees").val(numberOfMentees);
 		//encrypt password
 		$("#signupform input[name='password']").val(String(CryptoJS.SHA3($("#signupform input[name='password']").val(),{ outputLength: 224 })));
-		
+
 		if($(".mentee-textfield[name='mentee-1']").val() == "" && numberOfMentees == 1){
 			$("#numberofmentees").val(0);
 		}
-		
+
 	});
 });
