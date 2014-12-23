@@ -8,6 +8,7 @@ $(document).ready(function(){
 			type: "GET",
 			success: function (res) {
 				$("#content").html(res);
+				$("body").scrollTop(0);
 			},
 			error: function (e){
 				console.dir(e);
@@ -17,7 +18,7 @@ $(document).ready(function(){
 		history.pushState(null, null, $(this).attr('href'));
 		return false;
 	});
-	
+
 	window.addEventListener("popstate", function(e) {
 		$.ajax({
 			url: location.pathname=="/"?"http://localhost:8080/content":location.pathname+"/content",
