@@ -7,7 +7,7 @@ html
 		link(rel='stylesheet', href='/stylesheets/custom-navbar.css')
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
 
-	body(data-type="background",data-speed="")
+	body(data-type="background",data-speed="2")
 		// top bar
 		nav.navbar.navbar-default.navbar-fixed-top
 			div.container
@@ -128,10 +128,10 @@ html
 												div.form-group
 														ul.list-inline.container
 															li Username:
-																input(type="text",name="username")
+																input.form-control(type="text",name="username")
 															br
 															li Password:
-																input(type="password",name="password")
+																input.form-control(type="password",name="password")
 											div.modal-footer
 												button.btn.btn-warning(type="button",data-dismiss="modal",data-toggle="modal",data-target="#signupModal") No account yet?
 												input.btn.btn-default(type="submit",value="Submit")
@@ -191,6 +191,7 @@ html
 										h3.title About
 									div.row
 										p Lorem ipsum
+		
 		script(src='javascripts/jquery-2.1.1.min.js')
 		script(src='javascripts/bootstrap.min.js')
 		script(src='javascripts/jquery.nicescroll.js')

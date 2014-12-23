@@ -14,21 +14,26 @@ html
 			nav.navbar.navbar-default.navbar-fixed-top
 				div.container
 					div.navbar-header
+						button#phone-nav-button.navbar-toggle.collapsed(type="button",data-toggle="collapse",data-target="#navbar")
+							span.sr-only Toggle navigation
+							span.icon-bar
+							span.icon-bar
+							span.icon-bar
 						div#central-title
 							a.ajax.navbar-brand(href="http://localhost:8080")
 								img#logo.img-responsive(src="../images/logoAllWhite.png")
 								h2(style="position:relative;margin:0px;top:-7px;") YSES Central
 						div#search-bar.input-group.hidden-xs.hidden-sm.hidden-md
 							// label(for="tags")
-							input#tags.form-control(type="text")
+							input#tags.form-control(type="text",name="mentee-1")
 							span.input-group-btn
 								button#srch-button.btn.btn-default(type="button",value="+")
 									span.glyphicon.glyphicon-search
-						div.btn-group.hidden-xs.hidden-sm.hidden-md(style='float:right')
+						div.btn-group.text-left.hidden-xs(style='float:right')
 							div#navigation-buttons
 								button.btn-name.dropdown-toggle(type="button",data-toggle="dropdown")
 									h3#name #{name}
-										img(src='http://localhost:8080/#{picture}',style='width:40px;margin-left:15px;')
+										img(src='#{picture}',style='width:40px;margin-left:15px;')
 								ul.dropdown-menu.metro-dropdown(role="menu")
 									li
 										a.ajax.bold(href="http://localhost:8080/profile/#{name}") Profile
@@ -40,30 +45,43 @@ html
 									li
 										form#logout(action="http://localhost:8080/logout",method="post")
 										a(href="javascript:{}",onclick="$('#logout').submit()") Log out
-								div#chatbox-icon
+								div#chatbox-icon.hidden-sm.hidden-md
 									a.menu-icon(href="#")
 										span.glyphicon.glyphicon-send
+					// for phone navigation
+					div#navbar.collapse
+						ul.nav.navbar-nav.navbar-collapse.hidden-lg
+							li.navbutton
+								a.ajax.bold(href="http://localhost:8080/profile/#{name}") Profile
+							li.navbutton
+								a.ajax.bold(href="http://localhost:8080/2") Another action
+							li.navbutton
+								a.ajax.bold(href="http://localhost:8080/3") Something else here
+							li.navbutton
+								form#logout(action="http://localhost:8080/logout",method="post")
+								a(href="javascript:{}",onclick="$('#logout').submit()") Log out
 					div.clearfix
 		div#containerMAIN
 			div.container
 				div.row
-					div#content.col-lg-10
+					div#content.col-lg-12
 							link(rel="stylesheet",href="/stylesheets/profile-page.css")
 							link(rel="stylesheet",href="/stylesheets/title-hover.css")
 
-							div.container.col-lg-6
+							div#profile-bar.col-lg-3
 								div.row
 									div.box-group
 										div.box
 											div.profile-content
-												img.img-responsive(src="../images/logoAllWhite.png")
+												img.img-responsive(src="../images/Cla.jpg")
 										div.box
 											div.text.text-center.profile-content
 												div.row
 													h4.lead Ma. Clarissa Estremos
 													p.department-text.small Secretariat Department
 												div.row
-													p Hi. This is text. Some text. More text. Huehue. This is some text but I don't mind
+													p 
+														em Hi. This is italic text. Some text. More text. Amazing skills. This is some text but I don't mind
 								div.row
 									div.box-group
 										div.button
@@ -76,64 +94,33 @@ html
 													button(type="button")
 														span Edit profile
 														span.glyphicon.glyphicon-cog
-								// if(not user's profile) THIS_PROFILE.setVisible(false);
-							div.container.col-lg-6
+								//- if(not user's profile) THIS_PROFILE.setVisible(false);
+									this buttons should not exist if accessed by other users
+							div.container.col-lg-9
 								div#information
 									div.row
 										div.box-group
 											div.box.box-about
 												div.profile-content.title.text-center
-													h1 ABOUT
-											div.box.box-about
-												div.text-center.profile-content
-													div.wrapper.clearfix
-														figure.gallery-item
-															h5 Birthday
-															figcaption.img-title
-																h5 November 12, 1809
-														figure.gallery-item
-															h5 Home Address
-															figcaption.img-title
-																h5 7 SN Something Adress Street Yes
-														figure.gallery-item
-															h5 College Address
-															figcaption.img-title
-																h5 SOmething Here Is
-														figure.gallery-item
-															h5 Objective
-															figcaption.img-title
-																h5 Yes Write Here Wadup
-														figure.gallery-item
-															h5 About Here
-															figcaption.img-title
-																h5 Okay What Is This
-									div.row
+													button(type="button")
+														span ABOUT
 										div.box-group
 											div.box.box-mentor
 												div.profile-content.title.text-center
-													h1 MENTOR
-													p This I. Mentor
-											div.box.box-mentor
-												div.profile-content
-													img.img-responsive(src="../images/Cla.jpg")
-									div.row
+													button(type="button")
+														span MENTOR
 										div.box-group
 											div.box.box-mentee
-												div.profile-content
-													img.img-responsive(src="../images/JV.jpg")
-											div.box.box-mentee
 												div.profile-content.title.text-center
-													h1 MENTEE
-													p This I. Mentee
-									div.row
+													button(type="button")
+														span MENTEE
 										div.box-group
-											div.box.box-mentee
-												div.profile-content
-													img.img-responsive(src="../images/JV.jpg")
-											div.box.box-mentee
+											div.box.box-moreinfo
 												div.profile-content.title.text-center
-													h1 MENTEE
-													p This I. Alsomentee
+													button(type="button")
+														span MORE INFO
+									div.row
+										div.box.box-data
 					// chatbox
 					div.col-lg-2.padding-vert.hidden-xs.hidden-sm.hidden-md
 						ul.no-bullets.side-menu
@@ -178,7 +165,8 @@ html
 									li.metro.half
 										img.tile-pic(src='../images/cla.jpg')
 									li.metro.half
-										img.tile-pic(src='../images/jv.jpg')     
+										img.tile-pic(src='../images/jv.jpg')
+
 		script(src='http://localhost:8080/javascripts/jquery-2.1.1.min.js')
 		script(src='http://localhost:8080/javascripts/bootstrap.min.js')
 		script(src='http://localhost:8080/javascripts/jquery.nicescroll.js')
