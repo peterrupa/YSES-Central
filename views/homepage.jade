@@ -14,17 +14,22 @@ html
 			nav.navbar.navbar-default.navbar-fixed-top
 				div.container
 					div.navbar-header
+						button#phone-nav-button.navbar-toggle.collapsed(type="button",data-toggle="collapse",data-target="#navbar")
+							span.sr-only Toggle navigation
+							span.icon-bar
+							span.icon-bar
+							span.icon-bar
 						div#central-title
 							a.ajax.navbar-brand(href="http://localhost:8080")
 								img#logo.img-responsive(src="../images/logoAllWhite.png")
 								h2(style="position:relative;margin:0px;top:-7px;") YSES Central
 						div#search-bar.input-group.hidden-xs.hidden-sm.hidden-md
 							// label(for="tags")
-							input#tags.form-control(type="text")
+							input#tags.form-control(type="text",name="mentee-1")
 							span.input-group-btn
 								button#srch-button.btn.btn-default(type="button",value="+")
 									span.glyphicon.glyphicon-search
-						div.btn-group.hidden-xs.hidden-sm.hidden-md(style='float:right')
+						div.btn-group.text-left.hidden-xs(style='float:right')
 							div#navigation-buttons
 								button.btn-name.dropdown-toggle(type="button",data-toggle="dropdown")
 									h3#name #{name}
@@ -40,9 +45,21 @@ html
 									li
 										form#logout(action="http://localhost:8080/logout",method="post")
 										a(href="javascript:{}",onclick="$('#logout').submit()") Log out
-								div#chatbox-icon
+								div#chatbox-icon.hidden-sm.hidden-md
 									a.menu-icon(href="#")
 										span.glyphicon.glyphicon-send
+					// for phone navigation
+					div#navbar.collapse
+						ul.nav.navbar-nav.navbar-collapse.hidden-lg
+							li.navbutton
+								a.ajax.bold(href="http://localhost:8080/profile/#{name}") Profile
+							li.navbutton
+								a.ajax.bold(href="http://localhost:8080/2") Another action
+							li.navbutton
+								a.ajax.bold(href="http://localhost:8080/3") Something else here
+							li.navbutton
+								form#logout(action="http://localhost:8080/logout",method="post")
+								a(href="javascript:{}",onclick="$('#logout').submit()") Log out
 					div.clearfix
 		div#containerMAIN
 			div.container
@@ -130,6 +147,7 @@ html
 										img.tile-pic(src='images/cla.jpg')
 									li.metro.half
 										img.tile-pic(src='images/jv.jpg')
+		
 		script(src='http://localhost:8080/javascripts/jquery-2.1.1.min.js')
 		script(src='http://localhost:8080/javascripts/bootstrap.min.js')
 		script(src='http://localhost:8080/javascripts/jquery.nicescroll.js')

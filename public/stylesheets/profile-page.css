@@ -8,10 +8,29 @@ body{
 }
 
 #information{
-	max-height:560px;
+	position:relative;
+
 	width:100%;
 
-	overflow-y:auto;
+	left:-55px;
+	top:-6px;
+}
+
+#information .box{
+	width:175px;
+	margin-right:5px;
+	margin-left:5px;
+}
+
+#profile-bar .box, #profile-bar .button button{
+	background-color:rgb(0,50,100);
+
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+#profile-bar .box{
+	color:white;
 }
 
 .box-group .box{
@@ -25,7 +44,7 @@ body{
 }
 
 .box-group img{
-	height: 213px;
+	height: 221px;
 }
 
 .box-group .button .box:before{
@@ -76,9 +95,7 @@ body{
 }
 
 .button button{
-	background-color:rgb(0,50,100);
 	color:white;
-
 
 	height:100%;
 	width:100%;
@@ -86,7 +103,7 @@ body{
 	border:0px;
 }
 
-.button button:hover{
+.button button:hover, #information button:hover{
 	color:rgb(100,200,255);
 }
 
@@ -100,16 +117,27 @@ body{
 }
 
 .title{
-	padding-top:20%;
+	margin-top:0px;
+	padding-top:0px;
+}
+
+#information button{
+	height:100%;
+	width:100%;
+
+	background-color:rgba(255,255,255,0);
+
+	font-size:20px;
+	font-weight:bold;
+
+	margin:0px;
+	border:0px;
+	padding:0px;
 }
 
 .box-about{
 	color:white;
 	background-color:rgb(120,0,0);
-}
-
-.box-about.box{
-	height:210px;
 }
 
 .box-mentor{
@@ -120,6 +148,11 @@ body{
 .box-mentee{
 	color:black;
 	background-color:rgb(250,250,0);
+}
+
+.box-moreinfo{
+	color:white;
+	background-color:rgb(0,50,50);
 }
 
 .box-mentee img{
