@@ -283,33 +283,35 @@ router.post('/signup',
 
 //search
 router.get('/search',function(req,res){
-	var connection = mysql.createConnection({
-		host : 'localhost',
-		user : 'root',
-		password : '',
-		database: 'yses_central'
-	});
-	var substring1 = connection.escape(req.query.substring+"%");
-	var substring2 = connection.escape("% "+req.query.substring+"%");
-	var query = "SELECT full_name, picture from `accounts` WHERE full_name LIKE "+substring1+" || full_name LIKE "+substring2;
+	var session = req.session;
+	if(session.userkey){
+		var connection = mysql.createConnection({
+			host : 'localhost',
+			user : 'root',
+			password : '',
+			database: 'yses_central'
+		});
+		var query = "SELECT first_name, full_name AS 'value', picture from `accounts` WHERE 1";
 
-	connection.connect();
-	connection.query(query,function(err,rows){
-		if(err){
-			console.log(err);
-			res.send("Internal server error");
-		}
-		else{
-			if(rows[0]){
+		connection.connect();
+		connection.query(query,function(err,rows){
+			if(err){
+				console.log(err);
+				res.send("Internal server error");
+			}
+			else{
+				for(var i = 0; i < rows.length; i++){
+					rows[i]["picture"] = rows[i]["picture"].substring(7);
+					rows[i]["url"] = "http://localhost:8080/profile/" + rows[i]["first_name"];
+				}
 				res.send(rows);
 				connection.end();
 			}
-			else{
-				res.send("0");
-				connection.end();
-			}
-		}
-	});
+		});
+	}
+	else{
+		res.redirect("/");
+	}
 });
 
 /* TEST */
