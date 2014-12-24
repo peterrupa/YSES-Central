@@ -55,15 +55,61 @@ $(document).ready(function(){
 		createPreview();
 	}
 
-	//is exec box
-	$("#isExec").on('change',function(){
+	function addPosition(){
 		if($("#isExec").is(":checked")){
-			var insert = "<br><li>This is a test</li>";
+			var choices;
+			switch($("select[name='department']").val()){
+				case "spad":
+					choices = "<option value='deo'>Deputy Executive Officer</option><option value='lo'>Liaison Officer</option>";
+					break;
+				case "vl":
+					choices = "<option value='vlh'>Visuals and Logistics Head</option>";
+					break;
+				case "sec":
+					choices = "<option value='ea'>Executive Assistant</option>";
+					break;
+				case "scho":
+						choices = "<option value='sh'>Scholastics Head</option>";
+						break;
+				case "fin":
+						choices = "<option value='fh'>Finance Head</option>";
+						break;
+				case "hr":
+						choices = "<option value='hrh'>Human Resources Head</option>";
+						break;
+				case "exec":
+						choices = "<option value='eo'>Executive Officer</option>";
+						break;
+				}
+			var insert = "<li id='positions'>Position<br><select class='form-control' form='signupform' name='exec_position'>"+choices+"</select></li>";
 			$("#isExec").parent().after(insert);
 		}
 		else{
-			alert("Not check");
+			$('#positions').remove();
 		}
+	}
+
+	//disable exec button if jpad
+	$("select[name='department']").on('change',function(){
+		if($("select[name='department']").val() == 'jpad'){
+			$("#isExec").prop('checked',false);
+			$("#isExec").attr('disabled',true);
+			if($('#positions').length > 0){
+				$('#positions').remove();
+			}
+		}
+		else{
+			$("#isExec").removeAttr('disabled');
+			if($('#positions').length > 0){
+				$('#positions').remove();
+			}
+			addPosition();
+		}
+	});
+
+	//is exec box
+	$("#isExec").on('change',function(){
+		addPosition();
 	});
 
 	//add/remove mentees
@@ -102,7 +148,7 @@ $(document).ready(function(){
 	//onsubmit signup
 	$("#signupform").on("submit",function(){
 		var previewCoordinates = $("#draggable").position();
-
+		
 		//assign crop coordinates
 		$("#imageleft").val(previewCoordinates.left);
 		$("#imagetop").val(previewCoordinates.top);
