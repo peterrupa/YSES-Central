@@ -231,64 +231,74 @@ router.post('/signup',
 			database: 'yses_central'
 		});
 
-		var studentNumber = req.body["sn-year"]+"-"+req.body["sn-number"];
-		if(req.body["isExec"]){
-			var isExec = 1;
-		}
-		else{
-			var isExec = 0;
-		}
-
-		var queryAccount = "INSERT INTO `accounts`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `is_exec`, `picture`, `full_name`, `exec_position`) VALUES ("+connection.escape(req.body["username"])+","+connection.escape(req.body["password"])+","+connection.escape(req.body["first-name"])+","+connection.escape(req.body["middle-name"])+","+connection.escape(req.body["last-name"])+","+connection.escape(req.body["org-class"])+","+connection.escape(req.body["department"])+","+connection.escape(studentNumber)+","+connection.escape(req.body["org-batch"])+","+connection.escape(req.body["univ-batch"])+","+connection.escape(req.body["mentor"])+","+connection.escape(req.body["bday"])+","+connection.escape(req.body["homeAdd"])+","+connection.escape(req.body["collegeAdd"])+","+isExec+","+connection.escape(newFileName)+","+connection.escape(req.body["first-name"]+" "+req.body["middle-name"]+" "+req.body["last-name"])+","+connection.escape(req.body["exec_position"])+")";
-
-		var queryMenteesTable = "CREATE TABLE accounts_"+req.body["username"]+"_mentees (mentees VARCHAR(50))";
-		var account_username_mentees = "accounts_"+req.body["username"]+"_mentees";
-
-		connection.connect();
-		//insert row into accounts
-		connection.query(queryAccount,function(err){
+		connection.query("SELECT username FROM `accounts` WHERE full_name="+connection.escape(req.body["mentor"]),function(err,username){
 			if(err){
 				console.log(err);
 				res.send("Internal server error");
 				connection.end();
 			}
 			else{
-				//insert row into accounts_username_mentees
-				connection.query(queryMenteesTable,function(err){
+				if(username[0]){
+					req.body["mentor"] = username[0]["username"];
+				}
+				var studentNumber = req.body["sn-year"]+"-"+req.body["sn-number"];
+
+				var queryAccount = "INSERT INTO `accounts`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES ("+connection.escape(req.body["username"])+","+connection.escape(req.body["password"])+","+connection.escape(req.body["first-name"])+","+connection.escape(req.body["middle-name"])+","+connection.escape(req.body["last-name"])+","+connection.escape(req.body["org-class"])+","+connection.escape(req.body["department"])+","+connection.escape(studentNumber)+","+connection.escape(req.body["org-batch"])+","+connection.escape(req.body["univ-batch"])+","+connection.escape(req.body["mentor"])+","+connection.escape(req.body["bday"])+","+connection.escape(req.body["homeAdd"])+","+connection.escape(req.body["collegeAdd"])+","+connection.escape(newFileName)+","+connection.escape(req.body["first-name"]+" "+req.body["middle-name"]+" "+req.body["last-name"])+","+connection.escape(req.body["exec_position"])+")";
+				var account_username_mentees = "accounts_"+req.body["username"]+"_mentees";
+
+				//insert row into accounts
+				connection.query(queryAccount,function(err){
 					if(err){
 						console.log(err);
-						res.send("Internal server error!");
+						res.send("Internal server error");
 						connection.end();
 					}
 					else{
-						if(req.body["numberofmentees"] > 0){
-							for(var i = 0 ; i < req.body["numberofmentees"]; i++){
-								var variableName = "mentee-"+(i+1);
+						var queryMenteesTable = "CREATE TABLE accounts_"+req.body["username"]+"_mentees (mentees VARCHAR(50))";
 
-								connection.query("SELECT username FROM `accounts` WHERE full_name="+connection.escape(req.body[variableName]),function(err,username){
-									if(username[0]){
-										req.body[variableName] = username[0]["username"];
-									}
-									var queryMenteesRow = "INSERT INTO `"+account_username_mentees+"` (`mentees`) VALUES ("+connection.escape(req.body[variableName])+")";
-
-									connection.query(queryMenteesRow,function(err){
-										if(err){
-											console.log(err);
-											res.send("Internal server error!");
-											connection.end();
-										}
-										else if(i == req.body["numberofmentees"] - 1){
-											console.log("New account "+req.body["username"]+" succesfully created.");
-											connection.end();
-										}
-									});
-								});
+						//insert row into accounts_username_mentees
+						connection.query(queryMenteesTable,function(err){
+							if(err){
+								console.log(err);
+								res.send("Internal server error!");
+								connection.end();
 							}
-						}
-						else{
-							console.log("New account "+req.body["username"]+" succesfully created.");
-							connection.end();
-						}
+							else{
+								if(req.body["numberofmentees"] > 0){
+
+									function insertMentee(mentee,i){
+										connection.query("SELECT username FROM `accounts` WHERE full_name="+connection.escape(mentee),function(err,username){
+											if(username[0]){
+												mentee = username[0]["username"];
+											}
+											var queryMenteesRow = "INSERT INTO `"+account_username_mentees+"` (`mentees`) VALUES ("+connection.escape(mentee)+")";
+
+											connection.query(queryMenteesRow,function(err){
+												if(err){
+													console.log(err);
+													res.send("Internal server error!");
+													connection.end();
+												}
+												else if(i == parseInt(req.body["numberofmentees"]) - 1){
+													console.log("New account "+req.body["username"]+" succesfully created.");
+													connection.end();
+												}
+											});
+										});
+									}
+
+									for(var i = 0 ; i < req.body["numberofmentees"]; i++){
+										var variableName = "mentee-"+(i+1);
+
+										insertMentee(req.body[variableName],i);
+									}
+								}
+								else{
+									console.log("New account "+req.body["username"]+" succesfully created.");
+									connection.end();
+								}
+							}
+						});
 					}
 				});
 			}
