@@ -54,6 +54,18 @@ $(document).ready(function(){
 	if($("#photo").val()){
 		createPreview();
 	}
+
+	//is exec box
+	$("#isExec").on('change',function(){
+		if($("#isExec").is(":checked")){
+			var insert = "<br><li>This is a test</li>";
+			$("#isExec").parent().after(insert);
+		}
+		else{
+			alert("Not check");
+		}
+	});
+
 	//add/remove mentees
 	var numberOfMentees = 1;
 	$("#mentees").on('click','.mentee-field .add-mentee',function(){
