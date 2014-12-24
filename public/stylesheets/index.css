@@ -107,8 +107,9 @@ img.image{
 	max-height:300px;
 	overflow-y:auto;
 	overflow-x:hidden;
-	padding-left:200px;
-	padding-right:200px;
+	padding-left:175px;
+	padding-right:175px;
+	position:relative;
 }
 
 .mentee-field, #student-number{
@@ -131,6 +132,10 @@ img.image{
 ul.container{
 	padding:0%;
 	width:100%;
+}
+
+ul.ui-autocomplete {
+	z-index: 1100;
 }
 
 .navbutton li{

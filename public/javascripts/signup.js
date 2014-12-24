@@ -112,6 +112,36 @@ $(document).ready(function(){
 		addPosition();
 	});
 
+	//autocomplete for mentees
+	function menteesAutocomplete(){
+		var availableTags = (function(){
+			return $.ajax({
+				async: false,
+				url: "http://localhost:8080/search",
+				data: "",
+				type: "GET",
+				success: function (res) {
+					return res;
+				},
+				error: function (e){
+					console.dir(e);
+				}
+			})["responseJSON"];
+		})();
+
+		$( ".mentee-textfield" ).autocomplete({
+			source: availableTags
+		});
+		$('.mentee-textfield').each(function() {
+			$(this).autocomplete( "instance" )._renderItem = function (ul, item) {
+				return $( "<li>" )
+				.append( "<a>" + "<img src='http://localhost:8080/" + item.picture +"' style='width:25px;margin-right:15px;'>" + item.value + "</a>" )
+				.appendTo( ul );
+			};
+		});
+	}
+	menteesAutocomplete();
+
 	//add/remove mentees
 	var numberOfMentees = 1;
 	$("#mentees").on('click','.mentee-field .add-mentee',function(){
@@ -121,6 +151,7 @@ $(document).ready(function(){
 		$(this).removeClass('add-mentee');
 		$(this).addClass('remove-mentee');
 		$("#mentees").append(newfield);
+		menteesAutocomplete();
 	});
 	$("#mentees").on('click','.mentee-field .remove-mentee',function(){
 		$(this).parent().nextAll().each(function(index){
@@ -131,6 +162,7 @@ $(document).ready(function(){
 			$(this).children(".mentee-textfield").attr("name","mentee-"+temp);
 		});
 		$(this).parent().parent().remove();
+		menteesAutocomplete();
 
 		numberOfMentees--;
 	});
@@ -141,14 +173,13 @@ $(document).ready(function(){
 
 	//onsubmit login
 	$("#loginform").on("submit",function(){
-		//alert($("#loginform input[name='password']").val());
 		$("#loginform input[name='password']").val(String(CryptoJS.SHA3($("#loginform input[name='password']").val(),{ outputLength: 224 })));
 	});
 
 	//onsubmit signup
 	$("#signupform").on("submit",function(){
 		var previewCoordinates = $("#draggable").position();
-		
+
 		//assign crop coordinates
 		$("#imageleft").val(previewCoordinates.left);
 		$("#imagetop").val(previewCoordinates.top);

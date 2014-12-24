@@ -250,6 +250,7 @@ router.post('/signup',
 			if(err){
 				console.log(err);
 				res.send("Internal server error");
+				connection.end();
 			}
 			else{
 				//insert row into accounts_username_mentees
@@ -257,22 +258,32 @@ router.post('/signup',
 					if(err){
 						console.log(err);
 						res.send("Internal server error!");
+						connection.end();
 					}
 					else{
 						if(req.body["numberofmentees"] > 0){
 							for(var i = 0 ; i < req.body["numberofmentees"]; i++){
 								var variableName = "mentee-"+(i+1);
-								var queryMenteesRow = "INSERT INTO `"+account_username_mentees+"` (`mentees`) VALUES ("+connection.escape(req.body[variableName])+")";
 
-								connection.query(queryMenteesRow,function(err){
-									if(err){
-										console.log(err);
-										res.send("Internal server error!");
+								connection.query("SELECT username FROM `accounts` WHERE full_name="+connection.escape(req.body[variableName]),function(err,username){
+									if(username[0]){
+										req.body[variableName] = username[0]["username"];
 									}
+									var queryMenteesRow = "INSERT INTO `"+account_username_mentees+"` (`mentees`) VALUES ("+connection.escape(req.body[variableName])+")";
+
+									connection.query(queryMenteesRow,function(err){
+										if(err){
+											console.log(err);
+											res.send("Internal server error!");
+											connection.end();
+										}
+										else if(i == req.body["numberofmentees"] - 1){
+											console.log("New account "+req.body["username"]+" succesfully created.");
+											connection.end();
+										}
+									});
 								});
 							}
-							console.log("New account "+req.body["username"]+" succesfully created.");
-							connection.end();
 						}
 						else{
 							console.log("New account "+req.body["username"]+" succesfully created.");
@@ -289,8 +300,6 @@ router.post('/signup',
 
 //search
 router.get('/search',function(req,res){
-	var session = req.session;
-	if(session.userkey){
 		var connection = mysql.createConnection({
 			host : 'localhost',
 			user : 'root',
@@ -314,10 +323,6 @@ router.get('/search',function(req,res){
 				connection.end();
 			}
 		});
-	}
-	else{
-		res.redirect("/");
-	}
 });
 
 /* TEST */
