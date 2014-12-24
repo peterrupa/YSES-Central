@@ -87,11 +87,11 @@ html
 										div.button
 											div.box-content
 												div.box
-													button(type="button")
+													button.profile-button(type="button")
 														span Go to department
 														span.glyphicon.glyphicon-edit
 												div.box
-													button(type="button")
+													button.profile-button(type="button")
 														span Edit profile
 														span.glyphicon.glyphicon-cog
 								//- if(not user's profile) THIS_PROFILE.setVisible(false);
@@ -102,25 +102,307 @@ html
 										div.box-group
 											div.box.box-about
 												div.profile-content.title.text-center
-													button(type="button")
+													button#about.profile-button(type="button",href="#")
 														span ABOUT
 										div.box-group
 											div.box.box-mentor
 												div.profile-content.title.text-center
-													button(type="button")
+													button#mentor.profile-button(type="button")
 														span MENTOR
 										div.box-group
 											div.box.box-mentee
 												div.profile-content.title.text-center
-													button(type="button")
+													button#mentee.profile-button(type="button")
 														span MENTEE
 										div.box-group
 											div.box.box-moreinfo
 												div.profile-content.title.text-center
-													button(type="button")
-														span MORE INFO
+													button#more.profile-button(type="button")
+														span MORE
 									div.row
-										div.box.box-data
+										div#box-data
+											div.box
+												div#about-data.hidden
+													div.table-title
+														strong DETAILS
+															span.glyphicon.glyphicon-user
+													table.table.table-hover
+														tr
+															td First name
+															td Cla
+														tr
+															td Middle Name
+															td Ganda
+														tr
+															td Last Name
+															td Estremos
+														tr
+															td Organization Classification
+															td Active
+														tr
+															td Department
+															td Best Department
+														tr
+															td Student Number
+															td 2014-09272
+														tr
+															td Organization Batch
+															td Penguins
+														tr
+															td University Batch
+															td Batch '14
+														tr
+															td Birthday
+															td Month 1, 0000
+														tr
+															td Home Adress
+															td Adress is here
+														tr
+															td College Adress
+															td Adress is here too!
+												div#mentor-data.hidden
+													div.row
+														div.table-title
+															strong MENTOR
+																span.glyphicon.glyphicon-eye-open
+														hr
+													div.mentor-data-content-image
+														img.img-responsive(src="../images/Cla.jpg")
+													div.mentor-data-content-text
+														div.row
+															div.mentor-data-content-3
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 First Name
+																		figcaption.img-title
+																			h5 something
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 Middle Name
+																		figcaption.img-title
+																			h5 something
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 Last Name
+																		figcaption.img-title
+																			h5 something
+														div.row
+															div.mentor-data-content-1
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 Organization Classification
+																		figcaption.img-title
+																			h5 something
+														div.row
+															div.mentor-data-content-1
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 Department
+																		figcaption.img-title
+																			h5 something
+														div.row
+															div.mentor-data-content-1
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 Student Number
+																		figcaption.img-title
+																			h5 something
+														div.row
+															div.mentor-data-content-1
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 Organization Batch
+																		figcaption.img-title
+																			h5 something
+														div.row
+															div.mentor-data-content-1
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 University Batch
+																		figcaption.img-title
+																			h5 something
+														div.row
+															div.mentor-data-content-3
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 Month
+																		figcaption.img-title
+																			h5 something
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 Day
+																		figcaption.img-title
+																			h5 something
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 Year
+																		figcaption.img-title
+																			h5 something
+														div.row
+															div.mentor-data-content-4
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 Mentee
+																		figcaption.img-title
+																			h5 something
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 Mentee
+																		figcaption.img-title
+																			h5 something
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 Mentee
+																		figcaption.img-title
+																			h5 something
+																div.wrapper.clearfix
+																	figure.gallery-item
+																		h5 Mentee
+																		figcaption.img-title
+																			h5 something
+												div#mentee-data.hidden
+													div.row
+														div.table-title
+															strong MENTEE
+																span.glyphicon.glyphicon-leaf
+														hr
+													div.mentee-image-container
+														div.mentee-data-image
+															button#mentee-1
+																img.img-responsive(src="../images/JV.jpg")
+														div.mentee-data-image
+															button#mentee-2
+																img.img-responsive(src="../images/JV.jpg")
+														div.mentee-data-image
+															button#mentee-3
+																img.img-responsive(src="../images/JV.jpg")
+													div.mentee-data-content
+														div.mentee-1.hidden
+															div.row
+																table.table.table-hover.table-condensed
+																	thead
+																		tr
+																			td DETAILS
+																	tbody
+																		tr
+																			td Full Name
+																			td This I. Name
+																		tr
+																			td Organization Classification
+																			td Something
+																		tr
+																			td Department
+																			td Something
+																		tr
+																			td Student Number
+																			td Something
+																		tr
+																			td Organization Batch
+																			td Something
+																		tr
+																			td University Batch
+																			td Something
+																		tr
+																			td Birthday
+																			td Something
+															div.row
+																div.mentee-data-content-1
+																	div.wrapper.clearfix
+																		figure.gallery-item
+																			h5 Mentee
+																			figcaption.img-title
+																				h5 something
+														div.mentee-2.hidden
+															div.row
+																table.table.table-hover.table-condensed
+																	thead
+																		tr
+																			td DETAILS
+																	tbody
+																		tr
+																			td Full Name
+																			td Yeah I. Name
+																		tr
+																			td Organization Classification
+																			td Something
+																		tr
+																			td Department
+																			td Something
+																		tr
+																			td Student Number
+																			td Something
+																		tr
+																			td Organization Batch
+																			td Something
+																		tr
+																			td University Batch
+																			td Something
+																		tr
+																			td Birthday
+																			td Something
+															div.row
+																div.mentee-data-content-2
+																	div.wrapper.clearfix
+																		figure.gallery-item
+																			h5 Mentee
+																			figcaption.img-title
+																				h5 something
+																	div.wrapper.clearfix
+																		figure.gallery-item
+																			h5 Mentee
+																			figcaption.img-title
+																				h5 something
+														div.mentee-3.hidden
+															div.row
+																table.table.table-hover.table-condensed
+																	thead
+																		tr
+																			td DETAILS
+																	tbody
+																		tr
+																			td Full Name
+																			td This I. Something
+																		tr
+																			td Organization Classification
+																			td Something
+																		tr
+																			td Department
+																			td Something
+																		tr
+																			td Student Number
+																			td Something
+																		tr
+																			td Organization Batch
+																			td Something
+																		tr
+																			td University Batch
+																			td Something
+																		tr
+																			td Birthday
+																			td Something
+															div.row
+																div.mentee-data-content-3
+																	div.wrapper.clearfix
+																		figure.gallery-item
+																			h5 Mentee
+																			figcaption.img-title
+																				h5 something
+																	div.wrapper.clearfix
+																		figure.gallery-item
+																			h5 Mentee
+																			figcaption.img-title
+																				h5 something
+																	div.wrapper.clearfix
+																		figure.gallery-item
+																			h5 Mentee
+																			figcaption.img-title
+																				h5 something
+												div#more-data.hidden
+													div.row
+														div.table-title
+															strong MORE
+																span.glyphicon.glyphicon-th-list
+														hr
 					// chatbox
 					div.col-lg-2.padding-vert.hidden-xs.hidden-sm.hidden-md
 						ul.no-bullets.side-menu
@@ -178,3 +460,4 @@ html
 		script(src='http://localhost:8080/javascripts/jquery-ui.js')
 		script(src='http://localhost:8080/javascripts/jquery-ui.min.js')
 		script(src='http://localhost:8080/javascripts/title-hover.js')
+		script(src='http://localhost:8080/javascripts/toggler.js')

@@ -22,7 +22,7 @@ body{
 	margin-left:5px;
 }
 
-#profile-bar .box, #profile-bar .button button{
+#profile-bar .box, #profile-bar .button .profile-button{
 	background-color:rgb(0,50,100);
 
 	margin-top:0px;
@@ -66,7 +66,7 @@ body{
 	width: 215px;
 	
 	color:black;
-	background-color: rgba(200,200,200,0.99);
+	background-color: rgba(200,200,200,0.9);
 
 }
 
@@ -94,7 +94,7 @@ body{
 	padding-top: 18px;
 }
 
-.button button{
+.button .profile-button{
 	color:white;
 
 	height:100%;
@@ -103,11 +103,16 @@ body{
 	border:0px;
 }
 
-.button button:hover, #information button:hover{
+.button .profile-button:hover{
 	color:rgb(100,200,255);
 }
 
-.button button span{
+#information .profile-button:hover{
+	color:rgb(100,200,255);
+	background-color:rgb(0,50,100);
+}
+
+.button .profile-button span{
 	margin-right:10px;
 }
 
@@ -121,7 +126,7 @@ body{
 	padding-top:0px;
 }
 
-#information button{
+#information .profile-button{
 	height:100%;
 	width:100%;
 
@@ -133,6 +138,12 @@ body{
 	margin:0px;
 	border:0px;
 	padding:0px;
+}
+
+#information .title span{
+	position:relative;
+	top:60px;
+	left:-40px;
 }
 
 .box-about{
@@ -155,6 +166,14 @@ body{
 	background-color:rgb(0,50,50);
 }
 
+#box-data .box{
+	padding: 15px;
+	width:730px;
+	height:347px;
+
+	overflow-y:auto;
+}
+
 .box-mentee img{
 	position: relative;
 	height:214px;
@@ -167,8 +186,120 @@ body{
 	left:7px;
 }
 
+/*data manipulation here*/
+#box-data{
+	display:none;
+	height:100%;
+}
+
+#box-data .box:before{
+	padding-top:0;
+
+	z-index:-5;
+}
+
+#box-data hr{
+	margin-top:0px;
+}
+
+#information .glyphicon{
+	position: relative;
+	float:left;
+
+	margin-right:13px;
+}
+
+#information img{
+	position:relative;
+	float:left;
+
+	margin-left:10px;
+	margin-top:0px;
+	margin-bottom:0px;
+	width:283px;
+}
+
+#information table{
+	margin-bottom:0px;
+}
+
+#information .-content{
+	border:0px;
+	padding:0px;
+	margin:0px;
+}
+
+#information hr{
+	margin-bottom:10px;
+}
+
+.mentor-data-content-image{
+	float:left;
+}
+
+.mentor-data-content-text{
+	float:left;
+
+	margin-right:0px;
+
+	height:281px;
+	width:400px;
+}
+
+#mentor-data{
+	overflow:hidden;
+}
+
+#information .mentee-image-container{
+	height:280px;
+	width:110px;
+
+	float:left;
+
+	overflow-y:auto;
+}
+
+.mentee-image-container::-webkit-scrollbar {
+	width: 1px;
+}
+ 
+.mentee-image-container::-webkit-scrollbar-track {
+	background-color:rgba(255,255,255,1); 
+	border-radius: 0px;
+}
+ 
+.mentee-image-container::-webkit-scrollbar-thumb {
+	border-radius: 0px;
+	background-color:gray;
+}
+
+#information .mentee-data-image{
+	width:100px;
+
+	margin:5px;
+	border:0px;
+	padding:0px;
+}
+
+#information .mentee-data-image img{
+	width:100px;
+
+	margin:0px;
+	border:0px;
+	padding:0px;
+}
+
+#information .mentee-data-image button{
+	margin:0px;
+	border:0px;
+	padding:0px;
+}
+
+.hidden{
+	display:none;
+}
 
 .blank-space-baby{
-	height:100px;
-	width:100px;
+	height:19px;
+	width:100%;
 }
