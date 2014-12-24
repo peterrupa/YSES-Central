@@ -37,23 +37,19 @@ html
 												input(id="photo",type="file",name="photo")
 												div#preview
 											div.modal-body
-												ul.list-inline.container
+												ul.no-bullets.container
 													li First name:
 														input.form-control(type="text",name="first-name")
-													br
 													li Middle name:
 														input.form-control(type="text",name="middle-name")
-													br
 													li Last name:
 														input.form-control(type="text",name="last-name")
-													br
 													li Org Classification:
 														br
 														select.form-control(form="signupform",name="org-class")
 															option(value="Active") Active
 															option(value="Inactive") Inactive
 															option(value="Alumni") Alumni
-													br
 													li Department:
 														select.form-control(form="signupform",name="department")
 															optgroup(label="Projects and Activities")
@@ -64,31 +60,28 @@ html
 															option(value="scho") Scholastics
 															option(value="fin") Finance
 															option(value="hr") Human Resources
-													br
+															option(value="exec") Executive (EO Only)
+														input#isExec(type="checkbox",name="isExec")
+														span Executive
 													li Student Number:
 														br
 														div#student-number.input-group
 															input.form-control.sn(type="text",maxlength="4",name="sn-year",placeholder="20XX")
 															span.glyphicon.glyphicon-minus.input-group-addon(style="top:0px;")
 															input.form-control.sn(type="text",maxlength="5",name="sn-number",placeholder="XXXXX")
-													br
 													li Username:
 														br
 														input.form-control(type="text",name="username")
-													br
 													li Password:
 														input.form-control(type="password",name="password")
-													br
 													li Organization Batch:
 														select.form-control(form="signupform",name="org-batch")
 															option(value="Charter") Charter
 															option(value="Synergy") Synergy
 															option(value="RAMpage") RAMpage
-													br
 													li Mentor:
 														br
 														input.form-control(type="text",name="mentor")
-													br
 													li#mentees
 														span Mentees:
 														div.mentee-field.input-group
@@ -96,13 +89,10 @@ html
 															span.input-group-btn
 																button.add-mentee.btn.btn-default(type="button",value="+")
 																	span.glyphicon.glyphicon-plus
-													br
 													li Birthday:
 														input.form-control(type="date",name="bday")
-													br
 													li Home Address
 														input.form-control(type="text",name="homeAdd")
-													br
 													li College Address
 														input.form-control(type="text",name="collegeAdd")
 													input#imageleft(type="hidden",name="imageleft")
