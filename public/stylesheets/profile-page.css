@@ -12,12 +12,11 @@ body{
 
 	width:100%;
 
-	left:-55px;
 	top:-6px;
 }
 
 #information .box{
-	width:175px;
+	width:170px;
 	margin-right:5px;
 	margin-left:5px;
 }
@@ -166,18 +165,18 @@ body{
 	background-color:rgb(0,50,50);
 }
 
-#box-data .box{
-	padding: 15px;
-	width:730px;
-	height:347px;
-
-	overflow-y:auto;
-}
-
 .box-mentee img{
 	position: relative;
 	height:214px;
 	left:0px;
+}
+
+#box-data .box{
+	padding: 15px;
+	width:710px;
+	height:347px;
+
+	overflow-y:auto;
 }
 
 .box-mentor img{
@@ -223,12 +222,6 @@ body{
 	margin-bottom:0px;
 }
 
-#information .-content{
-	border:0px;
-	padding:0px;
-	margin:0px;
-}
-
 #information hr{
 	margin-bottom:10px;
 }
@@ -243,14 +236,25 @@ body{
 	margin-right:0px;
 
 	height:281px;
-	width:400px;
+	width:365px;
 }
 
 #mentor-data{
 	overflow:hidden;
 }
 
-#information .mentee-image-container{
+.mentee-1, .mentee-2, .mentee-3{
+	float:left;
+	
+	width:550px;
+}
+
+.mentee-data-content .table{
+	float:left;
+	width:100%;
+}
+
+.mentee-image-container{
 	height:280px;
 	width:110px;
 
@@ -293,6 +297,10 @@ body{
 	margin:0px;
 	border:0px;
 	padding:0px;
+}
+
+.row-head{
+	width:300px;
 }
 
 .hidden{

@@ -8,6 +8,10 @@ $(document).ready(function(){
 			$(this).closest("#information").find("#mentor-data").addClass("hidden");
 			$(this).closest("#information").find("#mentee-data").addClass("hidden");
 			$(this).closest("#information").find("#more-data").addClass("hidden");
+
+			$(this).closest("#information").find(".mentee-1").addClass("hidden");
+			$(this).closest("#information").find(".mentee-2").addClass("hidden");
+			$(this).closest("#information").find(".mentee-3").addClass("hidden");
 		}
 	});
 
@@ -17,6 +21,10 @@ $(document).ready(function(){
 			$(this).closest("#information").find("#about-data").addClass("hidden");
 			$(this).closest("#information").find("#mentee-data").addClass("hidden");
 			$(this).closest("#information").find("#more-data").addClass("hidden");
+
+			$(this).closest("#information").find(".mentee-1").addClass("hidden");
+			$(this).closest("#information").find(".mentee-2").addClass("hidden");
+			$(this).closest("#information").find(".mentee-3").addClass("hidden");
 		}
 	});
 
@@ -35,6 +43,10 @@ $(document).ready(function(){
 			$(this).closest("#information").find("#about-data").addClass("hidden");
 			$(this).closest("#information").find("#mentor-data").addClass("hidden");
 			$(this).closest("#information").find("#mentee-data").addClass("hidden");
+
+			$(this).closest("#information").find(".mentee-1").addClass("hidden");
+			$(this).closest("#information").find(".mentee-2").addClass("hidden");
+			$(this).closest("#information").find(".mentee-3").addClass("hidden");
 		}
 	});
 
