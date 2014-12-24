@@ -306,7 +306,7 @@ router.get('/search',function(req,res){
 			password : '',
 			database: 'yses_central'
 		});
-		var query = "SELECT first_name, full_name AS 'value', picture from `accounts` WHERE 1";
+		var query = "SELECT first_name, full_name AS 'value', picture from `accounts` WHERE 1 ORDER BY full_name";
 
 		connection.connect();
 		connection.query(query,function(err,rows){

@@ -129,10 +129,10 @@ $(document).ready(function(){
 			})["responseJSON"];
 		})();
 
-		$( ".mentee-textfield" ).autocomplete({
+		$( ".accountsAutocomplete" ).autocomplete({
 			source: availableTags
 		});
-		$('.mentee-textfield').each(function() {
+		$('.accountsAutocomplete').each(function() {
 			$(this).autocomplete( "instance" )._renderItem = function (ul, item) {
 				return $( "<li>" )
 				.append( "<a>" + "<img src='http://localhost:8080/" + item.picture +"' style='width:25px;margin-right:15px;'>" + item.value + "</a>" )
@@ -145,7 +145,7 @@ $(document).ready(function(){
 	//add/remove mentees
 	var numberOfMentees = 1;
 	$("#mentees").on('click','.mentee-field .add-mentee',function(){
-		var newfield = '<div class="mentee-field input-group"><input class="mentee-textfield form-control" type="text" name="mentee-'+ ++numberOfMentees +'"><span class="input-group-btn"><button class="add-mentee btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></span></div>'
+		var newfield = '<div class="mentee-field input-group accountsAutocomplete"><input class="mentee-textfield form-control" type="text" name="mentee-'+ ++numberOfMentees +'"><span class="input-group-btn"><button class="add-mentee btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></span></div>'
 		$(this).append('<span class="glyphicon glyphicon-remove"></span>');
 		$(this).find('.glyphicon-plus').remove();
 		$(this).removeClass('add-mentee');
