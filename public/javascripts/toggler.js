@@ -9,7 +9,7 @@ $(document).ready(function(){
 	
 	window.onload = $('#box-data').slideDown(800);
 
-	$("#mentee-1").on('click',function(){
+	$("body").on('click',"#mentee-1",function(){
 		if($(this).closest("#information").find(".mentee-1").is(":hidden")){
 			$(this).closest("#information").find(".mentee-1").removeClass("hidden");
 			$(this).closest("#information").find(".mentee-2").addClass("hidden");
@@ -17,7 +17,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("#mentee-2").on('click',function(){
+	$("body").on('click','#mentee-2',function(){
 		if($(this).closest("#information").find(".mentee-2").is(":hidden")){
 			$(this).closest("#information").find(".mentee-2").removeClass("hidden");
 			$(this).closest("#information").find(".mentee-1").addClass("hidden");
@@ -25,7 +25,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("#mentee-3").on('click',function(){
+	$("body").on('click',"#mentee-3",function(){
 		if($(this).closest("#information").find(".mentee-3").is(":hidden")){
 			$(this).closest("#information").find(".mentee-3").removeClass("hidden");
 			$(this).closest("#information").find(".mentee-2").addClass("hidden");
