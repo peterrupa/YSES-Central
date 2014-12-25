@@ -36,40 +36,55 @@
 }
 
 /**********************/
-.mentor-data-content-6 .wrapper{
-	position:relative;
-	float:left;
-	width:16.6666666667%;
+@media screen and (max-width: 400px){
+	.mentor-data-content-6 .wrapper,
+	.mentor-data-content-5 .wrapper,
+	.mentor-data-content-4 .wrapper,
+	.mentor-data-content-3 .wrapper,
+	.mentor-data-content-2 .wrapper,
+	.mentor-data-content-1 .wrapper{
+		position: relative;
+		float: left;
+		width:100%;
+	}
 }
 
-.mentor-data-content-5 .wrapper{
-	position:relative;
-	float:left;
-	width:20%;
-}
+@media screen and (min-width: 401px){
+	.mentor-data-content-6 .wrapper{
+		position:relative;
+		float:left;
+		width:16.6666666667%;
+	}
 
-.mentor-data-content-4 .wrapper{
-	position:relative;
-	float:left;
-	width:25%;
-}
+	.mentor-data-content-5 .wrapper{
+		position:relative;
+		float:left;
+		width:20%;
+	}
 
-.mentor-data-content-3 .wrapper{
-	position:relative;
-	float:left;
-	width:33.3333333335%;
-}
+	.mentor-data-content-4 .wrapper{
+		position:relative;
+		float:left;
+		width:25%;
+	}
 
-.mentor-data-content-2 .wrapper{
-	position:relative;
-	float:left;
-	width:50%;
-}
+	.mentor-data-content-3 .wrapper{
+		position:relative;
+		float:left;
+		width:33.3333333335%;
+	}
 
-.mentor-data-content-1 .wrapper{
-	position:relative;
-	float:left;
-	width:100%;
+	.mentor-data-content-2 .wrapper{
+		position:relative;
+		float:left;
+		width:50%;
+	}
+
+	.mentor-data-content-1 .wrapper{
+		position:relative;
+		float:left;
+		width:100%;
+	}
 }
 
 .gallery {

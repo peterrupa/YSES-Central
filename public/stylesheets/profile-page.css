@@ -16,9 +16,13 @@ body{
 }
 
 #information .box{
-	width:170px;
+	width:23.5%;
 	margin-right:5px;
 	margin-left:5px;
+}
+
+#profile-bar{
+	margin-bottom:10px;
 }
 
 #profile-bar .box, #profile-bar .button .profile-button{
@@ -30,10 +34,12 @@ body{
 
 #profile-bar .box{
 	color:white;
+	margin-right:5px;
+	margin-left:5px;
 }
 
 .box-group .box{
-	width:220px;
+	width:89%;
 	margin-right:0;
 	margin-left:0;
 }
@@ -43,7 +49,7 @@ body{
 }
 
 .box-group img{
-	height: 221px;
+	width: 100%;
 }
 
 .box-group .button .box:before{
@@ -141,8 +147,11 @@ body{
 
 #information .title span{
 	position:relative;
-	top:60px;
-	left:-40px;
+	
+	font-size:1em;	
+
+	top:55px;
+	left:-30px;
 }
 
 .box-about{
@@ -173,7 +182,7 @@ body{
 
 #box-data .box{
 	padding: 15px;
-	width:710px;
+	width:98%;
 	height:347px;
 
 	overflow-y:auto;
@@ -212,7 +221,7 @@ body{
 	position:relative;
 	float:left;
 
-	margin-left:10px;
+	margin-left:0px;
 	margin-top:0px;
 	margin-bottom:0px;
 	width:283px;
@@ -310,4 +319,193 @@ body{
 .blank-space-baby{
 	height:19px;
 	width:100%;
+}
+
+/*xs*/
+@media screen and (max-width: 400px){
+	#profile-bar{
+		margin: 1%;
+	}
+
+	#profile-bar .box{
+		width:50%;
+		margin:0px;
+	
+		font-size:8px;
+	}
+
+	#information .box{
+		width:48%;
+		height:40px;
+
+		margin-bottom:0px;
+
+		margin-left:1%;
+		margin-right:1%;
+	}
+
+	#information .title span{
+		position:relative;
+
+		margin:0px;
+		top:0px;
+		left:0px;
+	}
+
+	#information #box-data .box{
+		height:345px;
+		width:98%;
+	}
+
+	#mentor-data .mentor-data-content-text{
+		font-size:8px;
+
+		width:100%;
+		margin-left:10px;
+	}
+
+	#mentor-data h5{
+		font-size:11px;
+	}
+
+	#mentor-data .mentor-data-content-image{
+		position:relative;
+		left:40%;
+		width:20%;
+	
+		margin-left:0px;
+
+		box-shadow:1px 1px 5px black;
+	}
+
+	#mentor-data .mentor-data-content-image img{
+		display:none;
+	}
+
+	#mentee-data .mentee-1, #mentee-data .mentee-2, #mentee-data .mentee-3{
+		margin-left:10px;
+		width:70%;
+	}
+
+}
+
+/*sm*/
+@media screen and (min-width:399px) and (max-width: 770px){
+	#profile-bar{
+		margin: 1%;
+	}
+
+	#profile-bar .box{
+		width:50%;
+		margin:0px;
+	}
+
+	#information .box{
+		width:48%;
+		height:50px;
+
+		margin-left:1%;
+		margin-right:1%;
+	}
+
+	#information .title span{
+		position:relative;
+
+		margin:0px;
+		top:0px;
+		left:0px;
+	}
+
+	#information #box-data .box{
+		height:345px;
+		width:98%;
+	}
+
+	#mentor-data .mentor-data-content-text{
+		width:100%;
+		margin-left:10px;
+	}
+
+	#mentor-data .mentor-data-content-image{
+		position:relative;
+		left:40%;
+		width:20%;
+	
+		margin-left:0px;
+
+		box-shadow:1px 1px 5px black;
+	}
+
+	#mentee-data .mentee-1, #mentee-data .mentee-2, #mentee-data .mentee-3{
+		margin-left:10px;
+		width:70%;
+	}
+}
+
+/*md*/
+@media screen and (min-width:769px) and (max-width: 1000px){
+	#profile-bar .box{
+		width:50%;
+		margin:0px;
+	}
+
+	#information .box{
+		width:369px;
+		height:50px;
+
+		margin-left:3px;
+		margin-right: 3px;
+	}
+
+	#information .title span{
+		position:relative;
+
+		margin:0px;
+		top:0px;
+		left:0px;
+	}
+
+	#information #box-data .box{
+		height:345px;
+		width:99.1%;
+	}
+
+	#mentor-data .mentor-data-content-text{
+		width:58%;
+	}
+
+	#mentee-data .mentee-1, #mentee-data .mentee-2, #mentee-data .mentee-3{
+		margin-left:10px;
+		width:80%;
+	}
+}
+
+/*lg*/
+@media screen and (min-width:999px) and (max-width: 1200px){
+	#profile-bar .box{
+		width:48.79%;
+		margin:0px;
+	}
+
+	#information .box{
+		margin-left:0px;
+		margin-right: 11.7px;
+	}
+
+	#information #box-data .box{
+		width:97.5%;
+	}
+
+	#mentor-data .mentor-data-content-text{
+		width:67%;
+	}
+
+	#mentee-data .mentee-1, #mentee-data .mentee-2, #mentee-data .mentee-3{
+		width:85%;
+	}
+}
+
+/*normal size*/
+@media screen and (min-width:1199px) and (max-width: 1400px){
+
 }
