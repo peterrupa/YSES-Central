@@ -72,12 +72,34 @@ html
 									div.box-group
 										div.box
 											div.profile-content
-												img.img-responsive(src="../images/Cla.jpg")
+												img.img-responsive(src="http://localhost:8080/#{rows['picture']}")
 										div.box
 											div.text.text-center.profile-content
 												div.row
-													h4.lead Ma. Clarissa Estremos
-													p.department-text.small Secretariat Department
+													- var middlename = rows["middle_name"].split(" ");
+													- var middlenameinitials = "";
+														each word in middlename
+															- middlenameinitials = middlenameinitials.concat(word.substring(0,1));
+													- var fullname = rows["first_name"] + " " + middlenameinitials + ". " + rows["last_name"];
+													h4.lead= fullname
+													case rows["department"]
+														when "jpad"
+															- var department = "Junior Projects and Activities Department";
+														when "spad"
+															- var department = "Senior Projects and Activities Department";
+														when "vl"
+															- var department = "Visuals and Logistics Department";
+														when "sec"
+															- var department = "Secretariat Department";
+														when "scho"
+															- var department = "Scholastics Department";
+														when "fin"
+															- var department = "Finance Department";
+														when "hr"
+															- var department = "Human Resources Department";
+														when "exec"
+															- var department = "Executive Department";
+													p.department-text.small= department
 												div.row
 													p 
 														em Hi. This is italic text. Some text. More text. Amazing skills. This is some text but I don't mind
@@ -89,10 +111,11 @@ html
 													button.profile-button(type="button")
 														span Go to department
 														span.glyphicon.glyphicon-edit
-												div.box
-													button.profile-button(type="button")
-														span Edit profile
-														span.glyphicon.glyphicon-cog
+												if exec_position || name == rows["first_name"]
+													div.box
+														button.profile-button(type="button")
+															span Edit profile
+															span.glyphicon.glyphicon-cog
 								//- if(not user's profile) THIS_PROFILE.setVisible(false);
 									this buttons should not exist if accessed by other users
 							div.container.col-lg-9

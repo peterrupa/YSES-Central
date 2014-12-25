@@ -21,10 +21,10 @@ router.get('/', function(req, res) {
 	var session = req.session;
 	if(session.userkey){
 		pool.getConnection(function(err,connection){
-			connection.query("SELECT first_name, picture FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows){
+			connection.query("SELECT first_name, picture, exec_position FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows){
 				if(err) console.log(err);
 				else{
-					res.render('homepage',{name: rows[0]["first_name"],picture: rows[0]["picture"].substring(7)});
+					res.render('homepage',{name: rows[0]["first_name"],picture: rows[0]["picture"].substring(7),exec_position: rows[0]["exec_position"]});
 				}
 			});
 			connection.release();
@@ -48,7 +48,7 @@ router.get('/profile/:name',function(req,res){
 				}
 				else{
 					if(rows[0]){
-						connection.query("SELECT username, first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, mentor, birthday, home_address, college_address, picture FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
+						connection.query("SELECT username, first_name, middle_name, last_name, department, picture, exec_position FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
 							if(err){
 								console.log(err);
 								res.send("Internal server error!");
@@ -64,12 +64,12 @@ router.get('/profile/:name',function(req,res){
 									}
 									else{
 										//before render, get owner's profile first
-										connection.query("SELECT first_name, picture FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows3){
+										connection.query("SELECT first_name, picture, exec_position FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows3){
 											if(err){
 												console.log(err);
 											}
 											else{
-												res.render("profile",{rows:rows[0],rows2:rowsMentees,name:rows3[0]["first_name"],picture:rows3[0]["picture"].substring(7)});
+												res.render("profile",{rows:rows[0],rows2:rowsMentees,name:rows3[0]["first_name"],picture:rows3[0]["picture"].substring(7),exec_position:rows3[0]["exec_position"]});
 											}
 										});
 									}
@@ -103,7 +103,7 @@ router.get('/profile/:name/content',function(req,res){
 				}
 				else{
 					if(rows[0]){
-						connection.query("SELECT username, first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, mentor, birthday, home_address, college_address, picture FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
+						connection.query("SELECT username, first_name, middle_name, last_name, department, picture, exec_position FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
 							if(err){
 								console.log(err);
 								res.send("Internal server error!");
@@ -119,12 +119,12 @@ router.get('/profile/:name/content',function(req,res){
 									}
 									else{
 										//before render, get owner's profile first
-										connection.query("SELECT first_name, picture FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows3){
+										connection.query("SELECT first_name, picture, exec_position FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows3){
 											if(err){
 												console.log(err);
 											}
 											else{
-												res.render("profile-content",{rows:rows[0],rows2:rowsMentees,name:rows3[0]["first_name"],picture:rows3[0]["picture"].substring(7)});
+												res.render("profile-content",{rows:rows[0],rows2:rowsMentees,name:rows3[0]["first_name"],picture:rows3[0]["picture"].substring(7),exec_position:rows3[0]["exec_position"]});
 											}
 										});
 									}
