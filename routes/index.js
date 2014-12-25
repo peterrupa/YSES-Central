@@ -9,24 +9,25 @@ var gm = im.subClass({imageMagic:true});
 
 //database
 var mysql = require('mysql');
+var pool = mysql.createPool({
+	host : 'localhost',
+	user : 'root',
+	password : '',
+	database: 'yses_central'
+});
 
 /* GET home page. */
 router.get('/', function(req, res) {
 	var session = req.session;
 	if(session.userkey){
-		var connection = mysql.createConnection({
-			host : 'localhost',
-			user : 'root',
-			password : '',
-			database: 'yses_central'
-		});
-
-		connection.connect();
-		connection.query("SELECT first_name, picture FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows){
-			if(err) console.log(err);
-			else{
-				res.render('homepage',{name: rows[0]["first_name"],picture: rows[0]["picture"].substring(7)});
-			}
+		pool.getConnection(function(err,connection){
+			connection.query("SELECT first_name, picture FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows){
+				if(err) console.log(err);
+				else{
+					res.render('homepage',{name: rows[0]["first_name"],picture: rows[0]["picture"].substring(7)});
+				}
+			});
+			connection.release();
 		});
 	}
 	else{
@@ -39,59 +40,51 @@ router.get('/profile/:name',function(req,res){
 	var session = req.session;
 
 	if(session.userkey){
-		var connection = mysql.createConnection({
-			host : 'localhost',
-			user : 'root',
-			password : '',
-			database: 'yses_central'
-		});
-
-		connection.connect();
-		connection.query("SELECT first_name FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
-			if(err){
-				console.log(err);
-				res.send("Internal server error!");
-			}
-			else{
-				if(rows[0]){
-					connection.query("SELECT username, first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, mentor, birthday, home_address, college_address, picture FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
-						if(err){
-							console.log(err);
-							res.send("Internal server error!");
-						}
-						else{
-							//remove /public
-							rows[0]["picture"] = rows[0]["picture"].substring(7);
-
-							connection.query("SELECT mentees FROM `accounts_"+rows[0]["username"]+"_mentees` WHERE 1",function(err,rowsMentees){
-								if(err){
-									console.log(err);
-									res.send("Internal server error!");
-									connection.end();
-								}
-								else{
-									//before render, get owner's profile first
-									connection.query("SELECT first_name, picture FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows3){
-										if(err){
-											console.log(err);
-											connection.end();
-										}
-										else{
-											res.render("profile",{rows:rows[0],rows2:rowsMentees,name:rows3[0]["first_name"],picture:rows3[0]["picture"].substring(7)});
-											connection.end();
-										}
-									});
-								}
-							});
-						}
-					});
+		pool.getConnection(function(err,connection){
+			connection.query("SELECT first_name FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
+				if(err){
+					console.log(err);
+					res.send("Internal server error!");
 				}
 				else{
-					res.send("No profile found!");
-					connection.end();
+					if(rows[0]){
+						connection.query("SELECT username, first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, mentor, birthday, home_address, college_address, picture FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
+							if(err){
+								console.log(err);
+								res.send("Internal server error!");
+							}
+							else{
+								//remove /public
+								rows[0]["picture"] = rows[0]["picture"].substring(7);
+
+								connection.query("SELECT mentees FROM `accounts_"+rows[0]["username"]+"_mentees` WHERE 1",function(err,rowsMentees){
+									if(err){
+										console.log(err);
+										res.send("Internal server error!");
+									}
+									else{
+										//before render, get owner's profile first
+										connection.query("SELECT first_name, picture FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows3){
+											if(err){
+												console.log(err);
+											}
+											else{
+												res.render("profile",{rows:rows[0],rows2:rowsMentees,name:rows3[0]["first_name"],picture:rows3[0]["picture"].substring(7)});
+											}
+										});
+									}
+								});
+							}
+						});
+					}
+					else{
+						res.send("No profile found!");
+					}
 				}
-			}
+			});
+			connection.release();
 		});
+
 	}
 	else{
 		res.redirect('/');
@@ -102,50 +95,51 @@ router.get('/profile/:name/content',function(req,res){
 	var session = req.session;
 
 	if(session.userkey){
-		var connection = mysql.createConnection({
-			host : 'localhost',
-			user : 'root',
-			password : '',
-			database: 'yses_central'
-		});
-
-		connection.connect();
-		connection.query("SELECT first_name FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
-			if(err){
-				console.log(err);
-				res.send("Internal server error!");
-			}
-			else{
-				if(rows[0]){
-					connection.query("SELECT username, first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, mentor, birthday, home_address, college_address, picture FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
-						if(err){
-							console.log(err);
-							res.send("Internal server error!");
-						}
-						else{
-							//remove /public
-							rows[0]["picture"] = rows[0]["picture"].substring(7);
-
-							connection.query("SELECT mentees FROM `accounts_"+rows[0]["username"]+"_mentees` WHERE 1",function(err,rowsMentees){
-								if(err){
-									console.log(err);
-									res.send("Internal server error!");
-									connection.end();
-								}
-								else{
-									res.render("profile-content",{rows:rows[0],rows2:rowsMentees});
-									connection.end();
-								}
-							});
-						}
-					});
+		pool.getConnection(function(err,connection){
+			connection.query("SELECT first_name FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
+				if(err){
+					console.log(err);
+					res.send("Internal server error!");
 				}
 				else{
-					res.send("No profile found!");
-					connection.end();
+					if(rows[0]){
+						connection.query("SELECT username, first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, mentor, birthday, home_address, college_address, picture FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
+							if(err){
+								console.log(err);
+								res.send("Internal server error!");
+							}
+							else{
+								//remove /public
+								rows[0]["picture"] = rows[0]["picture"].substring(7);
+
+								connection.query("SELECT mentees FROM `accounts_"+rows[0]["username"]+"_mentees` WHERE 1",function(err,rowsMentees){
+									if(err){
+										console.log(err);
+										res.send("Internal server error!");
+									}
+									else{
+										//before render, get owner's profile first
+										connection.query("SELECT first_name, picture FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows3){
+											if(err){
+												console.log(err);
+											}
+											else{
+												res.render("profile-content",{rows:rows[0],rows2:rowsMentees,name:rows3[0]["first_name"],picture:rows3[0]["picture"].substring(7)});
+											}
+										});
+									}
+								});
+							}
+						});
+					}
+					else{
+						res.send("No profile found!");
+					}
 				}
-			}
+			});
+			connection.release();
 		});
+
 	}
 	else{
 		res.redirect('/');
@@ -153,30 +147,20 @@ router.get('/profile/:name/content',function(req,res){
 });
 
 router.post('/login', function(req, res) {
-	var connection = mysql.createConnection({
-		host : 'localhost',
-		user : 'root',
-		password : '',
-		database: 'yses_central'
+	pool.getConnection(function(err,connection){
+		connection.query("SELECT username FROM `accounts` WHERE username="+connection.escape(req.body["username"])+"&&password="+connection.escape(req.body["password"]),function(err,rows){
+			if(rows[0]){ //successful login
+				var session = req.session;
+				session.userkey = rows[0]["username"];
+				res.redirect("/");
+			}
+			else{ //no result
+				//insert ajax response here
+				res.send("None!");
+			}
+		});
+		connection.release();
 	});
-	console.log("Username: "+req.body["username"]);
-	console.log("Password: "+req.body["password"]);
-	connection.connect();
-	connection.query("SELECT username FROM `accounts` WHERE username="+connection.escape(req.body["username"])+"&&password="+connection.escape(req.body["password"]),function(err,rows){
-		if(rows[0]){ //successful login
-			var session = req.session;
-			session.userkey = rows[0]["username"];
-			res.redirect("/");
-			connection.end();
-		}
-		else{ //no result
-			//insert ajax response here
-			res.send("None!");
-			connection.end();
-		}
-	});
-
-
 });
 
 router.post('/logout', function(req, res) {
@@ -224,84 +208,74 @@ router.post('/signup',
 		});
 
 		//save to database
-		var connection = mysql.createConnection({
-			host : 'localhost',
-			user : 'root',
-			password : '',
-			database: 'yses_central'
-		});
-
-		connection.query("SELECT username FROM `accounts` WHERE full_name="+connection.escape(req.body["mentor"]),function(err,username){
-			if(err){
-				console.log(err);
-				res.send("Internal server error");
-				connection.end();
-			}
-			else{
-				if(username[0]){
-					req.body["mentor"] = username[0]["username"];
+		pool.getConnection(function(err,connection){
+			connection.query("SELECT username FROM `accounts` WHERE full_name="+connection.escape(req.body["mentor"]),function(err,username){
+				if(err){
+					console.log(err);
+					res.send("Internal server error");
 				}
-				var studentNumber = req.body["sn-year"]+"-"+req.body["sn-number"];
-
-				var queryAccount = "INSERT INTO `accounts`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES ("+connection.escape(req.body["username"])+","+connection.escape(req.body["password"])+","+connection.escape(req.body["first-name"])+","+connection.escape(req.body["middle-name"])+","+connection.escape(req.body["last-name"])+","+connection.escape(req.body["org-class"])+","+connection.escape(req.body["department"])+","+connection.escape(studentNumber)+","+connection.escape(req.body["org-batch"])+","+connection.escape(req.body["univ-batch"])+","+connection.escape(req.body["mentor"])+","+connection.escape(req.body["bday"])+","+connection.escape(req.body["homeAdd"])+","+connection.escape(req.body["collegeAdd"])+","+connection.escape(newFileName)+","+connection.escape(req.body["first-name"]+" "+req.body["middle-name"]+" "+req.body["last-name"])+","+connection.escape(req.body["exec_position"])+")";
-				var account_username_mentees = "accounts_"+req.body["username"]+"_mentees";
-
-				//insert row into accounts
-				connection.query(queryAccount,function(err){
-					if(err){
-						console.log(err);
-						res.send("Internal server error");
-						connection.end();
+				else{
+					if(username[0]){
+						req.body["mentor"] = username[0]["username"];
 					}
-					else{
-						var queryMenteesTable = "CREATE TABLE accounts_"+req.body["username"]+"_mentees (mentees VARCHAR(50))";
+					var studentNumber = req.body["sn-year"]+"-"+req.body["sn-number"];
 
-						//insert row into accounts_username_mentees
-						connection.query(queryMenteesTable,function(err){
-							if(err){
-								console.log(err);
-								res.send("Internal server error!");
-								connection.end();
-							}
-							else{
-								if(req.body["numberofmentees"] > 0){
+					var queryAccount = "INSERT INTO `accounts`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES ("+connection.escape(req.body["username"])+","+connection.escape(req.body["password"])+","+connection.escape(req.body["first-name"])+","+connection.escape(req.body["middle-name"])+","+connection.escape(req.body["last-name"])+","+connection.escape(req.body["org-class"])+","+connection.escape(req.body["department"])+","+connection.escape(studentNumber)+","+connection.escape(req.body["org-batch"])+","+connection.escape(req.body["univ-batch"])+","+connection.escape(req.body["mentor"])+","+connection.escape(req.body["bday"])+","+connection.escape(req.body["homeAdd"])+","+connection.escape(req.body["collegeAdd"])+","+connection.escape(newFileName)+","+connection.escape(req.body["first-name"]+" "+req.body["middle-name"]+" "+req.body["last-name"])+","+connection.escape(req.body["exec_position"])+")";
+					var account_username_mentees = "accounts_"+req.body["username"]+"_mentees";
 
-									function insertMentee(mentee,i){
-										connection.query("SELECT username FROM `accounts` WHERE full_name="+connection.escape(mentee),function(err,username){
-											if(username[0]){
-												mentee = username[0]["username"];
-											}
-											var queryMenteesRow = "INSERT INTO `"+account_username_mentees+"` (`mentees`) VALUES ("+connection.escape(mentee)+")";
+					//insert row into accounts
+					connection.query(queryAccount,function(err){
+						if(err){
+							console.log(err);
+							res.send("Internal server error");
+						}
+						else{
+							var queryMenteesTable = "CREATE TABLE accounts_"+req.body["username"]+"_mentees (mentees VARCHAR(50))";
 
-											connection.query(queryMenteesRow,function(err){
-												if(err){
-													console.log(err);
-													res.send("Internal server error!");
-													connection.end();
-												}
-												else if(i == parseInt(req.body["numberofmentees"]) - 1){
-													console.log("New account "+req.body["username"]+" succesfully created.");
-													connection.end();
-												}
-											});
-										});
-									}
-
-									for(var i = 0 ; i < req.body["numberofmentees"]; i++){
-										var variableName = "mentee-"+(i+1);
-
-										insertMentee(req.body[variableName],i);
-									}
+							//insert row into accounts_username_mentees
+							connection.query(queryMenteesTable,function(err){
+								if(err){
+									console.log(err);
+									res.send("Internal server error!");
 								}
 								else{
-									console.log("New account "+req.body["username"]+" succesfully created.");
-									connection.end();
+									if(req.body["numberofmentees"] > 0){
+
+										function insertMentee(mentee,i){
+											connection.query("SELECT username FROM `accounts` WHERE full_name="+connection.escape(mentee),function(err,username){
+												if(username[0]){
+													mentee = username[0]["username"];
+												}
+												var queryMenteesRow = "INSERT INTO `"+account_username_mentees+"` (`mentees`) VALUES ("+connection.escape(mentee)+")";
+
+												connection.query(queryMenteesRow,function(err){
+													if(err){
+														console.log(err);
+														res.send("Internal server error!");
+													}
+													else if(i == parseInt(req.body["numberofmentees"]) - 1){
+														console.log("New account "+req.body["username"]+" succesfully created.");
+													}
+												});
+											});
+										}
+
+										for(var i = 0 ; i < req.body["numberofmentees"]; i++){
+											var variableName = "mentee-"+(i+1);
+
+											insertMentee(req.body[variableName],i);
+										}
+									}
+									else{
+										console.log("New account "+req.body["username"]+" succesfully created.");
+									}
 								}
-							}
-						});
-					}
-				});
-			}
+							});
+						}
+					});
+				}
+			});
+			connection.release();
 		});
 
 		res.redirect("/");
@@ -310,15 +284,9 @@ router.post('/signup',
 
 //search
 router.get('/search',function(req,res){
-		var connection = mysql.createConnection({
-			host : 'localhost',
-			user : 'root',
-			password : '',
-			database: 'yses_central'
-		});
+	pool.getConnection(function(err,connection){
 		var query = "SELECT first_name, full_name AS 'value', picture from `accounts` WHERE 1 ORDER BY full_name";
 
-		connection.connect();
 		connection.query(query,function(err,rows){
 			if(err){
 				console.log(err);
@@ -330,9 +298,10 @@ router.get('/search',function(req,res){
 					rows[i]["url"] = "http://localhost:8080/profile/" + rows[i]["first_name"];
 				}
 				res.send(rows);
-				connection.end();
 			}
 		});
+		connection.release()
+	});
 });
 
 /* TEST */
