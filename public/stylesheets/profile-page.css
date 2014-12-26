@@ -302,10 +302,28 @@ body{
 	padding:0px;
 }
 
-#information .mentee-data-image button{
-	margin:0px;
+#mentee-data .mentee-data-content{
+	position:relative;
+	left:15px;
+	top:16px;
+}
+
+#mentee-data button{
+	width:100%;
+	height:120px;
+
 	border:0px;
-	padding:0px;
+
+	background-color:rgba(255,255,255,0);
+}
+
+#mentee-data button:hover{
+	color:rgba(0,50,100,.8);
+	background-color:rgba(0,50,100,0.1);
+}
+
+#mentee-data p{
+	margin-bottom:0px;
 }
 
 .row-head{
