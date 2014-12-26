@@ -171,6 +171,10 @@ $(document).ready(function(){
 		createPreview();
 	});
 
+	$("#upfile1").click(function () {
+    	$("#photo").trigger('click');
+	});
+
 	//onsubmit login
 	$("#loginform").on("submit",function(){
 		$("#loginform input[name='password']").val(String(CryptoJS.SHA3($("#loginform input[name='password']").val(),{ outputLength: 224 })));

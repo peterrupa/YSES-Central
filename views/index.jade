@@ -34,10 +34,13 @@ html
 												button.close(type="button",data-dismiss="modal")
 													span(aria-hidden="true") &times;
 													span.sr-only Close
-												h4.modal-title Sign Up
-												span Profile Picture
-														input.form-control(id="photo",type="file",name="photo")
-														div#preview
+												h4.modal-title(style='margin-bottom:10px;') Sign Up
+												span
+													input#photo.form-control(type="file",name="photo",style='display:none')
+													div#upfile1.text-center
+														span Profile Picture: 
+														span.glyphicon.glyphicon-picture
+													div#preview
 											div.modal-body
 												ul.no-bullets.container
 													li First name:
