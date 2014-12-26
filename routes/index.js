@@ -332,6 +332,57 @@ router.get('/search',function(req,res){
 	});
 });
 
+//fetch mentees data
+router.get('/getmentees', function(req,res){
+	var session = req.session;
+	if(session.userkey){
+		pool.getConnection(function(err,connection){
+			connection.query("SELECT username FROM `accounts` WHERE first_name="+connection.escape(req.query.account),function(err,username){
+				if(err){
+					console.log(err);
+					res.send("Internal server error");
+				}
+				else{
+					connection.query("SELECT mentees FROM `accounts_"+username[0]["username"]+"_mentees` WHERE 1",function(err,mentees){
+						if(err){
+							console.log(err);
+							res.send("Internal server error");
+						}
+						else{
+							if(mentees[0]){
+								var subquery = "'" + mentees[0]["mentees"] + "'";
+								for(var i = 1; i < mentees.length; i++){
+									subquery = subquery.concat(" || username='"+mentees[i]["mentees"]+"'");
+								}
+								connection.query("SELECT first_name, middle_name, last_name, picture, department, org_class FROM `accounts` WHERE username="+subquery,function(err,rows){
+									if(err){
+										console.log(err);
+										res.send("Internal server error");
+									}
+									else{
+										//remove /public
+										for(var j = 0; j < rows.length; j++){
+											rows[j]["picture"] = rows[j]["picture"].substring(7);
+										}
+										res.send(rows);
+									}
+								});
+							}
+							else{
+								res.send("0");
+							}
+						}
+					});
+				}
+			});
+			connection.release();
+		});
+	}
+	else{
+		res.redirect("/");
+	}
+});
+
 /* TEST */
 router.get('/test', function(req, res) {
 	res.render('test');
