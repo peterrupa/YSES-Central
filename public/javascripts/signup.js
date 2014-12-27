@@ -353,11 +353,11 @@ $(document).ready(function(){
 		}
 	});
 
-	$(".mentee-textfield").tooltip({
+	$("#mentees").tooltip({
 		placement: "left",
 		trigger: "focus",
 		title: "invalid"
-	}).on("keyup", function() {
+	}).on("keyup",".mentee-textfield", function() {
 		var $this = $(this),
 		tooltip = $this.next(".tooltip");
 		$this.tooltip("show");
