@@ -24,8 +24,8 @@ body{
 
 #screen {
 	overflow:hidden;
-	width:150px;
-	height:150px;
+	width:250px;
+	height:250px;
 	clear:both;
 	position:relative;
 	background:white;
@@ -183,7 +183,7 @@ ul.ui-autocomplete {
 	padding-top:5px;
 
 	height:30px;
-	width:150px;
+	width:250px;
 	cursor:pointer;
 	font-size:1em;
 

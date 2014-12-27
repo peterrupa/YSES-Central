@@ -184,9 +184,9 @@ router.post('/signup',
 				if(!err){
 					//resize image to 150px
 					if(size.width<size.height){
-						gm(newFileName).resize(150).write(newFileName,function(err){
+						gm(newFileName).resize(250).write(newFileName,function(err){
 							if(!err){
-								gm(newFileName).crop(150,150,0,Math.abs(req.body["imagetop"])).write(newFileName,function(err){
+								gm(newFileName).crop(250,250,0,Math.abs(req.body["imagetop"])).write(newFileName,function(err){
 									if(!err){
 										console.log(newFileName+" resized to 150x150 px, cropped at (0,"+Math.abs(req.body["imagetop"])+").");
 									}
@@ -195,9 +195,9 @@ router.post('/signup',
 						});
 					}
 					else{
-						gm(newFileName).resize(null,150).write(newFileName,function(err){
+						gm(newFileName).resize(null,250).write(newFileName,function(err){
 							if(!err){
-								gm(newFileName).crop(150,150,Math.abs(req.body["imageleft"]),0).write(newFileName,function(err){
+								gm(newFileName).crop(250,250,Math.abs(req.body["imageleft"]),0).write(newFileName,function(err){
 									console.log(newFileName+" resized to 150x150 px, cropped at ("+Math.abs(req.body["imageleft"])+",0).");
 								});
 							}
