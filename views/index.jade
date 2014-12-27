@@ -40,15 +40,16 @@ html
 													div#upfile1.text-center
 														span Profile Picture: 
 														span.glyphicon.glyphicon-picture
+													div#bottom-input-file.text-center NO FILE SELECTED
 													div#preview
 											div.modal-body
 												ul.no-bullets.container
 													li First name:
-														input.form-control(type="text",name="first-name")
+														input.input-text.form-control(type="text",name="first-name")
 													li Middle name:
-														input.form-control(type="text",name="middle-name")
+														input.input-text.form-control(type="text",name="middle-name")
 													li Last name:
-														input.form-control(type="text",name="last-name")
+														input.input-text.form-control(type="text",name="last-name")
 													li Org Classification:
 														br
 														select.form-control(form="signupform",name="org-class")
@@ -71,14 +72,16 @@ html
 													li Student Number:
 														br
 														div#student-number.input-group
-															input.form-control.sn(type="text",maxlength="4",name="sn-year",placeholder="20XX")
+															input#sn-year.form-control.sn(type="text",maxlength="4",name="sn-year",placeholder="20XX")
 															span.glyphicon.glyphicon-minus.input-group-addon(style="top:0px;")
-															input.form-control.sn(type="text",maxlength="5",name="sn-number",placeholder="XXXXX")
+															input#sn-number.form-control.sn(type="text",maxlength="5",name="sn-number",placeholder="XXXXX")
 													li Username:
 														br
-														input.form-control(type="text",name="username")
+														input#username.form-control(type="text",name="username")
 													li Password:
-														input.form-control(type="password",name="password")
+														input#password.form-control(type="password",name="password")
+													li Retype Password:
+														input#retype-password.form-control(type="password",name="retype-password")
 													li Organization Batch:
 														select.form-control(form="signupform",name="org-batch")
 															option(value="Charter") Charter
@@ -86,7 +89,7 @@ html
 															option(value="RAMpage") RAMpage
 													li Mentor:
 														br
-														input.accountsAutocomplete.form-control(type="text",name="mentor")
+														input.accountsAutocomplete.input-text.form-control(type="text",name="mentor")
 													li#mentees
 														span Mentees:
 														div.mentee-field.input-group
@@ -97,9 +100,9 @@ html
 													li Birthday:
 														input.form-control(type="date",name="bday")
 													li Home Address
-														input.form-control(type="text",name="homeAdd")
+														input.input-text.form-control(type="text",name="homeAdd")
 													li College Address
-														input.form-control(type="text",name="collegeAdd")
+														input.input-text.form-control(type="text",name="collegeAdd")
 													input#imageleft(type="hidden",name="imageleft")
 													input#imagetop(type="hidden",name="imagetop")
 													input#numberofmentees(type="hidden",name="numberofmentees")
@@ -195,3 +198,4 @@ html
 		script(src='javascripts/carousel.js')
 		script(src='javascripts/sha3.js')
 		script(src='javascripts/signup.js')
+		script(src='javascripts/bootstrap-tooltip.js')

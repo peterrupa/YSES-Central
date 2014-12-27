@@ -171,8 +171,9 @@ $(document).ready(function(){
 		createPreview();
 	});
 
+	//allows the use of images for input type=file
 	$("#upfile1").click(function () {
-    	$("#photo").trigger('click');
+		$("#photo").trigger('click');
 	});
 
 	//onsubmit login
@@ -202,4 +203,178 @@ $(document).ready(function(){
 		}
 
 	});
+
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+
+	//make this dynamic and for all cases
+	$(".input-text").tooltip({
+		placement: "right",
+		trigger: "focus",
+		title: "invalid"
+	}).on("keyup", function() {
+		var $this = $(this),
+		tooltip = $this.next(".tooltip");
+		$this.tooltip("show");
+		
+		tooltip.find(".tooltip-inner").css({
+				backgroundColor: "red",
+				color: "black",
+				borderColor: "red",
+				borderWidth: "1px",
+				borderStyle: "solid"
+		});
+
+		if(this.value.length == 0) {
+			$this.tooltip("show");
+		} else {
+			$this.tooltip("hide");
+		}
+	});
+
+	$("#sn-year").tooltip({
+		placement: "left",
+		trigger: "focus",
+		title: "invalid"
+	}).on("keyup", function() {
+		var $this = $(this),
+		tooltip = $this.next(".tooltip");
+		$this.tooltip("show");
+		
+		tooltip.find(".tooltip-inner").css({
+				backgroundColor: "red",
+				color: "black",
+				borderColor: "red",
+				borderWidth: "1px",
+				borderStyle: "solid"
+		});
+
+		if(this.value.length != 4) {
+			$this.tooltip("show");
+		} else {
+			$this.tooltip("hide");
+		}
+	});
+
+	$("#sn-number").tooltip({
+		placement: "right",
+		trigger: "focus",
+		title: "invalid"
+	}).on("keyup", function() {
+		var $this = $(this),
+		tooltip = $this.next(".tooltip");
+		$this.tooltip("show");
+		
+		tooltip.find(".tooltip-inner").css({
+				backgroundColor: "red",
+				color: "black",
+				borderColor: "red",
+				borderWidth: "1px",
+				borderStyle: "solid"
+		});
+
+		if(this.value.length != 5) {
+			$this.tooltip("show");
+		} else {
+			$this.tooltip("hide");
+		}
+	});
+
+	$("#username").tooltip({
+		placement: "right",
+		trigger: "focus",
+		title: "username already exists"
+	}).on("keyup", function() {
+		var $this = $(this),
+		tooltip = $this.next(".tooltip");
+		$this.tooltip("show");
+		
+		tooltip.find(".tooltip-inner").css({
+				backgroundColor: "red",
+				color: "black",
+				borderColor: "red",
+				borderWidth: "1px",
+				borderStyle: "solid"
+		});
+
+		if (this.value.length <= 3 && this.value.length > 0) {
+			$this.tooltip("show");
+		} else {
+			$this.tooltip("hide");
+		}
+	});
+
+	$("#password").tooltip({
+		placement: "left",
+		trigger: "focus",
+		title: "invalid password"
+	}).on("keyup", function() {
+		var $this = $(this),
+		tooltip = $this.next(".tooltip");
+		$this.tooltip("show");
+		
+		tooltip.find(".tooltip-inner").css({
+				backgroundColor: "red",
+				color: "black",
+				borderColor: "red",
+				borderWidth: "1px",
+				borderStyle: "solid"
+		});
+
+		if (this.value.length <= 3 && this.value.length > 0) {
+			$this.tooltip("show");
+		} else {
+			$this.tooltip("hide");
+		}
+	});
+
+	$("#retype-password").tooltip({
+		placement: "right",
+		trigger: "focus",
+		title: "password does not match"
+	}).on("keyup", function() {
+		var $this = $(this),
+		tooltip = $this.next(".tooltip");
+		$this.tooltip("show");
+		
+		tooltip.find(".tooltip-inner").css({
+				backgroundColor: "red",
+				color: "black",
+				borderColor: "red",
+				borderWidth: "1px",
+				borderStyle: "solid"
+		});
+
+		if (this.value.length <= 3 && this.value.length > 0) {
+			$this.tooltip("show");
+		} else {
+			$this.tooltip("hide");
+		}
+	});
+
+	$(".mentee-textfield").tooltip({
+		placement: "left",
+		trigger: "focus",
+		title: "invalid"
+	}).on("keyup", function() {
+		var $this = $(this),
+		tooltip = $this.next(".tooltip");
+		$this.tooltip("show");
+		
+		tooltip.find(".tooltip-inner").css({
+				backgroundColor: "red",
+				color: "black",
+				borderColor: "red",
+				borderWidth: "1px",
+				borderStyle: "solid"
+		});
+
+		if(this.value.length == 0) {
+			$this.tooltip("show");
+		} else {
+			$this.tooltip("hide");
+		}
+	});
+
 });
