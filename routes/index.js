@@ -332,6 +332,28 @@ router.get('/search',function(req,res){
 	});
 });
 
+//fetch prifle data
+router.get('/getdetails', function(req,res){
+	var session = req.session;
+	if(session.userkey){
+		pool.getConnection(function(err,connection){
+			connection.query("SELECT first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, DATE_FORMAT(`birthday`,'%M %e %Y') AS birthday, home_address, college_address FROM `accounts` WHERE first_name="+connection.escape(req.query.account),function(err,data){
+				if(err){
+					console.log(err);
+					res.send("Internal server error");
+				}
+				else{
+					res.send(data[0]);
+				}
+			});
+			connection.release();
+		});
+	}
+	else{
+		res.redirect("/");
+	}
+});
+
 //fetch mentees data
 router.get('/getmentees', function(req,res){
 	var session = req.session;
