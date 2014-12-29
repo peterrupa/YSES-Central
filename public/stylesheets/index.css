@@ -80,7 +80,7 @@ img.image{
 	padding-left: 10px;
 }
 
-.modal, #signupModal, #loginModal{
+.modal, #signupModal, #loginModal, .modal-backdrop{
 	position: fixed;
 	height:100%;
 	padding:0;
@@ -208,6 +208,8 @@ ul.ui-autocomplete {
 #bottom-input-file{
 	position:fixed;
 
+	left:28.84%;
+
 	top:89px;
 
 	padding-top:5px;
@@ -223,6 +225,11 @@ ul.ui-autocomplete {
 
 	border-bottom-left-radius:3px;
 	border-bottom-right-radius:3px;
+}
+
+#picture-div{
+	position:relative;
+	left:26.51%;
 }
 
 .red-tooltip + .tooltip > .tooltip-inner {

@@ -188,12 +188,6 @@ body{
 	overflow-y:auto;
 }
 
-.box-mentor img{
-	position:relative;
-	height:214px;
-	left:7px;
-}
-
 /*data manipulation here*/
 #box-data{
 	display:none;
@@ -235,21 +229,96 @@ body{
 	margin-bottom:10px;
 }
 
+#mentor-data .mentor-data-content{
+	position:relative;
+
+	padding:10px;
+	margin-top:15px;
+	margin-left:12.9%;
+	
+	width:530px;
+	height:170px;
+
+	background-color:rgba(0,0,20,.2);
+}
+
 .mentor-data-content-image{
+	position:relative;
 	float:left;
+	
+	left:0%;
+
+	width:150px;
 }
 
 .mentor-data-content-text{
+	position:relative;
 	float:left;
 
+	margin-left:10px;
 	margin-right:0px;
+	margin-top: 0px;
 
-	height:281px;
-	width:365px;
+	width:250px;
+
+	font-size:90%;
 }
 
-#mentor-data{
-	overflow:hidden;
+.mentor-data-content-text strong,.mentor-data-content-text p{
+	margin-bottom:0px;
+	float:left;
+}
+
+.mentor-data-content-text table{
+	width:350px;
+}
+
+.mentor-data-content-text .row-header{
+	width:120px;
+}
+
+#mentor-data .mentor-navigation{
+	position:relative;
+	float:left;
+
+	height:100px;
+	width:530px;
+	background-color:rgba(0,0,0,0);
+
+	margin-left:12.9%;
+
+	cursor:pointer;
+}
+
+#mentor-data .mentor-navigation p{
+	margin-top:15px;
+}
+
+#mentor-data a{
+	color:black;
+	font-size:2em;
+}
+
+#mentor-data .mentor-link:hover{
+	border-top:10px solid rgba(0,0,150,1);
+
+	padding-top:0px;
+
+	color:gray;
+
+	cursor:pointer;
+}
+
+#mentor-data .mentor-link{
+	position:relative;
+	float:left;
+
+	padding-top:10px;
+
+	height:100%;
+	width:50%;
+	background-color:rgba(100,100,100,0);
+
 }
 
 .mentee-1, .mentee-2, .mentee-3{
@@ -308,22 +377,29 @@ body{
 	top:16px;
 }
 
-#mentee-data button{
+#mentee-data a{
 	width:100%;
 	height:120px;
 
 	border:0px;
 
-	background-color:rgba(255,255,255,0);
-}
-
-#mentee-data button:hover{
-	color:rgba(0,50,100,.8);
-	background-color:rgba(0,50,100,0.1);
+	color:rgba(50,50,50,1);
 }
 
 #mentee-data p{
 	margin-bottom:0px;
+}
+
+a:hover{
+	text-decoration:none;
+}
+
+#mentee-data .mentee-content:hover{
+	height:110px;
+	width:100%;
+
+	background-color:rgba(0,50,100,0.2);
+
 }
 
 .row-head{
@@ -332,11 +408,6 @@ body{
 
 .hidden{
 	display:none;
-}
-
-.blank-space-baby{
-	height:19px;
-	width:100%;
 }
 
 /*xs*/
@@ -526,4 +597,9 @@ body{
 /*normal size*/
 @media screen and (min-width:1199px) and (max-width: 1400px){
 
+}
+
+.blank-space-baby{
+	height:19px;
+	width:100%;
 }

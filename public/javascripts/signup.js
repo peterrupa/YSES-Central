@@ -204,10 +204,6 @@ $(document).ready(function(){
 
 	});
 
-	$(function () {
-		$('[data-toggle="tooltip"]').tooltip();
-	});
-
 	//make this dynamic and for all cases
 	$(".input-text").tooltip({
 		placement: "right",
@@ -353,7 +349,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("#mentees").tooltip({
+	/*$("#mentees").tooltip({
 		placement: "left",
 		trigger: "focus",
 		title: "invalid"
@@ -375,6 +371,6 @@ $(document).ready(function(){
 		} else {
 			$this.tooltip("hide");
 		}
-	});
+	});*/
 
 });

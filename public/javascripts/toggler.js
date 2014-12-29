@@ -1,11 +1,66 @@
 $(document).ready(function(){
 
-	var mentor_content ='<div class="box"><div id="mentor-data"><div class="row"><div class="table-title"><strong>MENTOR<span class="glyphicon glyphicon-eye-open"></span></strong></div><hr/></div><div class="mentor-data-content-image"><img src="../images/Cla.jpg" class="img-responsive"/></div><div class="mentor-data-content-text"><div class="row"><div class="mentor-data-content-3"><div class="wrapper clearfix"><figure class="gallery-item"><h5>First Name</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div><div class="wrapper clearfix"><figure class="gallery-item"><h5>Middle Name</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div><div class="wrapper clearfix"><figure class="gallery-item"><h5>Last Name</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div></div></div><div class="row"><div class="mentor-data-content-1"><div class="wrapper clearfix"><figure class="gallery-item"><h5>Organization Classification</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div></div></div><div class="row"><div class="mentor-data-content-1"><div class="wrapper clearfix"><figure class="gallery-item"><h5>Department</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div></div></div><div class="row"><div class="mentor-data-content-1"><div class="wrapper clearfix"><figure class="gallery-item"><h5>Student Number</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div></div></div><div class="row"><div class="mentor-data-content-1"><div class="wrapper clearfix"><figure class="gallery-item"><h5>Organization Batch</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div></div></div><div class="row"><div class="mentor-data-content-1"><div class="wrapper clearfix"><figure class="gallery-item"><h5>University Batch</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div></div></div><div class="row"><div class="mentor-data-content-3"><div class="wrapper clearfix"><figure class="gallery-item"><h5>Month</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div><div class="wrapper clearfix"><figure class="gallery-item"><h5>Day</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div><div class="wrapper clearfix"><figure class="gallery-item"><h5>Year</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div></div></div><div class="row"><div class="mentor-data-content-4"><div class="wrapper clearfix"><figure class="gallery-item"><h5>Mentee</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div><div class="wrapper clearfix"><figure class="gallery-item"><h5>Mentee</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div><div class="wrapper clearfix"><figure class="gallery-item"><h5>Mentee</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div><div class="wrapper clearfix"><figure class="gallery-item"><h5>Mentee</h5><figcaption class="img-title"><h5>something</h5></figcaption></figure></div></div></div></div></div></div>';
+	var mentor_content ='<div class="box"><div id="mentor-data"><div class="row"><div class="table-title"><strong></strong>MENTOR<span class="glyphicon glyphicon-eye-open"></span></div><hr/></div><div class="row"><div class="mentor-data-content"><div class="mentor-data-content-image"><img src="../images/Cla.jpg" class="img-responsive"/></div><div class="mentor-data-content-text"><table class="table table-condensed table-hover"><tr><td class="row-header"><strong>Name: </strong></td><td><p>Name T. Somethingname</p></td></tr><tr><td class="row-header"><strong>Classification: </strong></td><td><p>Active</p></td></tr><tr><td class="row-header"><strong>Department: </strong></td><td><p>Senior Projects and Activities Department</p></td></tr><tr><td class="row-header"><strong>Batch: </strong></td><td><p>rainByte \'12</p></td></tr></table></div></div><div class="mentor-navigation text-center"><a id="classification"><div class="mentor-link"><p>Semtheng Here</p></div></a><a id="mentor-profile"><div class="mentor-link"><p>Go to profile</p></div></a></div></div></div></div>';
+
+
+
+	/*
+		<div class="box">
+		  <div id="mentor-data">
+		    <div class="row">
+		      <div class="table-title"><strong></strong>MENTOR<span class="glyphicon glyphicon-eye-open"></span></div>
+		      <hr/>
+		    </div>
+		    <div class="row">
+		      <div class="mentor-data-content">
+		        <div class="mentor-data-content-image"><img src="../images/Cla.jpg" class="img-responsive"/></div>
+		        <div class="mentor-data-content-text">
+		          <table class="table table-condensed table-hover">
+		            <tr>
+		              <td class="row-header"><strong>Name: </strong></td>
+		              <td>
+		                <p>Name T. Somethingname</p>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td class="row-header"><strong>Classification: </strong></td>
+		              <td>
+		                <p>Active</p>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td class="row-header"><strong>Department: </strong></td>
+		              <td>
+		                <p>Senior Projects and Activities Department</p>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td class="row-header"><strong>Batch: </strong></td>
+		              <td>
+		                <p>rainByte '12</p>
+		              </td>
+		            </tr>
+		          </table>
+		        </div>
+		      </div>
+		      <div class="mentor-navigation text-center"><a id="classification">
+		          <div class="mentor-link">
+		            <p>Semtheng Here</p>
+		          </div></a><a id="mentor-profile">
+		          <div class="mentor-link">
+		            <p>Go to profile</p>
+		          </div></a></div>
+		    </div>
+		  </div>
+		</div>
+
+	*/
 
 	var more_content ='<div class="box"><div id="more-data"><div class="row"><div class="table-title"><strong>MORE<span class="glyphicon glyphicon-th-list"></span></strong></div><hr/></div></div></div>';
 
 	window.onload = $('#box-data').slideDown(800);
 
+	/*
 	$("body").on('click',"#mentee-1",function(){
 		if($(this).closest("#information").find(".mentee-1").is(":hidden")){
 			$(this).closest("#information").find(".mentee-1").removeClass("hidden");
@@ -29,6 +84,7 @@ $(document).ready(function(){
 			$(this).closest("#information").find(".mentee-1").addClass("hidden");
 		}
 	});
+	*/
 
 	$("#about").on('click',function(){
 		$.ajax({
@@ -142,7 +198,7 @@ $(document).ready(function(){
 							case "exec": var department = "Executive Department";
 							break;
 						}
-						var menteeHTML = "<div class='row'><a class='ajax' href='http://localhost:8080/profile/" + res[i]["first_name"] +"'><div class='mentee-data-image'><img src='http://localhost:8080/" + res[i]["picture"] + "' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + fullname + "</strong><p>" + res[i]["org_class"] + "</p><p>" + department + "</p></div></a></div>";
+						var menteeHTML = "<div class='row mentee-content'><a class='ajax' href='http://localhost:8080/profile/" + res[i]["first_name"] +"'><div class='mentee-data-image'><img src='http://localhost:8080/" + res[i]["picture"] + "' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + fullname + "</strong><p>" + res[i]["org_class"] + "</p><p>" + department + "</p></div></a></div>";
 						$("#mentee-data").append(menteeHTML);
 					}
 				}
@@ -155,10 +211,6 @@ $(document).ready(function(){
 
 	$("#more").on('click',function(){
 		$(this).closest('#information').find('#box-data').html(more_content);
-
-		$(this).closest("#information").find(".mentee-1").addClass("hidden");
-		$(this).closest("#information").find(".mentee-2").addClass("hidden");
-		$(this).closest("#information").find(".mentee-3").addClass("hidden");
 	});
 });
 
