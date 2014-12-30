@@ -1,33 +1,13 @@
 html
 	head
-		title Search
+		title Test
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 	body
-		input#field(type="text")
-		ul#result
-		script(src='javascripts/jquery-2.1.1.min.js')
-		script.
-			$(document).ready(function(){
-				$("#field").on("keyup",function(){
-					$("#result").html("");
-					if($("#field").val()){
-						$.ajax({
-							url: "search",
-							data: "substring="+$("#field").val(),
-							type: "GET",
-							success: function (res) {
-								if(res == "0"){
-									$("#result").append("<li>No result found.</li>");
-								}
-								else{
-									for(var i = 0; i < res.length; i++){
-										$("#result").append("<li>"+res[i]["full_name"]+"</li>")
-									}
-								}
-							},
-							error: function (e){
-								console.dir(e);
-							}
-						});
-					}
-				});
-			});
+		div.dropdown
+			button#dropdownMenu.btn.btn-default.dropdown-toggle(type="button",data-toggle="dropdown") Test
+				span.caret
+			div.dropdown-menu(role="menu",aria-labelledby="dropdonMenu")
+				p Content
+				p More content
+	script(src='http://localhost:8080/javascripts/jquery-2.1.1.min.js')
+	script(src='http://localhost:8080/javascripts/bootstrap.min.js')

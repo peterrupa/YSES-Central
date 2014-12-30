@@ -1,0 +1,62 @@
+#wrap {
+  color:white;
+  min-height:550px;
+}
+
+#YSERs  {
+  font-size: 45px;
+}
+
+#resultText  {
+  font-size:18px;
+}
+
+#result {
+  margin-top:20px;
+}
+
+.pic  {
+  margin-bottom:15px;
+  width:90%;
+  position:relative;
+}
+
+.pic img  {
+  width:100%;
+}
+
+.sort-label {
+  font-size:20px;
+  font-weight:bold;
+}
+
+.btm-label  {
+  display:none;
+}
+
+.btm-label-gradient {
+  position:absolute;
+  bottom:0;
+  height:40%;
+  width:100%;
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 69%, rgba(0,0,0,0.9) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(69%,rgba(0,0,0,0.8)), color-stop(100%,rgba(0,0,0,0.9))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.8) 69%,rgba(0,0,0,0.9) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.8) 69%,rgba(0,0,0,0.9) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.8) 69%,rgba(0,0,0,0.9) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.8) 69%,rgba(0,0,0,0.9) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#e6000000',GradientType=0 ); /* IE6-9 */
+}
+
+.btm-label-text {
+  position:absolute;
+  bottom:5%;
+  width:100%;
+  color:white;
+  font-size:12px;
+}
+
+.btm-label-text > p  {
+  margin:0;
+  margin-left:5px;
+}

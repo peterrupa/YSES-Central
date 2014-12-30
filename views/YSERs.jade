@@ -1,0 +1,135 @@
+doctype html
+html
+  head
+    title YSES Central
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/chat.css')
+    link(rel='stylesheet', href='/stylesheets/custom-navbar.css')
+    link(rel='stylesheet', href='/stylesheets/jquery-ui.css')
+    link(rel='stylesheet', href='/stylesheets/search-bar.css')
+    link(rel="stylesheet",href="/stylesheets/profile-page.css")
+    link(rel="stylesheet",href="/stylesheets/title-hover.css")
+    script(src='http://localhost:8080/javascripts/jquery-2.1.1.min.js')
+    script(src='http://localhost:8080/javascripts/bootstrap.min.js')
+    script(src='http://localhost:8080/javascripts/jquery.nicescroll.js')
+    script(src='http://localhost:8080/javascripts/jquery-ui.min.js')
+    meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
+  body(data-type="background",data-speed="2")
+    div#header.padding-vert
+      nav.navbar.navbar-default.navbar-fixed-top
+        div.container
+          div.navbar-header
+            button#phone-nav-button.navbar-toggle.collapsed(type="button",data-toggle="collapse",data-target="#navbar")
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            div#central-title
+              a.ajax.navbar-brand(href="http://localhost:8080")
+                img#logo.img-responsive(src="../images/logoAllWhite.png")
+                h2(style="position:relative;margin:0px;top:-7px;") YSES Central
+            div#search-bar.right-inner-addon.hidden-xs.hidden-sm.hidden-md
+              // label(for="tags")
+              i.glyphicon.glyphicon-search
+              input#tags.form-control(type="text",name="mentee-1")
+            div.btn-group.text-left.hidden-xs(style='float:right')
+              div#navigation-buttons
+                button.btn-name.dropdown-toggle(type="button",data-toggle="dropdown")
+                  h3#name #{name}
+                    img(src='#{picture}',style='width:40px;margin-left:15px;')
+                ul.dropdown-menu.metro-dropdown(role="menu")
+                  li
+                    a.ajax.bold(href="http://localhost:8080/profile/#{name}") Profile
+                  li
+                    a.ajax.bold(href="http://localhost:8080/2") Another action
+                  li
+                    a.ajax.bold(href="http://localhost:8080/3") Something else here
+                  li.divider
+                  li
+                    form#logout(action="http://localhost:8080/logout",method="post")
+                    a(href="javascript:{}",onclick="$('#logout').submit()") Log out
+                div#chatbox-icon.hidden-sm.hidden-md
+                  a.menu-icon(href="#")
+                    span.glyphicon.glyphicon-send
+          // for phone navigation
+          div#navbar.collapse
+            ul.nav.navbar-nav.navbar-collapse.hidden-lg
+              li.navbutton
+                a.ajax.bold(href="http://localhost:8080/profile/#{name}") Profile
+              li.navbutton
+                a.ajax.bold(href="http://localhost:8080/2") Another action
+              li.navbutton
+                a.ajax.bold(href="http://localhost:8080/3") Something else here
+              li.navbutton
+                form#logout(action="http://localhost:8080/logout",method="post")
+                a(href="javascript:{}",onclick="$('#logout').submit()") Log out
+          div.clearfix
+    div#containerMAIN
+      div.container
+        div.row
+          div#content.col-lg-10
+            link(rel="stylesheet",href="/stylesheets/YSERs.css")
+            div#wrap
+              div 
+                div.dropdown.pull-right
+                  button#dropdownMenu.btn.btn-default.dropdown-toggle(type="button",data-toggle="dropdown") Test
+                    span.caret
+                  div.dropdown-menu(role="menu",aria-labelledby="dropdownMenu")
+                    p Content
+                    p More content
+                p#YSERs YSERs
+                p#resultText Results for "All", sorted alpabetical ascending
+              div#result
+              div.clearfix
+            script(src="http://localhost:8080/javascripts/YSERs.js")
+          // chatbox
+          div.col-lg-2.padding-vert.hidden-xs.hidden-sm.hidden-md
+            ul.no-bullets.side-menu
+              li.chat-row
+                ul.no-bullets
+                  li.metro.half
+                    img.tile-pic(src='images/jv.jpg')
+                  li.metro.half
+                    img.tile-pic(src='images/cla.jpg')
+              li.chat-row
+                ul.no-bullets
+                  li.metro.half
+                    img.tile-pic(src='images/cla.jpg')
+                  li.metro.half
+                    img.tile-pic(src='images/jv.jpg')
+              li.chat-row
+                ul.no-bullets
+                  li.metro.half
+                    img.tile-pic(src='images/cla.jpg')
+                  li.metro.half
+                    img.tile-pic(src='images/jv.jpg')
+              li.chat-row
+                ul.no-bullets
+                  li.metro.half
+                    img.tile-pic(src='images/cla.jpg')
+                  li.metro.half
+                    img.tile-pic(src='images/jv.jpg')
+              li.chat-row
+                ul.no-bullets
+                  li.metro.half
+                    img.tile-pic(src='images/cla.jpg')
+                  li.metro.half
+                    img.tile-pic(src='images/jv.jpg')
+              li.chat-row
+                ul.no-bullets
+                  li.metro.half
+                    img.tile-pic(src='images/cla.jpg')
+                  li.metro.half
+                    img.tile-pic(src='images/jv.jpg')
+              li.chat-row
+                ul.no-bullets
+                  li.metro.half
+                    img.tile-pic(src='images/cla.jpg')
+                  li.metro.half
+                    img.tile-pic(src='images/jv.jpg')
+    script(src='http://localhost:8080/javascripts/content-request.js')
+    script(src='http://localhost:8080/javascripts/parallax.js')
+    script(src='http://localhost:8080/javascripts/announcements.js')
+    script(src='http://localhost:8080/javascripts/chatbox.js')
+    script(src='http://localhost:8080/javascripts/autocomplete.js')
