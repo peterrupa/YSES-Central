@@ -392,7 +392,6 @@ router.get('/getYSERs', function(req,res){
 			//determine filters
 			//batch
 			req.query.filterBatch = req.query.filterBatch.split(';')
-			req.query.filterBatch.sort();
 			for(var i = 0; i < req.query.filterBatch.length; i++){
 				if(i == 0){
 					filterBatch = "org_batch = "+connection.escape(req.query.filterBatch[i]);
@@ -465,7 +464,7 @@ router.get('/getdetails', function(req,res){
 	var session = req.session;
 	if(session.userkey){
 		pool.getConnection(function(err,connection){
-			connection.query("SELECT first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, DATE_FORMAT(`birthday`,'%M %e %Y') AS birthday, home_address, college_address FROM `accounts` WHERE first_name="+connection.escape(req.query.account),function(err,data){
+			connection.query("SELECT first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, DATE_FORMAT(`birthday`,'%M %e %Y') AS birthday, home_address, college_address, exec_position FROM `accounts` WHERE first_name="+connection.escape(req.query.account),function(err,data){
 				if(err){
 					console.log(err);
 					res.send("Internal server error");

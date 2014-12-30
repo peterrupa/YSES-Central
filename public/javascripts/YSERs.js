@@ -1,7 +1,7 @@
 $(document).ready(function(){
   $.ajax({
     url: "http://localhost:8080/getYSERs",
-    data: "sort=ASC&filterBatch=Charter;RAMpage&filterClass=Active;Inactive;Alumni",
+    data: "sort=ASC&filterBatch=Charter;Synergy;RAMpage&filterClass=Active;Inactive;Alumni",
     type: "GET",
     success: function (res) {
       for(batch in res){

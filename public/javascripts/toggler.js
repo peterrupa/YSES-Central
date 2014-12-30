@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	var mentor_content ='<div class="box"><div id="mentor-data"><div class="row"><div class="table-title"><strong></strong>MENTOR<span class="glyphicon glyphicon-eye-open"></span></div><hr/></div><div class="row"><div class="mentor-data-content"><div class="mentor-data-content-image"><img src="../images/Cla.jpg" class="img-responsive"/></div><div class="mentor-data-content-text"><table class="table table-condensed table-hover"><tr><td class="row-header"><strong>Name: </strong></td><td><p>Name T. Somethingname</p></td></tr><tr><td class="row-header"><strong>Classification: </strong></td><td><p>Active</p></td></tr><tr><td class="row-header"><strong>Department: </strong></td><td><p>Senior Projects and Activities Department</p></td></tr><tr><td class="row-header"><strong>Batch: </strong></td><td><p>rainByte \'12</p></td></tr></table></div></div><div class="mentor-navigation text-center"><a id="classification"><div class="mentor-link"><p>Semtheng Here</p></div></a><a id="mentor-profile"><div class="mentor-link"><p>Go to profile</p></div></a></div></div></div></div>';
+	var mentor_content ='<div class="box"><div id="mentor-data"><div class="row"><div class="table-title"><strong>MENTORm</strong><span class="glyphicon glyphicon-eye-open"></span></div><hr/></div><div class="row"><div class="mentor-data-content"><div class="mentor-data-content-image"><img src="../images/Cla.jpg" class="img-responsive"/></div><div class="mentor-data-content-text"><table class="table table-condensed table-hover"><tr><td class="row-header"><strong>Name: </strong></td><td><p>Name T. Somethingname</p></td></tr><tr><td class="row-header"><strong>Classification: </strong></td><td><p>Active</p></td></tr><tr><td class="row-header"><strong>Department: </strong></td><td><p>Senior Projects and Activities Department</p></td></tr><tr><td class="row-header"><strong>Batch: </strong></td><td><p>rainByte \'12</p></td></tr></table></div></div><div class="mentor-navigation text-center"><a id="classification"><div class="mentor-link"><p>Semtheng Here</p></div></a><a id="mentor-profile"><div class="mentor-link"><p>Go to profile</p></div></a></div></div></div></div>';
 
 
 
@@ -87,6 +87,22 @@ $(document).ready(function(){
 	*/
 
 	$("#about").on('click',function(){
+		var about_content =
+		'<div class="box">'+
+			'<div id="about-data">'+
+				'<div class="table-title">'+
+					'<strong>DETAILS'+
+						'<span class="glyphicon glyphicon-user"></span>'+
+					'</strong>'+
+				'</div>'+
+				'<hr>'+
+				'<table class="table table-hover table-condensed">'+
+				'</table>'+
+			'</div>'+
+		'</div>';
+
+		$('#box-data').html(about_content);
+
 		$.ajax({
 			url: "http://localhost:8080/getdetails",
 			data: "account="+location.pathname.substring(9),
@@ -110,10 +126,47 @@ $(document).ready(function(){
 					case "exec": res["department"] = "Executive Department";
 					break;
 				}
+				if(res["exec_position"]){
+					switch(res["exec_position"]){
+						case "deo": res["exec_position"] = "Deputy Executive Officer";
+										break;
+						case "lo": res["exec_position"] = "Liaison Officer";
+										break;
+						case "vlh": res["exec_position"] = "Visuals and Logistics Head";
+										break;
+						case "ea": res["exec_position"] = "Executive Assistant";
+										break;
+						case "sh": res["exec_position"] = "Scholastics Head";
+										break;
+						case "fh": res["exec_position"] = "Finance Head";
+										break;
+						case "hrh": res["exec_position"] = "Human Resources Head";
+										break;
+						case "eo": res["exec_position"] = "Executive Officer";
+										break;
+					}
+				}
 
-				var about_content = '<div class="box"><div id="about-data"><div class="table-title"><strong>DETAILS<span class="glyphicon glyphicon-user"></span></strong></div><table class="table table-hover table-condensed"><tr><td>First name</td><td>' + res["first_name"] + '</td></tr><tr><td>Middle Name</td><td>' + res["middle_name"] + '</td></tr><tr><td>Last Name</td><td>' + res["last_name"] + '</td></tr><tr><td>Organization Classification</td><td>' + res["org_class"] + '</td></tr><tr><td>Department</td><td>' + res["department"] + '</td></tr><tr><td>Student Number</td><td>' + res["student_number"] + '</td></tr><tr><td>Organization Batch</td><td>' + res["org_batch"] + '</td></tr><tr><td>University Batch</td><td>' + res["univ_batch"] + '</td></tr><tr><td>Birthday</td><td>' + res["birthday"] + '</td></tr><tr><td>Home Adress</td><td>' + res["home_address"] + '</td></tr><tr><td>College Address</td><td>' + res["college_address"] + '</td></tr></table></div></div>';
-				
-				$('#box-data').html(about_content);
+				function rowHTML(first,second){
+					return '<tr>'+
+							'<td>'+first+'</td>'+
+							'<td>'+second+'</td>'+
+						'</tr>';
+				}
+				$("#about-data table").append(rowHTML("First name",res["first_name"]));
+				$("#about-data table").append(rowHTML("Middle name",res["middle_name"]));
+				$("#about-data table").append(rowHTML("Last name",res["last_name"]));
+				$("#about-data table").append(rowHTML("Org Classification",res["org_class"]));
+				$("#about-data table").append(rowHTML("Department",res["department"]));
+				if(res["exec_position"]){
+					$("#about-data table").append(rowHTML("Position",res["exec_position"]));
+				}
+				$("#about-data table").append(rowHTML("Student Number",res["student_number"]));
+				$("#about-data table").append(rowHTML("Organization Batch",res["org_batch"]));
+				$("#about-data table").append(rowHTML("University Batch",res["univ_batch"]));
+				$("#about-data table").append(rowHTML("Birthday",res["birthday"]));
+				$("#about-data table").append(rowHTML("Home Address",res["home_address"]));
+				$("#about-data table").append(rowHTML("College Address",res["college_address"]));
 			},
 			error: function (e){
 				console.dir(e);
