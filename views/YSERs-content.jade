@@ -1,14 +1,11 @@
 link(rel="stylesheet",href="/stylesheets/YSERs.css")
 div#wrap
-  div 
-    div.dropdown.pull-right
-      button#dropdownMenu.btn.btn-default.dropdown-toggle(type="button",data-toggle="dropdown") Test
+  div
+    div.pull-right(style="position:relative")
+      button#buttonOptions.btn.btn-default(type="button",data-toggle="popover",data-placement="bottom") Options
         span.caret
-      div.dropdown-menu(role="menu",aria-labelledby="dropdownMenu")
-        p Content
-        p More content
     p#YSERs YSERs
-    p#resultText Results for "All", sorted alpabetical ascending
+    p#resultText
   div#result
   div.clearfix
-    script(src="http://localhost:8080/javascripts/YSERs.js") 
+script(src="http://localhost:8080/javascripts/YSERs.js")

@@ -400,7 +400,6 @@ router.get('/getYSERs', function(req,res){
 					filterBatch += "|| org_batch = "+connection.escape(req.query.filterBatch[i]);
 				}
 			}
-			console.log(filterBatch); //debug
 
 			//class
 			req.query.filterClass = req.query.filterClass.split(';')
@@ -413,7 +412,6 @@ router.get('/getYSERs', function(req,res){
 					filterClass += "|| org_class = "+connection.escape(req.query.filterClass[i]);
 				}
 			}
-			console.log(filterClass); //debug
 
 			//determine sort
 			var sort;
@@ -425,7 +423,7 @@ router.get('/getYSERs', function(req,res){
 				sort = "ORDER BY full_name DESC";
 			}
 
-			connection.query("SELECT first_name, full_name, picture, org_class, org_batch FROM `accounts` WHERE "+filterBatch+" AND "+filterClass+" "+sort,function(err,data){
+			connection.query("SELECT first_name, full_name, picture, org_class, org_batch FROM `accounts` WHERE ("+filterBatch+") AND "+filterClass+" "+sort,function(err,data){
 				if(err){
 					console.log(err);
 					res.send("Internal Server Error");

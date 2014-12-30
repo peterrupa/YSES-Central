@@ -3,6 +3,18 @@
   min-height:550px;
 }
 
+#buttonOptions  {
+  border-radius:0px;
+  border: none;
+  background: #FFF637;
+  padding:10px 20px 10px 20px;
+}
+
+#buttonOptions > .caret {
+  margin-left:10px;
+}
+
+
 #YSERs  {
   font-size: 45px;
 }
@@ -15,10 +27,45 @@
   margin-top:20px;
 }
 
+.All {
+  width:80%;
+}
+
+.popover.bottom>.arrow {
+  left:92% !important;
+}
+
+.popover {
+  border-radius:0;
+  border:0;
+  -webkit-box-shadow:none;
+  -moz-box-shadow:none;
+  box-shadow:none;
+  color:black;
+  padding-left:10px;
+  padding-right:10px;
+  min-width:650px;
+  color:black;
+  z-index:1000;
+  position:absolute !important;
+  top:100% !important;
+  left:-523% !important;
+}
+
+.dropdown-label-1 {
+  font-size:20px;
+  font-weight:bold;
+}
+
+.dropdown-label-2 {
+  font-size:16px;
+}
+
 .pic  {
   margin-bottom:15px;
   width:90%;
   position:relative;
+  border: rgba(100,100,100,0.75) 1px solid;
 }
 
 .pic img  {
@@ -37,7 +84,7 @@
 .btm-label-gradient {
   position:absolute;
   bottom:0;
-  height:40%;
+  height:80%;
   width:100%;
   background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 69%, rgba(0,0,0,0.9) 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(69%,rgba(0,0,0,0.8)), color-stop(100%,rgba(0,0,0,0.9))); /* Chrome,Safari4+ */
@@ -59,4 +106,21 @@
 .btm-label-text > p  {
   margin:0;
   margin-left:5px;
+}
+
+.btn  {
+  border-radius:0;
+}
+
+.btn-batch  {
+  width:100%;
+}
+
+.btn-all  {
+  width:95%;
+}
+
+.btn-container {
+  padding-left:5px;
+  padding-right:5px;
 }

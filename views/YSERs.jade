@@ -11,9 +11,11 @@ html
     link(rel="stylesheet",href="/stylesheets/profile-page.css")
     link(rel="stylesheet",href="/stylesheets/title-hover.css")
     script(src='http://localhost:8080/javascripts/jquery-2.1.1.min.js')
+    script(src='http://localhost:8080/javascripts/jquery-ui.min.js')
+    script(src='http://localhost:8080/javascripts/jquery.mousewheel.min.js')
+    script(src='http://localhost:8080/javascripts/jquery.simplr.smoothscroll.min.js')
     script(src='http://localhost:8080/javascripts/bootstrap.min.js')
     script(src='http://localhost:8080/javascripts/jquery.nicescroll.js')
-    script(src='http://localhost:8080/javascripts/jquery-ui.min.js')
     meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
   body(data-type="background",data-speed="2")
     div#header.padding-vert
@@ -71,15 +73,12 @@ html
           div#content.col-lg-10
             link(rel="stylesheet",href="/stylesheets/YSERs.css")
             div#wrap
-              div 
-                div.dropdown.pull-right
-                  button#dropdownMenu.btn.btn-default.dropdown-toggle(type="button",data-toggle="dropdown") Test
+              div
+                div.pull-right(style="position:relative")
+                  button#buttonOptions.btn.btn-default(type="button",data-toggle="popover",data-placement="bottom") Options
                     span.caret
-                  div.dropdown-menu(role="menu",aria-labelledby="dropdownMenu")
-                    p Content
-                    p More content
                 p#YSERs YSERs
-                p#resultText Results for "All", sorted alpabetical ascending
+                p#resultText
               div#result
               div.clearfix
             script(src="http://localhost:8080/javascripts/YSERs.js")
