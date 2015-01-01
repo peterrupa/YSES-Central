@@ -104,11 +104,10 @@ img.image{
 
 .modal-body{
 	width: 100%;
-	max-height:300px;
-	overflow-y:auto;
+	max-height:350px;
 	overflow-x:hidden;
-	padding-left:175px;
-	padding-right:175px;
+	padding-left:12px;
+	padding-right:12px;
 	position:relative;
 }
 
@@ -118,7 +117,7 @@ img.image{
 
 #mentees input{
 	left:-12px;
-	width:165px;
+	width:195px;
 }
 
 #student-number {
@@ -135,12 +134,12 @@ img.image{
 }
 
 .add-mentee.btn, .remove-mentee.btn{
-	left:-12px;
+	left:-11px;
 }
 
 ul.container{
 	padding:0%;
-	width:100%;
+	width:90%;
 }
 
 ul.ui-autocomplete {
@@ -199,18 +198,18 @@ ul.ui-autocomplete {
 	font-size:1em;
 
 
+	margin-bottom:20px;
+
 	border-top-left-radius:3px;
 	border-top-right-radius:3px;
-
-	margin-bottom:20px;
 }
 
 #bottom-input-file{
 	position:fixed;
 
-	left:28.84%;
+	left:4.5%;
 
-	top:89px;
+	top:120px;
 
 	padding-top:5px;
 
@@ -229,7 +228,6 @@ ul.ui-autocomplete {
 
 #picture-div{
 	position:relative;
-	left:26.51%;
 }
 
 .red-tooltip + .tooltip > .tooltip-inner {
@@ -238,6 +236,25 @@ ul.ui-autocomplete {
 
 .red-tooltip + .tooltip > .tooltip-arrow { 
 	border-bottom-color:#f00;
+}
+
+/*for two column modals*/
+
+.first-column {
+  float: left;
+  width: 47%;
+  overflow-y:hidden;
+}
+
+.second-column {
+  float: right;
+  width: 50%;
+  height:300px;
+  overflow-y:auto;
+}
+
+.second-column input, .second-column select{
+	width:245px;
 }
 
 ::-webkit-scrollbar-track {

@@ -35,78 +35,80 @@ html
 													span(aria-hidden="true") &times;
 													span.sr-only Close
 												h4.modal-title(style='margin-bottom:10px;') Sign Up
-												span#picture-div
-													input#photo.form-control(type="file",name="photo",style='display:none')
-													div#upfile1.text-center
-														span Profile Picture: 
-														span.glyphicon.glyphicon-picture
-													div#bottom-input-file.text-center NO FILE SELECTED
-													div#preview
 											div.modal-body
-												ul.no-bullets.container
-													li First name:
-														input.input-text.form-control(type="text",name="first-name")
-													li Middle name:
-														input.input-text.form-control(type="text",name="middle-name")
-													li Last name:
-														input.input-text.form-control(type="text",name="last-name")
-													li Org Classification:
-														br
-														select.form-control(form="signupform",name="org-class")
-															option(value="Active") Active
-															option(value="Inactive") Inactive
-															option(value="Alumni") Alumni
-													li Department:
-														select.form-control(form="signupform",name="department")
-															optgroup(label="Projects and Activities")
-																option(value="jpad") Junior
-																option(value="spad") Senior
-															option(value="vl") Visuals and Logistics
-															option(value="sec") Secretariat
-															option(value="scho") Scholastics
-															option(value="fin") Finance
-															option(value="hr") Human Resources
-															option(value="exec") Executive (EO Only)
-														input#isExec(type="checkbox",name="isExec" disabled)
-														span Executive
-													li Student Number:
-														br
-														div#student-number.input-group
-															input#sn-year.form-control.sn(type="text",maxlength="4",name="sn-year",placeholder="20XX")
-															span.glyphicon.glyphicon-minus.input-group-addon(style="top:0px;")
-															input#sn-number.form-control.sn(type="text",maxlength="5",name="sn-number",placeholder="XXXXX")
-													li Username:
-														br
-														input#username.form-control(type="text",name="username")
-													li Password:
-														input#password.form-control(type="password",name="password")
-													li Retype Password:
-														input#retype-password.form-control(type="password",name="retype-password")
-													li Organization Batch:
-														select.form-control(form="signupform",name="org-batch")
-															option(value="Charter") Charter
-															option(value="Synergy") Synergy
-															option(value="RAMpage") RAMpage
-													li Mentor:
-														br
-														input.accountsAutocomplete.input-text.form-control(type="text",name="mentor")
-													li#mentees
-														span Mentees:
-														div.mentee-field.input-group
-															input.accountsAutocomplete.mentee-textfield.form-control(type="text",name="mentee-1")
-															span.input-group-btn
-																button.add-mentee.btn.btn-default(type="button",value="+")
-																	span.glyphicon.glyphicon-plus
-													li Birthday:
-														input.form-control(type="date",name="bday")
-													li Home Address
-														input.input-text.form-control(type="text",name="homeAdd")
-													li College Address
-														input.input-text.form-control(type="text",name="collegeAdd")
-													input#imageleft(type="hidden",name="imageleft")
-													input#imagetop(type="hidden",name="imagetop")
-													input#numberofmentees(type="hidden",name="numberofmentees")
-													input#univbatch(type="hidden",name="univ-batch")
+												div.first-column
+													span#picture-div
+														input#photo.form-control(type="file",name="photo",style='display:none')
+														div#upfile1.text-center
+															span Profile Picture: 
+															span.glyphicon.glyphicon-picture
+														div#bottom-input-file.text-center NO FILE SELECTED
+														div#preview
+												div.second-column
+													ul.no-bullets.container
+														li First name:
+															input.input-text.form-control(type="text",name="first-name")
+														li Middle name:
+															input.input-text.form-control(type="text",name="middle-name")
+														li Last name:
+															input.input-text.form-control(type="text",name="last-name")
+														li Org Classification:
+															br
+															select.form-control(form="signupform",name="org-class")
+																option(value="Active") Active
+																option(value="Inactive") Inactive
+																option(value="Alumni") Alumni
+														li Department:
+															select.form-control(form="signupform",name="department")
+																optgroup(label="Projects and Activities")
+																	option(value="jpad") Junior
+																	option(value="spad") Senior
+																option(value="vl") Visuals and Logistics
+																option(value="sec") Secretariat
+																option(value="scho") Scholastics
+																option(value="fin") Finance
+																option(value="hr") Human Resources
+																option(value="exec") Executive (EO Only)
+															input#isExec(type="checkbox",name="isExec" disabled)
+															span Executive
+														li Student Number:
+															br
+															div#student-number.input-group
+																input#sn-year.form-control.sn(type="text",maxlength="4",name="sn-year",placeholder="20XX")
+																span.glyphicon.glyphicon-minus.input-group-addon(style="top:0px;")
+																input#sn-number.form-control.sn(type="text",maxlength="5",name="sn-number",placeholder="XXXXX")
+														li Username:
+															br
+															input#username.form-control(type="text",name="username")
+														li Password:
+															input#password.form-control(type="password",name="password")
+														li Retype Password:
+															input#retype-password.form-control(type="password",name="retype-password")
+														li Organization Batch:
+															select.form-control(form="signupform",name="org-batch")
+																option(value="Charter") Charter
+																option(value="Synergy") Synergy
+																option(value="RAMpage") RAMpage
+														li Mentor:
+															br
+															input.accountsAutocomplete.input-text.form-control(type="text",name="mentor")
+														li#mentees
+															span Mentees:
+															div.mentee-field.input-group
+																input.accountsAutocomplete.mentee-textfield.form-control(type="text",name="mentee-1")
+																span.input-group-btn
+																	button.add-mentee.btn.btn-default(type="button",value="+")
+																		span.glyphicon.glyphicon-plus
+														li Birthday:
+															input.form-control(type="date",name="bday")
+														li Home Address
+															input.input-text.form-control(type="text",name="homeAdd")
+														li College Address
+															input.input-text.form-control(type="text",name="collegeAdd")
+														input#imageleft(type="hidden",name="imageleft")
+														input#imagetop(type="hidden",name="imagetop")
+														input#numberofmentees(type="hidden",name="numberofmentees")
+														input#univbatch(type="hidden",name="univ-batch")
 											div.modal-footer
 												button.btn.btn-warning(type="button",data-dismiss="modal",data-toggle="modal",data-target="#loginModal") Existing user?
 												button.btn.btn-default(type="submit") Submit
