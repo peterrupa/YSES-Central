@@ -1,9 +1,6 @@
 YSES Central
 ============
-
 PAD Project 14151. Go best batch RAMpage!
-
-============
 List of known bugs/issues:
 ============
 
