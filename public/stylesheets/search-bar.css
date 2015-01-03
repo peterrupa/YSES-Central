@@ -37,7 +37,8 @@
 
 .ui-widget, #tags{
 	font-family:inherit;
-	font-size:inherit;	
+	font-size:inherit;
+	z-index:1001;
 }
 
 i.glyphicon{
@@ -50,7 +51,7 @@ i.glyphicon{
     position: relative;
 }
 .left-inner-addon input {
-    padding-left: 30px;    
+    padding-left: 30px;
 }
 .left-inner-addon i {
     position: absolute;
@@ -62,7 +63,7 @@ i.glyphicon{
     position: relative;
 }
 .right-inner-addon input {
-    padding-right: 30px;    
+    padding-right: 30px;
 }
 .right-inner-addon i {
     position: absolute;

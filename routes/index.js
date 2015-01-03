@@ -479,6 +479,41 @@ router.get('/getdetails', function(req,res){
 	}
 });
 
+router.get('/getmentor', function(req,res){
+	var session = req.session;
+	if(session.userkey){
+		pool.getConnection(function(err,connection){
+			connection.query("SELECT mentor FROM `accounts` WHERE first_name="+connection.escape(req.query.account),function(err,username){
+				if(err){
+					console.log(err);
+					res.send("Internal server error");
+				}
+				else{
+					connection.query("SELECT first_name, full_name, org_class, department, org_batch, picture FROM `accounts` WHERE username="+connection.escape(username[0]["mentor"]),function(err,data){
+						if(err){
+							console.log(err);
+							res.send("Internal server error");
+						}
+						else{
+							if(data[0]){
+								data[0]["picture"] = data[0]["picture"].substring(7);
+								res.send(data[0]);
+							}
+							else{
+								res.send({status:"None",full_name:username[0]["mentor"]});
+							}
+						}
+					});
+				}
+			});
+			connection.release();
+		});
+	}
+	else{
+		res.redirect('/');
+	}
+});
+
 //fetch mentees data
 router.get('/getmentees', function(req,res){
 	var session = req.session;
