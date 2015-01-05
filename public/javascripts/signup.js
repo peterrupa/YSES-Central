@@ -205,6 +205,7 @@ $(document).ready(function(){
 	});
 
 	//make this dynamic and for all cases
+
 	$(".input-text").tooltip({
 		placement: "right",
 		trigger: "focus",
@@ -213,7 +214,7 @@ $(document).ready(function(){
 		var $this = $(this),
 		tooltip = $this.next(".tooltip");
 		$this.tooltip("show");
-		
+
 		tooltip.find(".tooltip-inner").css({
 				backgroundColor: "red",
 				color: "black",
@@ -237,7 +238,7 @@ $(document).ready(function(){
 		var $this = $(this),
 		tooltip = $this.next(".tooltip");
 		$this.tooltip("show");
-		
+
 		tooltip.find(".tooltip-inner").css({
 				backgroundColor: "red",
 				color: "black",
@@ -261,7 +262,7 @@ $(document).ready(function(){
 		var $this = $(this),
 		tooltip = $this.next(".tooltip");
 		$this.tooltip("show");
-		
+
 		tooltip.find(".tooltip-inner").css({
 				backgroundColor: "red",
 				color: "black",
@@ -285,7 +286,7 @@ $(document).ready(function(){
 		var $this = $(this),
 		tooltip = $this.next(".tooltip");
 		$this.tooltip("show");
-		
+
 		tooltip.find(".tooltip-inner").css({
 				backgroundColor: "red",
 				color: "black",
@@ -309,7 +310,7 @@ $(document).ready(function(){
 		var $this = $(this),
 		tooltip = $this.next(".tooltip");
 		$this.tooltip("show");
-		
+
 		tooltip.find(".tooltip-inner").css({
 				backgroundColor: "red",
 				color: "black",
@@ -333,7 +334,7 @@ $(document).ready(function(){
 		var $this = $(this),
 		tooltip = $this.next(".tooltip");
 		$this.tooltip("show");
-		
+
 		tooltip.find(".tooltip-inner").css({
 				backgroundColor: "red",
 				color: "black",
@@ -357,7 +358,7 @@ $(document).ready(function(){
 		var $this = $(this),
 		tooltip = $this.next(".tooltip");
 		$this.tooltip("show");
-		
+
 		tooltip.find(".tooltip-inner").css({
 				backgroundColor: "red",
 				color: "black",

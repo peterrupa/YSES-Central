@@ -1,73 +1,5 @@
 $(document).ready(function(){
 
-	var mentor_content =''+
-	'<div class="box">'+
-		'<div id="mentor-data">'+
-			'<div class="row">'+
-				'<div class="table-title">'+
-					'<strong>MENTOR</strong>'+
-					'<span class="glyphicon glyphicon-eye-open"></span>'+
-				'</div>'+
-				'<hr/>'+
-			'</div>'+
-			'<div class="row">'+
-				'<div class="mentor-data-content">'+
-					'<div class="mentor-data-content-image">'+
-						'<img src="../images/Cla.jpg" class="img-responsive"/>'+
-					'</div>'+
-					'<div class="mentor-data-content-text">'+
-						'<table class="table table-hover">'+
-							'<tr>'+
-								'<td class="row-header">'+
-									'<strong>Name: </strong>'+
-								'</td>'+
-								'<td>'+
-									'<p>Name T. Somethingname</p>'+
-								'</td>'+
-							'</tr>'+
-							'<tr>'+
-								'<td class="row-header">'+
-									'<strong>Classification: </strong>'+
-								'</td>'+
-								'<td>'+
-									'<p>Active</p>'+
-								'</td>'+
-							'</tr>'+
-							'<tr>'+
-								'<td class="row-header">'+
-									'<strong>Department: </strong>'+
-								'</td>'+
-								'<td>'+
-									'<p>Senior Projects and Activities Department</p>'+
-								'</td>'+
-							'</tr>'+
-							'<tr>'+
-								'<td class="row-header">'+
-									'<strong>Batch: </strong>'+
-								'</td>'+
-								'<td>'+
-									'<p>rainByte \'12</p>'+
-								'</td>'+
-							'</tr>'+
-						'</table>'+
-					'</div>'+
-				'</div>'+
-				'<div class="mentor-navigation text-center">'+
-					'<a id="classification">'+
-						'<div class="mentor-link">'+
-							'<p>Semtheng Here</p>'+
-						'</div>'+
-					'</a>'+
-					'<a id="mentor-profile">'+
-						'<div class="mentor-link">'+
-							'<p>Go to profile</p>'+
-						'</div>'+
-					'</a>'+
-				'</div>'+
-			'</div>'+
-		'</div>'+
-	'</div>';
-
 	var more_content =''+
 	'<div class="box">'+
 		'<div id="more-data">'+
@@ -81,6 +13,19 @@ $(document).ready(function(){
 	'</div>';
 
 	window.onload = $('#box-data').slideDown(800);
+
+	function convertDepartment(department){
+		switch(department){
+			case "jpad": return "Junior Projects and Activities Department";
+			case "spad": return "Senior Projects and Activities Department";
+			case "vl": return "Visuals and Logistics Department";
+			case "sec": return "Secretariat Department";
+			case "scho": return "Scholastics Department";
+			case "fin": return "Finance Department";
+			case "hr": return "Human Resources Department";
+			case "exec": return "Executive Department";
+		}
+	}
 
 	$("#about").on('click',function(){
 		var about_content =
@@ -104,24 +49,7 @@ $(document).ready(function(){
 			data: "account="+location.pathname.substring(9),
 			type: "GET",
 			success: function (res) {
-				switch(res["department"]){
-					case "jpad": res["department"] = "Junior Projects and Activities Department";
-					break;
-					case "spad": res["department"] = "Senior Projects and Activities Department";
-					break;
-					case "vl": res["department"] = "Visuals and Logistics Department";
-					break;
-					case "sec": res["department"] = "Secretariat Department";
-					break;
-					case "scho": res["department"] = "Scholastics Department";
-					break;
-					case "fin": res["department"] = "Finance Department";
-					break;
-					case "hr": res["department"] = "Human Resources Department";
-					break;
-					case "exec": res["department"] = "Executive Department";
-					break;
-				}
+				res["department"] = convertDepartment(res["department"]);
 				if(res["exec_position"]){
 					switch(res["exec_position"]){
 						case "deo": res["exec_position"] = "Deputy Executive Officer";
@@ -172,7 +100,126 @@ $(document).ready(function(){
 	});
 
 	$("#mentor").on('click',function(){
-		$(this).closest('#information').find('#box-data').html(mentor_content);
+
+		//fetch mentee content via ajax
+		$.ajax({
+			url: "http://localhost:8080/getmentor",
+			data: "account="+location.pathname.substring(9),
+			type: "GET",
+			success: function (res) {
+				if(res["status"] == "None"){
+					var mentor_content =''+
+					'<div class="box">'+
+						'<div id="mentor-data">'+
+							'<div class="row">'+
+								'<div class="table-title">'+
+									'<strong>MENTOR</strong>'+
+									'<span class="glyphicon glyphicon-eye-open"></span>'+
+								'</div>'+
+								'<hr/>'+
+							'</div>'+
+							'<div class="row">'+
+								'<div class="mentor-data-content">'+
+									'<div class="mentor-data-content-image">'+
+										'<img src="http://localhost:8080/images/unknownpic.jpg" class="img-responsive"/>'+
+									'</div>'+
+									'<div class="mentor-data-content-text">'+
+										'<table class="table table-hover">'+
+											'<tr>'+
+												'<td class="row-header">'+
+													'<strong>Name: </strong>'+
+												'</td>'+
+												'<td>'+
+													'<p>'+ res["full_name"] +'</p>'+
+												'</td>'+
+											'</tr>'+
+										'</table>'+
+									'</div>'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>';
+
+					$('#box-data').html(mentor_content);
+				}
+				else{
+					res["department"] = convertDepartment(res["department"]);
+
+					var mentor_content =''+
+					'<div class="box">'+
+						'<div id="mentor-data">'+
+							'<div class="row">'+
+								'<div class="table-title">'+
+									'<strong>MENTOR</strong>'+
+									'<span class="glyphicon glyphicon-eye-open"></span>'+
+								'</div>'+
+								'<hr/>'+
+							'</div>'+
+							'<div class="row">'+
+								'<div class="mentor-data-content">'+
+									'<div class="mentor-data-content-image">'+
+										'<img src="http://localhost:8080/'+ res["picture"] +'" class="img-responsive"/>'+
+									'</div>'+
+									'<div class="mentor-data-content-text">'+
+										'<table class="table table-hover">'+
+											'<tr>'+
+												'<td class="row-header">'+
+													'<strong>Name: </strong>'+
+												'</td>'+
+												'<td>'+
+													'<p>'+ res["full_name"] +'</p>'+
+												'</td>'+
+											'</tr>'+
+											'<tr>'+
+												'<td class="row-header">'+
+													'<strong>Classification: </strong>'+
+												'</td>'+
+												'<td>'+
+													'<p>' + res["org_class"] + '</p>'+
+												'</td>'+
+											'</tr>'+
+											'<tr>'+
+												'<td class="row-header">'+
+													'<strong>Department: </strong>'+
+												'</td>'+
+												'<td>'+
+													'<p>' + res["department"] + '</p>'+
+												'</td>'+
+											'</tr>'+
+											'<tr>'+
+												'<td class="row-header">'+
+													'<strong>Organization Batch: </strong>'+
+												'</td>'+
+												'<td>'+
+													'<p>' + res["org_batch"] + '</p>'+
+												'</td>'+
+											'</tr>'+
+										'</table>'+
+									'</div>'+
+								'</div>'+
+								'<div class="mentor-navigation text-center">'+
+									'<a id="classification">'+
+										'<div class="mentor-link">'+
+											'<p>Semtheng Here</p>'+
+										'</div>'+
+									'</a>'+
+									'<a id="mentor-profile" href="http://localhost:8080/profile/'+ res["first_name"] +'">'+
+										'<div class="mentor-link">'+
+											'<p>Go to profile</p>'+
+										'</div>'+
+									'</a>'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>';
+
+					$('#box-data').html(mentor_content);
+				}
+			},
+			error: function (e){
+				console.dir(e);
+			}
+		});
 	});
 
 	$("#mentee").on('click',function(){
@@ -200,24 +247,8 @@ $(document).ready(function(){
 						}
 						var fullname = res[i]["first_name"] + " " + middlenameinitials + ". " + res[i]["last_name"];
 
-						switch(res[i]["department"]){
-							case "jpad": var department = "Junior Projects and Activities Department";
-							break;
-							case "spad": var department = "Senior Projects and Activities Department";
-							break;
-							case "vl": var department = "Visuals and Logistics Department";
-							break;
-							case "sec": var department = "Secretariat Department";
-							break;
-							case "scho": var department = "Scholastics Department";
-							break;
-							case "fin": var department = "Finance Department";
-							break;
-							case "hr": var department = "Human Resources Department";
-							break;
-							case "exec": var department = "Executive Department";
-							break;
-						}
+						var department = convertDepartment(res[i]["department"]);
+
 						var menteeHTML = "<div class='row mentee-content'><a class='ajax' href='http://localhost:8080/profile/" + res[i]["first_name"] +"'><div class='mentee-data-image'><img src='http://localhost:8080/" + res[i]["picture"] + "' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + fullname + "</strong><p>" + res[i]["org_class"] + "</p><p>" + department + "</p></div></a></div>";
 						$("#mentee-data").append(menteeHTML);
 					}
