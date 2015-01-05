@@ -11,13 +11,15 @@ $(document).ready(function(){
 
 	//smooth scroll
 
-	$(function () {
-    $.srSmoothscroll({
-        // defaults
-        step: 75,
-        speed: 100,
-        ease: 'linear'
-    });
+	//it fucks up modals so it's disbaled for a meanwhile
 
-	});
+	// $(function () {
+  //   $.srSmoothscroll({
+  //       // defaults
+  //       step: 75,
+  //       speed: 100,
+  //       ease: 'linear'
+  //   });
+	//
+	// });
 });
