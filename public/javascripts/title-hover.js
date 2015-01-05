@@ -1,9 +1,9 @@
 $(document).ready( function() {
 
-    $('body').on('mouseenter','.gallery-item', function() {
-        $(this).children('.img-title').fadeIn(300);
-    }).on('mouseleave','.gallery-item', function() {
-      $(this).children('.img-title').fadeOut(100);
+    $('.gallery-item').hover( function() {
+        $(this).find('.img-title').fadeIn(300);
+    }, function() {
+        $(this).find('.img-title').fadeOut(100);
     });
-
+	
 });

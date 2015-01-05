@@ -1,90 +1,102 @@
-/***********************/
-.mentee-data-content-6 .wrapper{
-	position:relative;
-	float:left;
-	width:16.6666666667%;
-}
-
-.mentee-data-content-5 .wrapper{
-	position:relative;
-	float:left;
-	width:20%;
-}
-
-.mentee-data-content-4 .wrapper{
-	position:relative;
-	float:left;
-	width:25%;
-}
-
-.mentee-data-content-3 .wrapper{
-	position:relative;
-	float:left;
-	width:33.3333333335%;
-}
-
-.mentee-data-content-2 .wrapper{
-	position:relative;
-	float:left;
-	width:50%;
-}
-
-.mentee-data-content-1 .wrapper{
-	position:relative;
-	float:left;
-	width:100%;
-}
-
-/**********************/
-@media screen and (max-width: 400px){
-	.mentor-data-content-6 .wrapper,
-	.mentor-data-content-5 .wrapper,
-	.mentor-data-content-4 .wrapper,
-	.mentor-data-content-3 .wrapper,
-	.mentor-data-content-2 .wrapper,
-	.mentor-data-content-1 .wrapper{
-		position: relative;
-		float: left;
-		width:100%;
-	}
-}
-
-@media screen and (min-width: 401px){
-	.mentor-data-content-6 .wrapper{
+/* MENTEE DATA **********/
+	.mentee-data-content-6 .wrapper{
 		position:relative;
 		float:left;
 		width:16.6666666667%;
 	}
 
-	.mentor-data-content-5 .wrapper{
+	.mentee-data-content-5 .wrapper{
 		position:relative;
 		float:left;
 		width:20%;
 	}
 
-	.mentor-data-content-4 .wrapper{
+	.mentee-data-content-4 .wrapper{
 		position:relative;
 		float:left;
 		width:25%;
 	}
 
-	.mentor-data-content-3 .wrapper{
+	.mentee-data-content-3 .wrapper{
 		position:relative;
 		float:left;
 		width:33.3333333335%;
 	}
 
-	.mentor-data-content-2 .wrapper{
+	.mentee-data-content-2 .wrapper{
 		position:relative;
 		float:left;
 		width:50%;
 	}
 
-	.mentor-data-content-1 .wrapper{
+	.mentee-data-content-1 .wrapper{
 		position:relative;
 		float:left;
 		width:100%;
 	}
+/**********************/
+
+/* MENTOR DATA *********/
+	@media screen and (max-width: 400px){
+		.mentor-data-content-6 .wrapper,
+		.mentor-data-content-5 .wrapper,
+		.mentor-data-content-4 .wrapper,
+		.mentor-data-content-3 .wrapper,
+		.mentor-data-content-2 .wrapper,
+		.mentor-data-content-1 .wrapper{
+			position: relative;
+			float: left;
+			width:100%;
+		}
+	}
+
+	@media screen and (min-width: 401px){
+		.mentor-data-content-6 .wrapper{
+			position:relative;
+			float:left;
+			width:16.6666666667%;
+		}
+
+		.mentor-data-content-5 .wrapper{
+			position:relative;
+			float:left;
+			width:20%;
+		}
+
+		.mentor-data-content-4 .wrapper{
+			position:relative;
+			float:left;
+			width:25%;
+		}
+
+		.mentor-data-content-3 .wrapper{
+			position:relative;
+			float:left;
+			width:33.3333333335%;
+		}
+
+		.mentor-data-content-2 .wrapper{
+			position:relative;
+			float:left;
+			width:50%;
+		}
+
+		.mentor-data-content-1 .wrapper{
+			position:relative;
+			float:left;
+			width:100%;
+		}
+	}
+/**********************/
+
+.wrapper{
+	float:left;
+
+	margin-top:8px;
+	margin-left:100px;
+
+	width:80px;
+	height:80px;
 }
 
 .gallery {
@@ -120,22 +132,58 @@
 }
 
 .img-title {
-	position: absolute;
-	top: 0;
-	margin: 0;
-	height: 100%;
-	width: 100%;
-	text-align: center;
-	/*opacity: 0;*/
-	display: none; /* comment this out for CSS hover */
-	background-color: #333;
-	/*transition: all 0.5s ease;*/
+    position: absolute;
+    top: 0;
+    margin: 0;
+    height: 80px;
+    width: 80px;
+    text-align: center;
+    /*opacity: 0;*/
+    display: none; /* comment this out for CSS hover */
+    /*transition: all 0.5s ease;*/
 }
 
-.img-title h5 {
+.exec-title{
+	background-color: rgb(116,119,125);
+	color:rgb(3,3,4);
+}
+
+.pad-title{
+	background-color: rgb(93,213,247);
+	color:rgb(41,87,239);
+}
+
+.sec-title{
+	background-color: rgb(84,18,85);
+	color:rgb(142,97,168);
+}
+
+.vl-title{
+	background-color: rgb(131,86,68);
+	color:rgb(211,152,128);
+}
+
+.scho-title{
+	background-color: rgb(232,210,12);
+	color:rgb(255,255,0);
+}
+
+.hr-title{
+	background-color: rgb(243,101,101);
+	color:rgb(178,57,57);
+}
+
+.fin-title{
+	background-color: rgb(42,152,58);
+	color:rgb(30,112,32);
+}
+
+.img-title h3 {
 	position: absolute;
-	color: #fff;
 	top: 0;
+	margin-top:32%;
 	width: 100%;
 	text-align: center;
+
+	font-weight: bold;
 }

@@ -27,6 +27,52 @@ html
 							span.icon-bar
 							span.icon-bar
 							span.icon-bar
+						div#department-icon.hidden-sm.hidden-md
+							a.menu-icon-department(href="#")
+								span.glyphicon.glyphicon-list
+							div#department-button-container
+								div.wrapper.clearfix
+									figure.gallery-item
+										img.department-logo(src="../images/department-logo/exec.png")
+										a(href="#")
+											figcaption.img-title.exec-title
+												h3 EXEC
+								div.wrapper.clearfix
+									figure.gallery-item
+										img.department-logo(src="../images/department-logo/pad.png")
+										a(href="#")
+											figcaption.img-title.pad-title
+												h3 PAD
+								div.wrapper.clearfix
+									figure.gallery-item
+										img.department-logo(src="../images/department-logo/sec.png")
+										a(href="#")
+											figcaption.img-title.sec-title
+												h3 SEC
+								div.wrapper.clearfix
+									figure.gallery-item
+										img.department-logo(src="../images/department-logo/vl.png")
+										a(href="#")
+											figcaption.img-title.vl-title
+												h3 VL
+								div.wrapper.clearfix
+									figure.gallery-item
+										img.department-logo(src="../images/department-logo/SCHO.png")
+										a(href="#")
+											figcaption.img-title.scho-title
+												h3 SCHO
+								div.wrapper.clearfix
+									figure.gallery-item
+										img.department-logo(src="../images/department-logo/hr.png")
+										a(href="#")
+											figcaption.img-title.hr-title
+												h3 HR
+								div.wrapper.clearfix
+									figure.gallery-item
+										img.department-logo(src="../images/department-logo/fin.png")
+										a(href="#")
+											figcaption.img-title.fin-title
+												h3 FIN
 						div#central-title
 							a.ajax.navbar-brand(href="http://localhost:8080")
 								img#logo.img-responsive(src="../images/logoAllWhite.png")
@@ -52,7 +98,7 @@ html
 										form#logout(action="http://localhost:8080/logout",method="post")
 										a(href="javascript:{}",onclick="$('#logout').submit()") Log out
 								div#chatbox-icon.hidden-sm.hidden-md
-									a.menu-icon(href="#")
+									a.menu-icon-chatbox(href="#")
 										span.glyphicon.glyphicon-send
 					// for phone navigation
 					div#navbar.collapse
@@ -75,18 +121,18 @@ html
 							h3 Announcements
 							ul.no-bullets
 								- for(var i=0;i<15;i++){
-									li
-										div.post.post-PAD
-											button.close.hoverClose(type="button",aria-hidden="true") &times; 
-											div.row
-												h3.title
-													PF Committee Heads Survey
-											p.op Projects and Activities Department
-											p.date 11/29/14 9:03PM
-											div.row
-												p Good evening YSERS. We are here to ask you who are interested in being a committee head this coming PF 2014. Thank you!
+								li
+									div.post.post-PAD
+										button.close.hoverClose(type="button",aria-hidden="true") &times; 
+										div.row
+											h3.title
+												PF Committee Heads Survey
+										p.op Projects and Activities Department
+										p.date 11/29/14 9:03PM
+										div.row
+											p Good evening YSERS. We are here to ask you who are interested in being a committee head this coming PF 2014. Thank you!
 								- }
-								
+
 						div.col-lg-8.padding-vert
 							h3 Logbook
 							ul.no-bullets
@@ -159,4 +205,6 @@ html
 		script(src='http://localhost:8080/javascripts/parallax.js')
 		script(src='http://localhost:8080/javascripts/announcements.js')
 		script(src='http://localhost:8080/javascripts/chatbox.js')
+		script(src='http://localhost:8080/javascripts/department.js')
 		script(src='http://localhost:8080/javascripts/autocomplete.js')
+		script(src='http://localhost:8080/javascripts/title-hover.js')
