@@ -203,7 +203,7 @@ $(document).ready(function(){
 											'<p>Semtheng Here</p>'+
 										'</div>'+
 									'</a>'+
-									'<a id="mentor-profile" href="http://localhost:8080/profile/'+ res["first_name"] +'">'+
+									'<a id="mentor-profile" href="http://localhost:8080/profile/'+ res["username"] +'">'+
 										'<div class="mentor-link">'+
 											'<p>Go to profile</p>'+
 										'</div>'+
@@ -249,7 +249,7 @@ $(document).ready(function(){
 
 						var department = convertDepartment(res[i]["department"]);
 
-						var menteeHTML = "<div class='row mentee-content'><a class='ajax' href='http://localhost:8080/profile/" + res[i]["first_name"] +"'><div class='mentee-data-image'><img src='http://localhost:8080/" + res[i]["picture"] + "' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + fullname + "</strong><p>" + res[i]["org_class"] + "</p><p>" + department + "</p></div></a></div>";
+						var menteeHTML = "<div class='row mentee-content'><a class='ajax' href='http://localhost:8080/profile/" + res[i]["username"] +"'><div class='mentee-data-image'><img src='http://localhost:8080/" + res[i]["picture"] + "' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + fullname + "</strong><p>" + res[i]["org_class"] + "</p><p>" + department + "</p></div></a></div>";
 						$("#mentee-data").append(menteeHTML);
 					}
 				}

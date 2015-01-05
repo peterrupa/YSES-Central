@@ -18,45 +18,54 @@ var pool = mysql.createPool({
 
 function serveMain(req,res){
 	var session = req.session;
-	if(session.userkey){
-		pool.getConnection(function(err,connection){
-			connection.query("SELECT first_name, picture, exec_position FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows){
-				if(err) console.log(err);
-				else{
-					res.render('main',{name: rows[0]["first_name"],picture: rows[0]["picture"].substring(7),exec_position: rows[0]["exec_position"]});
-				}
-			});
-			connection.release();
+
+	pool.getConnection(function(err,connection){
+		connection.query("SELECT username, first_name, picture, exec_position FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows){
+			if(err) console.log(err);
+			else{
+				res.render('main',{username: rows[0]["username"],name: rows[0]["first_name"],picture: rows[0]["picture"].substring(7),exec_position: rows[0]["exec_position"]});
+			}
 		});
-	}
-	else{
-		res.render('index');
-	}
+		connection.release();
+	});
 }
 
 /* GET home page. */
 router.get('/', function(req, res) {
-	serveMain(req,res);
+	var session = req.session;
+
+	if(session.userkey){
+		serveMain(req,res);
+	}
+	else{
+		res.render('index');
+	}
 });
 
 //profiles
-router.get('/profile/:name',function(req,res){
-	serveMain(req,res);
+router.get('/profile/:username',function(req,res){
+	var session = req.session;
+	if(session.userkey){
+		serveMain(req,res);
+	}
+	else{
+		res.redirect('/');
+	}
 });
 
-router.get('/profile/:name/content',function(req,res){
+router.get('/profile/:username/content',function(req,res){
 	var session = req.session;
 
 	if(session.userkey){
 		pool.getConnection(function(err,connection){
-			connection.query("SELECT first_name FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
+			connection.query("SELECT username FROM `accounts` WHERE username="+connection.escape(req.params.username),function(err,rows){
 				if(err){
 					console.log(err);
 					res.send("Internal server error!");
 				}
 				else{
 					if(rows[0]){
-						connection.query("SELECT username, first_name, middle_name, last_name, department, picture, exec_position FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
+						connection.query("SELECT username, first_name, middle_name, last_name, department, picture, exec_position FROM `accounts` WHERE username="+connection.escape(req.params.username),function(err,rows){
 							if(err){
 								console.log(err);
 								res.send("Internal server error!");
@@ -266,7 +275,7 @@ router.post('/signup',
 //search
 router.get('/search',function(req,res){
 	pool.getConnection(function(err,connection){
-		var query = "SELECT first_name, full_name AS 'value', picture from `accounts` WHERE 1 ORDER BY full_name";
+		var query = "SELECT username, full_name AS 'value', picture from `accounts` WHERE 1 ORDER BY full_name";
 
 		connection.query(query,function(err,rows){
 			if(err){
@@ -276,7 +285,7 @@ router.get('/search',function(req,res){
 			else{
 				for(var i = 0; i < rows.length; i++){
 					rows[i]["picture"] = rows[i]["picture"].substring(7);
-					rows[i]["url"] = "http://localhost:8080/profile/" + rows[i]["first_name"];
+					rows[i]["url"] = "http://localhost:8080/profile/" + rows[i]["username"];
 				}
 				res.send(rows);
 			}
@@ -353,7 +362,7 @@ router.get('/getYSERs', function(req,res){
 				sort = "ORDER BY full_name DESC";
 			}
 
-			connection.query("SELECT first_name, full_name, picture, org_class, org_batch FROM `accounts` WHERE ("+filterBatch+") AND "+filterClass+" "+sort,function(err,data){
+			connection.query("SELECT username, first_name, full_name, picture, org_class, org_batch FROM `accounts` WHERE ("+filterBatch+") AND "+filterClass+" "+sort,function(err,data){
 				if(err){
 					console.log(err);
 					res.send("Internal Server Error");
@@ -392,7 +401,7 @@ router.get('/getdetails', function(req,res){
 	var session = req.session;
 	if(session.userkey){
 		pool.getConnection(function(err,connection){
-			connection.query("SELECT first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, DATE_FORMAT(`birthday`,'%M %e %Y') AS birthday, home_address, college_address, exec_position FROM `accounts` WHERE first_name="+connection.escape(req.query.account),function(err,data){
+			connection.query("SELECT first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, DATE_FORMAT(`birthday`,'%M %e %Y') AS birthday, home_address, college_address, exec_position FROM `accounts` WHERE username="+connection.escape(req.query.account),function(err,data){
 				if(err){
 					console.log(err);
 					res.send("Internal server error");
@@ -413,13 +422,13 @@ router.get('/getmentor', function(req,res){
 	var session = req.session;
 	if(session.userkey){
 		pool.getConnection(function(err,connection){
-			connection.query("SELECT mentor FROM `accounts` WHERE first_name="+connection.escape(req.query.account),function(err,username){
+			connection.query("SELECT mentor FROM `accounts` WHERE username="+connection.escape(req.query.account),function(err,username){
 				if(err){
 					console.log(err);
 					res.send("Internal server error");
 				}
 				else{
-					connection.query("SELECT first_name, full_name, org_class, department, org_batch, picture FROM `accounts` WHERE username="+connection.escape(username[0]["mentor"]),function(err,data){
+					connection.query("SELECT username, first_name, full_name, org_class, department, org_batch, picture FROM `accounts` WHERE username="+connection.escape(username[0]["mentor"]),function(err,data){
 						if(err){
 							console.log(err);
 							res.send("Internal server error");
@@ -449,7 +458,7 @@ router.get('/getmentees', function(req,res){
 	var session = req.session;
 	if(session.userkey){
 		pool.getConnection(function(err,connection){
-			connection.query("SELECT username FROM `accounts` WHERE first_name="+connection.escape(req.query.account),function(err,username){
+			connection.query("SELECT username FROM `accounts` WHERE username="+connection.escape(req.query.account),function(err,username){
 				if(err){
 					console.log(err);
 					res.send("Internal server error");
@@ -466,7 +475,7 @@ router.get('/getmentees', function(req,res){
 								for(var i = 1; i < mentees.length; i++){
 									subquery = subquery.concat(" || username='"+mentees[i]["mentees"]+"'");
 								}
-								connection.query("SELECT first_name, middle_name, last_name, picture, department, org_class FROM `accounts` WHERE username="+subquery,function(err,rows){
+								connection.query("SELECT username, first_name, middle_name, last_name, picture, department, org_class FROM `accounts` WHERE username="+subquery,function(err,rows){
 									if(err){
 										console.log(err);
 										res.send("Internal server error");
