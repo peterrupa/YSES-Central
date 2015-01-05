@@ -16,15 +16,14 @@ var pool = mysql.createPool({
 	database: 'yses_central'
 });
 
-/* GET home page. */
-router.get('/', function(req, res) {
+function serveMain(req,res){
 	var session = req.session;
 	if(session.userkey){
 		pool.getConnection(function(err,connection){
 			connection.query("SELECT first_name, picture, exec_position FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows){
 				if(err) console.log(err);
 				else{
-					res.render('homepage',{name: rows[0]["first_name"],picture: rows[0]["picture"].substring(7),exec_position: rows[0]["exec_position"]});
+					res.render('main',{name: rows[0]["first_name"],picture: rows[0]["picture"].substring(7),exec_position: rows[0]["exec_position"]});
 				}
 			});
 			connection.release();
@@ -33,62 +32,16 @@ router.get('/', function(req, res) {
 	else{
 		res.render('index');
 	}
+}
+
+/* GET home page. */
+router.get('/', function(req, res) {
+	serveMain(req,res);
 });
 
 //profiles
 router.get('/profile/:name',function(req,res){
-	var session = req.session;
-
-	if(session.userkey){
-		pool.getConnection(function(err,connection){
-			connection.query("SELECT first_name FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
-				if(err){
-					console.log(err);
-					res.send("Internal server error!");
-				}
-				else{
-					if(rows[0]){
-						connection.query("SELECT username, first_name, middle_name, last_name, department, picture, exec_position FROM `accounts` WHERE first_name="+connection.escape(req.params.name),function(err,rows){
-							if(err){
-								console.log(err);
-								res.send("Internal server error!");
-							}
-							else{
-								//remove /public
-								rows[0]["picture"] = rows[0]["picture"].substring(7);
-
-								connection.query("SELECT mentees FROM `accounts_"+rows[0]["username"]+"_mentees` WHERE 1",function(err,rowsMentees){
-									if(err){
-										console.log(err);
-										res.send("Internal server error!");
-									}
-									else{
-										//before render, get owner's profile first
-										connection.query("SELECT first_name, picture, exec_position FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows3){
-											if(err){
-												console.log(err);
-											}
-											else{
-												res.render("profile",{rows:rows[0],rows2:rowsMentees,name:rows3[0]["first_name"],picture:rows3[0]["picture"].substring(7),exec_position:rows3[0]["exec_position"]});
-											}
-										});
-									}
-								});
-							}
-						});
-					}
-					else{
-						res.send("No profile found!");
-					}
-				}
-			});
-			connection.release();
-		});
-
-	}
-	else{
-		res.redirect('/');
-	}
+	serveMain(req,res);
 });
 
 router.get('/profile/:name/content',function(req,res){
@@ -334,24 +287,7 @@ router.get('/search',function(req,res){
 
 //view all YSERs
 router.get('/YSERs', function(req,res){
-	var session = req.session;
-
-	if(session.userkey){
-		pool.getConnection(function(err,connection){
-			connection.query("SELECT first_name, picture, exec_position FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows){
-				if(err){
-					console.log(err);
-				}
-				else{
-					res.render('YSERs',{name: rows[0]["first_name"],picture: rows[0]["picture"].substring(7),exec_position: rows[0]["exec_position"]});
-				}
-			});
-			connection.release();
-		});
-	}
-	else{
-		res.redirect('/');
-	}
+	serveMain(req,res);
 });
 
 router.get('/YSERs/content', function(req,res){
@@ -561,7 +497,21 @@ router.get('/getmentees', function(req,res){
 
 /* TEST */
 router.get('/test', function(req, res) {
-	res.render('test');
+	var session = req.session;
+	if(session.userkey){
+		pool.getConnection(function(err,connection){
+			connection.query("SELECT first_name, picture, exec_position FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows){
+				if(err) console.log(err);
+				else{
+					res.render('test',{name: rows[0]["first_name"],picture: rows[0]["picture"].substring(7),exec_position: rows[0]["exec_position"]});
+				}
+			});
+			connection.release();
+		});
+	}
+	else{
+		res.render('index');
+	}
 });
 router.post('/upload',function(req,res){
 	console.log(req.files);

@@ -10,6 +10,7 @@ $(document).ready(function(){
 	});
 
 	//smooth scroll
+
 	$(function () {
     $.srSmoothscroll({
         // defaults
@@ -17,5 +18,6 @@ $(document).ready(function(){
         speed: 100,
         ease: 'linear'
     });
-});
+
+	});
 });
