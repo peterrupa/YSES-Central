@@ -8,8 +8,12 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 
 //application dependencies
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var datafetch = require('./routes/datafetch');
+var functions = require('./routes/functions');
+var indexhomepage = require('./routes/index-homepage');
+var profile = require('./routes/profile');
+var public = require('./routes/public');
+var viewAllYSERs = require('./routes/viewAllYSERs');
 
 var app = express();
 
@@ -33,10 +37,12 @@ app.use(session({
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
-app.use('/', routes);
-app.use('/users', users);
+app.use(datafetch);
+app.use(functions);
+app.use(indexhomepage);
+app.use(profile);
+app.use(public);
+app.use(viewAllYSERs);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
