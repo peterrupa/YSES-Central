@@ -191,12 +191,12 @@ $(document).ready(function(){
 
 				//clear element
 				$("#result").empty();
-				
+
 				for(batchName in res){
 					if(res[batchName].length > 0){
 						var batchHTML= "";
 						for(var i = 0; i < res[batchName].length; i++){
-							var memberHTML = '<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4"><a class="ajax" href="http://localhost:8080/profile/'+res[batchName][i]["first_name"]+'"><div class="pic"><img class="img-responsive" src="http://localhost:8080/'+res[batchName][i]["picture"]+'"><div class="btm-label"><div class="btm-label-gradient"></div><div class="btm-label-text"><p>'+res[batchName][i]["full_name"]+'</p><p>'+res[batchName][i]["org_class"]+'</p></div></div></div></a></div>';
+							var memberHTML = '<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4"><a class="ajax" href="http://localhost:8080/profile/'+res[batchName][i]["username"]+'"><div class="pic"><img class="img-responsive" src="http://localhost:8080/'+res[batchName][i]["picture"]+'"><div class="btm-label"><div class="btm-label-gradient"></div><div class="btm-label-text"><p>'+res[batchName][i]["full_name"]+'</p><p>'+res[batchName][i]["org_class"]+'</p></div></div></div></a></div>';
 							batchHTML += memberHTML;
 						}
 							//append here per batch
