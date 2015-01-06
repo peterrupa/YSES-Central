@@ -93,10 +93,9 @@
 	float:left;
 
 	margin-top:8px;
-	margin-left:100px;
-
-	width:80px;
-	height:80px;
+	
+	width:14.2863%;
+	height:100%;
 }
 
 .gallery {
@@ -108,27 +107,37 @@
 	float: left;
 	position: relative;
 
-	height: 35.5px;
+	height: 100%;
 	width: 100%;
 	
 	margin-right:0px;
+
+	padding:0px;
 
 	float:left;
 
 	cursor:default;
 }
 
-.gallery-item > h5{
+.gallery-item > h3{
 	position:relative;
 
 	left:20px;
 }
 .gallery-item img {
+	margin-left:30.6%;
 	width: 100%;
 }
 
 .gallery-item:hover .img-title {
 	/*opacity: 1;*/
+}
+
+.item{
+	color:white;
+	font-weight:bold;
+
+	list-style:none;
 }
 
 .img-title {
@@ -137,6 +146,7 @@
     margin: 0;
     height: 80px;
     width: 80px;
+    margin-left:30.6%;
     text-align: center;
     /*opacity: 0;*/
     display: none; /* comment this out for CSS hover */
@@ -178,6 +188,29 @@
 	color:rgb(30,112,32);
 }
 
+.item{
+	margin-left:30.6%;
+	
+	width:80px;
+	height:30px;
+
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+.item a{
+	color:inherit;
+}
+
+.item a:hover{
+	color:white;
+}
+
+.item:hover{
+	color:white;
+	background-color:rgba(30,30,50,1);
+}
+
 .img-title h3 {
 	position: absolute;
 	top: 0;
@@ -186,4 +219,15 @@
 	text-align: center;
 
 	font-weight: bold;
+}
+
+.item h5{
+	padding-top:7px;
+
+	margin-bottom:0px;
+	margin-top:0px;
+
+	font-size:12px;
+
+	font-weight:bold;
 }
