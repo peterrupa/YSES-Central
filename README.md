@@ -5,5 +5,5 @@ List of known bugs/issues:
 ============
 
 1. Adding smooth scrolling makes scrolling on a modal scroll the body instead.
-2. On profile page, "About" tab does not scroll.
-3. Jade files could be restructured to using blocks.
+2. Mentee tab does not show mentees without YSES Central accounts
+3. Side tab of profiles have wrong height if you cannot edit their profile
