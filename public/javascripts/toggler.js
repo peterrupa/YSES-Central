@@ -239,17 +239,23 @@ $(document).ready(function(){
 					$("#mentee-data").append("No mentees");
 				}
 				else{
-					for(var i = 0; i < res.length; i++){
-						var middlename = res[i]["middle_name"].split(" ");
+					//mentees with accounts
+					for(var i = 0; i < res.accounts.length; i++){
+						var middlename = res.accounts[i]["middle_name"].split(" ");
 						var middlenameinitials = "";
 						for(var j = 0; j < middlename.length; j++){
 							middlenameinitials = middlenameinitials.concat(middlename[j].substring(0,1));
 						}
-						var fullname = res[i]["first_name"] + " " + middlenameinitials + ". " + res[i]["last_name"];
+						var fullname = res.accounts[i]["first_name"] + " " + middlenameinitials + ". " + res.accounts[i]["last_name"];
 
-						var department = convertDepartment(res[i]["department"]);
+						var department = convertDepartment(res.accounts[i]["department"]);
 
-						var menteeHTML = "<div class='row mentee-content'><a class='ajax' href='http://localhost:8080/profile/" + res[i]["username"] +"'><div class='mentee-data-image'><img src='http://localhost:8080/" + res[i]["picture"] + "' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + fullname + "</strong><p>" + res[i]["org_class"] + "</p><p>" + department + "</p></div></a></div>";
+						var menteeHTML = "<div class='row mentee-content'><a class='ajax' href='http://localhost:8080/profile/" + res.accounts[i]["username"] +"'><div class='mentee-data-image'><img src='http://localhost:8080/" + res.accounts[i]["picture"] + "' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + fullname + "</strong><p>" + res.accounts[i]["org_class"] + "</p><p>" + department + "</p></div></a></div>";
+						$("#mentee-data").append(menteeHTML);
+					}
+					//mentees without accounts
+					for(var i = 0; i < res.noaccounts.length; i++){
+						var menteeHTML = "<div class='row mentee-content'><div class='mentee-data-image'><img src='http://localhost:8080/images/unknownpic.jpg' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + res.noaccounts[i] + "</strong></div>";
 						$("#mentee-data").append(menteeHTML);
 					}
 				}

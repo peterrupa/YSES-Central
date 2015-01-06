@@ -187,8 +187,6 @@ $(document).ready(function(){
 			data: "sort="+sort+"&filterBatch="+batch+"&filterClass="+orgclass,
 			type: "GET",
 			success: function (res) {
-				console.log(res);
-
 				//clear element
 				$("#result").empty();
 

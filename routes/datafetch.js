@@ -184,7 +184,14 @@ router.get('/getmentees', function(req,res){
 						}
 						else{
 							if(mentees[0]){
+								//this list will serve as a list of those mentees w/o yses accounts
+								var menteesList = [];
+
+								for(i = 0; i < mentees.length; i++){
+									menteesList.push(mentees[i]["mentees"]);
+								}
 								var subquery = "'" + mentees[0]["mentees"] + "'";
+
 								for(var i = 1; i < mentees.length; i++){
 									subquery = subquery.concat(" || username='"+mentees[i]["mentees"]+"'");
 								}
@@ -194,11 +201,18 @@ router.get('/getmentees', function(req,res){
 										res.send("Internal server error");
 									}
 									else{
-										//remove /public
+										//remove /public and remove from mentee list
 										for(var j = 0; j < rows.length; j++){
+											if(menteesList.indexOf(rows[j]["username"]) != -1){
+												menteesList.splice(menteesList.indexOf(rows[j]["username"]),1);
+											}
 											rows[j]["picture"] = rows[j]["picture"].substring(7);
 										}
-										res.send(rows);
+
+										//merge with accounts and without accounts into one object
+										var send = {accounts:rows,noaccounts:menteesList};
+
+										res.send(send);
 									}
 								});
 							}
