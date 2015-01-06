@@ -9,38 +9,74 @@ $(document).ready(function(){
 			var reader = new FileReader();
 
 			reader.onload = function(e) {
+				// Create a new image.
+				var img = new Image();
+				// Set the img src property using the data URL.
+				img.src = reader.result;
+				img.id = "draggable";
 
-			// Create a new image.
-			var img = new Image();
-			// Set the img src property using the data URL.
-			img.src = reader.result;
-			img.id = "draggable";
-			//create screen
-			var screen = "<div id='screen'></div>";
+				//create screen
+				var screen = "<div id='screen'></div>";
 
-			// Add the image to the page.
-			$("#preview").append(screen);
-			$("#screen").append(img);
-			$("#draggable").addClass("drag-image");
-			//preview image set up
-			if($("#draggable").width()<$("#draggable").height()){
-				$("#draggable").width($("#screen").width());
-				$("#draggable").height("auto");
-			}
-			else{
-				$("#draggable").width("auto");
-				$("#draggable").height($("#screen").height());
-			}
-			var xy = $("#screen").offset();
-			//be sure to take in account the pixel of the border
-			if($("#draggable").width()<=$("#draggable").height()){
-				var excess = $("#draggable").height()-$("#screen").height();
-				$("#draggable").draggable({containment:[xy.left,xy.top-excess,xy.left,xy.top]});
-			}
-			else{
-				var excess = $("#draggable").width()-$("#screen").width();
-				$("#draggable").draggable({containment:[xy.left-excess,xy.top,xy.left,xy.top]});
-			}
+				// Add the screen to the page.
+				$("#preview").append(screen);
+
+				//identify orientation of excess
+				var orientation;
+
+				if(img.width<img.height){
+					orientation = "portrait";
+				}
+				else{
+					orientation = "landscape"
+				}
+
+				var bounds = "<div id='bounds' style='position:absolute'></div>";
+
+				$("#screen").append(bounds);
+
+				$("#bounds").append(img);
+
+				//preview image set up
+				if(orientation == "portrait"){
+					$("#draggable").width($("#screen").width());
+					$("#draggable").height("auto");
+				}
+				else{
+					$("#draggable").width("auto");
+					$("#draggable").height($("#screen").height());
+				}
+
+				//calculate excess
+				var excess;
+				if(orientation == "portrait"){
+					excess = $("#draggable").height()-$("#screen").height()
+				}
+
+				else{
+					excess = $("#draggable").width()-$("#screen").width()
+				}
+
+				//create div boundary
+				var excessDirection, width, height;
+
+				if(orientation == "portrait"){
+					width = $("#screen").width();
+					height = $("#draggable").height()+excess;
+					$("#bounds").css("top","-"+excess+"px").css("width",width+"px").css("height",height+"px");
+					$("#draggable").css("top",excess+"px");
+				}
+				else{
+					width = $("#draggable").width()+excess;
+					height = $("#screen").height();
+					$("#bounds").css("left","-"+excess+"px").css("width",width+"px").css("height",height+"px");
+					$("#draggable").css("left",excess/2+"px");
+				}
+
+				//assign draggable to element parent
+				$("#draggable").addClass("drag-image");
+
+				$("#draggable").draggable({containment:"parent"});
 		  }
 
 		  reader.readAsDataURL(file);
@@ -180,9 +216,18 @@ $(document).ready(function(){
 	$("#signupform").on("submit",function(){
 		var previewCoordinates = $("#draggable").position();
 
+		var excess;
 		//assign crop coordinates
-		$("#imageleft").val(previewCoordinates.left);
-		$("#imagetop").val(previewCoordinates.top);
+		if($("#draggable").width()<$("#draggable").height()){
+			excess = $("#draggable").height()-$("#screen").height();
+			$("#imageleft").val(previewCoordinates.left);
+			$("#imagetop").val(previewCoordinates.top-excess);
+		}
+		else{
+			excess = $("#draggable").width()-$("#screen").width()
+			$("#imageleft").val(previewCoordinates.left-excess);
+			$("#imagetop").val(previewCoordinates.top);
+		}
 
 		//assign number of mentees
 		$("#numberofmentees").val(numberOfMentees);
