@@ -9,7 +9,7 @@ ul.side-menu {
 	overflow: visible;
 	width: 250px;
 	height: 100%;
-	background-color: #444;
+	background-color: rgba(23,15,130,0.8);
 	z-index: 1;
 
 	-webkit-transition: right .3s;
