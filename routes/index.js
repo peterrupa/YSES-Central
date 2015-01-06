@@ -16,6 +16,13 @@ var pool = mysql.createPool({
 	database: 'yses_central'
 });
 
+//encryption
+var crypto = require('crypto');
+
+function encrypt(text) {
+    return crypto.createHash('sha256').update(text).digest("hex");
+}
+
 function serveMain(req,res){
 	var session = req.session;
 
@@ -110,7 +117,10 @@ router.get('/profile/:username/content',function(req,res){
 
 router.post('/login', function(req, res) {
 	pool.getConnection(function(err,connection){
-		connection.query("SELECT username FROM `accounts` WHERE username="+connection.escape(req.body["username"])+"&&password="+connection.escape(req.body["password"]),function(err,rows){
+		var salt = "this is a rainbow unicorn"
+		var password = encrypt(salt+req.body["password"]);
+
+		connection.query("SELECT username FROM `accounts` WHERE username="+connection.escape(req.body["username"])+"&&password="+connection.escape(password),function(err,rows){
 			if(rows[0]){ //successful login
 				var session = req.session;
 				session.userkey = rows[0]["username"];
@@ -181,8 +191,10 @@ router.post('/signup',
 						req.body["mentor"] = username[0]["username"];
 					}
 					var studentNumber = req.body["sn-year"]+"-"+req.body["sn-number"];
+					var salt = "this is a rainbow unicorn"
+					var password = encrypt(salt+req.body["password"])
 
-					var queryAccount = "INSERT INTO `accounts`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES ("+connection.escape(req.body["username"])+","+connection.escape(req.body["password"])+","+connection.escape(req.body["first-name"])+","+connection.escape(req.body["middle-name"])+","+connection.escape(req.body["last-name"])+","+connection.escape(req.body["org-class"])+","+connection.escape(req.body["department"])+","+connection.escape(studentNumber)+","+connection.escape(req.body["org-batch"])+","+connection.escape(req.body["univ-batch"])+","+connection.escape(req.body["mentor"])+","+connection.escape(req.body["bday"])+","+connection.escape(req.body["homeAdd"])+","+connection.escape(req.body["collegeAdd"])+","+connection.escape(newFileName)+","+connection.escape(req.body["first-name"]+" "+req.body["middle-name"]+" "+req.body["last-name"])+","+connection.escape(req.body["exec_position"])+")";
+					var queryAccount = "INSERT INTO `accounts`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES ("+connection.escape(req.body["username"])+","+connection.escape(password)+","+connection.escape(req.body["first-name"])+","+connection.escape(req.body["middle-name"])+","+connection.escape(req.body["last-name"])+","+connection.escape(req.body["org-class"])+","+connection.escape(req.body["department"])+","+connection.escape(studentNumber)+","+connection.escape(req.body["org-batch"])+","+connection.escape(req.body["univ-batch"])+","+connection.escape(req.body["mentor"])+","+connection.escape(req.body["bday"])+","+connection.escape(req.body["homeAdd"])+","+connection.escape(req.body["collegeAdd"])+","+connection.escape(newFileName)+","+connection.escape(req.body["first-name"]+" "+req.body["middle-name"]+" "+req.body["last-name"])+","+connection.escape(req.body["exec_position"])+")";
 					var account_username_mentees = "accounts_"+req.body["username"]+"_mentees";
 
 					//insert row into accounts

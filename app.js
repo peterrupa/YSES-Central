@@ -12,7 +12,6 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-var http = require('http').Server(app);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -71,7 +70,7 @@ app.use(function(err, req, res, next) {
 });
 
 // start server
-http.listen(8080, function(){
+app.listen(8080, function(){
 	console.log('YSES Central started on :8080.');
 });
 

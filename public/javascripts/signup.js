@@ -176,11 +176,6 @@ $(document).ready(function(){
 		$("#photo").trigger('click');
 	});
 
-	//onsubmit login
-	$("#loginform").on("submit",function(){
-		$("#loginform input[name='password']").val(String(CryptoJS.SHA3($("#loginform input[name='password']").val(),{ outputLength: 224 })));
-	});
-
 	//onsubmit signup
 	$("#signupform").on("submit",function(){
 		var previewCoordinates = $("#draggable").position();
@@ -194,9 +189,6 @@ $(document).ready(function(){
 
 		//assign university batch from student number
 		$("#univbatch").val($("#signupform input[name='sn-year']").val());
-
-		//encrypt password
-		$("#signupform input[name='password']").val(String(CryptoJS.SHA3($("#signupform input[name='password']").val(),{ outputLength: 224 })));
 
 		if($(".mentee-textfield[name='mentee-1']").val() == "" && numberOfMentees == 1){
 			$("#numberofmentees").val(0);
@@ -349,29 +341,5 @@ $(document).ready(function(){
 			$this.tooltip("hide");
 		}
 	});
-
-	/*$("#mentees").tooltip({
-		placement: "left",
-		trigger: "focus",
-		title: "invalid"
-	}).on("keyup",".mentee-textfield", function() {
-		var $this = $(this),
-		tooltip = $this.next(".tooltip");
-		$this.tooltip("show");
-
-		tooltip.find(".tooltip-inner").css({
-				backgroundColor: "red",
-				color: "black",
-				borderColor: "red",
-				borderWidth: "1px",
-				borderStyle: "solid"
-		});
-
-		if(this.value.length == 0) {
-			$this.tooltip("show");
-		} else {
-			$this.tooltip("hide");
-		}
-	});*/
 
 });
