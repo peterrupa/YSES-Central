@@ -37,15 +37,7 @@ router.get('/profile/:username/content',function(req,res){
 										res.send("Internal server error!");
 									}
 									else{
-										//before render, get owner's profile first
-										connection.query("SELECT first_name, picture, exec_position FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows3){
-											if(err){
-												console.log(err);
-											}
-											else{
-												res.render("profile-content",{rows:rows[0],rows2:rowsMentees,name:rows3[0]["first_name"],picture:rows3[0]["picture"].substring(7),exec_position:rows3[0]["exec_position"]});
-											}
-										});
+										res.render("profile-content",{rows:rows[0],rows2:rowsMentees});
 									}
 								});
 							}
