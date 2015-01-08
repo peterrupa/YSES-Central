@@ -70,6 +70,17 @@ router.get('/accountvalidator', function(req,res){
 	}
 });
 
+//announcementposter
+router.get('/announcementposter', function(req,res){
+	var session = req.session;
+	if(session.userkey){
+		serveMain(req,res);
+	}
+	else{
+		res.redirect('/');
+	}
+});
+
 /* TEST */
 router.get('/test', function(req, res) {
 	var session = req.session;

@@ -50,7 +50,6 @@ router.get('/profile/:username/content',function(req,res){
 			});
 			connection.release();
 		});
-
 	}
 	else{
 		res.redirect('/');

@@ -91,7 +91,7 @@ router.get('/getYSERs', function(req,res){
 				}
 			});
 			connection.release();
-		})
+		});
 	}
 	else{
 		res.redirect('/');

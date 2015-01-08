@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2015 at 09:43 AM
+-- Generation Time: Jan 08, 2015 at 06:48 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -59,8 +59,8 @@ INSERT INTO `accounts` (`username`, `password`, `first_name`, `middle_name`, `la
 ('queenjubs', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Jhubielyn', 'Go', 'Garachico', 'Active', 'Senior Projects and Activities', '2012-51343', 'Synergy', '2012', 'Idk lol', '1995-11-12', 'Somewhere', 'Silverios Compound', 'public/uploads/queenjubs.jpg', 'Jhubielyn Go Garachico', NULL),
 ('kimini07', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Kim Joshua', 'Caicdoy', 'Advincula', 'Active', 'Senior Projects and Activities', '2011-12312', 'Synergy', '2011', 'Kim''s Mentor', '3232-12-31', 'Makati', 'Bella Cartash', 'public/uploads/kimini07.jpg', 'Kim Joshua Caicdoy Advincula', 'Deputy Executive Officer'),
 ('penguinlove', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Maria Clarissa', 'Sulit', 'Estremos', 'Active', 'Secretariat', '2011-55645', 'Synergy', '2011', 'Cla''s Mentor', '5234-04-27', 'Binangonan, Rizal', 'Bella Cartash', 'public/uploads/penguinlove.jpg', 'Maria Clarissa Sulit Estremos', 'Executive Assistant'),
-('arvielimbo', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Arvie', 'Abrencillo', 'Limbo', 'Active', 'Finance', '2012-54523', 'Synergy', '2012', 'Angela Roscel Brojas', '1996-01-09', 'Quezon', 'New Dorm', 'public/uploads/arvielimbo.jpg', 'Arvie Abrencillo Limbo', NULL),
-('youryayness', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Desery', 'Ramos', 'Sabado', 'Active', 'Human Resources', '2011-43432', 'Synergy', '2011', 'Yay''s Mentor', '3212-12-27', 'Muntinlupa', 'Student''s Dorm', 'public/uploads/youryayness.jpg', 'Desery Ramos Sabado', 'Human Resources Head');
+('youryayness', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Desery', 'Ramos', 'Sabado', 'Active', 'Human Resources', '2011-43432', 'Synergy', '2011', 'Yay''s Mentor', '3212-12-27', 'Muntinlupa', 'Student''s Dorm', 'public/uploads/youryayness.jpg', 'Desery Ramos Sabado', 'Human Resources Head'),
+('arvielimbo', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Arvie', 'Abrencillo', 'Limbo', 'Active', 'Finance', '2012-12321', 'Synergy', '2012', 'Angela Roscel Brojas Almoro', '1111-11-10', 'Quezon', 'New Dorm', 'public/uploads/arvielimbo.jpg', 'Arvie Abrencillo Limbo', NULL);
 
 -- --------------------------------------------------------
 
@@ -87,32 +87,7 @@ CREATE TABLE IF NOT EXISTS `accounts_arvielimbo_mentees` (
 --
 
 INSERT INTO `accounts_arvielimbo_mentees` (`mentees`) VALUES
-('P'),
-('e'),
-('t'),
-('e'),
-('r'),
-(' '),
-('B'),
-('e'),
-('r'),
-('n'),
-('a'),
-('r'),
-('d'),
-(' '),
-('M'),
-('a'),
-('r'),
-('i'),
-('a'),
-('n'),
-('o'),
-(' '),
-('R'),
-('u'),
-('p'),
-('a');
+('tricycle');
 
 -- --------------------------------------------------------
 
@@ -192,8 +167,7 @@ CREATE TABLE IF NOT EXISTS `accounts_penguinlove_mentees` (
 --
 
 INSERT INTO `accounts_penguinlove_mentees` (`mentees`) VALUES
-('qylegeronimo'),
-('mentee1');
+('qylegeronimo');
 
 -- --------------------------------------------------------
 
@@ -251,8 +225,27 @@ CREATE TABLE IF NOT EXISTS `accounts_youryayness_mentees` (
 CREATE TABLE IF NOT EXISTS `announcement_posts` (
   `department` varchar(30) NOT NULL,
   `message` varchar(500) NOT NULL,
-  `date` datetime DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+
+--
+-- Dumping data for table `announcement_posts`
+--
+
+INSERT INTO `announcement_posts` (`department`, `message`, `date`, `id`, `title`) VALUES
+('Projects and Activities', 'Good evening YSERS. We are here to ask you who are interested in being a committee head this coming PF 2014. Thank you!', '2015-01-08 18:59:03', 1, 'Committee Heads Survey'),
+('Secretariat', 'Hi, we''re cuties! <3 hihi', '2015-01-08 20:32:14', 2, 'Urgent message for everyone!'),
+('Executive', 'hai lol', '2015-01-08 20:48:58', 3, 'hello yses'),
+('Visuals and Logistics', 'RING DING DING DING RING DING DING DING DING', '2015-01-08 20:49:48', 4, 'WHAT DOES THE FOX SAY?'),
+('Scholastics', 'Mag-aral tayo mabuti. <3', '2015-01-08 20:50:15', 5, 'A very important message from the best department ever'),
+('Finance', 'Magbayad kayo!', '2015-01-08 20:50:29', 6, 'Hoy!'),
+('Human Resources', 'explicit material.', '2015-01-08 20:51:12', 7, 'This announcement contains explicit material.'),
+('Secretariat', 'Hello, YSERS! Please send to me your articles. Thanks!', '2015-01-09 00:39:55', 19, 'CatalYSES'),
+('Secretariat', 'Test', '2015-01-09 00:45:53', 23, '123'),
+('Secretariat', 'test', '2015-01-09 00:48:49', 24, '321');
 
 -- --------------------------------------------------------
 

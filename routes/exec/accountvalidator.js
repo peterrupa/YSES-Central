@@ -12,6 +12,7 @@ var pool = mysql.createPool({
 	password : '',
 	database: 'yses_central'
 });
+
 function reportError(res,err){
 	console.log(err);
 	if(!res.headersSent){
@@ -134,9 +135,13 @@ router.post('/acceptAccount', function(req,res){
   var session = req.session;
 
   if(session.userkey){
-		for(data in req.body){
-			console.log("req.body[\""+data+"\"]: "+req.body[data]);
-		}
+		//parse
+		req.body["mentee"] = JSON.parse(req.body["mentee"]);
+
+		//add /public to picture
+		req.body["picture"] = "public/"+req.body["picture"];
+		console.log("req.body[\"mentee\"]: "+req.body["mentee"])
+
 		//insert to database
 		pool.getConnection(function(err,connection){
 			//get hashed password
@@ -158,7 +163,11 @@ router.post('/acceptAccount', function(req,res){
 							}
 							//remove /pending on picture
 							var picture = req.body["picture"].replace("pending/","");
-							fs.rename("./"+req.body["picture"],"./"+picture, function(){});
+							fs.rename("./"+req.body["picture"],"./"+picture, function(err){
+								if(err){
+									console.log(err);
+								}
+							});
 
 							//fix exec_position value
 							var exec_position;
@@ -182,7 +191,7 @@ router.post('/acceptAccount', function(req,res){
 										}
 										else{
 											//insert mentees to the newly generated table
-											if(req.body["mentee[]"]){
+											if(req.body["mentee"]){
 
 												function insertMentee(mentee,i){
 													connection.query("SELECT username FROM `accounts` WHERE full_name="+connection.escape(mentee),function(err,username){
@@ -195,7 +204,7 @@ router.post('/acceptAccount', function(req,res){
 															if(err){
 																reportError(res,err);
 															}
-															else if(i == req.body["mentee[]"].length - 1){
+															else if(i == req.body["mentee"].length - 1){
 																console.log("Account "+req.body["username"]+" accepted.");
 																res.sendStatus(200);
 															}
@@ -203,9 +212,9 @@ router.post('/acceptAccount', function(req,res){
 													});
 												}
 
-												for(var i = 0 ; i < req.body["mentee[]"].length; i++){
+												for(var i = 0 ; i < req.body["mentee"].length; i++){
 
-													insertMentee(req.body["mentee[]"][i],i);
+													insertMentee(req.body["mentee"][i],i);
 												}
 											}
 											else{

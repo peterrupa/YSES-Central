@@ -28,7 +28,7 @@ router.get('/search',function(req,res){
 				res.send(rows);
 			}
 		});
-		connection.release()
+		connection.release();
 	});
 });
 

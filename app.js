@@ -14,8 +14,10 @@ var indexhomepage = require('./routes/index-homepage');
 var profile = require('./routes/profile');
 var public = require('./routes/public');
 var viewAllYSERs = require('./routes/viewAllYSERs');
+var announcements = require('./routes/announcements');
 //exec
 var accountvalidator = require('./routes/exec/accountvalidator');
+var announcementposter = require('./routes/exec/announcementposter');
 
 var app = express();
 
@@ -47,7 +49,9 @@ app.use(indexhomepage);
 app.use(profile);
 app.use(public);
 app.use(viewAllYSERs);
+app.use(announcements);
 app.use(accountvalidator);
+app.use(announcementposter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

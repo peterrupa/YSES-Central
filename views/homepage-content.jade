@@ -1,18 +1,7 @@
 div.col-lg-4.padding-vert
 	h3 Announcements
-	ul.no-bullets
-		- for(var i=0;i<15;i++){
-			li
-				div.post.post-PAD
-					button.close.hoverClose(type="button",aria-hidden="true") &times; 
-					div.row
-						h3.title
-							PF Committee Heads Survey
-					p.op Projects and Activities Department
-					p.date 11/29/14 9:03PM
-					div.row
-						p Good evening YSERS. We are here to ask you who are interested in being a committee head this coming PF 2014. Thank you!
-		- }
+	ul#announcements.no-bullets
+	
 		
 div.col-lg-8.padding-vert
 	h3 Logbook
@@ -80,3 +69,4 @@ ul.no-bullets.side-menu
 				img.tile-pic(src='images/cla.jpg')
 			li.metro.half
 				img.tile-pic(src='images/jv.jpg')
+	script(src='http://localhost:8080/javascripts/announcements.js')

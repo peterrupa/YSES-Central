@@ -211,7 +211,7 @@ $(document).ready(function(){
 						}
 						var fullname = res.accounts[i]["first_name"] + " " + middlenameinitials + ". " + res.accounts[i]["last_name"];
 
-						var menteeHTML = "<div class='row mentee-content'><a class='ajax' href='http://localhost:8080/profile/" + res.accounts[i]["username"] +"'><div class='mentee-data-image'><img src='http://localhost:8080/" + res.accounts[i]["picture"] + "' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + fullname + "</strong><p>" + res.accounts[i]["org_class"] + "</p><p>" + department + "</p></div></a></div>";
+						var menteeHTML = "<div class='row mentee-content'><a class='ajax' href='http://localhost:8080/profile/" + res.accounts[i]["username"] +"'><div class='mentee-data-image'><img src='http://localhost:8080/" + res.accounts[i]["picture"] + "' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + fullname + "</strong><p>" + res.accounts[i]["org_class"] + "</p><p>" + res.accounts[i]["department"] + "</p></div></a></div>";
 						$("#mentee-data").append(menteeHTML);
 					}
 					//mentees without accounts

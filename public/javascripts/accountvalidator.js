@@ -61,6 +61,7 @@ $(document).ready(function(){
       $(this).parent().find($("li[data-mentee]")).each(function(index){
         mentee.push($(this).html());
       });
+      mentee = JSON.stringify(mentee);
       $.ajax({
   			url: "http://localhost:8080/acceptAccount",
         data: {origusername:$(this).parent().data("username"),

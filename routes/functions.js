@@ -169,7 +169,6 @@ router.post('/signup',
 			});
 			connection.release();
 		});
-
 		res.redirect("/");
 	}
 ]);
