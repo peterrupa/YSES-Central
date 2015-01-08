@@ -8,12 +8,14 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 
 //application dependencies
-var datafetch = require('./routes/datafetch');
+var search = require('./routes/search');
 var functions = require('./routes/functions');
 var indexhomepage = require('./routes/index-homepage');
 var profile = require('./routes/profile');
 var public = require('./routes/public');
 var viewAllYSERs = require('./routes/viewAllYSERs');
+//exec
+var accountvalidator = require('./routes/exec/accountvalidator');
 
 var app = express();
 
@@ -23,7 +25,6 @@ app.set('view engine', 'jade');
 
 // favicon
 app.use(favicon(__dirname + '/public/favico.ico'));
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -37,12 +38,16 @@ app.use(session({
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(datafetch);
+app.use(logger('dev')); //routes below this line are logged
+
+//all defined routes
+app.use(search);
 app.use(functions);
 app.use(indexhomepage);
 app.use(profile);
 app.use(public);
 app.use(viewAllYSERs);
+app.use(accountvalidator);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

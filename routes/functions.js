@@ -102,8 +102,8 @@ router.post('/signup',
 					var salt = "this is a rainbow unicorn"
 					var password = encrypt(salt+req.body["password"])
 
-					var queryAccount = "INSERT INTO `accounts`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES ("+connection.escape(req.body["username"])+","+connection.escape(password)+","+connection.escape(req.body["first-name"])+","+connection.escape(req.body["middle-name"])+","+connection.escape(req.body["last-name"])+","+connection.escape(req.body["org-class"])+","+connection.escape(req.body["department"])+","+connection.escape(studentNumber)+","+connection.escape(req.body["org-batch"])+","+connection.escape(req.body["univ-batch"])+","+connection.escape(req.body["mentor"])+","+connection.escape(req.body["bday"])+","+connection.escape(req.body["homeAdd"])+","+connection.escape(req.body["collegeAdd"])+","+connection.escape(newFileName)+","+connection.escape(req.body["first-name"]+" "+req.body["middle-name"]+" "+req.body["last-name"])+","+connection.escape(req.body["exec_position"])+")";
-					var account_username_mentees = "accounts_"+req.body["username"]+"_mentees";
+					var queryAccount = "INSERT INTO `accounts_pending`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES ("+connection.escape(req.body["username"])+","+connection.escape(password)+","+connection.escape(req.body["first-name"])+","+connection.escape(req.body["middle-name"])+","+connection.escape(req.body["last-name"])+","+connection.escape(req.body["org-class"])+","+connection.escape(req.body["department"])+","+connection.escape(studentNumber)+","+connection.escape(req.body["org-batch"])+","+connection.escape(req.body["univ-batch"])+","+connection.escape(req.body["mentor"])+","+connection.escape(req.body["bday"])+","+connection.escape(req.body["homeAdd"])+","+connection.escape(req.body["collegeAdd"])+","+connection.escape(newFileName)+","+connection.escape(req.body["first-name"]+" "+req.body["middle-name"]+" "+req.body["last-name"])+","+connection.escape(req.body["exec_position"])+")";
+					var account_username_mentees = "accounts_pending_"+req.body["username"]+"_mentees";
 
 					//insert row into accounts
 					connection.query(queryAccount,function(err){
@@ -112,7 +112,7 @@ router.post('/signup',
 							res.send("Internal server error");
 						}
 						else{
-							var queryMenteesTable = "CREATE TABLE accounts_"+req.body["username"]+"_mentees (mentees VARCHAR(50))";
+							var queryMenteesTable = "CREATE TABLE "+account_username_mentees+" (mentees VARCHAR(50))";
 
 							//insert row into accounts_username_mentees
 							connection.query(queryMenteesTable,function(err){
@@ -137,7 +137,7 @@ router.post('/signup',
 														res.send("Internal server error!");
 													}
 													else if(i == parseInt(req.body["numberofmentees"]) - 1){
-														console.log("New account "+req.body["username"]+" succesfully created.");
+														console.log("New account "+req.body["username"]+" pending for approval.");
 													}
 												});
 											});
@@ -150,33 +150,15 @@ router.post('/signup',
 										}
 									}
 									else{
-										console.log("New account "+req.body["username"]+" succesfully created.");
+										console.log("New account "+req.body["username"]+" pending for approval.");
 									}
+
+									//transfer this on account accept
 									//update already existing full name of mentors to usernames
 									connection.query("UPDATE `accounts` SET `mentor`="+connection.escape(req.body["username"])+" WHERE mentor="+connection.escape(req.body["first-name"]+" "+req.body["middle-name"]+" "+req.body["last-name"]),function(err){
 										if(err){
 											console.log(err);
 											res.send("Internal server error");
-										}
-									});
-
-									//update already existing full name of mentees to usernames
-									connection.query("SELECT username FROM `accounts` WHERE 1",function(err,results){
-										if(err){
-											console.log(err);
-											res.send("Internal server error");
-										}
-										else{
-											for(var j = 0; j < results.length; j++){
-												(function(username){
-													connection.query("UPDATE `accounts_"+username+"_mentees` SET `mentees`="+connection.escape(req.body["username"])+" WHERE mentees="+connection.escape(req.body["first-name"]+" "+req.body["middle-name"]+" "+req.body["last-name"]),function(err){
-														if(err){
-															console.log(err);
-															res.send("Internal server error");
-														}
-													});
-												})(results[j]["username"]);
-											}
 										}
 									});
 								}

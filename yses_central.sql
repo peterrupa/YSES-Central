@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 21, 2014 at 07:34 AM
+-- Generation Time: Jan 08, 2015 at 09:43 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -41,7 +41,6 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `birthday` date NOT NULL,
   `home_address` varchar(100) NOT NULL,
   `college_address` varchar(100) NOT NULL,
-  `is_exec` int(1) NOT NULL,
   `picture` varchar(50) NOT NULL,
   `full_name` varchar(150) NOT NULL,
   `exec_position` varchar(50) DEFAULT NULL
@@ -51,9 +50,106 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `is_exec`, `picture`, `full_name`, `exec_position`) VALUES
-('tricycle', 'b3afa1d451da8bab35e52323c5fe6e19bd2cde2905529789bfe4f787', 'Peter Bernard', 'Mariano', 'Rupa', 'Active', 'jpad', '2013-45106', 'RAMpage', '2012', 'arvielimbo', '1996-11-29', 'Block 1 Lot 10 Nova Romania, Deparo, Caloocan', 'Mendoza Dorm', 0, 'public/uploads/pending/tricycle.jpg', 'Peter Bernard Mariano Rupa', NULL),
-('zaizai', 'b3afa1d451da8bab35e52323c5fe6e19bd2cde2905529789bfe4f787', 'Zion Ruth', 'Borres', 'Gragasin', 'Alumni', 'hr', '2013-11111', 'RAMpage', '2014', 'tricycle', '1996-06-06', 'Deparo, Caloocan', 'PUP', 0, 'public/uploads/pending/zaizai.jpg', 'Zion Ruth Borres Gragasin', NULL);
+INSERT INTO `accounts` (`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES
+('qylegeronimo', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Qyle', 'De Los Angeles', 'San Juan', 'Active', 'Junior Projects and Activities', '2012-11111', 'RAMpage', '2012', 'penguinlove', '1996-06-07', 'Naga City', 'Vetmed Dorm', 'public/uploads/qylegeronimo.jpg', 'Qyle De Los Angeles San Juan', NULL),
+('tricycle', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Peter Bernard', 'Mariano', 'Rupa', 'Active', 'Junior Projects and Activities', '2013-45106', 'RAMpage', '2013', 'arvielimbo', '1996-11-29', 'Block 1 Lot 10 Nova Romania, Deparo, Caloocan', 'Mendoza Dorm', 'public/uploads/tricycle.jpg', 'Peter Bernard Mariano Rupa', NULL),
+('badluckbrian', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Bad', 'Luck', 'Brian', 'Alumni', 'Scholastics', '2006-11111', 'Charter', '2006', 'Good Guy Greg', '1111-11-11', 'Internetz', 'Internetz', 'public/uploads/badluckbrian.png', 'Bad Luck Brian', 'Scholastics Head'),
+('kath28', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Katherine', 'So', 'Villegas', 'Active', 'Senior Projects and Activities', '2012-22222', 'Synergy', '2012', 'Suzette De Torres', '1995-01-28', 'Candelaria, Quezon', 'Silverios Compound', 'public/uploads/kath28.jpg', 'Katherine So Villegas', NULL),
+('almermamer', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Almer', 'Taculog', 'Mendoza', 'Active', 'Junior Projects and Activities', '2013-12112', 'RAMpage', '2013', 'kath28', '1996-11-08', 'Pateros, Rizal', 'Vetmed Dorm', 'public/uploads/almermamer.jpg', 'Almer Taculog Mendoza', NULL),
+('queenjubs', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Jhubielyn', 'Go', 'Garachico', 'Active', 'Senior Projects and Activities', '2012-51343', 'Synergy', '2012', 'Idk lol', '1995-11-12', 'Somewhere', 'Silverios Compound', 'public/uploads/queenjubs.jpg', 'Jhubielyn Go Garachico', NULL),
+('kimini07', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Kim Joshua', 'Caicdoy', 'Advincula', 'Active', 'Senior Projects and Activities', '2011-12312', 'Synergy', '2011', 'Kim''s Mentor', '3232-12-31', 'Makati', 'Bella Cartash', 'public/uploads/kimini07.jpg', 'Kim Joshua Caicdoy Advincula', 'Deputy Executive Officer'),
+('penguinlove', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Maria Clarissa', 'Sulit', 'Estremos', 'Active', 'Secretariat', '2011-55645', 'Synergy', '2011', 'Cla''s Mentor', '5234-04-27', 'Binangonan, Rizal', 'Bella Cartash', 'public/uploads/penguinlove.jpg', 'Maria Clarissa Sulit Estremos', 'Executive Assistant'),
+('arvielimbo', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Arvie', 'Abrencillo', 'Limbo', 'Active', 'Finance', '2012-54523', 'Synergy', '2012', 'Angela Roscel Brojas', '1996-01-09', 'Quezon', 'New Dorm', 'public/uploads/arvielimbo.jpg', 'Arvie Abrencillo Limbo', NULL),
+('youryayness', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Desery', 'Ramos', 'Sabado', 'Active', 'Human Resources', '2011-43432', 'Synergy', '2011', 'Yay''s Mentor', '3212-12-27', 'Muntinlupa', 'Student''s Dorm', 'public/uploads/youryayness.jpg', 'Desery Ramos Sabado', 'Human Resources Head');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts_almermamer_mentees`
+--
+
+CREATE TABLE IF NOT EXISTS `accounts_almermamer_mentees` (
+  `mentees` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts_arvielimbo_mentees`
+--
+
+CREATE TABLE IF NOT EXISTS `accounts_arvielimbo_mentees` (
+  `mentees` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `accounts_arvielimbo_mentees`
+--
+
+INSERT INTO `accounts_arvielimbo_mentees` (`mentees`) VALUES
+('P'),
+('e'),
+('t'),
+('e'),
+('r'),
+(' '),
+('B'),
+('e'),
+('r'),
+('n'),
+('a'),
+('r'),
+('d'),
+(' '),
+('M'),
+('a'),
+('r'),
+('i'),
+('a'),
+('n'),
+('o'),
+(' '),
+('R'),
+('u'),
+('p'),
+('a');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts_badluckbrian_mentees`
+--
+
+CREATE TABLE IF NOT EXISTS `accounts_badluckbrian_mentees` (
+  `mentees` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts_kath28_mentees`
+--
+
+CREATE TABLE IF NOT EXISTS `accounts_kath28_mentees` (
+  `mentees` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `accounts_kath28_mentees`
+--
+
+INSERT INTO `accounts_kath28_mentees` (`mentees`) VALUES
+('almermamer');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts_kimini07_mentees`
+--
+
+CREATE TABLE IF NOT EXISTS `accounts_kimini07_mentees` (
+  `mentees` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -72,12 +168,58 @@ CREATE TABLE IF NOT EXISTS `accounts_pending` (
   `student_number` varchar(10) NOT NULL,
   `org_batch` varchar(20) NOT NULL,
   `univ_batch` varchar(4) NOT NULL,
-  `mentor` varchar(50) NOT NULL,
+  `mentor` varchar(50) DEFAULT NULL,
   `birthday` date NOT NULL,
   `home_address` varchar(100) NOT NULL,
   `college_address` varchar(100) NOT NULL,
-  `is_exec` int(1) NOT NULL,
-  `picture` varchar(50) NOT NULL
+  `picture` varchar(50) NOT NULL,
+  `full_name` varchar(150) NOT NULL,
+  `exec_position` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts_penguinlove_mentees`
+--
+
+CREATE TABLE IF NOT EXISTS `accounts_penguinlove_mentees` (
+  `mentees` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `accounts_penguinlove_mentees`
+--
+
+INSERT INTO `accounts_penguinlove_mentees` (`mentees`) VALUES
+('qylegeronimo'),
+('mentee1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts_queenjubs_mentees`
+--
+
+CREATE TABLE IF NOT EXISTS `accounts_queenjubs_mentees` (
+  `mentees` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `accounts_queenjubs_mentees`
+--
+
+INSERT INTO `accounts_queenjubs_mentees` (`mentees`) VALUES
+('Mon Cedrick Glipo Frias');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accounts_qylegeronimo_mentees`
+--
+
+CREATE TABLE IF NOT EXISTS `accounts_qylegeronimo_mentees` (
+  `mentees` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -90,21 +232,13 @@ CREATE TABLE IF NOT EXISTS `accounts_tricycle_mentees` (
   `mentees` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `accounts_tricycle_mentees`
---
-
-INSERT INTO `accounts_tricycle_mentees` (`mentees`) VALUES
-('zaizai'),
-('tricycle');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accounts_zaizai_mentees`
+-- Table structure for table `accounts_youryayness_mentees`
 --
 
-CREATE TABLE IF NOT EXISTS `accounts_zaizai_mentees` (
+CREATE TABLE IF NOT EXISTS `accounts_youryayness_mentees` (
   `mentees` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

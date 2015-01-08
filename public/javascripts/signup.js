@@ -95,26 +95,26 @@ $(document).ready(function(){
 		if($("#isExec").is(":checked")){
 			var choices;
 			switch($("select[name='department']").val()){
-				case "spad":
-					choices = "<option value='deo'>Deputy Executive Officer</option><option value='lo'>Liaison Officer</option>";
+				case "Senior Projects and Activities":
+					choices = "<option value='Deputy Executve Officer'>Deputy Executive Officer</option><option value='lo'>Liaison Officer</option>";
 					break;
-				case "vl":
-					choices = "<option value='vlh'>Visuals and Logistics Head</option>";
+				case "Visuals and Logistics":
+					choices = "<option value='Visuals and Logistics Head'>Visuals and Logistics Head</option>";
 					break;
-				case "sec":
-					choices = "<option value='ea'>Executive Assistant</option>";
+				case "Secretariat":
+					choices = "<option value='Executive Assistant'>Executive Assistant</option>";
 					break;
-				case "scho":
-						choices = "<option value='sh'>Scholastics Head</option>";
+				case "Scholastics":
+						choices = "<option value='Scholastics Head'>Scholastics Head</option>";
 						break;
-				case "fin":
-						choices = "<option value='fh'>Finance Head</option>";
+				case "Finance":
+						choices = "<option value='Finance Head'>Finance Head</option>";
 						break;
-				case "hr":
-						choices = "<option value='hrh'>Human Resources Head</option>";
+				case "Human Resources":
+						choices = "<option value='Human Resources Head'>Human Resources Head</option>";
 						break;
-				case "exec":
-						choices = "<option value='eo'>Executive Officer</option>";
+				case "Executive":
+						choices = "<option value='Executive Officer'>Executive Officer</option>";
 						break;
 				}
 			var insert = "<li id='positions'>Position<br><select class='form-control' form='signupform' name='exec_position'>"+choices+"</select></li>";

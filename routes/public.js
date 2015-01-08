@@ -49,7 +49,25 @@ router.get('/profile/:username',function(req,res){
 
 //view all YSERs
 router.get('/YSERs', function(req,res){
-	serveMain(req,res);
+	var session = req.session;
+	if(session.userkey){
+		serveMain(req,res);
+	}
+	else{
+		res.redirect('/');
+	}
+});
+
+//exec system
+//account validator
+router.get('/accountvalidator', function(req,res){
+	var session = req.session;
+	if(session.userkey){
+		serveMain(req,res);
+	}
+	else{
+		res.redirect('/');
+	}
 });
 
 /* TEST */

@@ -14,19 +14,6 @@ $(document).ready(function(){
 
 	window.onload = $('#box-data').slideDown(800);
 
-	function convertDepartment(department){
-		switch(department){
-			case "jpad": return "Junior Projects and Activities Department";
-			case "spad": return "Senior Projects and Activities Department";
-			case "vl": return "Visuals and Logistics Department";
-			case "sec": return "Secretariat Department";
-			case "scho": return "Scholastics Department";
-			case "fin": return "Finance Department";
-			case "hr": return "Human Resources Department";
-			case "exec": return "Executive Department";
-		}
-	}
-
 	$("#about").on('click',function(){
 		var about_content =
 		'<div class="box">'+
@@ -49,28 +36,6 @@ $(document).ready(function(){
 			data: "account="+location.pathname.substring(9),
 			type: "GET",
 			success: function (res) {
-				res["department"] = convertDepartment(res["department"]);
-				if(res["exec_position"]){
-					switch(res["exec_position"]){
-						case "deo": res["exec_position"] = "Deputy Executive Officer";
-										break;
-						case "lo": res["exec_position"] = "Liaison Officer";
-										break;
-						case "vlh": res["exec_position"] = "Visuals and Logistics Head";
-										break;
-						case "ea": res["exec_position"] = "Executive Assistant";
-										break;
-						case "sh": res["exec_position"] = "Scholastics Head";
-										break;
-						case "fh": res["exec_position"] = "Finance Head";
-										break;
-						case "hrh": res["exec_position"] = "Human Resources Head";
-										break;
-						case "eo": res["exec_position"] = "Executive Officer";
-										break;
-					}
-				}
-
 				function rowHTML(first,second){
 					return '<tr>'+
 							'<td>'+first+'</td>'+
@@ -143,8 +108,6 @@ $(document).ready(function(){
 					$('#box-data').html(mentor_content);
 				}
 				else{
-					res["department"] = convertDepartment(res["department"]);
-
 					var mentor_content =''+
 					'<div class="box">'+
 						'<div id="mentor-data">'+
@@ -247,8 +210,6 @@ $(document).ready(function(){
 							middlenameinitials = middlenameinitials.concat(middlename[j].substring(0,1));
 						}
 						var fullname = res.accounts[i]["first_name"] + " " + middlenameinitials + ". " + res.accounts[i]["last_name"];
-
-						var department = convertDepartment(res.accounts[i]["department"]);
 
 						var menteeHTML = "<div class='row mentee-content'><a class='ajax' href='http://localhost:8080/profile/" + res.accounts[i]["username"] +"'><div class='mentee-data-image'><img src='http://localhost:8080/" + res.accounts[i]["picture"] + "' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + fullname + "</strong><p>" + res.accounts[i]["org_class"] + "</p><p>" + department + "</p></div></a></div>";
 						$("#mentee-data").append(menteeHTML);
