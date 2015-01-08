@@ -75,6 +75,9 @@ $(document).ready(function(){
 	//invoke on document ready
 	fetchAnnouncements(0);
 
+	//remove already existing listener
+	$("body").off('click','.announcementsViewMore');
+
 	$("body").on('click','.announcementsViewMore',function(e){
 		e.preventDefault();
 		fetchAnnouncements(announcementIndex);

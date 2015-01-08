@@ -46,10 +46,10 @@ $(document).ready(function(){
 					}
 					if(announcementIndex2 == 0){
 						var temphtml = ''+
-							'<a class="announcementsViewMore" href="#">'+
+							'<a class="announcementsViewMore2" href="#">'+
 								'<p class="text-center">View more</p>'
 							'</a>';
-						$("#announcements").append(temphtml);
+						$("#announcements").after(temphtml);
 					}
 					announcementIndex2 += res.length;
 
@@ -57,7 +57,7 @@ $(document).ready(function(){
 					var temphtml = ''+
 						'<p class="text-center">No more announcements.</p>';
 					$("#announcements").append(temphtml);
-					$(".announcementsViewMore").remove();
+					$(".announcementsViewMore2").remove();
 				}
 			},
 			error: function (e){
@@ -69,7 +69,7 @@ $(document).ready(function(){
 	//invoke on document ready
 	fetchAnnouncements(0);
 
-  $("body").on('click','.announcementsViewMore',function(e){
+  $("body").on('click','.announcementsViewMore2',function(e){
 		e.preventDefault();
 		fetchAnnouncements(announcementIndex2);
 	});
