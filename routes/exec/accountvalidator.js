@@ -63,6 +63,11 @@ router.get('/getPendingAccounts', function(req,res){
 				}
 				else{
 					if(accountspending.length > 0){
+						//remove /public
+						for(var i = 0; i < accountspending.length; i++){
+							accountspending[i]["picture"] = accountspending[i]["picture"].substring(7);
+						}
+
 						//fetch mentees here
 						for(var i = 0; i < accountspending.length; i++){
 							(function(i){
