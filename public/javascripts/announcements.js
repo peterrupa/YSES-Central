@@ -58,7 +58,6 @@ $(document).ready(function(){
 						$("#announcements").after(temphtml);
 					}
 					announcementIndex += res.length;
-					alert(announcementIndex);
 
 				if(res.length < 5){
 					var temphtml = ''+
@@ -79,7 +78,6 @@ $(document).ready(function(){
 	$("body").on('click','.announcementsViewMore',function(e){
 		e.preventDefault();
 		fetchAnnouncements(announcementIndex);
-		alert('click');
 	});
 
 });
