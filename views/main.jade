@@ -28,83 +28,6 @@ html
 							span.icon-bar
 							span.icon-bar
 							span.icon-bar
-						div#department-icon.hidden-sm.hidden-md
-							a.menu-icon-department(href="#")
-								span.glyphicon.glyphicon-list
-							div#department-button-container
-								div.wrapper.clearfix
-									figure.gallery-item
-										img.department-logo(src="http://localhost:8080/images/department-logo/exec.png")
-										a(href="#")
-											figcaption.img-title.exec-title
-												h3 EXEC
-										ul.wheel.text-center
-											li.item.exec-title
-												a(href="#")
-													h5 Announcement
-											li.item.exec-title
-												a(href="#")
-													h5 Edit Accounts
-								div.wrapper.clearfix
-									figure.gallery-item
-										img.department-logo(src="http://localhost:8080/images/department-logo/pad.png")
-										a(href="#")
-											figcaption.img-title.pad-title
-												h3 PAD
-										ul.wheel.text-center
-											li.item.pad-title
-												a(href="#")
-													h5 JPAD stats
-								div.wrapper.clearfix
-									figure.gallery-item
-										img.department-logo(src="http://localhost:8080/images/department-logo/sec.png")
-										a(href="#")
-											figcaption.img-title.sec-title
-												h3 SEC
-										ul.wheel.text-center
-											li.item.sec-title
-												a(href="#")
-													h5 Attendance
-								div.wrapper.clearfix
-									figure.gallery-item
-										img.department-logo(src="http://localhost:8080/images/department-logo/vl.png")
-										a(href="#")
-											figcaption.img-title.vl-title
-												h3 VL
-										ul.wheel.text-center
-											li.item.vl-title
-												a(href="#")
-													h5 VL Inventory
-								div.wrapper.clearfix
-									figure.gallery-item
-										img.department-logo(src="http://localhost:8080/images/department-logo/SCHO.png")
-										a(href="#")
-											figcaption.img-title.scho-title
-												h3 SCHO
-										ul.wheel.text-center
-											li.item.scho-title
-												a(href="#")
-													h5 Checklist
-								div.wrapper.clearfix
-									figure.gallery-item
-										img.department-logo(src="http://localhost:8080/images/department-logo/hr.png")
-										a(href="#")
-											figcaption.img-title.hr-title
-												h3 HR
-										ul.wheel.text-center
-											li.item.hr-title
-												a(href="#")
-													h5 Family Tree
-								div.wrapper.clearfix
-									figure.gallery-item
-										img.department-logo(src="http://localhost:8080/images/department-logo/fin.png")
-										a(href="#")
-											figcaption.img-title.fin-title
-												h3 FIN
-										ul.wheel.text-center
-											li.item.fin-title
-												a(href="#")
-													h5 Member Fees
 						div#central-title
 							a.ajax.navbar-brand(href="http://localhost:8080")
 								img#logo.img-responsive(src="../images/logoAllWhite.png")
@@ -129,9 +52,106 @@ html
 									li
 										form#logout(action="http://localhost:8080/logout",method="post")
 										a(href="javascript:{}",onclick="$('#logout').submit()") Log out
-								div#chatbox-icon.hidden-sm.hidden-md
-									a.menu-icon-chatbox(href="#")
-										span.glyphicon.glyphicon-send
+								div#nav-button-group.text-center
+									div#logbook-icon.hidden-sm.hidden-md
+										a(href="#",data-toggle="modal",data-target="#logbookModal")
+											span.glyphicon.glyphicon-pencil
+										div#logbookModal.modal.fade
+											div.modal-dialog
+												div.modal-content.text-center
+													div.text-left.modal-header
+														button.close(type="button",data-dismiss="modal")
+															span(aria-hidden="true") &times;
+															span.sr-only Close
+														h6.modal-title Write to Logbook
+													div.modal-body
+														textarea#logbook-input(placeholder="Make your ideas be heard")
+													div.modal-footer
+														span#counter 120 characters left 
+														input.btn.btn-default(type="submit",value="POST")
+									div#chatbox-icon.hidden-sm.hidden-md
+										a.menu-icon-chatbox(href="#")
+											span.glyphicon.glyphicon-send
+									div#department-icon.hidden-sm.hidden-md
+										a.menu-icon-department(href="#")
+											span.glyphicon.glyphicon-list
+										div#department-button-container
+											div.wrapper.clearfix
+												figure.gallery-item
+													img.department-logo(src="http://localhost:8080/images/button/exec.png")
+													a(href="#")
+														figcaption.img-title.exec-title
+															h3 EXEC
+													ul.wheel.text-center
+														li.item.exec-title
+															a(href="#")
+																h5 Announcement
+														li.item.exec-title
+															a(href="#")
+																h5 Edit Accounts
+														li.item.exec-title
+															a.ajax(href="accountvalidator")
+																h5 Validate
+											div.wrapper.clearfix
+												figure.gallery-item
+													img.department-logo(src="http://localhost:8080/images/button/pad.png")
+													a(href="#")
+														figcaption.img-title.pad-title
+															h3 PAD
+													ul.wheel.text-center
+														li.item.pad-title
+															a(href="#")
+																h5 JPAD stats
+											div.wrapper.clearfix
+												figure.gallery-item
+													img.department-logo(src="http://localhost:8080/images/button/sec.png")
+													a(href="#")
+														figcaption.img-title.sec-title
+															h3 SEC
+													ul.wheel.text-center
+														li.item.sec-title
+															a(href="#")
+																h5 Attendance
+											div.wrapper.clearfix
+												figure.gallery-item
+													img.department-logo(src="http://localhost:8080/images/button/vl.png")
+													a(href="#")
+														figcaption.img-title.vl-title
+															h3 VL
+													ul.wheel.text-center
+														li.item.vl-title
+															a(href="#")
+																h5 VL Inventory
+											div.wrapper.clearfix
+												figure.gallery-item
+													img.department-logo(src="http://localhost:8080/images/button/SCHO.png")
+													a(href="#")
+														figcaption.img-title.scho-title
+															h3 SCHO
+													ul.wheel.text-center
+														li.item.scho-title
+															a(href="#")
+																h5 Checklist
+											div.wrapper.clearfix
+												figure.gallery-item
+													img.department-logo(src="http://localhost:8080/images/button/hr.png")
+													a(href="#")
+														figcaption.img-title.hr-title
+															h3 HR
+													ul.wheel.text-center
+														li.item.hr-title
+															a(href="#")
+																h5 Family Tree
+											div.wrapper.clearfix
+												figure.gallery-item
+													img.department-logo(src="http://localhost:8080/images/button/fin.png")
+													a(href="#")
+														figcaption.img-title.fin-title
+															h3 FIN
+													ul.wheel.text-center
+														li.item.fin-title
+															a(href="#")
+																h5 Member Fees
 					// for phone navigation
 					div#navbar.collapse
 						ul.nav.navbar-nav.navbar-collapse.hidden-lg

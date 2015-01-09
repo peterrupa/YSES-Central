@@ -1,0 +1,62 @@
+#temp{
+	/*semtheng here*/
+}
+
+#temp .to-validate{
+	padding:0px;
+
+	height:300px;
+	width:100%;
+
+	color:black;
+
+	margin-bottom:15px;
+
+	background-color:white;
+
+	margin-bottom:0px;
+}
+
+#temp img{
+	margin:15px;
+
+	width:130px;
+}
+
+#temp .table{
+	float:left;
+
+	margin-top:10px;
+	margin-right:10px;
+
+	height:80%;
+	width:40%;
+}
+
+.account-image{
+	float:left;
+	height:100%;
+}
+
+.account-data{
+	height:100%;
+}
+
+#temp button{
+	position:relative;
+
+	height:40px;
+	width:33.33493%;
+	border:0px;
+
+	font-size:1.69em;
+
+	margin-top:0px;
+	margin-bottom:0px;
+
+	color:black;
+}
+
+#temp a{
+	cursor:pointer;
+}
