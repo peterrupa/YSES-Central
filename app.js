@@ -15,6 +15,7 @@ var profile = require('./routes/profile');
 var public = require('./routes/public');
 var viewAllYSERs = require('./routes/viewAllYSERs');
 var announcements = require('./routes/announcements');
+var logbook = require('./routes/logbook');
 //exec
 var accountvalidator = require('./routes/exec/accountvalidator');
 var announcementposter = require('./routes/exec/announcementposter');
@@ -50,6 +51,7 @@ app.use(profile);
 app.use(public);
 app.use(viewAllYSERs);
 app.use(announcements);
+app.use(logbook);
 app.use(accountvalidator);
 app.use(announcementposter);
 

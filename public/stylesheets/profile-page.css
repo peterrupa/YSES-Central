@@ -4,7 +4,6 @@ body{
 
 #containerMAIN{
 	height:100%;
-	padding-top:90px;
 }
 
 #information{
@@ -69,7 +68,7 @@ body{
 	margin-bottom:5px;
 
 	width: 215px;
-	
+
 	color:black;
 	background-color: rgba(200,200,200,0.9);
 
@@ -82,7 +81,7 @@ body{
 .box:before{
 	content: "";
 	display: block;
-	padding-top: 100%; 	
+	padding-top: 100%;
 }
 
 .profile-content{
@@ -147,8 +146,8 @@ body{
 
 #information .title span{
 	position:relative;
-	
-	font-size:1em;	
+
+	font-size:1em;
 
 	top:55px;
 	left:-30px;
@@ -235,7 +234,7 @@ body{
 	padding:10px;
 	margin-top:15px;
 	margin-left:12.9%;
-	
+
 	width:530px;
 	height:170px;
 
@@ -245,7 +244,7 @@ body{
 .mentor-data-content-image{
 	position:relative;
 	float:left;
-	
+
 	left:0%;
 
 	width:150px;
@@ -323,7 +322,7 @@ body{
 
 .mentee-1, .mentee-2, .mentee-3{
 	float:left;
-	
+
 	width:550px;
 }
 
@@ -344,12 +343,12 @@ body{
 .mentee-image-container::-webkit-scrollbar {
 	width: 1px;
 }
- 
+
 .mentee-image-container::-webkit-scrollbar-track {
-	background-color:rgba(255,255,255,1); 
+	background-color:rgba(255,255,255,1);
 	border-radius: 0px;
 }
- 
+
 .mentee-image-container::-webkit-scrollbar-thumb {
 	border-radius: 0px;
 	background-color:gray;
@@ -419,7 +418,7 @@ a:hover{
 	#profile-bar .box{
 		width:50%;
 		margin:0px;
-	
+
 		font-size:8px;
 	}
 
@@ -461,7 +460,7 @@ a:hover{
 		position:relative;
 		left:40%;
 		width:20%;
-	
+
 		margin-left:0px;
 
 		box-shadow:1px 1px 5px black;
@@ -519,7 +518,7 @@ a:hover{
 		position:relative;
 		left:40%;
 		width:20%;
-	
+
 		margin-left:0px;
 
 		box-shadow:1px 1px 5px black;

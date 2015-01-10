@@ -12,7 +12,7 @@ $(document).ready(function(){
 		'</div>'+
 	'</div>';
 
-	window.onload = $('#box-data').slideDown(800);
+	window.onload = $('#box-data').slideDown(1);
 
 	$("#about").on('click',function(){
 		var about_content =

@@ -1,79 +1,80 @@
-div#profile-bar.col-lg-3
-	div.row
-		div.box-group
-			div.box
-				div.profile-content
-					img.img-responsive(src="http://localhost:8080/#{rows['picture']}")
-			div.box
-				div.text.text-center.profile-content
-					div.row
-						- var middlename = rows["middle_name"].split(" ");
-						- var middlenameinitials = "";
-							each word in middlename
-								- middlenameinitials = middlenameinitials.concat(word.substring(0,1));
-						- var fullname = rows["first_name"] + " " + middlenameinitials + ". " + rows["last_name"];
-						h4.lead= fullname
-						case rows["department"]
-							when "jpad"
-								- var department = "Junior Projects and Activities Department";
-							when "spad"
-								- var department = "Senior Projects and Activities Department";
-							when "vl"
-								- var department = "Visuals and Logistics Department";
-							when "sec"
-								- var department = "Secretariat Department";
-							when "scho"
-								- var department = "Scholastics Department";
-							when "fin"
-								- var department = "Finance Department";
-							when "hr"
-								- var department = "Human Resources Department";
-							when "exec"
-								- var department = "Executive Department";
-						p.department-text.small= department
-					div.row
-						p
-							em Hi. This is italic text. Some text. More text. Amazing skills. This is some text but I don't mind
-	div.row
-		div.box-group
-			div.button
-				div.box-content
-					div.box
-						button.profile-button(type="button")
-							span Go to department
-							span.glyphicon.glyphicon-edit
-					if exec_position || name == rows["first_name"]
+div(style="padding-top:30px;")
+	div#profile-bar.col-lg-3
+		div.row
+			div.box-group
+				div.box
+					div.profile-content
+						img.img-responsive(src="http://localhost:8080/#{rows['picture']}")
+				div.box
+					div.text.text-center.profile-content
+						div.row
+							- var middlename = rows["middle_name"].split(" ");
+							- var middlenameinitials = "";
+								each word in middlename
+									- middlenameinitials = middlenameinitials.concat(word.substring(0,1));
+							- var fullname = rows["first_name"] + " " + middlenameinitials + ". " + rows["last_name"];
+							h4.lead= fullname
+							case rows["department"]
+								when "jpad"
+									- var department = "Junior Projects and Activities Department";
+								when "spad"
+									- var department = "Senior Projects and Activities Department";
+								when "vl"
+									- var department = "Visuals and Logistics Department";
+								when "sec"
+									- var department = "Secretariat Department";
+								when "scho"
+									- var department = "Scholastics Department";
+								when "fin"
+									- var department = "Finance Department";
+								when "hr"
+									- var department = "Human Resources Department";
+								when "exec"
+									- var department = "Executive Department";
+							p.department-text.small= department
+						div.row
+							p
+								em Hi. This is italic text. Some text. More text. Amazing skills. This is some text but I don't mind
+		div.row
+			div.box-group
+				div.button
+					div.box-content
 						div.box
 							button.profile-button(type="button")
-								span Edit profile
-								span.glyphicon.glyphicon-cog
-	//- if(not user's profile) THIS_PROFILE.setVisible(false);
-		this buttons should not exist if accessed by other users
-div.container.col-lg-9
-	div#information
-		div.row
-			div.box-group
-				div.box.box-about
-					div.profile-content.title.text-center
-						button#about.profile-button(type="button",href="#")
-							span ABOUT
-			div.box-group
-				div.box.box-mentor
-					div.profile-content.title.text-center
-						button#mentor.profile-button(type="button")
-							span MENTOR
-			div.box-group
-				div.box.box-mentee
-					div.profile-content.title.text-center
-						button#mentee.profile-button(type="button")
-							span MENTEE
-			div.box-group
-				div.box.box-moreinfo
-					div.profile-content.title.text-center
-						button#more.profile-button(type="button")
-							span MORE
-		div.row
-			div#box-data
-				div.box
+								span Go to department
+								span.glyphicon.glyphicon-edit
+						if exec_position || name == rows["first_name"]
+							div.box
+								button.profile-button(type="button")
+									span Edit profile
+									span.glyphicon.glyphicon-cog
+		//- if(not user's profile) THIS_PROFILE.setVisible(false);
+			this buttons should not exist if accessed by other users
+	div.container.col-lg-9
+		div#information
+			div.row
+				div.box-group
+					div.box.box-about
+						div.profile-content.title.text-center
+							button#about.profile-button(type="button",href="#")
+								span ABOUT
+				div.box-group
+					div.box.box-mentor
+						div.profile-content.title.text-center
+							button#mentor.profile-button(type="button")
+								span MENTOR
+				div.box-group
+					div.box.box-mentee
+						div.profile-content.title.text-center
+							button#mentee.profile-button(type="button")
+								span MENTEE
+				div.box-group
+					div.box.box-moreinfo
+						div.profile-content.title.text-center
+							button#more.profile-button(type="button")
+								span MORE
+			div.row
+				div#box-data
+					div.box
 script(src='http://localhost:8080/javascripts/title-hover.js')
 script(src='http://localhost:8080/javascripts/toggler.js')

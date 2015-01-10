@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	$(".hoverClose").click(function(){
+	$("body").on("click",".hoverClose",function(){
 		$(this).parent().parent().remove();
 	});
 
@@ -13,7 +13,6 @@ $(document).ready(function(){
 			data: "count="+index,
 			type: "GET",
 			success: function(res){
-					console.log(res);
 					for(var i = 0; i < res.length; i++){
 						var postClass;
 						switch(res[i]["department"]){

@@ -56,7 +56,7 @@ router.get('/getPendingAccounts', function(req,res){
 
   if(session.userkey){
     pool.getConnection(function(err,connection){
-			var query = "SELECT `username`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, birthday, `home_address`, `college_address`, `picture`, `exec_position` FROM `accounts_pending` WHERE 1";
+			var query = "SELECT `username`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, DATE_FORMAT(`birthday`,'%Y-%m-%d') AS birthday, `home_address`, `college_address`, `picture`, `exec_position` FROM `accounts_pending` WHERE 1";
 
 			connection.query(query,function(err,accountspending){
 				if(err){
