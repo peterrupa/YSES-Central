@@ -30,6 +30,11 @@ $(document).ready(function(){
 							case "Executive": postClass = "Exec";
 										break;
 						}
+
+						for(data in res[i]){ //cleans all html elements
+							res[i][data] = safe_tags(res[i][data]);
+						}
+
             //convert newline to breaks
             res[i]["message"] = res[i]["message"].replace(/\n/g,"<br>");
 						var temphtml = ''+

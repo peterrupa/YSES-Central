@@ -7,7 +7,21 @@ $(document).ready(function(){
 							$("#temp").append("No pending accounts"); //generate cool html for this
 					}
 					else{
+						console.log(res);
 						for(var i = 0; i < res.length; i++){
+							for(data in res[i]){
+								if(data == "mentee"){
+									for(var j = 0; j < res[i][data].length; j++){
+										res[i][data][j] = safe_tags(res[i][data][j]);
+									}
+								}
+								else{
+									if(res[i][data] != null){
+										res[i][data] = safe_tags(res[i][data]);
+									}
+								}
+	            }
+
 							var li = ''+
 								'<table class="table table-condensed table-hover">';
 							var mentee_mentor = '';
@@ -89,7 +103,7 @@ $(document).ready(function(){
 									var temphtml = ''+
 										'<tr data-'+'exec-position'+'>'+
 											'<td>'+'Executive Position'+'</td>'+
-											'<td>'+res[i]['exec_position']+'</td>'+
+											'<td>'+(res[i]['exec_position']==null?"None":res[i]['exec_position'])+'</td>'+
 											'<td>'+'<a>Edit</a>'+'</td>'+
 										'</tr>';
 									mentee_mentor = '<table class="table table-condensed table-hover">' + temphtml + mentee_mentor;

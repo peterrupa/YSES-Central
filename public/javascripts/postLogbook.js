@@ -55,6 +55,13 @@ $(document).ready(function(){
             case "Executive": postClass = "Exec";
                   break;
           }
+
+          for(data in res){ //cleans all html elements
+            res[data] = safe_tags(res[data]);
+          }
+
+          $("#logbook-input").val(safe_tags($("#logbook-input").val())); //clean this too
+
           //convert newline to breaks
           paragraph = $("#logbook-input").val().replace(/\n/g,"<br>");
           var temphtml = ''+

@@ -31,6 +31,11 @@ $(document).ready(function(){
 							case "Executive": postClass = "Exec";
 										break;
 						}
+						
+						for(data in res[i]){ //cleans all html elements
+							res[i][data] = safe_tags(res[i][data]);
+						}
+
 						var temphtml = ''+
 							'<li>'+
 								'<div class="post post-'+postClass+'">'+
