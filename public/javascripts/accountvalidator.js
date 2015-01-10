@@ -7,7 +7,6 @@ $(document).ready(function(){
 							$("#temp").append("No pending accounts"); //generate cool html for this
 					}
 					else{
-						console.log(res);
 						for(var i = 0; i < res.length; i++){
 							for(data in res[i]){
 								if(data == "mentee"){
