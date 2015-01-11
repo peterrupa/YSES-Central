@@ -36,56 +36,11 @@ $(document).ready(function(){
         data: {message:$("#logbook-input").val()},
   			type: "POST",
   			success: function(res){
-          var postClass;
-          switch(res["department"]){
-            case "Senior Projects and Activities": postClass = "PAD";
-                  break;
-            case "Junior Projects and Activities": postClass = "JPAD";
-                  break;
-            case "Visuals and Logistics": postClass = "VL";
-                  break;
-            case "Human Resources": postClass = "HR";
-                  break;
-            case "Finance": postClass = "Fin";
-                  break;
-            case "Scholastics": postClass = "Scho";
-                  break;
-            case "Secretariat": postClass = "Sec";
-                  break;
-            case "Executive": postClass = "Exec";
-                  break;
-          }
-
-          for(data in res){ //cleans all html elements
-            res[data] = safe_tags(res[data]);
-          }
-
-          $("#logbook-input").val(safe_tags($("#logbook-input").val())); //clean this too
-
-          //convert newline to breaks
-          paragraph = $("#logbook-input").val().replace(/\n/g,"<br>");
-          var temphtml = ''+
-            '<li>'+
-              '<div class="post post-'+postClass+'">'+
-                '<button class="close hoverClose" type="button" aria-hidden="true">&times;</button>'+
-                '<div class="row">'+
-                  '<a href="http://localhost:8080/profile/'+res["username"]+'"><img class="mini-pic" src="'+res["picture"]+'"></a>'+
-                  '<h3 class="title"><a href="http://localhost:8080/profile/'+res["username"]+'">'+res["first_name"]+'</a></h3>'+
-                  '<p class="date">'+res["date"]+'</p>'+
-                '</div>'+
-                '<div class"row">'+
-                  '<p>'+paragraph+'</p>'+
-                '</div>'+
-              '</div>'+
-            '</li>';
-          $("#logbook").prepend(temphtml);
           $("#logbook-input").val("");
           $("#logbookModal").modal("hide");
           $('#counter').text(charLimit+' characters left ');
           $('#counter').removeClass("overlimit");
         	$('#counter').removeClass("warning");
-
-          logbookIndex++;
 
           alert("INSERT SUCCESS PROMPT/MODAL/WHATEVER HERE"); //do what this alert says.
         },

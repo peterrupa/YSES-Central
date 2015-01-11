@@ -86,4 +86,51 @@ $(document).ready(function(){
 		fetchLogbook(logbookIndex);
 	});
 
+  //socket listener for new logbook posts
+  socket.on('newlogbookpost',function(post){
+    var postClass;
+    switch(post["department"]){
+      case "Senior Projects and Activities": postClass = "PAD";
+            break;
+      case "Junior Projects and Activities": postClass = "JPAD";
+            break;
+      case "Visuals and Logistics": postClass = "VL";
+            break;
+      case "Human Resources": postClass = "HR";
+            break;
+      case "Finance": postClass = "Fin";
+            break;
+      case "Scholastics": postClass = "Scho";
+            break;
+      case "Secretariat": postClass = "Sec";
+            break;
+      case "Executive": postClass = "Exec";
+            break;
+    }
+
+    for(data in post){ //cleans all html elements
+      post[data] = safe_tags(post[data]);
+    }
+
+    //convert newline to breaks
+    paragraph = post["message"].replace(/\n/g,"<br>");
+    var temphtml = ''+
+      '<li>'+
+        '<div class="post post-'+postClass+'">'+
+          '<button class="close hoverClose" type="button" aria-hidden="true">&times;</button>'+
+          '<div class="row">'+
+            '<a href="http://localhost:8080/profile/'+post["username"]+'"><img class="mini-pic" src="'+post["picture"]+'"></a>'+
+            '<h3 class="title"><a href="http://localhost:8080/profile/'+post["username"]+'">'+post["first_name"]+'</a></h3>'+
+            '<p class="date">'+post["date"]+'</p>'+
+          '</div>'+
+          '<div class"row">'+
+            '<p>'+paragraph+'</p>'+
+          '</div>'+
+        '</div>'+
+      '</li>';
+    $("#logbook").prepend(temphtml);
+
+    logbookIndex++;
+  });
+
 });

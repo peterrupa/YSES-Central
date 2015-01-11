@@ -7,18 +7,15 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
-//application dependencies
-var search = require('./routes/search');
-var functions = require('./routes/functions');
-var indexhomepage = require('./routes/index-homepage');
-var profile = require('./routes/profile');
-var public = require('./routes/public');
-var viewAllYSERs = require('./routes/viewAllYSERs');
-var announcements = require('./routes/announcements');
-var logbook = require('./routes/logbook');
-//exec
-var accountvalidator = require('./routes/exec/accountvalidator');
-var announcementposter = require('./routes/exec/announcementposter');
+var sessionMiddleware = session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+})
+
+//create events
+var events = require('events');
+var eventEmitter = new events.EventEmitter();
 
 var app = express();
 
@@ -31,29 +28,33 @@ app.use(favicon(__dirname + '/public/favico.ico'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//sessions
-app.use(cookieParser());
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true
-}))
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(logger('dev')); //routes below this line are logged
 
-//all defined routes
-app.use(search);
-app.use(functions);
-app.use(indexhomepage);
-app.use(profile);
-app.use(public);
-app.use(viewAllYSERs);
-app.use(announcements);
-app.use(logbook);
-app.use(accountvalidator);
-app.use(announcementposter);
+// start server
+var http = app.listen(8080, function(){
+	console.log('YSES Central started on :8080.');
+});
+
+//sessions
+app.use(cookieParser());
+app.use(sessionMiddleware)
+
+var socket = require("./sockets/socket.js")(http,sessionMiddleware,eventEmitter);
+
+//application dependencies
+var search = require('./routes/search')(app);
+var functions = require('./routes/functions')(app);
+var indexhomepage = require('./routes/index-homepage')(app);
+var profile = require('./routes/profile')(app);
+var public = require('./routes/public')(app);
+var viewAllYSERs = require('./routes/viewAllYSERs')(app);
+var announcements = require('./routes/announcements')(app);
+var logbook = require('./routes/logbook')(app,eventEmitter);
+//exec
+var accountvalidator = require('./routes/exec/accountvalidator')(app);
+var announcementposter = require('./routes/exec/announcementposter')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -84,11 +85,6 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {}
     });
-});
-
-// start server
-app.listen(8080, function(){
-	console.log('YSES Central started on :8080.');
 });
 
 module.exports = app;
