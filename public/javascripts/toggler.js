@@ -31,6 +31,7 @@ $(document).ready(function(){
 
 		$('#box-data').html(about_content);
 
+		//about
 		$.ajax({
 			url: "http://localhost:8080/getdetails",
 			data: "account="+location.pathname.substring(9),
@@ -42,6 +43,11 @@ $(document).ready(function(){
 							'<td>'+second+'</td>'+
 						'</tr>';
 				}
+
+				for(data in res){
+					res[data] = safe_tags(res[data]);
+				}
+
 				$("#about-data table").append(rowHTML("First name",res["first_name"]));
 				$("#about-data table").append(rowHTML("Middle name",res["middle_name"]));
 				$("#about-data table").append(rowHTML("Last name",res["last_name"]));
@@ -72,6 +78,10 @@ $(document).ready(function(){
 			data: "account="+location.pathname.substring(9),
 			type: "GET",
 			success: function (res) {
+				for(data in res){ //clean possible HTML tags
+					res[data] = safe_tags(res[data]);
+				}
+
 				if(res["status"] == "None"){
 					var mentor_content =''+
 					'<div class="box">'+
@@ -204,6 +214,9 @@ $(document).ready(function(){
 				else{
 					//mentees with accounts
 					for(var i = 0; i < res.accounts.length; i++){
+						for(data in res.accounts[i]){ //clean possible HTML tags
+							res.accounts[i][data] = safe_tags(res.accounts[i][data]);
+						}
 						var middlename = res.accounts[i]["middle_name"].split(" ");
 						var middlenameinitials = "";
 						for(var j = 0; j < middlename.length; j++){
@@ -216,6 +229,7 @@ $(document).ready(function(){
 					}
 					//mentees without accounts
 					for(var i = 0; i < res.noaccounts.length; i++){
+						res.noaccounts[i] = safe_tags(res.noaccounts[i]);
 						var menteeHTML = "<div class='row mentee-content'><div class='mentee-data-image'><img src='http://localhost:8080/images/unknownpic.jpg' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + res.noaccounts[i] + "</strong></div>";
 						$("#mentee-data").append(menteeHTML);
 					}

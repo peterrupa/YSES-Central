@@ -26,6 +26,11 @@ $(document).ready(function(){
 							case "Executive": postClass = "Exec";
 										break;
 						}
+
+            for(data in res[i]){
+              res[i][data] = safe_tags(res[i][data]);
+            }
+
 						var temphtml = ''+
 							'<li>'+
 								'<div class="post post-'+postClass+'">'+
@@ -98,6 +103,11 @@ $(document).ready(function(){
           case "Executive": postClass = "Exec";
                 break;
         }
+
+        for(data in res){
+          res[data] = safe_tags(res[data]);
+        }
+        
         var temphtml = ''+
           '<li>'+
             '<div class="post post-'+postClass+'">'+
