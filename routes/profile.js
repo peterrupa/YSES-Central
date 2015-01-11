@@ -10,22 +10,27 @@ var pool = mysql.createPool({
 	database: 'yses_central'
 });
 
+function reportError(res,err){
+	console.log(err);
+	if(!res.headersSent){
+		res.sendStatus(500);
+	}
+}
+
 router.get('/profile/:username/content',function(req,res){
 	var session = req.session;
 
 	if(session.userkey){
-		pool.getConnection(function(err,connection){
+		pool.getConnection(function(err,connection){ //fix
 			connection.query("SELECT username FROM `accounts` WHERE username="+connection.escape(req.params.username),function(err,rows){
 				if(err){
-					console.log(err);
-					res.send("Internal server error!");
+					reportError(res,err);
 				}
 				else{
 					if(rows[0]){
 						connection.query("SELECT username, first_name, middle_name, last_name, department, picture, exec_position FROM `accounts` WHERE username="+connection.escape(req.params.username),function(err,rows){
 							if(err){
-								console.log(err);
-								res.send("Internal server error!");
+								reportError(res,err);
 							}
 							else{
 								//remove /public
@@ -33,8 +38,7 @@ router.get('/profile/:username/content',function(req,res){
 
 								connection.query("SELECT mentees FROM `accounts_"+rows[0]["username"]+"_mentees` WHERE 1",function(err,rowsMentees){
 									if(err){
-										console.log(err);
-										res.send("Internal server error!");
+										reportError(res,err);
 									}
 									else{
 										res.render("profile-content",{rows:rows[0],rows2:rowsMentees});
@@ -63,8 +67,7 @@ router.get('/getdetails', function(req,res){
 		pool.getConnection(function(err,connection){
 			connection.query("SELECT first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, DATE_FORMAT(`birthday`,'%M %e %Y') AS birthday, home_address, college_address, exec_position FROM `accounts` WHERE username="+connection.escape(req.query.account),function(err,data){
 				if(err){
-					console.log(err);
-					res.send("Internal server error");
+					reportError(res,err);
 				}
 				else{
 					res.send(data[0]);
@@ -82,27 +85,25 @@ router.get('/getmentor', function(req,res){
 	var session = req.session;
 	if(session.userkey){
 		pool.getConnection(function(err,connection){
-			connection.query("SELECT mentor FROM `accounts` WHERE username="+connection.escape(req.query.account),function(err,username){
+			connection.query("SELECT username, first_name, full_name, org_class, department, org_batch, picture FROM `accounts` WHERE username=(SELECT mentor FROM `accounts` WHERE username="+connection.escape(req.query.account)+")",function(err,data){
 				if(err){
-					console.log(err);
-					res.send("Internal server error");
+					reportError(res,err);
 				}
 				else{
-					connection.query("SELECT username, first_name, full_name, org_class, department, org_batch, picture FROM `accounts` WHERE username="+connection.escape(username[0]["mentor"]),function(err,data){
-						if(err){
-							console.log(err);
-							res.send("Internal server error");
-						}
-						else{
-							if(data[0]){
-								data[0]["picture"] = data[0]["picture"].substring(7);
-								res.send(data[0]);
+					if(data[0]){
+						data[0]["picture"] = data[0]["picture"].substring(7);
+						res.send(data[0]);
+					}
+					else{
+						connection.query("SELECT mentor FROM `accounts` WHERE username="+connection.escape(req.query.account),function(err,mentor){
+							if(err){
+								reportError(res,err)
 							}
 							else{
-								res.send({status:"None",full_name:username[0]["mentor"]});
+								res.send({status:"None",full_name:mentor[0]["mentor"]});
 							}
-						}
-					});
+						});
+					}
 				}
 			});
 			connection.release();
@@ -120,14 +121,12 @@ router.get('/getmentees', function(req,res){
 		pool.getConnection(function(err,connection){
 			connection.query("SELECT username FROM `accounts` WHERE username="+connection.escape(req.query.account),function(err,username){
 				if(err){
-					console.log(err);
-					res.send("Internal server error");
+					reportError(res,err);
 				}
 				else{
 					connection.query("SELECT mentees FROM `accounts_"+username[0]["username"]+"_mentees` WHERE 1",function(err,mentees){
 						if(err){
-							console.log(err);
-							res.send("Internal server error");
+							reportError(res,err);
 						}
 						else{
 							if(mentees[0]){
