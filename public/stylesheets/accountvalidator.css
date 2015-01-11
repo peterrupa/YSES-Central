@@ -1,20 +1,31 @@
 #temp{
+	height:100%;
+	width:100%;
 	/*semtheng here*/
 }
 
 #temp .to-validate{
 	padding:0px;
 
-	height:300px;
+	/*min-height:380px;
+	max-height:500px;*/
+	height:420px;
 	width:100%;
 
 	color:black;
 
 	margin-bottom:15px;
 
-	background-color:white;
+	background-color:rgba(240,240,240,1);
 
-	margin-bottom:0px;
+	margin-bottom:10px;
+}
+
+.to-validate-button{
+	position:absolute;
+
+	margin-top:37%;
+	width:100%;
 }
 
 #temp img{
@@ -29,24 +40,29 @@
 	margin-top:10px;
 	margin-right:10px;
 
-	height:80%;
-	width:40%;
+	height:70%;
+	width:395px;
+
+}
+
+#temp .table td{
+	border-color:rgba(200,200,200,1);
 }
 
 .account-image{
 	float:left;
-	height:100%;
 }
 
 .account-data{
-	height:100%;
+	float:left;
 }
 
 #temp button{
 	position:relative;
+	float:left;
 
 	height:40px;
-	width:33.33493%;
+	width:50%;
 	border:0px;
 
 	font-size:1.69em;
@@ -54,7 +70,15 @@
 	margin-top:0px;
 	margin-bottom:0px;
 
+	top:0px;
+
+
+	background-color:rgba(240,240,240,0);
 	color:black;
+}
+
+#temp button:hover{
+	color:blue;
 }
 
 #temp a{

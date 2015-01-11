@@ -355,14 +355,6 @@ span.glyphicon-send:hover, span.glyphicon-list:hover, span.glyphicon-pencil:hove
 	border:0px;
 }
 
-.overlimit{
-   color: red;
-}​
-
-.warning{
-   color: yellow;
-}​
-
 ::-webkit-scrollbar {
 	width: 5px;
 }
@@ -375,4 +367,9 @@ span.glyphicon-send:hover, span.glyphicon-list:hover, span.glyphicon-pencil:hove
 ::-webkit-scrollbar-thumb {
 	border-radius: 0px;
 	background-color:rgba(0,0,0,1);
-}
+}​
+
+
+.overlimit{
+   color: red;
+}​
