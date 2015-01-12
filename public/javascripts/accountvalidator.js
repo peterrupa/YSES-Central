@@ -4,10 +4,6 @@ $(document).ready(function(){
 			url: "http://localhost:8080/getPendingAccounts",
 			type: "GET",
 			success: function(res){
-					if(res == "None"){
-							$("#temp").append("No pending accounts"); //generate cool html for this
-					}
-					else{
 						for(var i = 0; i < res.length; i++){
 							var table_data_2 = ''+
 								'<table class="table table-condensed table-hover">';
@@ -142,10 +138,14 @@ $(document).ready(function(){
 								'</div>';
 							$("#temp").append(html);
 					}
-				}
 			},
 			error: function (e){
-				console.dir(e);
+				if(e.status == 404){
+					$("#temp").append("No pending accounts"); //generate cool html for this
+				}
+				else{
+					console.dir(e);
+				}
 			}
 		});
 
