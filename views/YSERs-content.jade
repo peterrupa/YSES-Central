@@ -1,11 +1,14 @@
 link(rel="stylesheet",href="/stylesheets/YSERs.css")
 div#wrap
-  div
-    div.pull-right(style="position:relative")
-      button#buttonOptions.btn.btn-default(type="button",data-toggle="popover",data-placement="bottom") Options
-        span.caret
-    p#YSERs YSERs
-    p#resultText
-  div#result
-  div.clearfix
+	div.title-header.ysers-header
+		h2 YSERs
+	div
+		.pull-right(style='position:relative')
+			button#buttonOptions.btn.btn-default(type='button', data-toggle='popover', data-placement='bottom')
+				| Options
+				span.caret
+		p#YSERs
+		p#resultText
+	div#result
+	.clearfix
 script(src="http://localhost:8080/javascripts/YSERs.js")

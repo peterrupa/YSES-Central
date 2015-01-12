@@ -15,7 +15,7 @@ $(document).ready(function(){
 						switch(res[i]["department"]){
 							case "Senior Projects and Activities": postClass = "PAD";
 										break;
-              case "Junior Projects and Activities": postClass = "JPAD";
+            				case "Junior Projects and Activities": postClass = "JPAD";
 										break;
 							case "Visuals and Logistics": postClass = "VL";
 										break;
@@ -117,7 +117,7 @@ $(document).ready(function(){
     paragraph = post["message"].replace(/\n/g,"<br>");
     var temphtml = ''+
       '<li>'+
-        '<div class="post post-'+postClass+'">'+
+        '<div style="display:none;" class="newPost post post-'+postClass+'">'+
           '<button class="close hoverClose" type="button" aria-hidden="true">&times;</button>'+
           '<div class="row">'+
             '<a href="http://localhost:8080/profile/'+post["username"]+'"><img class="mini-pic" src="'+post["picture"]+'"></a>'+
@@ -130,6 +130,8 @@ $(document).ready(function(){
         '</div>'+
       '</li>';
     $("#logbook").prepend(temphtml);
+    $('.newPost').slideDown('400');
+	$(".newPost").removeClass('newPost');
 
     logbookIndex++;
   });

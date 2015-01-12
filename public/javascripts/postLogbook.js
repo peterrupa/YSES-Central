@@ -36,7 +36,7 @@ $(document).ready(function(){
           $('#counter').removeClass("overlimit");
         	$('#counter').removeClass("warning");
 
-          alert("INSERT SUCCESS PROMPT/MODAL/WHATEVER HERE"); //do what this alert says.
+          //alert("INSERT SUCCESS PROMPT/MODAL/WHATEVER HERE"); //do what this alert says.
         },
   			error: function (e){
   				console.dir(e);

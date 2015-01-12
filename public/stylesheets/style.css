@@ -10,7 +10,87 @@ body {
 }
 
 a {
-	color: #00B7FF;
+	color: black;
+}
+
+@font-face {
+	font-family: headerText;
+	src: url('/fonts/slabo.ttf');
+	font-weight:normal;
+}
+
+.title-header{
+	font-family: headerText;
+	text-transform:;
+
+	background-color:white;
+	width:100%;
+	height:100%;
+	margin-top:20px;
+	padding-left:10px;
+	padding-top:50px;
+}
+
+.logbook-header{
+	background-image:url('../images/titleheader/laptop-asset.jpg');
+	background-size:100% auto;
+	background-repeat:none;
+	background-position:center 1500px;
+
+	color:black;
+}
+
+.announcement-header{
+	background-image:url('../images/titleheader/abstract-1.jpg');
+	background-size:100% auto;
+	background-repeat:none;
+	background-position:center 95px;
+
+	color:white;
+}
+
+.accountvalidator-header{
+	background-image:url('../images/titleheader/tool.jpg');
+	background-size:100% auto;
+	background-repeat:none;
+	background-position:center 920px;
+
+	color:white;
+
+	margin-bottom:15px;
+}
+
+.announcementposter-header{
+	background-image:url('../images/titleheader/sky.jpg');
+	background-size:100% auto;
+	background-repeat:none;
+	background-position:0px 00px;
+
+	color:black;
+}
+
+.announcementhistory-header{
+	background-image:url('../images/titleheader/vintage.jpg');
+	background-size:150% auto;
+	background-repeat:none;
+	background-position:900px 95px;
+
+	color:white;
+}
+
+.ysers-header{
+	background-image:url('../images/titleheader/glass.jpg');
+	background-size:100% auto;
+	background-repeat:none;
+	background-position:0px 0px;
+
+	padding-left:15px;
+	color:white;
+}
+
+.title-header h2{
+	margin-top:0px;
+	padding-top:0px;
 }
 
 #header {
@@ -141,12 +221,13 @@ a {
 }
 
 .btn-name {
+	float:right;
 	width: auto;
 	height: 60px;
 	border:0;
 	background:none;
 	margin-right:0px;
-	margin-left:0px;
+	margin-left:12px;
 	margin-top:0px;
 	margin-bottom:0px;
 }
@@ -157,12 +238,14 @@ a {
 }
 
 .metro-dropdown {
+	width:55%;
 	border:0px black solid;
 	border-radius:0;
-	top:95%;
+	top:98%;
+	left:45%;
 	box-shadow:none;
 	z-index:10;
-	left:-18.8%;
+	right:inherit;
 }
 
 .bold {
@@ -307,17 +390,33 @@ span.glyphicon-send:hover, span.glyphicon-list:hover, span.glyphicon-pencil:hove
 	display:none;
 }
 
+body.modal-open, 
+.modal-open .navbar-fixed-top, 
+.modal-open .navbar-fixed-bottom 
+{
+	margin-right: 0px;
+}
+
 #logbookModal{
 	color:black;
+}
+
+#logbookModal .modal-backdrop{
+	margin-right:100px;
+	width:100%;
+	height:100%;
+}
+
+#logbookModal .modal-dialog{
+	width:400px;
+	margin-left:66%;
+	top:50px;
 }
 
 #logbookModal .modal-content{
 	position:relative;
 
 	width:400px;
-
-	top:50px;
-	left:86%;
 
 	-webkit-border-top-left-radius: 0px;
 	-webkit-border-top-right-radius: 0px;
@@ -355,6 +454,8 @@ span.glyphicon-send:hover, span.glyphicon-list:hover, span.glyphicon-pencil:hove
 	border:0px;
 }
 
+body .overlimit{ color:red; }
+
 ::-webkit-scrollbar {
 	width: 5px;
 }
@@ -367,8 +468,4 @@ span.glyphicon-send:hover, span.glyphicon-list:hover, span.glyphicon-pencil:hove
 ::-webkit-scrollbar-thumb {
 	border-radius: 0px;
 	background-color:rgba(0,0,0,1);
-}​
-
-.overlimit{
-   color:red;
 }
