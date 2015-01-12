@@ -88,6 +88,19 @@ a {
 	color:white;
 }
 
+.profile-header{
+	background-image:url('../images/titleheader/tree.jpg');
+	background-size:100% auto;
+	background-repeat:none;
+	background-position:0px 100px;
+
+	width:98.665%;
+	margin-top:0px;
+	margin-bottom:15px;
+	margin-left:5px;
+	color:white;
+}
+
 .title-header h2{
 	margin-top:0px;
 	padding-top:0px;

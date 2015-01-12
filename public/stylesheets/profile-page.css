@@ -3,6 +3,7 @@ body{
 }
 
 #containerMAIN{
+	margin-top:-20px;
 	height:100%;
 }
 
@@ -11,7 +12,7 @@ body{
 
 	width:100%;
 
-	top:-6px;
+	top:-4.54px;
 }
 
 #information .box{
@@ -186,7 +187,7 @@ body{
 #box-data .box{
 	padding: 15px;
 	width:98%;
-	height:347px;
+	height:293px;
 
 	overflow-y:auto;
 }
