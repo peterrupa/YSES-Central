@@ -3,3 +3,5 @@ chat sidebar http://www.webdesigncrowd.com/menu-transition-effects/
 parallax http://code.tutsplus.com/tutorials/simple-parallax-scrolling-technique--net-27641
 
 hover-title http://notlaura.com/show-title-hovering-image/
+
+scroll-to-top http://davidwalsh.name/jquery-top-link
