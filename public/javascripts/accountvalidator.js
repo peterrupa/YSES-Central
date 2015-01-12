@@ -4,6 +4,7 @@ $(document).ready(function(){
 			url: "http://localhost:8080/getPendingAccounts",
 			type: "GET",
 			success: function(res){
+				console.log(res);
 					if(res == "None"){
 							$("#temp").append("No pending accounts"); //generate cool html for this
 					}

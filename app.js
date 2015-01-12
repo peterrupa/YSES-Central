@@ -19,6 +19,9 @@ var eventEmitter = new events.EventEmitter();
 
 var app = express();
 
+//async
+var async = require('async');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -53,7 +56,7 @@ var viewAllYSERs = require('./routes/viewAllYSERs')(app);
 var announcements = require('./routes/announcements')(app);
 var logbook = require('./routes/logbook')(app,eventEmitter);
 //exec
-var accountvalidator = require('./routes/exec/accountvalidator')(app);
+var accountvalidator = require('./routes/exec/accountvalidator')(app,async);
 var announcementposter = require('./routes/exec/announcementposter')(app,eventEmitter);
 
 // catch 404 and forward to error handler

@@ -1,4 +1,4 @@
-module.exports = function(app){
+module.exports = function(app,async){
 	//file
 	var fs = require('fs');
 
@@ -49,78 +49,61 @@ module.exports = function(app){
 	  }
 	});
 
-	app.get('/getPendingAccounts', function(req,res){
+	app.get('/getPendingAccounts2', function(req,res){
 	  var session = req.session;
 
 	  if(session.userkey){
 	    pool.getConnection(function(err,connection){
 				var query = "SELECT `username`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, DATE_FORMAT(`birthday`,'%Y-%m-%d') AS birthday, `home_address`, `college_address`, `picture`, `exec_position` FROM `accounts_pending` WHERE 1";
 
-				connection.query(query,function(err,accountspending){
-					if(err){
-						reportError(res,err);
-					}
+				connection.query(query,function(err,pending){
+					if(err)	reportError(res,err);
 					else{
-						if(accountspending.length > 0){
-							//remove /public
-							for(var i = 0; i < accountspending.length; i++){
-								accountspending[i]["picture"] = accountspending[i]["picture"].substring(7);
-							}
+						if(pending.length > 0){
+							async.each(pending,function(account,callback){
+								//remove public/
+								account["picture"] = account["picture"].substring(7);
 
-							//fetch mentees here
-							for(var i = 0; i < accountspending.length; i++){
-								(function(i){
-									//declare mentee array
-									accountspending[i]["mentee"] = [];
-
-									var menteetable = "accounts_pending_"+accountspending[i]["username"]+"_mentees";
-									var query = "SELECT `mentees` FROM "+menteetable+" WHERE 1";
-									connection.query(query,function(err,mentees){
-										if(err){
-											reportError(res,err);
-										}
-										else{
-											if(mentees.length > 0){
-												for(var j = 0; j < mentees.length; j++){
-													(function(i,j){
-														//check if that mentee has an account in YSES Central
-														var query = "SELECT `full_name` FROM `accounts` WHERE username='"+mentees[j]["mentees"]+"'";
-														connection.query(query,function(err,fullname){
-															if(err){
-																reportError(res,err);
-															}
-															else{
-																if(fullname[0]){ //if mentee has account, replace his username with full name
-																	accountspending[i]["mentee"].push(fullname[0]["full_name"]);
-																}
-																else{
-																	accountspending[i]["mentee"].push(mentees[j]["mentees"]);
-																}
-
-																if(i == accountspending.length - 1 && j == mentees.length - 1){
-																	res.send(accountspending);
-																}
-															}
-														});
-													})(i,j);
+								var mentees = [];
+								//fetch mentees
+								var query = "SELECT `mentees` FROM accounts_pending_"+account["username"]+"_mentees WHERE 1";
+								connection.query(query,function(err,mentee){
+									if(err) reportError(res,err);
+									else{
+										//check if mentees have account
+										async.each(mentee,function(mentee,callback){
+											var query = "SELECT `full_name` FROM `accounts` WHERE username='"+mentee["mentees"]+"'";
+											connection.query(query,function(err,result){
+												if(err) reportError(res,err);
+												else{
+													if(result[0]){
+														mentee["mentees"] = result[0]["full_name"];
+													}
+													mentees.push(mentee["mentees"]);
+													callback();
 												}
-											}
+											});
+										},function(err){
+											if(err) reportError(res,err);
 											else{
-												if(i == accountspending.length - 1){
-													res.send(accountspending);
-												}
+												account["mentee"] = mentees;
+												callback();
 											}
-										}
-									})
-								})(i);
-							}
+										});
+									}
+								});
+							},function(err){
+								if(err)	reportError(res,err);
+								else{
+									res.send(pending);
+								}
+							});
 						}
 						else{
-							res.send("None")
+							res.sendStatus(404);
 						}
 					}
 				});
-
 				connection.release();
 			});
 	  }
