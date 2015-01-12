@@ -11,7 +11,7 @@ $(document).ready(function(){
 					for(var i = 0; i < res.length; i++){
 						var postClass;
 						switch(res[i]["department"]){
-							case "Projects and Activities": postClass = "PAD";
+							case "Senior Projects and Activities": postClass = "PAD";
 										break;
 							case "Visuals and Logistics": postClass = "VL";
 										break;
@@ -100,11 +100,11 @@ $(document).ready(function(){
   socket.on('announcementpost',function(post){
 		var postClass;
 		switch(post["department"]){
-			case "Projects and Activities": postClass = "PAD";
+			case "Senior Projects and Activities": postClass = "PAD";
 						break;
 			case "Visuals and Logistics": postClass = "VL";
 						break;
-			case "Human postources": postClass = "HR";
+			case "Human Resources": postClass = "HR";
 						break;
 			case "Finance": postClass = "Fin";
 						break;
