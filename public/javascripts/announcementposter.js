@@ -88,7 +88,7 @@ $(document).ready(function(){
 			success: function(res){
         $("#title").val("");
         $("#message").val("");
-        alert("insert success modal/window/alert/whatever shit it is");
+        //alert("insert success modal/window/alert/whatever shit it is");
       },
       error: function (e){
 				console.dir(e);
@@ -121,7 +121,7 @@ $(document).ready(function(){
 		}
 
 		var temphtml = ''+
-			'<li>'+
+			'<li class="new_post" style="display:none">'+
 				'<div class="post post-'+postClass+'">'+
 					'<button type="button" aria-hidden="true" class="close hoverClose">&times;</button>'+
 					'<div class="row">'+
@@ -137,6 +137,8 @@ $(document).ready(function(){
 				'</div>'+
 			'</li>';
 		$("#announcements").prepend(temphtml);
+		$(".new_post").slideDown('400');
+		$(".new_post").removeClass('new_post');
 		announcementIndex++;
 	});
 });
