@@ -1,10 +1,20 @@
+link(rel="stylesheet",href="http://localhost:8080/stylesheets/announcementposter.css")
 div#temp.col-lg-8
-  p Title
-  input#title(type="text",style="color:black")
-  p Message
-  textarea#message(style="resize:none;color:black;width:90%;height:200px;")
-  br
-  input#submit(type="button",value="Submit")
+	h1 Make an announcement
+	div#input-content
+		div#title-container
+			p Title
+			input#title.form-control(type="text",style="color:black")
+		div#message-container
+			p Message
+			textarea#message.form-control
+		div.footer
+			input#submit.btn.btn-primary.form-control(type="button",value="Submit")
 div.col-lg-4
-  div#announcements
+	div#announcements
+a#top-link.text-center(href="#top")
+	| Back to top &nbsp;
+	span.glyphicon.glyphicon-chevron-up
 script(src='http://localhost:8080/javascripts/announcementposter.js')
+script(src='http://localhost:8080/javascripts/scroll-top-main.js')
+script(src='http://localhost:8080/javascripts/jquery.scrollTo.min.js')

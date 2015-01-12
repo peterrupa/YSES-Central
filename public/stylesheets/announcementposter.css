@@ -1,0 +1,42 @@
+#input-content{
+	background-color:rgba(240,240,240,1);
+	width:98%;
+	height:100%;
+
+	color:black;
+
+	margin-top:12px;
+	padding:15px;
+}
+
+#input-content textarea{
+	width:100%;
+	height:200px;
+	resize:none;
+}
+
+#message-container{
+	margin-top:10px;
+}
+
+.footer{
+	margin-top:10px;
+}
+
+/* FOR SCROLL TOP LAYOUT */
+
+#top-link{ 
+	width:10%;
+	display:none; 
+	position:fixed; 
+	left:1%; 
+	bottom:10px; 
+	color:black; 
+	font-weight:bold; 
+	text-decoration:none; 
+	border:0px; 
+	background:rgba(255,255,255,1); 
+	padding:10px; 
+
+	font-size:15px;
+}

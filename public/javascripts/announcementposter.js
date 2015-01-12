@@ -139,5 +139,4 @@ $(document).ready(function(){
 		$("#announcements").prepend(temphtml);
 		announcementIndex++;
 	});
-
 });

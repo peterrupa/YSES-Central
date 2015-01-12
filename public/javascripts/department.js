@@ -26,14 +26,13 @@ $(document).ready(function(){
 	);
 
 	// on click outside department button container, will toggle visibility
-});
+	$(document).mouseup(function (e){
+	    var container = $("#department-button-container");
 
-$(document).mouseup(function (e){
-    var container = $("#department-button-container");
-
-    if (!container.is(e.target) // if the target of the click isn't the container...
-        && container.has(e.target).length === 0) // ... nor a descendant of the container
-    {
-        container.slideUp();
-    }
+	    if (!container.is(e.target) // if the target of the click isn't the container...
+	        && container.has(e.target).length === 0) // ... nor a descendant of the container
+	    {
+	        container.slideUp();
+	    }
+	});
 });

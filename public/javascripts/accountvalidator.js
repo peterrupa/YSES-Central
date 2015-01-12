@@ -28,8 +28,8 @@ $(document).ready(function(){
 									case 'univ_batch': 		tempData = 'University Batch'; break;
 									case 'mentor': 			tempData = 'Mentor'; break;
 									case 'birthday': 		tempData = 'Birthday'; break;
-									case 'home_address': 	tempData = 'Home Adress'; break;
-									case 'college_address': tempData = 'College Adress'; break;
+									case 'home_address': 	tempData = 'Home Address'; break;
+									case 'college_address': tempData = 'College Address'; break;
 									case 'exec_position': 	tempData = 'Executive Position'; break;
 									default: 				tempData = ' '; break;
 								}
@@ -127,7 +127,7 @@ $(document).ready(function(){
 								}
 							}
 							var html = ''+
-								'<div class="to-validate">'+
+								'<div data-username="'+res[i]['username']+'" class="to-validate">'+
 									img+
 									'<h3 style="float:left;font-weight:bold;padding-top:0px">'+res[i]['first_name']+' '+res[i]['last_name']+'</h3>'+
 									'<span style="float:left;padding-top:29px;margin-left:10px;">'+res[i]['department']+' Department'+'</span>'+
@@ -233,64 +233,32 @@ $(document).ready(function(){
 		$("body").on("click",".edit",function(){
 			
 			var data = $(this).closest("tr").find("td").first().next();
+			$(this).html('Done');
+			$(this).addClass('done');
+			$(this).removeClass('edit');
 
 			// will convert data to text box
 			if($(this).parent().find("input").length > 0){
 				alert("There are boxes");
 			}
 			else if($(this).closest('tr').hasClass('text')){
-				$(this).html('Done');
-				$(this).addClass('done');
-				$(this).removeClass('edit');
-
 				data.each(function(index){
 					var temphtml = ''+
 						'<input type="text" value="'+$(this).html()+'">';
 					$(this).html(temphtml);
 				});
-				$('input').on('keypress', function(e) {
-					var code = e.keyCode || e.which;
-					var temphtml = ''+
-						$(this).val();
-					if(code==13){
-						$(this).closest("tr").find(".done").html('Edit');
-						$(this).closest("tr").find(".done").addClass('edit');
-						$(this).closest("tr").find(".done").removeClass('done');
-						data.html(temphtml);
-					}
-				});
 			}
-
 			// will convert data to a datepicker
 			else if($(this).closest('tr').hasClass('birthdate')){
-				$(this).html('Done');
-				$(this).addClass('done');
-				$(this).removeClass('edit');
-
 				data.each(function(index){
 					var temphtml = ''+
 						'<input style="width:130px;height:20px;" type="date" value="'+$(this).html()+'">';
 					$(this).html(temphtml);
 				});
-				$('input').on('keypress', function(e) {
-					var code = e.keyCode || e.which;
-					var temphtml = ''+
-						$(this).val();
-					if(code==13){
-						$(this).closest("tr").find(".done").html('Edit');
-						$(this).closest("tr").find(".done").addClass('edit');
-						$(this).closest("tr").find(".done").removeClass('done');
-						data.html(temphtml);
-					}
-				});
 			}
 
 			// will convert data to a dropdown select [org_class]
 			else if($(this).closest('tr').hasClass('org_class')){
-				$(this).html('Done');
-				$(this).addClass('done');
-				$(this).removeClass('edit');
-
 				data.each(function(index){
 					var temphtml = ''+
 						'<select id="org_class_select" name="org-class">'+
@@ -304,10 +272,6 @@ $(document).ready(function(){
 
 			// will convert data to a dropdown select [org_batch]
 			else if($(this).closest('tr').hasClass('org_batch')){
-				$(this).html('Done');
-				$(this).addClass('done');
-				$(this).removeClass('edit');
-
 				data.each(function(index){
 					var temphtml = ''+
 						'<select id="org_batch_select" name="org-batch">'+
@@ -321,10 +285,6 @@ $(document).ready(function(){
 
 			// will convert data to a dropdown select [department]
 			else if($(this).closest('tr').hasClass('department')){
-				$(this).html('Done');
-				$(this).addClass('done');
-				$(this).removeClass('edit');
-
 				data.each(function(index){
 					var temphtml = ''+
 						'<select id="department_select" name="department">'+
@@ -345,10 +305,6 @@ $(document).ready(function(){
 
 			// will convert data to a dropdown select [position]
 			else if($(this).closest('tr').hasClass('position')){
-				$(this).html('Done');
-				$(this).addClass('done');
-				$(this).removeClass('edit');
-
 				data.each(function(index){
 					var temphtml = ''+
 						'<select  id="position_select"name="position">'+
@@ -365,21 +321,35 @@ $(document).ready(function(){
 				});
 			}
 
-			// will convert data to a dropdown select [position]
+			// will convert data to a dropdown select [studentnumber]
 			else if($(this).closest('tr').hasClass('studentnumber')){
-				$(this).html('Done');
-				$(this).addClass('done');
-				$(this).removeClass('edit');
-
 				data.each(function(index){
 					var temphtml = ''+
-						'<input style="width:70px;" type="text" id="stud_year">'+
+						'<input style="width:70px;" type="text" id="stud_year" value="'+$(this).html().substring(0,4)+'">'+
 						'<span> - </span>'+
-						'<input style="width:70px;" type="text" id="stud_number">';
+						'<input style="width:70px;" type="text" id="stud_number" value="'+$(this).html().substring(5)+'">';
 					$(this).html(temphtml);
 				}); 
 			}
-
+			data.find('input').on('keypress', function(e) {
+				var code = e.keyCode || e.which;
+				if(!$(this).closest('tr').hasClass('studentnumber')){
+					var temphtml = ''+
+						$(this).val();
+				}else{
+					var temphtml = ''+
+						text.find('#stud_year').val()+
+						'-'+
+						text.find('#stud_number').val();
+					$(this).html(temphtml);
+				}
+				if(code==13){
+					$(this).closest("tr").find(".done").html('Edit');
+					$(this).closest("tr").find(".done").addClass('edit');
+					$(this).closest("tr").find(".done").removeClass('done');
+					data.html(temphtml);
+				}
+			});
 		});
 
 		$('body').on('click','.done', function(){
@@ -390,91 +360,25 @@ $(document).ready(function(){
 				return text.hasClass(class_name);
 			}
 
-			// will convert data to a dropdown select [position]
-			if(traversed('text')){
+			if(traversed('text') || traversed('birthdate')){
 
 				data.each(function(index){
 					var temphtml = ''+
 						text.find('input').val();
 					$(this).html(temphtml);
 				});
-
-				$(this).html('Edit');
-				$(this).addClass('edit');
-				$(this).removeClass('done');
-			
 			}
-			else if(traversed('birthdate')){
-
+			else if(traversed('org_class') 
+				|| traversed('org_batch') 
+				|| traversed('department')
+				|| traversed('position')){
 				data.each(function(index){
 					var temphtml = ''+
-						text.find('input').val();
+						text.find('select').val();
 					$(this).html(temphtml);
 				});
-
-				$(this).html('Edit');
-				$(this).addClass('edit');
-				$(this).removeClass('done');
-			
 			}
-			else if(traversed('org_class')){
-
-				data.each(function(index){
-					var temphtml = ''+
-						text.find('#org_class_select').val();
-					$(this).html(temphtml);
-				});
-
-				$(this).html('Edit');
-				$(this).addClass('edit');
-				$(this).removeClass('done');
-			
-			}
-
-			else if(traversed('org_batch')){
-				
-				data.each(function(index){
-					var temphtml = ''+
-						text.find('#org_batch_select').val();
-					$(this).html(temphtml);
-				});
-
-				$(this).html('Edit');
-				$(this).addClass('edit');
-				$(this).removeClass('done');
-
-			}
-
-			else if(traversed('department')){
-				
-				data.each(function(index){
-					var temphtml = ''+
-						text.find('#department_select').val();
-					$(this).html(temphtml);
-				});
-
-				$(this).html('Edit');
-				$(this).addClass('edit');
-				$(this).removeClass('done');
-
-			}
-
-			else if(traversed('position')){
-				
-				data.each(function(index){
-					var temphtml = ''+
-						text.find('#position_select').val();
-					$(this).html(temphtml);
-				});
-
-				$(this).html('Edit');
-				$(this).addClass('edit');
-				$(this).removeClass('done');
-
-			}
-
 			else if(traversed('studentnumber')){
-				
 				data.each(function(index){
 					var temphtml = ''+
 						text.find('#stud_year').val()+
@@ -482,13 +386,21 @@ $(document).ready(function(){
 						text.find('#stud_number').val();
 					$(this).html(temphtml);
 				});
-
-				$(this).html('Edit');
-				$(this).addClass('edit');
-				$(this).removeClass('done');
-
 			}
 
+			$(this).html('Edit');
+			$(this).addClass('edit');
+			$(this).removeClass('done');
+
+		});
+
+		// needs work. will revert input fields clicked outside it's container.
+		$(document).mouseup(function (e){
+			var container = $('.done');
+
+			if ( (!container.is(e.target) && container.has(e.target).length === 0)){
+			
+			}
 		});
 	
 });
