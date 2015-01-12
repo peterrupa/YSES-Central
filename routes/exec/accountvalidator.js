@@ -49,7 +49,7 @@ module.exports = function(app,async){
 	  }
 	});
 
-	app.get('/getPendingAccounts2', function(req,res){
+	app.get('/getPendingAccounts', function(req,res){
 	  var session = req.session;
 
 	  if(session.userkey){
