@@ -23,6 +23,10 @@
 	margin-top:10px;
 }
 
+#announcements li{
+	list-style:none;
+}
+
 /*FOR SCROLL TOP LAYOUT*/
 
 #top-link{ 
