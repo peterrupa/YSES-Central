@@ -31,7 +31,7 @@ $(document).ready(function(){
 							case "Executive": postClass = "Exec";
 										break;
 						}
-						
+
 						for(data in res[i]){ //cleans all html elements
 							res[i][data] = safe_tags(res[i][data]);
 						}
@@ -85,6 +85,50 @@ $(document).ready(function(){
 	$("body").on('click','.announcementsViewMore',function(e){
 		e.preventDefault();
 		fetchAnnouncements(announcementIndex);
+	});
+
+	socket.off('announcementpost');
+	socket.on('announcementpost',function(post){
+		var postClass;
+		switch(post["department"]){
+			case "Projects and Activities": postClass = "PAD";
+						break;
+			case "Visuals and Logistics": postClass = "VL";
+						break;
+			case "Human postources": postClass = "HR";
+						break;
+			case "Finance": postClass = "Fin";
+						break;
+			case "Scholastics": postClass = "Scho";
+						break;
+			case "Secretariat": postClass = "Sec";
+						break;
+			case "Executive": postClass = "Exec";
+						break;
+		}
+
+		for(data in post){ //cleans all html elements
+			post[data] = safe_tags(post[data]);
+		}
+
+		var temphtml = ''+
+			'<li>'+
+				'<div class="post post-'+postClass+'">'+
+					'<button type="button" aria-hidden="true" class="close hoverClose">&times;</button>'+
+					'<div class="row">'+
+						'<h3 class="title">'+
+							post["title"]+
+						'</h3>'+
+					'</div>'+
+					'<p class="op">'+post["department"]+' Department</p>'+
+					'<p class="date">'+post["date"]+'</p>'+
+					'<div class="row">'+
+						'<p>'+post["message"]+'</p>'+
+					'</div>'+
+				'</div>'+
+			'</li>';
+		$("#announcements").prepend(temphtml);
+		announcementIndex++;
 	});
 
 });

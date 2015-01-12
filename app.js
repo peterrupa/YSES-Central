@@ -54,7 +54,7 @@ var announcements = require('./routes/announcements')(app);
 var logbook = require('./routes/logbook')(app,eventEmitter);
 //exec
 var accountvalidator = require('./routes/exec/accountvalidator')(app);
-var announcementposter = require('./routes/exec/announcementposter')(app);
+var announcementposter = require('./routes/exec/announcementposter')(app,eventEmitter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

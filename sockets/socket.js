@@ -9,6 +9,10 @@ module.exports = function(http,sessionMiddleware,eventEmitter) {
     io.to('/').emit("newlogbookpost",post);
   });
 
+  eventEmitter.on("announcementpost",function(post){
+    io.to('/').to('/announcementposter').emit("announcementpost",post);
+  });
+
   io.on("connection",function(socket){
     var currentURL;
 

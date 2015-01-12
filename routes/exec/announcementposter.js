@@ -1,4 +1,4 @@
-module.exports = function(app){
+module.exports = function(app,eventEmitter){
 	//file
 	var fs = require('fs');
 
@@ -74,7 +74,11 @@ module.exports = function(app){
 	                  reportError(res,err);
 	                }
 	                else{
-	                  res.send({title:req.body["title"],message:req.body["message"],department:department,date:date[0]["date"]});
+										var sendData = {title:req.body["title"],message:req.body["message"],department:department,date:date[0]["date"]};
+	                  res.send(sendData);
+
+										//emit server event for socket updates
+										eventEmitter.emit('announcementpost',sendData);
 	                }
 	              });
 	            }

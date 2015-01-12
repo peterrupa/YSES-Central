@@ -87,6 +87,7 @@ $(document).ready(function(){
 	});
 
   //socket listener for new logbook posts
+  socket.off('newlogbookpost');
   socket.on('newlogbookpost',function(post){
     var postClass;
     switch(post["department"]){
