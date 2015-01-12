@@ -45,7 +45,7 @@ var socket = require("./sockets/socket.js")(http,sessionMiddleware,eventEmitter)
 
 //application dependencies
 var search = require('./routes/search')(app);
-var functions = require('./routes/functions')(app);
+var functions = require('./routes/functions')(app,eventEmitter);
 var indexhomepage = require('./routes/index-homepage')(app);
 var profile = require('./routes/profile')(app);
 var public = require('./routes/public')(app);

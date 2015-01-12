@@ -61,15 +61,15 @@ $(document).ready(function(){
 									}
 									table_data_1 = table_data_1.concat(temphtml);
 								}
-								else if(data == "mentor" 
-									|| data == "username" 
-									|| data == "department" 
+								else if(data == "mentor"
+									|| data == "username"
+									|| data == "department"
 									|| data == "org_batch"
 									|| data == "org_class"
 									|| data == "exec_position"
 									|| data == "picture"
 								){
-									
+
 									if(data == "exec_position"){
 										var position;
 
@@ -231,7 +231,7 @@ $(document).ready(function(){
 			});
 		});
 		$("body").on("click",".edit",function(){
-			
+
 			var data = $(this).closest("tr").find("td").first().next();
 			$(this).html('Done');
 			$(this).addClass('done');
@@ -329,7 +329,7 @@ $(document).ready(function(){
 						'<span> - </span>'+
 						'<input style="width:70px;" type="text" id="stud_number" value="'+$(this).html().substring(5)+'">';
 					$(this).html(temphtml);
-				}); 
+				});
 			}
 			data.find('input').on('keypress', function(e) {
 				var code = e.keyCode || e.which;
@@ -368,8 +368,8 @@ $(document).ready(function(){
 					$(this).html(temphtml);
 				});
 			}
-			else if(traversed('org_class') 
-				|| traversed('org_batch') 
+			else if(traversed('org_class')
+				|| traversed('org_batch')
 				|| traversed('department')
 				|| traversed('position')){
 				data.each(function(index){
@@ -399,8 +399,145 @@ $(document).ready(function(){
 			var container = $('.done');
 
 			if ( (!container.is(e.target) && container.has(e.target).length === 0)){
-			
+
 			}
 		});
-	
+
+	//listen for newaccount events
+	socket.off('newaccount');
+	socket.on('newaccount',function(res){
+		var table_data_2 = ''+
+			'<table class="table table-condensed table-hover">';
+		var table_data_1 = '';
+		var img = '';
+		for(data in res){
+			var tempData;
+
+			switch(data){
+				case 'username': 		tempData = 'Username'; break;
+				case 'first_name': 		tempData = 'First Name'; break;
+				case 'middle_name':  	tempData = 'Middle Name'; break;
+				case 'last_name': 		tempData = 'Last Name'; break;
+				case 'org_class': 		tempData = 'Organization Classification'; break;
+				case 'department': 		tempData = 'Department'; break;
+				case 'student_number': 	tempData = 'Student Number'; break;
+				case 'org_batch': 		tempData = 'Organization Batch'; break;
+				case 'univ_batch': 		tempData = 'University Batch'; break;
+				case 'mentor': 			tempData = 'Mentor'; break;
+				case 'birthday': 		tempData = 'Birthday'; break;
+				case 'home_address': 	tempData = 'Home Address'; break;
+				case 'college_address': tempData = 'College Address'; break;
+				case 'exec_position': 	tempData = 'Executive Position'; break;
+				default: 				tempData = ' '; break;
+			}
+
+			if(data == "mentee"){
+				var counter = 0;
+				var temphtml = '';
+				for(var j = 0; j < res["mentee"].length; j++){
+					if(counter == 0){
+						var temphtml2 = ''+
+							'<tr class="text" data-mentee="'+res["mentee"][j]+'">'+
+								'<td>'+
+									'Mentees'+
+								'</td>'+
+								'<td>'+res["mentee"][j]+'</td>'+
+								'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+							'</tr>';
+						counter += 1;
+					} else{
+						var temphtml2 = ''+
+							'<tr class="text" data-mentee="'+res["mentee"][j]+'">'+
+								'<td>'+
+								'</td>'+
+								'<td>'+res["mentee"][j]+'</td>'+
+								'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+							'</tr>';
+					}
+					temphtml = temphtml.concat(temphtml2);
+				}
+				table_data_1 = table_data_1.concat(temphtml);
+			}
+			else if(data == "mentor"
+				|| data == "username"
+				|| data == "department"
+				|| data == "org_batch"
+				|| data == "org_class"
+				|| data == "exec_position"
+				|| data == "picture"
+			){
+
+				if(data == "exec_position"){
+					var position;
+
+					if(res['exec_position'] == null) position = 'Not an Executive Department Member';
+					else position = res['exec_position'];
+
+					var temphtml = ''+
+						'<tr class="position" data-'+'exec-position'+'="'+res['exec_position']+'">'+
+							'<td>'+'Executive Position'+'</td>'+
+							'<td>'+position+'</td>'+
+							'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+						'</tr>';
+					table_data_1 = '<table class="table table-condensed table-hover">' + temphtml + table_data_1;
+				} else if(data == "picture"){
+					var temphtml = ''+
+						'<div data-'+data+'="'+res["picture"]+'" class="account-image">'+
+							'<img src="http://localhost:8080/'+res["picture"]+'"/>'+
+						'</div>';
+					img = img.concat(temphtml);
+				} else{
+					var data_class;
+
+					switch(data){
+						case "department": 	data_class = 'department'; break;
+						case "org_batch": 	data_class = 'org_batch'; break;
+						case "org_class": 	data_class = 'org_class'; break;
+						default: 			data_class = 'text'; break;
+					}
+
+					var temphtml = ''+
+						'<tr class="'+data_class+'" data-'+data+'="'+res[data]+'">'+
+							'<td>'+tempData+'</td>'+
+							'<td>'+res[data]+'</td>'+
+							'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+						'</tr>';
+					table_data_1 = table_data_1.concat(temphtml);
+				}
+			}
+			else{
+				var data_class;
+
+				switch(data){
+					case "student_number": 	data_class = 'studentnumber'; break;
+					case "birthday": 		data_class = 'birthdate'; break;
+					default: 				data_class = 'text'; break;
+				}
+
+				var temphtml = ''+
+					'<tr class="'+data_class+'" data-'+data+'="'+res[data]+'">'+
+						'<td>'+tempData+'</td>'+
+						'<td>'+res[data]+'</td>'+
+						'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+					'</tr>';
+				table_data_2 = table_data_2.concat(temphtml);
+			}
+		}
+		var html = ''+
+			'<div data-username="'+res['username']+'" class="to-validate">'+
+				img+
+				'<h3 style="float:left;font-weight:bold;padding-top:0px">'+res['first_name']+' '+res['last_name']+'</h3>'+
+				'<span style="float:left;padding-top:29px;margin-left:10px;">'+res['department']+' Department'+'</span>'+
+				'<div class="account-data">'+
+					table_data_2+'</table>'+
+					table_data_1+'</table>'+
+				'</div>'+
+				'<div class="to-validate-button">'+
+					'<button class="pull-down accept">ACCEPT</button>'+
+					'<button class="pull-down reject">REJECT</button>'+
+				'</div>'+
+			'</div>';
+		$("#temp").append(html);
+		alert("NEW ACCOUNT. DO SOME FANCY STUFFS");
+	});
 });

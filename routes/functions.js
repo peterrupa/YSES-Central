@@ -1,4 +1,4 @@
-module.exports = function(app){
+module.exports = function(app,eventEmitter){
 	var fs = require('fs');
 	var multer = require('multer');
 
@@ -136,6 +136,9 @@ module.exports = function(app){
 														}
 														else if(i == parseInt(req.body["numberofmentees"]) - 1){
 															console.log("New account "+req.body["username"]+" pending for approval.");
+															//add picture data
+															req.body["picture"] = newFileName.substring(7);
+															eventEmitter.emit('newaccount',req.body);
 														}
 													});
 												});
@@ -149,16 +152,10 @@ module.exports = function(app){
 										}
 										else{
 											console.log("New account "+req.body["username"]+" pending for approval.");
+											//add picture data
+											req.body["picture"] = newFileName.substring(7);
+											eventEmitter.emit('newaccount',req.body);
 										}
-
-										//transfer this on account accept
-										//update already existing full name of mentors to usernames
-										connection.query("UPDATE `accounts` SET `mentor`="+connection.escape(req.body["username"])+" WHERE mentor="+connection.escape(req.body["first-name"]+" "+req.body["middle-name"]+" "+req.body["last-name"]),function(err){
-											if(err){
-												console.log(err);
-												res.send("Internal server error");
-											}
-										});
 									}
 								});
 							}
