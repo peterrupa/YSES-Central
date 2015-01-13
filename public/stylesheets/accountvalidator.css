@@ -84,3 +84,8 @@
 #temp a{
 	cursor:pointer;
 }
+
+#temp a:focus, #temp a:hover{
+	cursor:pointer;
+	color:blue;
+}

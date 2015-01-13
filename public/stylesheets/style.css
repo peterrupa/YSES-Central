@@ -9,8 +9,14 @@ body {
 	background-color: #1b58b8;
 }
 
-a {
+a{
 	color: black;
+	font-weight: bold;
+}
+
+a:hover, a:focus {
+	color: white;
+	text-decoration:none;
 }
 
 @font-face {
@@ -23,14 +29,14 @@ a {
 	font-family: headerText;
 	text-transform:;
 
-	background-color:white;
+	background-color:rgba(240,240,240,1);
 	width:100%;
 	height:100%;
 	margin-top:30px;
 	padding-left:10px;
 	padding-top:50px;
 }
-
+/*
 .logbook-header{
 	background-image:url('../images/titleheader/laptop-asset.jpg');
 	background-size:100% auto;
@@ -47,20 +53,20 @@ a {
 	background-position:center 95px;
 
 	color:white;
-}
+}*/
 
 .accountvalidator-header{
-	background-image:url('../images/titleheader/tool.jpg');
+	/*background-image:url('../images/titleheader/tool.jpg');
 	background-size:100% auto;
 	background-repeat:none;
 	background-position:center 920px;
-
-	color:white;
+	
+	color:white;*/
 
 	margin-bottom:15px;
 }
 
-.announcementposter-header{
+/*.announcementposter-header{
 	background-image:url('../images/titleheader/sky.jpg');
 	background-size:100% auto;
 	background-repeat:none;
@@ -87,13 +93,13 @@ a {
 	padding-left:15px;
 	color:white;
 }
-
+*/
 .profile-header{
-	background-image:url('../images/titleheader/tree.jpg');
+	/*background-image:url('../images/titleheader/tree.jpg');
 	background-size:100% auto;
 	background-repeat:none;
 	background-position:0px 100px;
-
+	*/
 	width:98.665%;
 	margin-top:0px;
 	margin-bottom:15px;
@@ -102,6 +108,7 @@ a {
 }
 
 .title-header h2{
+	color:rgba(20,20,20,.8);
 	margin-top:0px;
 	padding-top:0px;
 }
@@ -481,4 +488,19 @@ body .overlimit{ color:red; }
 ::-webkit-scrollbar-thumb {
 	border-radius: 0px;
 	background-color:rgba(0,0,0,1);
+}
+
+#chatbox-icon .tooltip{
+	margin-top:10px;
+	width:120px;
+}
+
+#logbook-icon .tooltip{
+	margin-top:10px;
+	width:120px;
+}
+
+#department-icon .tooltip{
+	margin-top:10px;
+	width:150px;
 }

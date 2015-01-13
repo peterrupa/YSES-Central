@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	$("body").on("click",".hoverClose",function(){
-		$(this).parent().parent().remove();
+		$(this).parent().parent().slideUp();
 	});
 
 	var announcementIndex = 0 //number of current announcements displayed. initialized at zero

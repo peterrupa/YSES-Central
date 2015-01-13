@@ -1,4 +1,9 @@
 $(document).ready(function(){
+
+	$("body").on("click",".hoverClose",function(){
+		$(this).parent().parent().slideUp();
+	});
+
   var announcementIndex = 0 //number of current announcements displayed. initialized at zero
 
 	//fetch announcements function
@@ -27,9 +32,9 @@ $(document).ready(function(){
 										break;
 						}
 
-            for(data in res[i]){
-              res[i][data] = safe_tags(res[i][data]);
-            }
+			            for(data in res[i]){
+			              res[i][data] = safe_tags(res[i][data]);
+			            }
 
 						var temphtml = ''+
 							'<li>'+

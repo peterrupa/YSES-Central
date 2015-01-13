@@ -58,7 +58,7 @@ html
 										a(href="javascript:{}",onclick="$('#logout').submit()") Log out
 								div#nav-button-group.text-center
 									div#logbook-icon.hidden-sm.hidden-md
-										a(href="#",data-toggle="modal",data-target="#logbookModal")
+										a(href="#",data-toggle="modal",data-target="#logbookModal,tooltip",data-placement="left",title="Write In Logbook")
 											span.glyphicon.glyphicon-pencil
 										div#logbookModal.modal.fade
 											div.modal-dialog
@@ -74,10 +74,10 @@ html
 														span#counter
 														input#postLogbook.btn.btn-default(type="button",value="Post")
 									div#chatbox-icon.hidden-sm.hidden-md
-										a.menu-icon-chatbox(href="#")
+										a.menu-icon-chatbox(href="#",data-target="tooltip",data-placement="left",title="Open Chatbox")
 											span.glyphicon.glyphicon-send
 									div#department-icon.hidden-sm.hidden-md
-										a.menu-icon-department(href="#")
+										a.menu-icon-department(href="#",data-target="tooltip",data-placement="left",title="Access Department Systems")
 											span.glyphicon.glyphicon-list
 										div#department-button-container
 											div.wrapper.clearfix
@@ -222,3 +222,4 @@ html
 		script(src='http://localhost:8080/javascripts/department.js')
 		script(src='http://localhost:8080/javascripts/postLogbook.js')
 		script(src='http://localhost:8080/javascripts/autocomplete.js')
+		script(src='http://localhost:8080/javascripts/bootstrap-tooltip.js')

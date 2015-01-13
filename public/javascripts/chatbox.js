@@ -62,3 +62,24 @@ $("a.menu-icon-chatbox").click(function(e) {
 $(document).ready(function(){
 	$("ul.side-menu").niceScroll().hide();
 });
+
+$(function(){
+	$('a').tooltip();
+
+	$('body').tooltip({
+    delay: { show: 300, hide: 0 },
+    placement: function(tip, element) { //$this is implicit
+        var position = $(element).position();
+        if (position.left > 515) {
+            return "left";
+        }
+        if (position.left < 515) {
+            return "right";
+        }
+        if (position.top < 110){
+            return "bottom";
+        }
+        	return "top";
+    	},selector: '[rel=tooltip]:not([disabled])'
+	});
+});

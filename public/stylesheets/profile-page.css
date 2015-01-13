@@ -154,30 +154,49 @@ body{
 	left:-30px;
 }
 
-.box-about{
+/*.box-about{
+	background-opacity:0.5;
 	background-color:rgb(255,255,255);
+	background-image:url('../images/button/about101.png');
+	background-position:;
+	background-size:100px auto;
+	background-repeat:no-repeat;
 	/*color:white;
-	background-color:rgb(120,0,0);*/
+	background-color:rgb(120,0,0);*
 }
-
 .box-mentor{
+	background-opacity:0.5;
 	background-color:rgb(255,255,255);
+	background-image:url('../images/button/mentor.png');
+	background-position:;
+	background-size:100px auto;
+	background-repeat:no-repeat;
 	/*color:black;
-	background-color:rgb(100,255,100);*/
+	background-color:rgb(100,255,100);*
 }
 
 .box-mentee{
+	background-opacity:0.5;
 	background-color:rgb(255,255,255);
+	background-image:url('../images/button/mentee.png');
+	background-position:;
+	background-size:100px auto;
+	background-repeat:no-repeat;
 	/*color:black;
-	background-color:rgb(250,250,0);*/
+	background-color:rgb(250,250,0);*
 }
 
 .box-moreinfo{
+	background-opacity:0.5;
 	background-color:rgb(255,255,255);
+	background-image:url('../images/button/more.png');
+	background-position:;
+	background-size:100px auto;
+	background-repeat:no-repeat;
 	/*color:white;
-	background-color:rgb(0,50,50);*/
+	background-color:rgb(0,50,50);*
 }
-
+*/
 .box-mentee img{
 	position: relative;
 	height:214px;
