@@ -54,10 +54,10 @@ var profile = require('./routes/profile')(app,async);
 var public = require('./routes/public')(app);
 var viewAllYSERs = require('./routes/viewAllYSERs')(app);
 var announcements = require('./routes/announcements')(app);
-var logbook = require('./routes/logbook')(app,eventEmitter);
+var logbook = require('./routes/logbook')(app,eventEmitter,async);
 //exec
 var accountvalidator = require('./routes/exec/accountvalidator')(app,async);
-var announcementposter = require('./routes/exec/announcementposter')(app,eventEmitter);
+var announcementposter = require('./routes/exec/announcementposter')(app,eventEmitter,async);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

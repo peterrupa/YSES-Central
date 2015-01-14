@@ -228,6 +228,7 @@ module.exports = function(app,eventEmitter,async){
 						function(err){
 							callback();
 						});
+						connection.release();
 					});
 				}
 			},
