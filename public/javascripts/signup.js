@@ -179,9 +179,8 @@ $(document).ready(function(){
 	menteesAutocomplete();
 
 	//add/remove mentees
-	var numberOfMentees = 1;
 	$("#mentees").on('click','.mentee-field .add-mentee',function(){
-		var newfield = '<div class="mentee-field input-group"><input class="mentee-textfield form-control accountsAutocomplete" type="text" name="mentee-'+ ++numberOfMentees +'"><span class="input-group-btn"><button class="add-mentee btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></span></div>'
+		var newfield = '<div class="mentee-field input-group"><input class="mentee-textfield form-control accountsAutocomplete" type="text" name="mentee"><span class="input-group-btn"><button class="add-mentee btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></span></div>'
 		$(this).append('<span class="glyphicon glyphicon-remove"></span>');
 		$(this).find('.glyphicon-plus').remove();
 		$(this).removeClass('add-mentee');
@@ -189,18 +188,10 @@ $(document).ready(function(){
 		$("#mentees").append(newfield);
 		menteesAutocomplete();
 	});
+
 	$("#mentees").on('click','.mentee-field .remove-mentee',function(){
-		$(this).parent().nextAll().each(function(index){
-			var temp;
-			temp = $(this).children(".mentee-textfield").attr("name").substring(7);
-			temp = parseInt(temp)-1;
-			temp = temp.toString();
-			$(this).children(".mentee-textfield").attr("name","mentee-"+temp);
-		});
 		$(this).parent().parent().remove();
 		menteesAutocomplete();
-
-		numberOfMentees--;
 	});
 
 	$("#photo").on("change",function(){
@@ -213,32 +204,36 @@ $(document).ready(function(){
 	});
 
 	//onsubmit signup
-	$("#signupform").on("submit",function(){
+	$("#signupform").on("submit",function(event){
+		event.preventDefault();
 		var previewCoordinates = $("#draggable").position();
-
 		var excess;
 		//assign crop coordinates
 		if($("#draggable").width()<$("#draggable").height()){
 			excess = $("#draggable").height()-$("#screen").height();
-			$("#imageleft").val(previewCoordinates.left);
-			$("#imagetop").val(previewCoordinates.top-excess);
+			var imageCoordinates = {left:previewCoordinates.left,top:previewCoordinates.top-excess};
 		}
 		else{
 			excess = $("#draggable").width()-$("#screen").width()
-			$("#imageleft").val(previewCoordinates.left-excess);
-			$("#imagetop").val(previewCoordinates.top);
+			var imageCoordinates = {left:previewCoordinates.left-excess,top:previewCoordinates.top};
 		}
-
-		//assign number of mentees
-		$("#numberofmentees").val(numberOfMentees);
 
 		//assign university batch from student number
-		$("#univbatch").val($("#signupform input[name='sn-year']").val());
+		var univ_batch = $("#signupform input[name='sn-year']").val();
 
-		if($(".mentee-textfield[name='mentee-1']").val() == "" && numberOfMentees == 1){
-			$("#numberofmentees").val(0);
-		}
-
+		$(this).ajaxSubmit({
+			data: {
+				imageCoordinates: imageCoordinates,
+			},
+			error: function(xhr) {
+				console.log('Error: ' + xhr.status);
+      },
+			success: function(res) {
+				$("#signupform").reset();
+				$("#signupModal").modal('hide');
+				alert("Insert successful message here!");
+			}
+		});
 	});
 
 	//make this dynamic and for all cases

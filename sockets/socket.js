@@ -14,29 +14,26 @@ module.exports = function(http,sessionMiddleware,eventEmitter) {
   });
 
   eventEmitter.on("newaccount",function(data){
-    var mentee = [];
-    for(var i = 1; i <= parseInt(data["numberofmentees"]); i++){
-      mentee.push(data["mentee-"+i]);
-    }
-    var studentnumber = data["sn-year"]+"-"+data["sn-number"];
-    var send = {
-      first_name: data["first-name"],
-      middle_name: data["middle-name"],
-      last_name: data["last-name"],
-      org_class: data["org-class"],
-      department: data["department"],
-      student_number: studentnumber,
-      username: data["username"],
-      org_batch: data["org-batch"],
-      univ_batch: data["sn-year"],
-      mentor: data["mentor"],
-      mentee: mentee,
-      birthday: data["bday"],
-      home_address: data["homeAdd"],
-      college_address: data["collegeAdd"],
-      exec_position: data["position"]?data["position"]:null,
-      picture: data["picture"]
+     var student_number = data["sn-year"]+"-"+data["sn-number"];
+     var send = {
+       first_name: data["first_name"],
+       middle_name: data["middle_name"],
+       last_name: data["last_name"],
+       org_class: data["org_class"],
+       department: data["department"],
+       student_number: student_number,
+       username: data["username"],
+       org_batch: data["org_batch"],
+       univ_batch: data["sn-year"],
+       mentor: data["mentor"],
+       mentee: data["mentee"],
+       birthday: data["birthday"],
+       home_address: data["home_address"],
+       college_address: data["college_address"],
+       exec_position: data["exec_position"]?data["exec_position"]:null,
+       picture: data["picture"]
     };
+    console.log(send);
     io.to('/accountvalidator').emit("newaccount",send);
   });
 

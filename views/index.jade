@@ -47,14 +47,14 @@ html
 												div.second-column
 													ul.no-bullets.container
 														li First name:
-															input.input-text.form-control(type="text",name="first-name")
+															input.input-text.form-control(type="text",name="first_name")
 														li Middle name:
-															input.input-text.form-control(type="text",name="middle-name")
+															input.input-text.form-control(type="text",name="middle_name")
 														li Last name:
-															input.input-text.form-control(type="text",name="last-name")
+															input.input-text.form-control(type="text",name="last_name")
 														li Org Classification:
 															br
-															select.form-control(form="signupform",name="org-class")
+															select.form-control(form="signupform",name="org_class")
 																option(value="Active") Active
 																option(value="Inactive") Inactive
 																option(value="Alumni") Alumni
@@ -85,7 +85,7 @@ html
 														li Retype Password:
 															input#retype-password.form-control(type="password",name="retype-password")
 														li Organization Batch:
-															select.form-control(form="signupform",name="org-batch")
+															select.form-control(form="signupform",name="org_batch")
 																option(value="Charter") Charter
 																option(value="Synergy") Synergy
 																option(value="RAMpage") RAMpage
@@ -95,20 +95,16 @@ html
 														li#mentees
 															span Mentees:
 															div.mentee-field.input-group
-																input.accountsAutocomplete.mentee-textfield.form-control(type="text",name="mentee-1")
+																input.accountsAutocomplete.mentee-textfield.form-control(type="text",name="mentee")
 																span.input-group-btn
 																	button.add-mentee.btn.btn-default(type="button",value="+")
 																		span.glyphicon.glyphicon-plus
 														li Birthday:
-															input.form-control(type="date",name="bday")
+															input.form-control(type="date",name="birthday")
 														li Home Address
-															input.input-text.form-control(type="text",name="homeAdd")
+															input.input-text.form-control(type="text",name="home_address")
 														li College Address
-															input.input-text.form-control(type="text",name="collegeAdd")
-														input#imageleft(type="hidden",name="imageleft")
-														input#imagetop(type="hidden",name="imagetop")
-														input#numberofmentees(type="hidden",name="numberofmentees")
-														input#univbatch(type="hidden",name="univ-batch")
+															input.input-text.form-control(type="text",name="college_address")
 											div.modal-footer
 												button.btn.btn-warning(type="button",data-dismiss="modal",data-toggle="modal",data-target="#loginModal") Existing user?
 												button.btn.btn-default(type="submit") Submit
@@ -198,6 +194,7 @@ html
 		script(src='javascripts/jquery.nicescroll.js')
 		script(src='javascripts/jquery.mousewheel.min.js')
 		script(src='javascripts/jquery.simplr.smoothscroll.min.js')
+		script(src='javascripts/jquery.form.js')
 		script(src='javascripts/parallax.js')
 		script(src='javascripts/carousel.js')
 		script(src='javascripts/signup.js')

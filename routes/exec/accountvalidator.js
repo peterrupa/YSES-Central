@@ -66,20 +66,20 @@ module.exports = function(app,async){
 
 								var mentees = [];
 								//fetch mentees
-								var query = "SELECT `mentees` FROM accounts_pending_"+account["username"]+"_mentees WHERE 1";
+								var query = "SELECT `mentee` FROM `accounts_pending_mentee` WHERE mentor="+connection.escape(account["username"]);
 								connection.query(query,function(err,mentee){
 									if(err) reportError(res,err);
 									else{
 										//check if mentees have account
 										async.each(mentee,function(mentee,callback){
-											var query = "SELECT `full_name` FROM `accounts` WHERE username='"+mentee["mentees"]+"'";
+											var query = "SELECT `full_name` FROM `accounts` WHERE username='"+mentee["mentee"]+"'";
 											connection.query(query,function(err,result){
 												if(err) reportError(res,err);
 												else{
 													if(result[0]){
-														mentee["mentees"] = result[0]["full_name"];
+														mentee["mentee"] = result[0]["full_name"];
 													}
-													mentees.push(mentee["mentees"]);
+													mentees.push(mentee["mentee"]);
 													callback();
 												}
 											});

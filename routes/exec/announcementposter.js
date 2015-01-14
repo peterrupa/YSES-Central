@@ -49,6 +49,8 @@ module.exports = function(app,eventEmitter){
 	  }
 	});
 
+/* OPTIMIZE, WATERFALLS */
+
 	app.post('/postAnnouncements',function(req,res){
 	  var session = req.session;
 

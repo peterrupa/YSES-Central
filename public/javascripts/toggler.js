@@ -207,30 +207,31 @@ $(document).ready(function(){
 			data: "account="+location.pathname.substring(9),
 			type: "GET",
 			success: function (res) {
-				if(res == "0"){
+				if(res == 242){
 					//edit this
 					$("#mentee-data").append("No mentees");
 				}
 				else{
+					console.log(res);
 					//mentees with accounts
-					for(var i = 0; i < res.accounts.length; i++){
-						for(data in res.accounts[i]){ //clean possible HTML tags
-							res.accounts[i][data] = safe_tags(res.accounts[i][data]);
+					for(var i = 0; i < res.Accounts.length; i++){
+						for(data in res.Accounts[i]){ //clean possible HTML tags
+							res.Accounts[i][data] = safe_tags(res.Accounts[i][data]);
 						}
-						var middlename = res.accounts[i]["middle_name"].split(" ");
+						var middlename = res.Accounts[i]["middle_name"].split(" ");
 						var middlenameinitials = "";
 						for(var j = 0; j < middlename.length; j++){
 							middlenameinitials = middlenameinitials.concat(middlename[j].substring(0,1));
 						}
-						var fullname = res.accounts[i]["first_name"] + " " + middlenameinitials + ". " + res.accounts[i]["last_name"];
+						var fullname = res.Accounts[i]["first_name"] + " " + middlenameinitials + ". " + res.Accounts[i]["last_name"];
 
-						var menteeHTML = "<div class='row mentee-content'><a class='ajax' href='http://localhost:8080/profile/" + res.accounts[i]["username"] +"'><div class='mentee-data-image'><img src='http://localhost:8080/" + res.accounts[i]["picture"] + "' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + fullname + "</strong><p>" + res.accounts[i]["org_class"] + "</p><p>" + res.accounts[i]["department"] + "</p></div></a></div>";
+						var menteeHTML = "<div class='row mentee-content'><a class='ajax' href='http://localhost:8080/profile/" + res.Accounts[i]["username"] +"'><div class='mentee-data-image'><img src='http://localhost:8080/" + res.Accounts[i]["picture"] + "' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + fullname + "</strong><p>" + res.Accounts[i]["org_class"] + "</p><p>" + res.Accounts[i]["department"] + "</p></div></a></div>";
 						$("#mentee-data").append(menteeHTML);
 					}
-					//mentees without accounts
-					for(var i = 0; i < res.noaccounts.length; i++){
-						res.noaccounts[i] = safe_tags(res.noaccounts[i]);
-						var menteeHTML = "<div class='row mentee-content'><div class='mentee-data-image'><img src='http://localhost:8080/images/unknownpic.jpg' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + res.noaccounts[i] + "</strong></div>";
+					//mentees without Accounts
+					for(var i = 0; i < res.noAccounts.length; i++){
+						res.noAccounts[i] = safe_tags(res.noAccounts[i]);
+						var menteeHTML = "<div class='row mentee-content'><div class='mentee-data-image'><img src='http://localhost:8080/images/unknownpic.jpg' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + res.noAccounts[i] + "</strong></div>";
 						$("#mentee-data").append(menteeHTML);
 					}
 				}

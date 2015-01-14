@@ -1,4 +1,4 @@
-module.exports = function(app,eventEmitter){
+module.exports = function(app,eventEmitter,async){
 	var fs = require('fs');
 	var multer = require('multer');
 
@@ -51,120 +51,197 @@ module.exports = function(app,eventEmitter){
 	app.post('/signup',
 		[multer({dest:'./public/uploads/pending'}),
 		function(req, res) {
-			//rename uploaded file to account's username
+			//insert validation here
+
+			//set image names here
 			var oldFileName = "public/uploads/pending/"+req.files["photo"]["name"];
 			var newFileName = "public/uploads/pending/"+req.body["username"]+"."+req.files["photo"]["extension"];
 
-			//process the uploaded image
-			fs.rename(oldFileName,newFileName, function(){
-				//get image size
-				gm(newFileName).size(function(err,size){
-					if(!err){
-						//resize image to 150px
-						if(size.width<size.height){
-							gm(newFileName).resize(250).write(newFileName,function(err){
-								if(!err){
-									gm(newFileName).crop(250,250,0,Math.abs(req.body["imagetop"])).write(newFileName,function(err){
-										if(!err){
-											console.log(newFileName+" resized to 150x150 px, cropped at (0,"+Math.abs(req.body["imagetop"])+").");
-										}
+			//clean up double instances of dropdowns
+			req.body["org_class"] = req.body["org_class"][0];
+			req.body["department"] = req.body["department"][0];
+			req.body["org_batch"] = req.body["org_batch"][0];
+			req.body["exec_position"]? req.body["exec_position"] = req.body["exec_position"][0] : req.body["exec_position"] = null;
+
+			//if there's only one mentee, convert it to an array
+			if(req.body["mentee"].constructor !== Array){
+				req.body["mentee"] = [req.body["mentee"]];
+			}
+
+			async.parallel({
+				image: function(callback){
+					//rename uploaded file to account's username
+					async.waterfall([
+						function(callback){
+							//rename photo
+							try{
+								fs.rename(oldFileName,newFileName);
+								callback();
+							}
+							catch(err){
+								callback(err);
+							}
+						},
+						function(callback){
+							//get image size
+							try{
+								gm(newFileName).size(function(err,size){
+									callback(null,size);
+								});
+							}
+							catch(err){
+								callback(err);
+							}
+						},
+						function(size,callback){
+							//resize image to 250px
+							try{
+								if(size.width<size.height){
+									gm(newFileName).resize(250).write(newFileName,function(err){
+										callback(null,"top");
 									});
 								}
-							});
+								else{
+									gm(newFileName).resize(null,250).write(newFileName,function(err){
+										callback(null,"left");
+									});
+								}
+							}
+							catch(err){
+								callback(err);
+							}
+						},
+						function(orientation,callback){
+							//crop image
+							try{
+								if(orientation == "top"){
+									gm(newFileName).crop(250,250,0,Math.abs(req.body["imageCoordinates"]["top"])).write(newFileName,function(err){
+										callback();
+									});
+								}
+								else{
+									gm(newFileName).crop(250,250,Math.abs(req.body["imageCoordinates"]["left"]),0).write(newFileName,function(err){
+										callback();
+									});
+								}
+							}
+							catch(err){
+								callback(err);
+							}
+						}
+					],
+					function(err){
+						if(err){
+							console.log(err)
 						}
 						else{
-							gm(newFileName).resize(null,250).write(newFileName,function(err){
-								if(!err){
-									gm(newFileName).crop(250,250,Math.abs(req.body["imageleft"]),0).write(newFileName,function(err){
-										console.log(newFileName+" resized to 150x150 px, cropped at ("+Math.abs(req.body["imageleft"])+",0).");
-									});
-								}
-							});
+							callback();
 						}
-					}
-				});
-			});
-
-			//save to database
-			pool.getConnection(function(err,connection){
-				connection.query("SELECT username FROM `accounts` WHERE full_name="+connection.escape(req.body["mentor"]),function(err,username){
-					if(err){
-						console.log(err);
-						res.send("Internal server error");
-					}
-					else{
-						if(username[0]){
-							req.body["mentor"] = username[0]["username"];
-						}
-						var studentNumber = req.body["sn-year"]+"-"+req.body["sn-number"];
-						var salt = "this is a rainbow unicorn"
-						var password = encrypt(salt+req.body["password"])
-
-						var queryAccount = "INSERT INTO `accounts_pending`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES ("+connection.escape(req.body["username"])+","+connection.escape(password)+","+connection.escape(req.body["first-name"])+","+connection.escape(req.body["middle-name"])+","+connection.escape(req.body["last-name"])+","+connection.escape(req.body["org-class"])+","+connection.escape(req.body["department"])+","+connection.escape(studentNumber)+","+connection.escape(req.body["org-batch"])+","+connection.escape(req.body["univ-batch"])+","+connection.escape(req.body["mentor"])+","+connection.escape(req.body["bday"])+","+connection.escape(req.body["homeAdd"])+","+connection.escape(req.body["collegeAdd"])+","+connection.escape(newFileName)+","+connection.escape(req.body["first-name"]+" "+req.body["middle-name"]+" "+req.body["last-name"])+","+connection.escape(req.body["exec_position"])+")";
-						var account_username_mentees = "accounts_pending_"+req.body["username"]+"_mentees";
-
-						//insert row into accounts
-						connection.query(queryAccount,function(err){
-							if(err){
-								console.log(err);
-								res.send("Internal server error");
-							}
-							else{
-								var queryMenteesTable = "CREATE TABLE "+account_username_mentees+" (mentees VARCHAR(50))";
-
-								//insert row into accounts_username_mentees
-								connection.query(queryMenteesTable,function(err){
-									if(err){
-										console.log(err);
-										res.send("Internal server error!");
+					});
+				},
+				database: function(callback){
+					//save info to the database
+					pool.getConnection(function(err,connection){
+						async.waterfall([
+							function(callback){
+								//check for already existing mentor
+								var query = "SELECT username FROM `accounts` WHERE full_name="+connection.escape(req.body["mentor"]);
+								connection.query(query,function(err,username){
+									if(username[0]){
+										req.body["mentor"] = username[0]["username"];
 									}
-									else{
-										//insert mentees to the newly generated table
-										if(req.body["numberofmentees"] > 0){
+									callback(null,req.body["mentor"]);
+								});
+							},
+							function(mentor,callback){
+								async.parallel({
+									account: function(callback){
+										//get full name
+										var full_name = req.body["first_name"]+" "+req.body["middle_name"]+" "+req.body["last_name"];
 
-											function insertMentee(mentee,i){
-												connection.query("SELECT username FROM `accounts` WHERE full_name="+connection.escape(mentee),function(err,username){
+										//salt and hash password
+										var salt = "this is a rainbow unicorn";
+										var password = encrypt(salt+req.body["password"]);
+
+										var temp = {};
+
+										//get student number
+										temp["student_number"] = req.body["sn-year"]+"-"+req.body["sn-number"];
+
+										//escape all input
+
+										for(data in req.body){
+											temp[data] = connection.escape(req.body[data]);
+										}
+										full_name = connection.escape(full_name);
+										password = connection.escape(password);
+										temp["student_number"] = connection.escape(temp["student_number"]);
+
+										//insert to table
+										var values = "("+temp["username"]+","+password+","+temp["first_name"]+","+temp["middle_name"]+","+temp["last_name"]+","+temp["org_class"]+","+temp["department"]+","+temp["student_number"]+","+temp["org_batch"]+","+temp["sn-year"]+","+temp["mentor"]+","+temp["birthday"]+","+temp["home_address"]+","+temp["college_address"]+",'"+newFileName+"',"+full_name+","+temp["exec_position"]+")";
+										var query = "INSERT INTO `accounts_pending`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES "+values;
+
+										connection.query(query,function(err){
+											if(err) throw err;
+											callback();
+										});
+									},
+									mentee: function(callback){
+										//insert mentees
+										if(req.body["mentee"]){
+											async.map(req.body["mentee"],
+											function(mentee,callback){
+												//check if mentee has already existing account
+												var query = "SELECT username FROM `accounts` WHERE full_name="+connection.escape(mentee);
+
+												connection.query(query,function(err,username){
 													if(username[0]){
 														mentee = username[0]["username"];
 													}
-													var queryMenteesRow = "INSERT INTO `"+account_username_mentees+"` (`mentees`) VALUES ("+connection.escape(mentee)+")";
-
-													connection.query(queryMenteesRow,function(err){
-														if(err){
-															console.log(err);
-															res.send("Internal server error!");
-														}
-														else if(i == parseInt(req.body["numberofmentees"]) - 1){
-															console.log("New account "+req.body["username"]+" pending for approval.");
-															//add picture data
-															req.body["picture"] = newFileName.substring(7);
-															eventEmitter.emit('newaccount',req.body);
-														}
-													});
+													callback(err,mentee);
 												});
-											}
-
-											for(var i = 0 ; i < req.body["numberofmentees"]; i++){
-												var variableName = "mentee-"+(i+1);
-
-												insertMentee(req.body[variableName],i);
-											}
+											},
+											function(err,mentees){
+												//insert username as pair
+												var temp = [];
+												for(var i = 0; i < mentees.length; i++){
+													temp.push([mentees[i],req.body["username"]]);
+												}
+												//insert to database
+												var query = "INSERT INTO `accounts_pending_mentee` (`mentee`,`mentor`) VALUES ?";
+												connection.query(query,[temp],function(err){
+													if(err) throw err;
+													callback();
+												});
+											});
 										}
 										else{
-											console.log("New account "+req.body["username"]+" pending for approval.");
-											//add picture data
-											req.body["picture"] = newFileName.substring(7);
-											eventEmitter.emit('newaccount',req.body);
+											callback();
 										}
 									}
+								},
+								function(err){
+									callback();
 								});
 							}
+						],
+						function(err){
+							callback();
 						});
-					}
-				});
-				connection.release();
-			});
-			res.redirect("/");
+					});
+				}
+			},
+			function(err,results){
+				if(err) res.sendStatus(500);
+				else{
+					res.sendStatus(200);
+					console.log("New pending account "+req.body["username"]+" successfully processed.");
+
+					//add picture
+					req.body["picture"] = newFileName.substring(7);
+					eventEmitter.emit('newaccount',req.body);
+				}
+			})
 		}
 	]);
 }
