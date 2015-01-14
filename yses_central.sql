@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2015 at 02:19 PM
+-- Generation Time: Jan 14, 2015 at 05:36 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -66,66 +66,24 @@ INSERT INTO `accounts` (`username`, `password`, `first_name`, `middle_name`, `la
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accounts_almermamer_mentees`
+-- Table structure for table `accounts_mentee`
 --
 
-CREATE TABLE IF NOT EXISTS `accounts_almermamer_mentees` (
-  `mentees` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accounts_arvielimbo_mentees`
---
-
-CREATE TABLE IF NOT EXISTS `accounts_arvielimbo_mentees` (
-  `mentees` varchar(50) DEFAULT NULL
+CREATE TABLE IF NOT EXISTS `accounts_mentee` (
+  `mentee` varchar(50) NOT NULL,
+  `mentor` varchar(50) NOT NULL,
+  PRIMARY KEY (`mentee`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `accounts_arvielimbo_mentees`
+-- Dumping data for table `accounts_mentee`
 --
 
-INSERT INTO `accounts_arvielimbo_mentees` (`mentees`) VALUES
-('tricycle');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accounts_badluckbrian_mentees`
---
-
-CREATE TABLE IF NOT EXISTS `accounts_badluckbrian_mentees` (
-  `mentees` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accounts_kath28_mentees`
---
-
-CREATE TABLE IF NOT EXISTS `accounts_kath28_mentees` (
-  `mentees` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `accounts_kath28_mentees`
---
-
-INSERT INTO `accounts_kath28_mentees` (`mentees`) VALUES
-('almermamer');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accounts_kimini07_mentees`
---
-
-CREATE TABLE IF NOT EXISTS `accounts_kimini07_mentees` (
-  `mentees` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `accounts_mentee` (`mentee`, `mentor`) VALUES
+('almermamer', 'kath28'),
+('Mon Cedrick Glipo Frias', 'queenjubs'),
+('qylegeronimo', 'penguinlove'),
+('tricycle', 'arvielimbo');
 
 -- --------------------------------------------------------
 
@@ -159,100 +117,30 @@ CREATE TABLE IF NOT EXISTS `accounts_pending` (
 --
 
 INSERT INTO `accounts_pending` (`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES
-('1', '14185c476467d716aec961b073f365841a8e348cbed76e8857dd4c5678055b94', '1', '1', '1', 'Active', 'Junior Projects and Activities', '1111-11111', 'Charter', '1111', '1', '1111-11-11', '1', '1', 'public/uploads/pending/1.png', '1 1 1', NULL),
+('getLostPanget', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Maria Theresa', 'Salvador', 'Nicdao', 'Active', 'Scholastics', '2011-56717', 'Synergy', '2011', 'Tere''s Mentor', '1994-10-29', 'Hermosa, Bataan', 'Silverios Compound', 'public/uploads/pending/getLostPanget.jpg', 'Maria Theresa Salvador Nicdao', NULL),
+('username', '26bdbdd16f7a11eff3e5fd8b1d0590798bf6835a93df3eceb3398c98ef324ef3', 'first', 'middle', 'last', 'Active', 'Visuals and Logistics', '2012-43132', 'Charter', '2012', 'tricycle', '1111-03-21', 'home address', 'college address', 'public/uploads/pending/username.jpg', 'first middle last', 'Visuals and Logistics Head'),
 ('zaiizaii', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Zion Ruth', 'Borres', 'Gragasin', 'Active', 'Junior Projects and Activities', '2013-53423', 'RAMpage', '2013', 'tricycle', '1996-06-06', 'Deparo, Caloocan', 'PUP', 'public/uploads/pending/zaiizaii.jpg', 'Zion Ruth Borres Gragasin', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accounts_pending_1_mentees`
+-- Table structure for table `accounts_pending_mentee`
 --
 
-CREATE TABLE IF NOT EXISTS `accounts_pending_1_mentees` (
-  `mentees` varchar(50) DEFAULT NULL
+CREATE TABLE IF NOT EXISTS `accounts_pending_mentee` (
+  `mentee` varchar(50) NOT NULL,
+  `mentor` varchar(50) NOT NULL,
+  PRIMARY KEY (`mentee`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `accounts_pending_1_mentees`
+-- Dumping data for table `accounts_pending_mentee`
 --
 
-INSERT INTO `accounts_pending_1_mentees` (`mentees`) VALUES
-('12'),
-('34');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accounts_pending_zaiizaii_mentees`
---
-
-CREATE TABLE IF NOT EXISTS `accounts_pending_zaiizaii_mentees` (
-  `mentees` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accounts_penguinlove_mentees`
---
-
-CREATE TABLE IF NOT EXISTS `accounts_penguinlove_mentees` (
-  `mentees` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `accounts_penguinlove_mentees`
---
-
-INSERT INTO `accounts_penguinlove_mentees` (`mentees`) VALUES
-('qylegeronimo');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accounts_queenjubs_mentees`
---
-
-CREATE TABLE IF NOT EXISTS `accounts_queenjubs_mentees` (
-  `mentees` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `accounts_queenjubs_mentees`
---
-
-INSERT INTO `accounts_queenjubs_mentees` (`mentees`) VALUES
-('Mon Cedrick Glipo Frias');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accounts_qylegeronimo_mentees`
---
-
-CREATE TABLE IF NOT EXISTS `accounts_qylegeronimo_mentees` (
-  `mentees` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accounts_tricycle_mentees`
---
-
-CREATE TABLE IF NOT EXISTS `accounts_tricycle_mentees` (
-  `mentees` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accounts_youryayness_mentees`
---
-
-CREATE TABLE IF NOT EXISTS `accounts_youryayness_mentees` (
-  `mentees` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `accounts_pending_mentee` (`mentee`, `mentor`) VALUES
+('almermamer', 'username'),
+('Marie Flor Ramos Bawanan', 'getLostPanget'),
+('Mentee 1', 'username');
 
 -- --------------------------------------------------------
 
@@ -267,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `announcement_posts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
 
 --
 -- Dumping data for table `announcement_posts`
@@ -283,7 +171,23 @@ INSERT INTO `announcement_posts` (`department`, `message`, `date`, `id`, `title`
 ('Human Resources', 'explicit material.', '2015-01-08 20:51:12', 7, 'This announcement contains explicit material.'),
 ('Secretariat', 'Hello, YSERS! Please send to me your articles. Thanks!', '2015-01-09 00:39:55', 19, 'CatalYSES'),
 ('Secretariat', 'Test', '2015-01-09 00:45:53', 23, '123'),
-('Secretariat', 'test', '2015-01-09 00:48:49', 24, '321');
+('Secretariat', 'test', '2015-01-09 00:48:49', 24, '321'),
+('Secretariat', 'Real time announcement testing.', '2015-01-12 13:59:01', 25, 'Hi.'),
+('Secretariat', 'TEST', '2015-01-12 13:59:43', 26, 'TEST'),
+('Secretariat', 'dsadsa', '2015-01-12 14:03:57', 27, 'dsada'),
+('Secretariat', 'dsdads', '2015-01-12 14:04:29', 28, 'wqewqeqw'),
+('Secretariat', 'HIHI.', '2015-01-12 14:05:40', 29, 'WORKS NOW.'),
+('Secretariat', 'HAHAHAHA', '2015-01-12 14:09:26', 30, 'HAHA'),
+('Secretariat', 'HOLY SHIT', '2015-01-12 14:12:09', 31, 'REAL TIME SHIT'),
+('Secretariat', 'dsadsada', '2015-01-12 14:12:32', 32, 'asd'),
+('Secretariat', 'dasdsadsa', '2015-01-12 14:12:55', 33, 'wqeqw'),
+('Secretariat', 'edsdsd', '2015-01-12 14:21:57', 34, 'ewqeqw'),
+('Secretariat', 'Animations!', '2015-01-12 22:00:37', 35, 'New feature'),
+('Secretariat', 'awawawa', '2015-01-12 22:00:45', 36, 'wew'),
+('Human Resources', 'bug daw?', '2015-01-12 22:01:34', 37, 'HI'),
+('Human Resources', 'das', '2015-01-12 22:03:06', 38, 'fds'),
+('Senior Projects and Activities', 'ddas', '2015-01-12 22:03:20', 39, 'cvx'),
+('Senior Projects and Activities', 'dsad', '2015-01-12 22:03:35', 40, 'ds');
 
 -- --------------------------------------------------------
 
@@ -362,14 +266,20 @@ CREATE TABLE IF NOT EXISTS `logbook_posts` (
   `message` varchar(1000) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
 
 --
 -- Dumping data for table `logbook_posts`
 --
 
 INSERT INTO `logbook_posts` (`username`, `date`, `message`, `id`) VALUES
-('tricycle', '2015-01-10 21:06:26', 'Hello. This is my first senseful post here in the logbook.\n\nBasically this is a dumbed down version of Facebook status. Although it''s not that complex, I am still proud on what I have been able to pull off though. Of course, with the help of all YSES Central developers, this portion is now functional.\n\nSo thank you guys. I am looking forward na mas maganda at satisfactory to our own standards ang susunod na mga features. Let''s do our best to make this one something we are very proud of.', 39);
+('tricycle', '2015-01-10 21:06:26', 'Hello. This is my first senseful post here in the logbook.\n\nBasically this is a dumbed down version of Facebook status. Although it''s not that complex, I am still proud on what I have been able to pull off though. Of course, with the help of all YSES Central developers, this portion is now functional.\n\nSo thank you guys. I am looking forward na mas maganda at satisfactory to our own standards ang susunod na mga features. Let''s do our best to make this one something we are very proud of.', 39),
+('badluckbrian', '2015-01-10 22:38:11', 'Writes XSS vulnerability script\n\n<script>alert("fails.")</script>', 42),
+('tricycle', '2015-01-12 14:13:20', 'test', 43),
+('tricycle', '2015-01-12 14:20:38', 'ha', 44),
+('tricycle', '2015-01-12 22:00:07', 'Le animation?', 45),
+('penguinlove', '2015-01-13 12:02:34', 'Hi!', 46),
+('tricycle', '2015-01-13 12:08:54', 'Hello, world!', 47);
 
 -- --------------------------------------------------------
 
