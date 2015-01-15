@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var request = require('request');
 
 var sessionMiddleware = session({
   secret: 'keyboard cat',
@@ -51,10 +52,11 @@ var search = require('./routes/search')(app);
 var functions = require('./routes/functions')(app,eventEmitter,async);
 var indexhomepage = require('./routes/index-homepage')(app);
 var profile = require('./routes/profile')(app,async);
-var public = require('./routes/public')(app);
+var public = require('./routes/public')(app,request);
 var viewAllYSERs = require('./routes/viewAllYSERs')(app);
 var announcements = require('./routes/announcements')(app);
 var logbook = require('./routes/logbook')(app,eventEmitter,async);
+var batch = require('./routes/batch')(app);
 //exec
 var accountvalidator = require('./routes/exec/accountvalidator')(app,async);
 var announcementposter = require('./routes/exec/announcementposter')(app,eventEmitter,async);

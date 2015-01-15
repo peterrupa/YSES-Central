@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2015 at 05:36 PM
+-- Generation Time: Jan 15, 2015 at 10:40 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `announcement_posts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
 
 --
 -- Dumping data for table `announcement_posts`
@@ -187,7 +187,11 @@ INSERT INTO `announcement_posts` (`department`, `message`, `date`, `id`, `title`
 ('Human Resources', 'bug daw?', '2015-01-12 22:01:34', 37, 'HI'),
 ('Human Resources', 'das', '2015-01-12 22:03:06', 38, 'fds'),
 ('Senior Projects and Activities', 'ddas', '2015-01-12 22:03:20', 39, 'cvx'),
-('Senior Projects and Activities', 'dsad', '2015-01-12 22:03:35', 40, 'ds');
+('Senior Projects and Activities', 'dsad', '2015-01-12 22:03:35', 40, 'ds'),
+('Secretariat', 'TEST', '2015-01-15 01:03:34', 41, 'Tset'),
+('Secretariat', 'ds', '2015-01-15 01:05:20', 42, 'as'),
+('Senior Projects and Activities', '2', '2015-01-15 01:07:14', 43, 'dota'),
+('Senior Projects and Activities', 'yeah', '2015-01-15 01:07:22', 44, 'fk');
 
 -- --------------------------------------------------------
 
@@ -266,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `logbook_posts` (
   `message` varchar(1000) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
 
 --
 -- Dumping data for table `logbook_posts`
@@ -279,7 +283,10 @@ INSERT INTO `logbook_posts` (`username`, `date`, `message`, `id`) VALUES
 ('tricycle', '2015-01-12 14:20:38', 'ha', 44),
 ('tricycle', '2015-01-12 22:00:07', 'Le animation?', 45),
 ('penguinlove', '2015-01-13 12:02:34', 'Hi!', 46),
-('tricycle', '2015-01-13 12:08:54', 'Hello, world!', 47);
+('tricycle', '2015-01-13 12:08:54', 'Hello, world!', 47),
+('youryayness', '2015-01-15 01:23:10', 'hart', 48),
+('youryayness', '2015-01-15 01:23:43', 'haaayy', 49),
+('youryayness', '2015-01-15 01:23:49', 'gfdg', 50);
 
 -- --------------------------------------------------------
 
@@ -290,6 +297,45 @@ INSERT INTO `logbook_posts` (`username`, `date`, `message`, `id`) VALUES
 CREATE TABLE IF NOT EXISTS `logbook_tricycle_hidden_posts` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `org_batch`
+--
+
+CREATE TABLE IF NOT EXISTS `org_batch` (
+  `batch` varchar(50) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+
+--
+-- Dumping data for table `org_batch`
+--
+
+INSERT INTO `org_batch` (`batch`, `id`) VALUES
+('Charter Member', 1),
+('Synergy', 2),
+('Nidaime Quatro', 3),
+('Gitara', 4),
+('Ecclesiastes 4:9', 5),
+('Bato Balani', 6),
+('Dyeese', 7),
+('Century', 8),
+('Quadfore', 9),
+('13EST©', 10),
+('Divide Et Impera X', 11),
+('BoltXV', 12),
+('+0- Net Charge', 13),
+('Aglet', 14),
+('1''s Complement', 15),
+('Equifinality', 16),
+('Jenga', 17),
+('He-4', 18),
+('rainByte', 19),
+('4tified', 20),
+('RAMpage', 21);
 
 -- --------------------------------------------------------
 

@@ -86,9 +86,8 @@ html
 															input#retype-password.form-control(type="password",name="retype-password")
 														li Organization Batch:
 															select.form-control(form="signupform",name="org_batch")
-																option(value="Charter") Charter
-																option(value="Synergy") Synergy
-																option(value="RAMpage") RAMpage
+																each item in JSON.parse(batch)
+																	option(value=item.batch)= item.batch
 														li Mentor:
 															br
 															input.accountsAutocomplete.input-text.form-control(type="text",name="mentor")

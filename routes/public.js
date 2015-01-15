@@ -1,4 +1,4 @@
-module.exports = function(app){
+module.exports = function(app,request){
 	//database
 	var mysql = require('mysql');
 	var pool = mysql.createPool({
@@ -31,7 +31,12 @@ module.exports = function(app){
 			serveMain(req,res);
 		}
 		else{
-			res.render('index');
+			//get list of batches for signup
+			request('http://localhost:8080/getBatch',function(error,response,body){
+				if (!error && response.statusCode == 200) {
+			    res.render('index',{batch:body});
+			  }
+			});
 		}
 	});
 
