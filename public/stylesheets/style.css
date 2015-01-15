@@ -506,3 +506,8 @@ body .overlimit{ color:red; }
 	margin-top:10px;
 	width:150px;
 }
+
+#central-title .tooltip{
+	margin-top:5px;
+	width:150px;
+}

@@ -230,9 +230,15 @@ $(document).ready(function(){
 				}
 			});
 		});
-		$("body").on("click",".edit",function(){
+		
+	var old_value = '';
+
+	/*EDIT DATA IN ABOUT*/
+	$("body").on("click",".edit",function(){
 
 			var data = $(this).closest("tr").find("td").first().next();
+			old_value = data.text();
+			
 			$(this).html('Done');
 			$(this).addClass('done');
 			$(this).removeClass('edit');
@@ -325,9 +331,9 @@ $(document).ready(function(){
 			else if($(this).closest('tr').hasClass('studentnumber')){
 				data.each(function(index){
 					var temphtml = ''+
-						'<input style="width:70px;" type="text" id="stud_year" value="'+$(this).html().substring(0,4)+'">'+
+						'<input style="width:70px;" type="text" id="stud_year" maxlength=4 value="'+$(this).html().substring(0,4)+'">'+
 						'<span> - </span>'+
-						'<input style="width:70px;" type="text" id="stud_number" value="'+$(this).html().substring(5)+'">';
+						'<input style="width:70px;" type="text" id="stud_number" maxlength=5 value="'+$(this).html().substring(5)+'">';
 					$(this).html(temphtml);
 				});
 			}
@@ -350,58 +356,58 @@ $(document).ready(function(){
 					data.html(temphtml);
 				}
 			});
-		});
+	});
 
-		$('body').on('click','.done', function(){
+	$('body').on('click','.done', function(){
 
-			var text = $(this).closest("tr");
-			var data = text.find("td").first().next();
-			var traversed = function(class_name){
-				return text.hasClass(class_name);
-			}
+		var text = $(this).closest("tr");
+		var data = text.find("td").first().next();
+		var traversed = function(class_name){
+			return text.hasClass(class_name);
+		}
 
-			if(traversed('text') || traversed('birthdate')){
+		if(traversed('text') || traversed('birthdate')){
 
-				data.each(function(index){
-					var temphtml = ''+
-						text.find('input').val();
-					$(this).html(temphtml);
-				});
-			}
-			else if(traversed('org_class')
-				|| traversed('org_batch')
-				|| traversed('department')
-				|| traversed('position')){
-				data.each(function(index){
-					var temphtml = ''+
-						text.find('select').val();
-					$(this).html(temphtml);
-				});
-			}
-			else if(traversed('studentnumber')){
-				data.each(function(index){
-					var temphtml = ''+
-						text.find('#stud_year').val()+
-						'-'+
-						text.find('#stud_number').val();
-					$(this).html(temphtml);
-				});
-			}
+			data.each(function(index){
+				var temphtml = ''+
+					text.find('input').val();
+				$(this).html(temphtml);
+			});
+		}
+		else if(traversed('org_class')
+			|| traversed('org_batch')
+			|| traversed('department')
+			|| traversed('position')){
+			data.each(function(index){
+				var temphtml = ''+
+					text.find('select').val();
+				$(this).html(temphtml);
+			});
+		}
+		else if(traversed('studentnumber')){
+			data.each(function(index){
+				var temphtml = ''+
+					text.find('#stud_year').val()+
+					'-'+
+					text.find('#stud_number').val();
+				$(this).html(temphtml);
+			});
+		}
+		$(this).html('Edit');
+		$(this).addClass('edit');
+		$(this).removeClass('done');
+		alert(data.prev().text() + " changed from " + old_value + " to " + data.text());
 
-			$(this).html('Edit');
-			$(this).addClass('edit');
-			$(this).removeClass('done');
+	});
 
-		});
+	// needs work. will revert input fields clicked outside it's container.
+	$(document).mouseup(function (e){
+		var container = $('.done');
 
-		// needs work. will revert input fields clicked outside it's container.
-		$(document).mouseup(function (e){
-			var container = $('.done');
+		if ( (!container.is(e.target) && container.has(e.target).length === 0)){
 
-			if ( (!container.is(e.target) && container.has(e.target).length === 0)){
-
-			}
-		});
+		}
+	});
 
 	//listen for newaccount events
 	socket.off('newaccount');
@@ -541,3 +547,4 @@ $(document).ready(function(){
 		alert("NEW ACCOUNT. DO SOME FANCY STUFFS");
 	});
 });
+
