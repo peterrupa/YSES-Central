@@ -233,6 +233,13 @@ $(document).ready(function(){
 		
 	var old_value = '';
 
+	function alertChanges(old_value, data){
+		if(old_value != data.text()) alert(data.prev().text() + " changed from " + old_value + " to " + data.text());
+		else alert("No changes for this data");
+	};
+
+	$('body').off('click','.edit');
+	
 	/*EDIT DATA IN ABOUT*/
 	$("body").on("click",".edit",function(){
 
@@ -314,6 +321,7 @@ $(document).ready(function(){
 				data.each(function(index){
 					var temphtml = ''+
 						'<select  id="position_select"name="position">'+
+							'<option value="Not an Executive Department Member">Not an Executive Department Member</option>'+
 							'<option value="Deputy Executive Officer">Deputy Executive Officer</option>'+
 							'<option value="Liaison Officer">Liaison Officer</option>'+
 							'<option value="Visuals and Logistics Department Head">Visuals and Logistics Department Head</option>'+
@@ -354,9 +362,12 @@ $(document).ready(function(){
 					$(this).closest("tr").find(".done").addClass('edit');
 					$(this).closest("tr").find(".done").removeClass('done');
 					data.html(temphtml);
+					alertChanges(old_value,data);
 				}
 			});
 	});
+
+	$('body').off('click','.done');
 
 	$('body').on('click','.done', function(){
 
@@ -396,8 +407,8 @@ $(document).ready(function(){
 		$(this).html('Edit');
 		$(this).addClass('edit');
 		$(this).removeClass('done');
-		if(old_value != data.text()) alert(data.prev().text() + " changed from " + old_value + " to " + data.text());
-		else alert("No changes for this data");
+
+		alertChanges(old_value,data);
 	});
 
 	// needs work. will revert input fields clicked outside it's container.
@@ -547,4 +558,3 @@ $(document).ready(function(){
 		alert("NEW ACCOUNT. DO SOME FANCY STUFFS");
 	});
 });
-
