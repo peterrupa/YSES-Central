@@ -38,9 +38,39 @@ $(document).ready(function(){
 			type: "GET",
 			success: function (res) {
 				function rowHTML(first,second){
-					return '<tr>'+
+					var classData = '';
+
+					switch(first){
+						case 'First name' || 'Middle name' || 'Last name' 
+						|| 'University Batch' || 'Home Address' || 'College Address': 
+							classData = 'text';
+							break;
+						case 'Organization Classification':
+							classData = 'org_class';
+							break;
+						case 'Department':
+							classData = 'department';
+							break;
+						case 'Position':
+							classData = 'position';
+							break;
+						case 'Student Number':
+							classData = 'studentnumber';
+							break;
+						case 'Organization Batch':
+							classData = 'org_batch';
+							break;
+						case 'Birthday':
+							classData = 'birthdate';
+							break;
+
+					}
+
+					return ''+
+						'<tr class="'+classData+'">'+
 							'<td>'+first+'</td>'+
 							'<td>'+second+'</td>'+
+							'<td>'+'<a class="edit">Edit</a>'+'</td>'+
 						'</tr>';
 				}
 
@@ -51,7 +81,7 @@ $(document).ready(function(){
 				$("#about-data table").append(rowHTML("First name",res["first_name"]));
 				$("#about-data table").append(rowHTML("Middle name",res["middle_name"]));
 				$("#about-data table").append(rowHTML("Last name",res["last_name"]));
-				$("#about-data table").append(rowHTML("Org Classification",res["org_class"]));
+				$("#about-data table").append(rowHTML("Organization Classification",res["org_class"]));
 				$("#about-data table").append(rowHTML("Department",res["department"]));
 				if(res["exec_position"]){
 					$("#about-data table").append(rowHTML("Position",res["exec_position"]));
@@ -245,4 +275,318 @@ $(document).ready(function(){
 	$("#more").on('click',function(){
 		$(this).closest('#information').find('#box-data').html(more_content);
 	});
+
+
+	/*EDIT DATA IN ABOUT*/
+	$("body").on("click",".edit",function(){
+
+			var data = $(this).closest("tr").find("td").first().next();
+			$(this).html('Done');
+			$(this).addClass('done');
+			$(this).removeClass('edit');
+
+			// will convert data to text box
+			if($(this).parent().find("input").length > 0){
+				alert("There are boxes");
+			}
+			else if($(this).closest('tr').hasClass('text')){
+				data.each(function(index){
+					var temphtml = ''+
+						'<input type="text" value="'+$(this).html()+'">';
+					$(this).html(temphtml);
+				});
+			}
+			// will convert data to a datepicker
+			else if($(this).closest('tr').hasClass('birthdate')){
+				data.each(function(index){
+					var temphtml = ''+
+						'<input style="width:130px;height:20px;" type="date" value="'+$(this).html()+'">';
+					$(this).html(temphtml);
+				});
+			}
+
+			// will convert data to a dropdown select [org_class]
+			else if($(this).closest('tr').hasClass('org_class')){
+				data.each(function(index){
+					var temphtml = ''+
+						'<select id="org_class_select" name="org-class">'+
+							'<option value="Active" >Active</option>'+
+							'<option value="Inactive">Inactive</option>'+
+							'<option value="Alumni">Alumni</option>'+
+						'</select>';
+					$(this).html(temphtml);
+				});
+			}
+
+			// will convert data to a dropdown select [org_batch]
+			else if($(this).closest('tr').hasClass('org_batch')){
+				data.each(function(index){
+					var temphtml = ''+
+						'<select id="org_batch_select" name="org-batch">'+
+							'<option value="Charter" >Charter</option>'+
+							'<option value="Synergy">Synergy</option>'+
+							'<option value="RAMpage">RAMpage</option>'+
+						'</select>';
+					$(this).html(temphtml);
+				});
+			}
+
+			// will convert data to a dropdown select [department]
+			else if($(this).closest('tr').hasClass('department')){
+				data.each(function(index){
+					var temphtml = ''+
+						'<select id="department_select" name="department">'+
+							'<optgroup label="Projects and Activities">'+
+								'<option value="Junior Projects and Activities">Junior</option>'+
+								'<option value="Senior Projects and Activities">Senior</option>'+
+							'</optgroup>'+
+							'<option value="Visuals and Logistics">Visuals and Logistics</option>'+
+							'<option value="Secretariat">Secretariat</option>'+
+							'<option value="Scholastics">Scholastics</option>'+
+							'<option value="Finance">Finance</option>'+
+							'<option value="Human Resources">Human Resources</option>'+
+							'<option value="Executive">Executive (EO Only)</option>'+
+						'</select>';
+					$(this).html(temphtml);
+				});
+			}
+
+			// will convert data to a dropdown select [position]
+			else if($(this).closest('tr').hasClass('position')){
+				data.each(function(index){
+					var temphtml = ''+
+						'<select  id="position_select"name="position">'+
+							'<option value="Deputy Executive Officer">Deputy Executive Officer</option>'+
+							'<option value="Liaison Officer">Liaison Officer</option>'+
+							'<option value="Visuals and Logistics Department Head">Visuals and Logistics Department Head</option>'+
+							'<option value="Executive Assistant">Executive Assistant</option>'+
+							'<option value="Scholastics Department Head">Scholastics Department Head</option>'+
+							'<option value="Finance Department Head">Finance Department Head</option>'+
+							'<option value="Human Resources Department Human">Human Resources Department Head</option>'+
+							'<option value="Executive Officer">Executive Officer</option>'+
+						'</select>';
+					$(this).html(temphtml);
+				});
+			}
+
+			// will convert data to a dropdown select [studentnumber]
+			else if($(this).closest('tr').hasClass('studentnumber')){
+				data.each(function(index){
+					var temphtml = ''+
+						'<input style="width:70px;" type="text" id="stud_year" value="'+$(this).html().substring(0,4)+'">'+
+						'<span> - </span>'+
+						'<input style="width:70px;" type="text" id="stud_number" value="'+$(this).html().substring(5)+'">';
+					$(this).html(temphtml);
+				});
+			}
+			data.find('input').on('keypress', function(e) {
+				var code = e.keyCode || e.which;
+				if(!$(this).closest('tr').hasClass('studentnumber')){
+					var temphtml = ''+
+						$(this).val();
+				}else{
+					var temphtml = ''+
+						text.find('#stud_year').val()+
+						'-'+
+						text.find('#stud_number').val();
+					$(this).html(temphtml);
+				}
+				if(code==13){
+					$(this).closest("tr").find(".done").html('Edit');
+					$(this).closest("tr").find(".done").addClass('edit');
+					$(this).closest("tr").find(".done").removeClass('done');
+					data.html(temphtml);
+				}
+			});
+		});
+
+		$('body').on('click','.done', function(){
+
+			var text = $(this).closest("tr");
+			var data = text.find("td").first().next();
+			var traversed = function(class_name){
+				return text.hasClass(class_name);
+			}
+
+			if(traversed('text') || traversed('birthdate')){
+
+				data.each(function(index){
+					var temphtml = ''+
+						text.find('input').val();
+					$(this).html(temphtml);
+				});
+			}
+			else if(traversed('org_class')
+				|| traversed('org_batch')
+				|| traversed('department')
+				|| traversed('position')){
+				data.each(function(index){
+					var temphtml = ''+
+						text.find('select').val();
+					$(this).html(temphtml);
+				});
+			}
+			else if(traversed('studentnumber')){
+				data.each(function(index){
+					var temphtml = ''+
+						text.find('#stud_year').val()+
+						'-'+
+						text.find('#stud_number').val();
+					$(this).html(temphtml);
+				});
+			}
+
+			$(this).html('Edit');
+			$(this).addClass('edit');
+			$(this).removeClass('done');
+
+		});
+
+		// needs work. will revert input fields clicked outside it's container.
+		$(document).mouseup(function (e){
+			var container = $('.done');
+
+			if ( (!container.is(e.target) && container.has(e.target).length === 0)){
+
+			}
+		});
+
+	//listen for newaccount events
+	socket.off('newaccount');
+	socket.on('newaccount',function(res){
+		var table_data_2 = ''+
+			'<table class="table table-condensed table-hover">';
+		var table_data_1 = '';
+		var img = '';
+		for(data in res){
+			var tempData;
+
+			switch(data){
+				case 'username': 		tempData = 'Username'; break;
+				case 'first_name': 		tempData = 'First Name'; break;
+				case 'middle_name':  	tempData = 'Middle Name'; break;
+				case 'last_name': 		tempData = 'Last Name'; break;
+				case 'org_class': 		tempData = 'Organization Classification'; break;
+				case 'department': 		tempData = 'Department'; break;
+				case 'student_number': 	tempData = 'Student Number'; break;
+				case 'org_batch': 		tempData = 'Organization Batch'; break;
+				case 'univ_batch': 		tempData = 'University Batch'; break;
+				case 'mentor': 			tempData = 'Mentor'; break;
+				case 'birthday': 		tempData = 'Birthday'; break;
+				case 'home_address': 	tempData = 'Home Address'; break;
+				case 'college_address': tempData = 'College Address'; break;
+				case 'exec_position': 	tempData = 'Executive Position'; break;
+				default: 				tempData = ' '; break;
+			}
+
+			if(data == "mentee"){
+				var counter = 0;
+				var temphtml = '';
+				for(var j = 0; j < res["mentee"].length; j++){
+					if(counter == 0){
+						var temphtml2 = ''+
+							'<tr class="text" data-mentee="'+res["mentee"][j]+'">'+
+								'<td>'+
+									'Mentees'+
+								'</td>'+
+								'<td>'+res["mentee"][j]+'</td>'+
+								'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+							'</tr>';
+						counter += 1;
+					} else{
+						var temphtml2 = ''+
+							'<tr class="text" data-mentee="'+res["mentee"][j]+'">'+
+								'<td>'+
+								'</td>'+
+								'<td>'+res["mentee"][j]+'</td>'+
+								'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+							'</tr>';
+					}
+					temphtml = temphtml.concat(temphtml2);
+				}
+				table_data_1 = table_data_1.concat(temphtml);
+			}
+			else if(data == "mentor"
+				|| data == "username"
+				|| data == "department"
+				|| data == "org_batch"
+				|| data == "org_class"
+				|| data == "exec_position"
+				|| data == "picture"
+			){
+
+				if(data == "exec_position"){
+					var position;
+
+					if(res['exec_position'] == null) position = 'Not an Executive Department Member';
+					else position = res['exec_position'];
+
+					var temphtml = ''+
+						'<tr class="position" data-'+'exec-position'+'="'+res['exec_position']+'">'+
+							'<td>'+'Executive Position'+'</td>'+
+							'<td>'+position+'</td>'+
+							'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+						'</tr>';
+					table_data_1 = '<table class="table table-condensed table-hover">' + temphtml + table_data_1;
+				} else if(data == "picture"){
+					var temphtml = ''+
+						'<div data-'+data+'="'+res["picture"]+'" class="account-image">'+
+							'<img src="http://localhost:8080/'+res["picture"]+'"/>'+
+						'</div>';
+					img = img.concat(temphtml);
+				} else{
+					var data_class;
+
+					switch(data){
+						case "department": 	data_class = 'department'; break;
+						case "org_batch": 	data_class = 'org_batch'; break;
+						case "org_class": 	data_class = 'org_class'; break;
+						default: 			data_class = 'text'; break;
+					}
+
+					var temphtml = ''+
+						'<tr class="'+data_class+'" data-'+data+'="'+res[data]+'">'+
+							'<td>'+tempData+'</td>'+
+							'<td>'+res[data]+'</td>'+
+							'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+						'</tr>';
+					table_data_1 = table_data_1.concat(temphtml);
+				}
+			}
+			else{
+				var data_class;
+
+				switch(data){
+					case "student_number": 	data_class = 'studentnumber'; break;
+					case "birthday": 		data_class = 'birthdate'; break;
+					default: 				data_class = 'text'; break;
+				}
+
+				var temphtml = ''+
+					'<tr class="'+data_class+'" data-'+data+'="'+res[data]+'">'+
+						'<td>'+tempData+'</td>'+
+						'<td>'+res[data]+'</td>'+
+						'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+					'</tr>';
+				table_data_2 = table_data_2.concat(temphtml);
+			}
+		}
+		var html = ''+
+			'<div data-username="'+res['username']+'" class="to-validate">'+
+				img+
+				'<h3 style="float:left;font-weight:bold;padding-top:0px">'+res['first_name']+' '+res['last_name']+'</h3>'+
+				'<span style="float:left;padding-top:29px;margin-left:10px;">'+res['department']+' Department'+'</span>'+
+				'<div class="account-data">'+
+					table_data_2+'</table>'+
+					table_data_1+'</table>'+
+				'</div>'+
+				'<div class="to-validate-button">'+
+					'<button class="pull-down accept">ACCEPT</button>'+
+					'<button class="pull-down reject">REJECT</button>'+
+				'</div>'+
+			'</div>';
+		$("#temp").append(html);
+		alert("NEW ACCOUNT. DO SOME FANCY STUFFS");
+	});
 });
+

@@ -35,7 +35,7 @@
 
 #input-content h5{
 	position:relative;
-	background-color:rgba(20,20,100,1);
+	background-color:rgba(42,99,189,1);
 	color:white;
 	height:30px;
 	left:0%;
@@ -73,7 +73,7 @@
 }
 
 #submit{
-	background-color:rgba(20,20,100,1);
+	background-color:rgba(42,99,189,1);
 	position:relative;
 	float:right;
 	

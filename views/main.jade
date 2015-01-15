@@ -34,7 +34,7 @@ html
 							span.icon-bar
 						div#central-title
 							a.ajax.navbar-brand(href="http://localhost:8080")
-								img#logo.img-responsive(src="../images/logoAllWhite.png")
+								img#logo.img-responsive(src="http://localhost:8080/images/logoAllWhite.png")
 								h2(style="position:relative;margin:0px;top:-7px;") YSES Central
 						div#search-bar.right-inner-addon.hidden-xs.hidden-sm.hidden-md
 							// label(for="tags")
@@ -58,7 +58,7 @@ html
 										a(href="javascript:{}",onclick="$('#logout').submit()") Log out
 								div#nav-button-group.text-center
 									div#logbook-icon.hidden-sm.hidden-md
-										a(href="#",data-toggle="modal",data-target="#logbookModal,tooltip",data-placement="left",title="Write In Logbook")
+										a(href="http://localhost:8080/#",data-toggle="modal",data-target="#logbookModal,tooltip",data-placement="left",title="Write In Logbook")
 											span.glyphicon.glyphicon-pencil
 										div#logbookModal.modal.fade
 											div.modal-dialog
@@ -74,24 +74,24 @@ html
 														span#counter
 														input#postLogbook.btn.btn-default(type="button",value="Post")
 									div#chatbox-icon.hidden-sm.hidden-md
-										a.menu-icon-chatbox(href="#",data-target="tooltip",data-placement="left",title="Open Chatbox")
+										a.menu-icon-chatbox(href="http://localhost:8080/#",data-target="tooltip",data-placement="left",title="Open Chatbox")
 											span.glyphicon.glyphicon-send
 									div#department-icon.hidden-sm.hidden-md
-										a.menu-icon-department(href="#",data-target="tooltip",data-placement="left",title="Access Department Systems")
+										a.menu-icon-department(href="http://localhost:8080/#",data-target="tooltip",data-placement="left",title="Access Department Systems")
 											span.glyphicon.glyphicon-list
 										div#department-button-container
 											div.wrapper.clearfix
 												figure.gallery-item
 													img.department-logo(src="http://localhost:8080/images/button/exec.png")
-													a(href="#")
+													a(href="http://localhost:8080/#")
 														figcaption.img-title.exec-title
 															h3 EXEC
 													ul.wheel.text-center
 														li.item.exec-title
-															a.ajax(href="announcementposter")
+															a.ajax(href="http://localhost:8080/announcementposter")
 																h5 Announcement
 														li.item.exec-title
-															a.ajax(href="accountvalidator")
+															a.ajax(href="http://localhost:8080/accountvalidator")
 																h5 Validate
 											div.wrapper.clearfix
 												figure.gallery-item

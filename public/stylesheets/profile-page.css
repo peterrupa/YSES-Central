@@ -252,6 +252,11 @@ body{
 	margin-bottom:10px;
 }
 
+#about-data a:hover, #about-data a:focus{
+	color:blue;
+	cursor:pointer;
+}
+
 #mentor-data .mentor-data-content{
 	position:relative;
 
@@ -321,6 +326,7 @@ body{
 	color:black;
 	font-size:2em;
 }
+
 
 #mentor-data .mentor-link:hover{
 	border-top:10px solid rgba(0,0,150,1);
