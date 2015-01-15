@@ -396,8 +396,8 @@ $(document).ready(function(){
 		$(this).html('Edit');
 		$(this).addClass('edit');
 		$(this).removeClass('done');
-		alert(data.prev().text() + " changed from " + old_value + " to " + data.text());
-
+		if(old_value != data.text()) alert(data.prev().text() + " changed from " + old_value + " to " + data.text());
+		else alert("No changes for this data");
 	});
 
 	// needs work. will revert input fields clicked outside it's container.
