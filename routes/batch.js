@@ -13,7 +13,14 @@ module.exports = function(app){
       var query = "SELECT batch FROM `org_batch` WHERE 1 ORDER BY id";
 
       connection.query(query,function(err,batch){
-        res.send(batch);
+				//place these results in an array
+				var send = [];
+
+				for(var i = 0; i < batch.length; i++){
+					send.push(batch[i]["batch"]);
+				}
+
+        res.send(send);
       });
       connection.release();
     });

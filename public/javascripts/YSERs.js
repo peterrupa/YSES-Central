@@ -1,5 +1,55 @@
 $(document).ready(function(){
-	$(function () {
+	function setOption(batchlist) {
+		//determine number of buttons on each side
+		var buttonsOnSide = parseInt(batchlist.length/2);
+
+		//set button html
+		var buttonHTML = '';
+
+		 if(buttonsOnSide > 0){
+		 		var temp1 = '';
+		 		for(var i = 0; i < buttonsOnSide; i++){
+					var temp = ''+
+						'<div data-toggle="buttons" class="btn-group btn-batch">'+
+							'<label class="btn btn-primary btn-batch disabled">'+
+								'<input type="checkbox" name="'+batchlist[i]+'" autocomplete="off" checked><span>'+batchlist[i]+'</span>'+
+							'</label>'+
+						'</div>';
+						temp1 += temp;
+		 		}
+
+				temp1 = ''+
+					'<div class="col-lg-6">'+
+						temp1+
+					'</div>';
+
+		 		var temp2 = '';
+		 		for(var j = buttonsOnSide; j < (batchlist.length%2!=0?batchlist.length-1:batchlist.length); j++){
+					var temp = ''+
+						'<div data-toggle="buttons" class="btn-group btn-batch">'+
+							'<label class="btn btn-primary btn-batch disabled">'+
+								'<input type="checkbox" name="'+batchlist[j]+'" autocomplete="off" checked><span>'+batchlist[j]+'</span>'+
+							'</label>'+
+						'</div>';
+						temp2 += temp;
+		 		}
+				temp2 = ''+
+					'<div class="col-lg-6">'+
+						temp2+
+					'</div>';
+				buttonHTML += temp1 + temp2;
+		 }
+		if(batchlist.length%2 != 0){
+			var temp = ''+
+				'<div data-toggle="buttons" class="btn-group btn-batch">'+
+					'<label class="btn btn-primary btn-batch disabled">'+
+						'<input type="checkbox" name="'+batchlist[batchlist.length-1]+'" autocomplete="off" checked><span>'+batchlist[batchlist.length-1]+'</span>'+
+					'</label>'+
+				'</div>';
+			buttonHTML += temp;
+		}
+
+
 		var contentHTML =
 		'<p class="dropdown-label-1">Filter</p>'+
 		'<div class="col-lg-6">'+
@@ -14,115 +64,7 @@ $(document).ready(function(){
 			'<hr/>'+
 			'<div class="btn-container">'+
 				'<form name="Batch">'+
-  			'<div class="col-lg-6">'+
-            '<div data-toggle="buttons" class="btn-group btn-batch">'+
-              '<label class="btn btn-primary btn-batch disabled">'+
-                '<input type="checkbox" name="Charter" autocomplete="off" checked><span>Charter</span>'+
-              '</label>'+
-            '</div>'+
-            '<div data-toggle="buttons" class="btn-group btn-batch">'+
-              '<label class="btn btn-primary btn-batch disabled">'+
-                '<input type="checkbox" name="Synergy" autocomplete="off" checked><span>Synergy</span>'+
-              '</label>'+
-            '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-              '<label class="btn btn-primary btn-batch disabled">'+
-                '<input type="checkbox" name="Nidaime Quatro" autocomplete="off" checked><span>Nidaime Quatro</span>'+
-              '</label>'+
-            '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-              '<label class="btn btn-primary btn-batch disabled">'+
-                '<input type="checkbox" name="Gitara" autocomplete="off" checked><span>Gitara</span>'+
-              '</label>'+
-            '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-              '<label class="btn btn-primary btn-batch disabled">'+
-                '<input type="checkbox" name="Ecclesiastes 4:9" autocomplete="off" checked><span>Ecclesiastes 4:9</span>'+
-              '</label>'+
-            '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-              '<label class="btn btn-primary btn-batch disabled">'+
-                '<input type="checkbox" name="Bato Balani" autocomplete="off" checked><span>Bato Balani</span>'+
-              '</label>'+
-            '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-              '<label class="btn btn-primary btn-batch disabled">'+
-                '<input type="checkbox" name="Dyeese" autocomplete="off" checked><span>Dyeese</span>'+
-              '</label>'+
-            '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-              '<label class="btn btn-primary btn-batch disabled">'+
-                '<input type="checkbox" name="Century" autocomplete="off" checked><span>Century</span>'+
-              '</label>'+
-            '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-              '<label class="btn btn-primary btn-batch disabled">'+
-                '<input type="checkbox" name="Quadfore" autocomplete="off" checked><span>Quadfore</span>'+
-              '</label>'+
-            '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-              '<label class="btn btn-primary btn-batch disabled">'+
-                '<input type="checkbox" name="13EST ©" autocomplete="off" checked><span>13EST ©</span>'+
-              '</label>'+
-            '</div>'+
-  			'</div>'+
-  			'<div class="col-lg-6">'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-							'<label class="btn btn-primary btn-batch disabled">'+
-								'<input type="checkbox" name="Divide Et Impera X" autocomplete="off" checked><span>Divide Et Impera X</span>'+
-							'</label>'+
-						'</div>'+
-	  				'<div data-toggle="buttons" class="btn-group btn-batch">'+
-	            '<label class="btn btn-primary btn-batch disabled">'+
-	              '<input type="checkbox" name="BoltXV" autocomplete="off" checked><span>BoltXV</span>'+
-	            '</label>'+
-	          '</div>'+
-	          '<div data-toggle="buttons" class="btn-group btn-batch">'+
-	            '<label class="btn btn-primary btn-batch disabled">'+
-	              '<input type="checkbox" name="+0- Net Charge" autocomplete="off" checked><span>+0- Net Charge</span>'+
-	            '</label>'+
-	          '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-	            '<label class="btn btn-primary btn-batch disabled">'+
-	              '<input type="checkbox" name="Aglet" autocomplete="off" checked><span>Aglet</span>'+
-	            '</label>'+
-	          '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-	            '<label class="btn btn-primary btn-batch disabled">'+
-	              '<input type="checkbox" name="1\'s Complement" autocomplete="off" checked><span>1\'s Complement</span>'+
-	            '</label>'+
-	          '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-	            '<label class="btn btn-primary btn-batch disabled">'+
-	              '<input type="checkbox" name="Equifinality" autocomplete="off" checked><span>Equifinality</span>'+
-	            '</label>'+
-	          '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-	            '<label class="btn btn-primary btn-batch disabled">'+
-	              '<input type="checkbox" name="Jenga" autocomplete="off" checked><span>Jenga</span>'+
-	            '</label>'+
-	          '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-	            '<label class="btn btn-primary btn-batch disabled">'+
-	              '<input type="checkbox" name="He-4" autocomplete="off" checked><span>He-4</span>'+
-	            '</label>'+
-	          '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-	            '<label class="btn btn-primary btn-batch disabled">'+
-	              '<input type="checkbox" name="RainByte" autocomplete="off" checked><span>RainByte</span>'+
-	            '</label>'+
-	          '</div>'+
-						'<div data-toggle="buttons" class="btn-group btn-batch">'+
-	            '<label class="btn btn-primary btn-batch disabled">'+
-	              '<input type="checkbox" name="4tified" autocomplete="off" checked><span>4tified</span>'+
-	            '</label>'+
-	          '</div>'+
-		    '</div>'+
-				'<div data-toggle="buttons" class="btn-group btn-batch">'+
-					'<label class="btn btn-primary btn-batch disabled">'+
-						'<input type="checkbox" name="RAMpage" autocomplete="off" checked><span>RAMpage</span>'+
-					'</label>'+
-				'</div>'+
+  			buttonHTML+
       '</div>'+
 			'</form>'+
 		'</div>'+
@@ -174,79 +116,96 @@ $(document).ready(function(){
 		'</button>'+
 		'<div class="clearfix"></div>';
 
-
 		$('[data-toggle="popover"]').popover({
       html: true,
 			container: $("#buttonOptions").parent(),
 			content: contentHTML
 		});
-	});
-	function doOption(sort,batch,orgclass,callback){
+	}
+
+	function doOption(sort,batch,org_class,callback){
 		$.ajax({
 			url: "http://localhost:8080/getYSERs",
-			data: "sort="+sort+"&filterBatch="+batch+"&filterClass="+orgclass,
+			data: "data="+JSON.stringify({sort:sort,batch:batch,org_class:org_class}),
 			type: "GET",
 			success: function (res) {
+				console.log(res);
 				//clear element
-				$("#result").empty();
+				 $("#result").empty();
 
-				for(batchName in res){
-					if(res[batchName].length > 0){
-						var batchHTML= "";
-						for(var i = 0; i < res[batchName].length; i++){
+				for(var i = 0; i < res.length; i++){
+					var batchHTML = '';
 
-		          for(data in res[batchName][i]){ //cleans all html elements
-		            res[batchName][i][data] = safe_tags(res[batchName][i][data]);
-		          }
-							var memberHTML = '<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4"><a class="ajax" href="http://localhost:8080/profile/'+res[batchName][i]["username"]+'"><div class="pic"><img class="img-responsive" src="http://localhost:8080/'+res[batchName][i]["picture"]+'"><div class="btm-label"><div class="btm-label-gradient"></div><div class="btm-label-text"><p>'+res[batchName][i]["full_name"]+'</p><p>'+res[batchName][i]["org_class"]+'</p></div></div></div></a></div>';
-							batchHTML += memberHTML;
-						}
-							//append here per batch
-							$("#result").append("<div class='clearfix'></div><p class='sort-label'>"+batchName+"</p>"+batchHTML);
+					for(var j = 0; j < res[i]["data"].length; j++){
+						//clean all html elements
+						for(data in res[i]["data"][j]){ //cleans all html elements
+            	res[i]["data"][j][data] = safe_tags(res[i]["data"][j][data]);
+	          }
+
+						var memberHTML = ''+
+						'<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">'+
+							'<a class="ajax" href="http://localhost:8080/profile/'+res[i]["data"][j]["username"]+'">'+
+								'<div class="pic">'+
+									'<img class="img-responsive" src="http://localhost:8080/'+res[i]["data"][j]["picture"]+'">'+
+									'<div class="btm-label">'+
+										'<div class="btm-label-gradient"></div>'+
+										'<div class="btm-label-text">'+
+											'<p>'+res[i]["data"][j]["full_name"]+'</p>'+
+											'<p>'+res[i]["data"][j]["org_class"]+'</p>'+
+										'</div>'+
+									'</div>'+
+								'</div>'+
+							'</a>'+
+						'</div>';
+
+						batchHTML += memberHTML;
 					}
+
+					$("#result").append("<div class='clearfix'></div><p class='sort-label'>"+res[i]["batch"]+"</p>"+batchHTML);
 				}
 
 				//set result batch text
-				var resultTextBatch = "";
-				batch = batch.split(";");
+				var batchtext = '';
+
 				for(var i = 0; i < batch.length; i++){
-					if(resultTextBatch == ""){
-						resultTextBatch += batch[i];
-					}
-					else{
-						resultTextBatch += ", "+batch[i];
-					}
+					batchtext += i==0?batch[i]:", "+batch[i];
 				}
 
 				//set result class text
-				var resultTextClass = "";
-				orgclass = orgclass.split(";");
-				for(var i = 0; i < orgclass.length; i++){
-					if(resultTextClass == ""){
-						resultTextClass += orgclass[i];
-					}
-					else{
-						resultTextClass += ", "+orgclass[i];
-					}
-				}
+				var classtext = '';
 
-				resultTextBatch = safe_tags(resultTextBatch);
-				resultTextClass = safe_tags(resultTextClass);
+				for(var i = 0; i < org_class.length; i++){
+					classtext += i==0?org_class[i]:", "+org_class[i];
+				}
 
 				//change result text
-				$("#resultText").text("Result for batch: \""+resultTextBatch+"\", classification: \""+resultTextClass+"\", sorted "+(sort=='ASC'?"ascending":"descending")+".");
+				$("#resultText").text("Result for batch: \""+batchtext+"\", classification: \""+classtext+"\", sorted "+(sort=='ASC'?"ascending":"descending")+".");
 
-				if(callback){
-					callback();
-				}
+				 if(callback){
+				 	callback();
+				 }
 			},
 			error: function (e){
 				console.dir(e);
 			}
 		});
 	}
-	doOption("ASC","Charter;Synergy;Nidaime Quatro;Gitara;Ecclesiastes 4:9;Bato Balani;Dyeese;Century;Quadfore;13EST ©;Divide Et Impera X;BoltXV;+0- Net Charge;Aglet;1\'s Complement;Equifinality;Jenga;He-4;RainByte;4tified;RAMpage","Active;Inactive;Alumni");
 
+	//fetch batch list
+	$.ajax({
+		url: "http://localhost:8080/getBatch",
+		type: "GET",
+		success: function (res) {
+			//console.log(res);
+			setOption(res);
+			doOption("ASC",res,["Active","Inactive","Alumni"]);
+		},
+		error: function (e){
+			console.dir(e);
+		}
+	});
+
+	$("body").off("click",".btn-all");
 	$("body").on("click",".btn-all",function(){
 		if($(this).hasClass('active')){
 			$(this).find("input").prop("checked",false);
@@ -262,6 +221,7 @@ $(document).ready(function(){
 		}
 	});
 
+	$("body").off("click","label.btn-batch");
 	$("body").on("click","label.btn-batch",function(){
 		if($(this).children('input').prop("checked") == true){
 			$(this).children('input').prop("checked",false);
@@ -275,27 +235,17 @@ $(document).ready(function(){
 		var $btn = $(this).button('loading');
 
 		//get checked checkboxes, batch
-		var Batches = "";
+		var batches = [];
 		for(var i = 0; i < document.forms["Batch"].elements.length; i++){
 			if(document.forms["Batch"].elements[i].checked == true){
-				if(Batches == ""){
-					Batches += document.forms["Batch"].elements[i].name;
-				}
-				else{
-					Batches += ";"+document.forms["Batch"].elements[i].name;
-				}
+				batches.push(document.forms["Batch"].elements[i].name);
 			}
 		}
 		//get checked checkboxes, class
-		var Classes = "";
+		var classes = [];
 		for(var i = 0; i < document.forms["Class"].elements.length; i++){
 			if(document.forms["Class"].elements[i].checked == true){
-				if(Classes == ""){
-					Classes += document.forms["Class"].elements[i].name;
-				}
-				else{
-					Classes += ";"+document.forms["Class"].elements[i].name;
-				}
+				classes.push(document.forms["Class"].elements[i].name);
 			}
 		}
 		//get sort
@@ -304,18 +254,21 @@ $(document).ready(function(){
 			sort = 'ASC';
 		}
 		else{
-			sort = 'DESC'
+			sort = 'DESC';
 		}
 
 		//send ajax request
-    doOption(sort,Batches,Classes,function(){
+    doOption(sort,batches,classes,function(){
 			$btn.button('reset');
+			$('[data-toggle="popover"]').popover('hide');
 		});
 	});
 
+	$('body').off('mouseenter','.pic');
 	$('body').on('mouseenter','.pic',function(){
 		$(this).find('.btm-label').fadeIn(150);
 	});
+	$('body').off('mouseleave','.pic');
 	$('body').on('mouseleave','.pic',function(){
 		$(this).find('.btm-label').fadeOut(150);
 	});

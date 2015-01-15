@@ -4,7 +4,7 @@ $(document).ready(function(){
 		$(this).parent().parent().slideUp();
 	});
 
-  var announcementIndex = 0 //number of current announcements displayed. initialized at zero
+  var announcementIndex = 0; //number of current announcements displayed. initialized at zero
 
 	//fetch announcements function
 	function fetchAnnouncements(index){
@@ -79,6 +79,28 @@ $(document).ready(function(){
 	//invoke on document ready
 	fetchAnnouncements(0);
 
+	function checkVisible( elm, evalType ) { //from stackoverflow, not mine!
+		evalType = evalType || "visible";
+
+		var vpH = $(window).height(), // Viewport Height
+				st = $(window).scrollTop(), // Scroll Top
+				y = $(elm).offset().top,
+				elementHeight = $(elm).height();
+
+		if (evalType === "visible") return ((y < (vpH + st)) && (y > (st - elementHeight)));
+		if (evalType === "above") return ((y < (vpH + st)));
+	}
+
+	$(window).off('scroll');
+	$(window).on('scroll',function(){
+		if($('.announcementsViewMore2').length > 0){
+			if(checkVisible($('.announcementsViewMore2'))){
+				fetchAnnouncements(announcementIndex);
+			}
+		}
+	});
+
+	$("body").off('click','.announcementsViewMore2');
   $("body").on('click','.announcementsViewMore2',function(e){
 		e.preventDefault();
 		fetchAnnouncements(announcementIndex);

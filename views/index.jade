@@ -87,7 +87,7 @@ html
 														li Organization Batch:
 															select.form-control(form="signupform",name="org_batch")
 																each item in JSON.parse(batch)
-																	option(value=item.batch)= item.batch
+																	option(value=item)= item
 														li Mentor:
 															br
 															input.accountsAutocomplete.input-text.form-control(type="text",name="mentor")
