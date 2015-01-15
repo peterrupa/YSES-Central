@@ -24,7 +24,7 @@ $(document).ready(function(){
 					'</strong>'+
 				'</div>'+
 				'<hr>'+
-				'<table class="table table-hover table-condensed">'+
+				'<table class="table table-hover">'+
 				'</table>'+
 			'</div>'+
 		'</div>';
@@ -41,28 +41,19 @@ $(document).ready(function(){
 					var classData = '';
 
 					switch(first){
-						case 'First name' || 'Middle name' || 'Last name' 
-						|| 'University Batch' || 'Home Address' || 'College Address': 
-							classData = 'text';
-							break;
-						case 'Organization Classification':
-							classData = 'org_class';
-							break;
-						case 'Department':
-							classData = 'department';
-							break;
-						case 'Position':
-							classData = 'position';
-							break;
-						case 'Student Number':
-							classData = 'studentnumber';
-							break;
-						case 'Organization Batch':
-							classData = 'org_batch';
-							break;
-						case 'Birthday':
-							classData = 'birthdate';
-							break;
+						case 'First name': classData = 'text'; break;
+						case 'Middle name': classData = 'text'; break;
+						case 'Last name': classData = 'text'; break;
+						case 'University Batch': classData = 'text'; break;
+						case 'Home Address': classData = 'text'; break;
+						case 'College Address': classData = 'text'; break;
+						case 'Organization Classification': classData = 'org_class'; break;
+						case 'Department': classData = 'department'; break;
+						case 'Position': classData = 'position'; break;
+						case 'Student Number': classData = 'studentnumber'; break;
+						case 'Organization Batch': classData = 'org_batch'; break;
+						case 'Birthday': classData = 'birthdate'; break;
+						default: classData = ''; break;
 
 					}
 
