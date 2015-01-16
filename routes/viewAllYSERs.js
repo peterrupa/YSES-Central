@@ -8,6 +8,13 @@ module.exports = function(app,async){
 		database: 'yses_central'
 	});
 
+	function reportError(res,err){
+		console.log(err);
+		if(!res.headersSent){
+			res.sendStatus(500);
+		}
+	}
+
 	app.get('/YSERs/content', function(req,res){
 		var session = req.session;
 

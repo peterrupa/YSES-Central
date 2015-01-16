@@ -63,7 +63,7 @@ require('./routes/exec/announcementposter')(app,eventEmitter,async);
 //pad
 require('./routes/pad/padattendanceportal')(app);
 require('./routes/pad/spad/spadattendance')(app,async);
-require('./routes/pad/jpad/jpadattendance')(app);
+require('./routes/pad/jpad/jpadattendance')(app,async);
 
 
 // catch 404 and forward to error handler
