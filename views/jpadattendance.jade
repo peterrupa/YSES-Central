@@ -1,2 +1,16 @@
 div#jpadcontainer
   p= JSON.stringify(attendance)
+  p= "Total Events: "+attendance.length
+  - var present = 0;
+  - var absent = 0;
+  - for(var i = 0; i < attendance.length; i++){
+  -   if(attendance[i]["didattend"]==true){
+  -     present++;
+  -   }
+  -   else{
+  -     absent++;
+  -   }
+  - }
+  p= "Events present: "+present
+  p= "Events absent: "+absent
+  p= "Percentage: "+(present/attendance.length*100).toFixed(2)+"%"
