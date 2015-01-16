@@ -48,18 +48,23 @@ app.use(sessionMiddleware)
 var socket = require("./sockets/socket.js")(http,sessionMiddleware,eventEmitter);
 
 //application dependencies
-var search = require('./routes/search')(app);
-var functions = require('./routes/functions')(app,eventEmitter,async);
-var indexhomepage = require('./routes/index-homepage')(app);
-var profile = require('./routes/profile')(app,async);
-var public = require('./routes/public')(app,request);
-var viewAllYSERs = require('./routes/viewAllYSERs')(app,async);
-var announcements = require('./routes/announcements')(app);
-var logbook = require('./routes/logbook')(app,eventEmitter,async);
-var batch = require('./routes/batch')(app);
+require('./routes/search')(app);
+require('./routes/functions')(app,eventEmitter,async);
+require('./routes/index-homepage')(app);
+require('./routes/profile')(app,async);
+require('./routes/public')(app,request);
+require('./routes/viewAllYSERs')(app,async);
+require('./routes/announcements')(app);
+require('./routes/logbook')(app,eventEmitter,async);
+require('./routes/batch')(app);
 //exec
-var accountvalidator = require('./routes/exec/accountvalidator')(app,async);
-var announcementposter = require('./routes/exec/announcementposter')(app,eventEmitter,async);
+require('./routes/exec/accountvalidator')(app,async);
+require('./routes/exec/announcementposter')(app,eventEmitter,async);
+//pad
+require('./routes/pad/padattendanceportal')(app);
+require('./routes/pad/spad/spadattendance')(app,async);
+require('./routes/pad/jpad/jpadattendance')(app);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

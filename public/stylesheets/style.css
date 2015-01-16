@@ -33,7 +33,7 @@ a:hover, a:focus {
 	height:100%;
 	margin-top:00px;
 	padding-left:10px;
-	padding-top:50px;
+	padding-top:30px;
 
 }
 
@@ -68,7 +68,7 @@ a:hover, a:focus {
 	background-size:100% auto;
 	background-repeat:none;
 	background-position:center 920px;
-	
+
 	color:white;*/
 
 	margin-bottom:15px;
@@ -412,9 +412,9 @@ span.glyphicon-send:hover, span.glyphicon-list:hover, span.glyphicon-pencil:hove
 	display:none;
 }
 
-body.modal-open, 
-.modal-open .navbar-fixed-top, 
-.modal-open .navbar-fixed-bottom 
+body.modal-open,
+.modal-open .navbar-fixed-top,
+.modal-open .navbar-fixed-bottom
 {
 	margin-right: 0px;
 }

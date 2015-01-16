@@ -85,6 +85,37 @@ module.exports = function(app,request){
 		}
 	});
 
+	//pad system
+	app.get('/padattendance',function(req,res){
+		var session = req.session;
+		if(session.userkey){
+			serveMain(req,res);
+		}
+		else{
+			res.redirect('/');
+		}
+	});
+
+	app.get('/spadattendance', function(req,res){
+		var session = req.session;
+		if(session.userkey){
+			serveMain(req,res);
+		}
+		else{
+			res.redirect('/');
+		}
+	});
+
+	app.get('/jpadattendance', function(req,res){
+		var session = req.session;
+		if(session.userkey){
+			serveMain(req,res);
+		}
+		else{
+			res.redirect('/');
+		}
+	});
+
 	/* TEST */
 	app.get('/test', function(req, res) {
 		var session = req.session;
