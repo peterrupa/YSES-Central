@@ -38,30 +38,35 @@ $(document).ready(function(){
 			success: function (res) {
 				function rowHTML(first,second){
 					var classData = '';
+					var data = '';
 
 					switch(first){
-						case 'First name': classData = 'text'; break;
-						case 'Middle name': classData = 'text'; break;
-						case 'Last name': classData = 'text'; break;
-						case 'University Batch': classData = 'text'; break;
-						case 'Home Address': classData = 'text'; break;
-						case 'College Address': classData = 'text'; break;
-						case 'Organization Classification': classData = 'org_class'; break;
-						case 'Department': classData = 'department'; break;
-						case 'Position': classData = 'position'; break;
-						case 'Student Number': classData = 'studentnumber'; break;
-						case 'Organization Batch': classData = 'org_batch'; break;
-						case 'Birthday': classData = 'birthdate'; break;
+						case 'First name': classData = 'text'; data = 'first_name'; break;
+						case 'Middle name': classData = 'text'; data = 'middle_name'; break;
+						case 'Last name': classData = 'text'; data = 'last_name'; break;
+						case 'University Batch': classData = 'text'; data = 'univ_batch'; break;
+						case 'Home Address': classData = 'text'; data = 'home_address'; break;
+						case 'College Address': classData = 'text'; data = 'college_address'; break;
+						case 'Organization Classification': classData = 'org_class'; data = 'org_class'; break;
+						case 'Department': classData = 'department'; data = 'department'; break;
+						case 'Position': classData = 'position'; data = 'exec_position'; break;
+						case 'Student Number': classData = 'studentnumber'; data = 'student_number'; break;
+						case 'Organization Batch': classData = 'org_batch'; data = 'org_batch'; break;
+						case 'Birthday': classData = 'birthdate'; data = 'birthday'; break;
 						default: classData = ''; break;
 
 					}
 
-					return ''+
-						'<tr class="'+classData+'">'+
+					var edit = res["owner"]=="true"?'<td>'+'<a class="edit">Edit</a>'+'</td>':"";
+
+					var html = ''+
+						'<tr class="'+classData+'" data-name="'+data+'">'+
 							'<td>'+first+'</td>'+
 							'<td>'+second+'</td>'+
-							'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+							edit+ //only appears if account has valid powers to edit
 						'</tr>';
+
+					return html;
 				}
 
 				for(data in res){
@@ -268,19 +273,36 @@ $(document).ready(function(){
 
 	var old_value = '';
 
-	function alertChanges(old_value, data){
-		if(old_value != data.text()) alert(data.prev().text() + " changed from " + old_value + " to " + data.text());
-		else alert("No changes for this data");
+	function dataChanges(old_value, data){
+		//your data
+		//data.parent().data('name')
+		//your new value
+		//data.text()
+		if(old_value != data.text()){
+			//send ajax request to edit data in the database
+			$.ajax({
+				url: "http://localhost:8080/editprofile",
+				data: {
+					account: location.pathname.substring(9),
+					dataname: data.parent().data('name'),
+					newdata: data.text(),
+				},
+				type: "POST",
+				error: function (e){
+					console.dir(e);
+				}
+			});
+		}
 	};
 
 	$('body').off('click','.edit');
-	
+
 	/*EDIT DATA IN ABOUT*/
 	$("body").on("click",".edit",function(){
 
 			var data = $(this).closest("tr").find("td").first().next();
 			old_value = data.text();
-			
+
 			$(this).html('Done');
 			$(this).addClass('done');
 			$(this).removeClass('edit');
@@ -397,7 +419,7 @@ $(document).ready(function(){
 					$(this).closest("tr").find(".done").addClass('edit');
 					$(this).closest("tr").find(".done").removeClass('done');
 					data.html(temphtml);
-					alertChanges(old_value,data);
+					dataChanges(old_value,data);
 				}
 			});
 	});
@@ -443,7 +465,7 @@ $(document).ready(function(){
 		$(this).addClass('edit');
 		$(this).removeClass('done');
 
-		alertChanges(old_value,data);
+		dataChanges(old_value,data);
 	});
 
 	// needs work. will revert input fields clicked outside it's container.

@@ -47,12 +47,36 @@ module.exports = function(app,async){
 		var session = req.session;
 		if(session.userkey){
 			pool.getConnection(function(err,connection){
-				connection.query("SELECT first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, DATE_FORMAT(`birthday`,'%M %e %Y') AS birthday, home_address, college_address, exec_position FROM `accounts` WHERE username="+connection.escape(req.query.account),function(err,data){
-					if(err){
-						reportError(res,err);
+				async.parallel({
+					details: function(callback){
+						connection.query("SELECT first_name, middle_name, last_name, org_class, department, student_number, org_batch, univ_batch, DATE_FORMAT(`birthday`,'%M %e %Y') AS birthday, home_address, college_address, exec_position FROM `accounts` WHERE username="+connection.escape(req.query.account),function(err,data){
+							if(err) callback(err);
+							else{
+								callback(null,data[0]);
+							}
+						});
+					},
+					owner: function(callback){
+						//check if exec, he/she should be able to edit any profiles
+						var query = "SELECT exec_position FROM `accounts` WHERE username="+connection.escape(session.userkey)+" AND org_class='Active'";
+						connection.query(query,function(err,position){
+							if(err) callback(err);
+							else{
+								if(position[0]["exec_position"]){
+									callback(null,"true");
+								}
+								else{
+									callback(null,"false");
+								}
+							}
+						});
 					}
+				},
+				function(err,send){
+					if(err) reportError(res,err);
 					else{
-						res.send(data[0]);
+						send["details"]["owner"] = send["owner"];
+						res.send(send["details"]);
 					}
 				});
 				connection.release();
@@ -173,4 +197,25 @@ module.exports = function(app,async){
 			});
 		}
 	});
+
+	//edit profile
+	app.post('/editprofile',function(req,res){
+		var session = req.session;
+
+		if(session.userkey){
+			pool.getConnection(function(err,connection){
+				//query the database for edit
+				var query = "UPDATE `accounts` SET "+connection.escapeId(req.body["dataname"])+"="+connection.escape(req.body["newdata"])+" WHERE username="+connection.escape(req.body["account"]);
+
+				connection.query(query,function(err){
+					if(err) reportError(res,err);
+					else res.sendStatus(200);
+				});
+				connection.release();
+			});
+		}
+		else{
+			res.redirect('/');
+		}
+	})
 }

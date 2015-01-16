@@ -16,7 +16,7 @@ module.exports = function(app,request){
 			connection.query("SELECT username, first_name, picture FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows){
 				if(err) console.log(err);
 				else{
-					res.render('main',{username: rows[0]["username"],name: rows[0]["first_name"],picture: rows[0]["picture"].substring(7),});
+					res.render('main',{username: rows[0]["username"],name: rows[0]["first_name"],picture: rows[0]["picture"].substring(7)});
 				}
 			});
 			connection.release();
