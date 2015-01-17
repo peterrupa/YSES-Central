@@ -30,8 +30,7 @@ Possible functionalities are:
 * `Remove Event` Removes an event, along with the attendance data of that particular event.
 
 #### As a Junior PADster
-The systems all relevant statistics of the attendance of the user. This includes all events, whether the user attended it or not, and statistics such as the number of times the user was present/absent overall and its percentage.
-
+The system displays all relevant statistics of the attendance of the user. This includes all events, whether the user attended it or not, and statistics such as the number of times the user was present/absent overall and its percentage.
 
 ============
 To be continued.
