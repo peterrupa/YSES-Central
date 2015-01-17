@@ -1,3 +1,10 @@
 div#spadcontainer
   p= JSON.stringify(events)
   p= JSON.stringify(attendance)
+  p= "Total Number of Events: "+events.length
+  p Statistics:
+  each member in attendance
+    p= member["name"]
+    p= "Events present: "+member["eventsAttended"].length
+    p= "Events absent: "+(events.length-member["eventsAttended"].length)
+    p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
