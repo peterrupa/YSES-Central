@@ -19,9 +19,9 @@ YSES Central have
 YSERs must create an account in order to use the system. All their data of interest (names, student numbers, and other stuff) are stored in this account.
 
 # Department Specific Systems
-# Projects and Activities Department
-# Junior PADsters Attendance
-# As a Senior PADster
+## Projects and Activities Department
+### Junior PADsters Attendance
+#### As a Senior PADster
 Senior PADsters may view the attendance of all current Junior PADsters. Relevant statistics of each JPADsters are also displayed on the page.
 
 Possible functionalities are:
@@ -29,7 +29,7 @@ Possible functionalities are:
 * `Edit Event` Allows the user to modify existing events and attendance values.
 * `Remove Event` Removes an event, along with the attendance data of that particular event.
 
-# As a Junior PADster
+#### As a Junior PADster
 The systems all relevant statistics of the attendance of the user. This includes all events, whether the user attended it or not, and statistics such as the number of times the user was present/absent overall and its percentage.
 
 
