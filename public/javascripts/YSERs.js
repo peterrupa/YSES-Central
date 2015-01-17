@@ -231,6 +231,7 @@ $(document).ready(function(){
 		}
 	});
 
+	$("body").off("click","#optionsSubmit");
 	$("body").on("click","#optionsSubmit",function(){
 		var $btn = $(this).button('loading');
 

@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+	$("body").off("click",".hoverClose");
 	$("body").on("click",".hoverClose",function(){
 		$(this).parent().parent().slideUp();
 	});
@@ -106,6 +107,7 @@ $(document).ready(function(){
 		fetchAnnouncements(announcementIndex);
 	});
 
+	$("#submit").off('click');
   $("#submit").on('click',function(){
     //insert validation here
     $.ajax({

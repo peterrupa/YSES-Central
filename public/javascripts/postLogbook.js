@@ -23,6 +23,7 @@ $(document).ready(function(){
 		$('#counter').text(left+" character"+(left==1?"":"s")+" left  ");
 	});
 
+  $("body").off("click","#postLogbook");
   $("body").on("click","#postLogbook",function(){
     var button = $(this);
     	$.ajax({

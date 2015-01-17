@@ -14,6 +14,7 @@ $(document).ready(function(){
 
 	window.onload = $('#box-data').slideDown(1);
 
+	$("#about").off('click');
 	$("#about").on('click',function(){
 		var about_content =
 		'<div class="box">'+
@@ -95,6 +96,7 @@ $(document).ready(function(){
 
 	});
 
+	$("#mentor").off('click');
 	$("#mentor").on('click',function(){
 
 		//fetch mentee content via ajax
@@ -220,6 +222,7 @@ $(document).ready(function(){
 		});
 	});
 
+	$("#mentee").off('click');
 	$("#mentee").on('click',function(){
 		var mentee_content ='<div class="box"><div id="mentee-data"><div class="row"><div class="table-title"><strong>MENTEE<span class="glyphicon glyphicon-leaf"></span></strong></div><hr/></div></div></div>';
 
@@ -267,6 +270,7 @@ $(document).ready(function(){
 		});
 	});
 
+	$("#more").off('click');
 	$("#more").on('click',function(){
 		$(this).closest('#information').find('#box-data').html(more_content);
 	});
@@ -402,6 +406,8 @@ $(document).ready(function(){
 					$(this).html(temphtml);
 				});
 			}
+
+			data.find('input').off('keypress');
 			data.find('input').on('keypress', function(e) {
 				var code = e.keyCode || e.which;
 				if(!$(this).closest('tr').hasClass('studentnumber')){

@@ -149,6 +149,7 @@ $(document).ready(function(){
 			}
 		});
 
+		$("body").off("click",".accept");
 		$("body").on("click",".accept",function(){
 			//check if there are input boxes
 			if($(this).parent().find("input").length > 0){
@@ -200,7 +201,7 @@ $(document).ready(function(){
 			});
 		});
 
-
+		$("body").off("click",".reject");
 		$("body").on("click",".reject",function(){
 			//check if there are input boxes
 			if($(this).parent().find("input").length > 0){
@@ -230,7 +231,7 @@ $(document).ready(function(){
 				}
 			});
 		});
-		
+
 	var old_value = '';
 
 	function alertChanges(old_value, data){
@@ -239,13 +240,13 @@ $(document).ready(function(){
 	};
 
 	$('body').off('click','.edit');
-	
+
 	/*EDIT DATA IN ABOUT*/
 	$("body").on("click",".edit",function(){
 
 			var data = $(this).closest("tr").find("td").first().next();
 			old_value = data.text();
-			
+
 			$(this).html('Done');
 			$(this).addClass('done');
 			$(this).removeClass('edit');
@@ -345,6 +346,7 @@ $(document).ready(function(){
 					$(this).html(temphtml);
 				});
 			}
+			data.find('input').off('keypress');
 			data.find('input').on('keypress', function(e) {
 				var code = e.keyCode || e.which;
 				if(!$(this).closest('tr').hasClass('studentnumber')){
