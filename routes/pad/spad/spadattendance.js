@@ -42,7 +42,6 @@ module.exports = function(app,pool,async){
 			                connection.query(query,function(err,jpads){
 			                  if(err) callback(err);
 			                  else{
-			                    //convert it to a 1d array of strings
 			                    var temp = [];
 
 			                    for(var i = 0; i < jpads.length; i++){

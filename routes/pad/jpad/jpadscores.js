@@ -10,7 +10,23 @@ module.exports = function(app,pool,async){
     var session = req.session;
 
     if(session.userkey){
-      res.render('2');
+      pool.getConnection(function(err,connection){
+				//be sure user is an SPAD member before doing stuffs!
+				var query = "SELECT department FROM `accounts` WHERE username="+connection.escape(session.userkey);
+
+				connection.query(query,function(err,department){
+					if(err) reportError(res,err);
+					else{
+						if(department[0]["department"] != "Junior Projects and Activities"){
+							res.sendStatus(403);
+						}
+						else{
+
+						}
+					}
+				});
+				connection.release();
+			});
     }
     else{
       res.redirect('/');

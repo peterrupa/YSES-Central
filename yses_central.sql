@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2015 at 06:58 PM
+-- Generation Time: Jan 17, 2015 at 04:45 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -395,9 +395,43 @@ INSERT INTO `pad_jpadsters_event` (`event`, `date`) VALUES
 CREATE TABLE IF NOT EXISTS `pad_jpadsters_scores` (
   `username` varchar(50) NOT NULL,
   `score` int(11) NOT NULL,
-  `max_score` int(11) NOT NULL,
-  `task` varchar(50) NOT NULL
+  `task` varchar(50) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `pad_jpadsters_scores`
+--
+
+INSERT INTO `pad_jpadsters_scores` (`username`, `score`, `task`, `id`) VALUES
+('tricycle', 10, 'Quiz #1', 1),
+('tricycle', 5, 'Quiz #2', 2),
+('almermamer', 7, 'Quiz #1', 3),
+('almermamer', 3, 'Quiz #2', 4),
+('qylegeronimo', 0, 'Quiz #1', 5),
+('qylegeronimo', 0, 'Quiz #2', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pad_jpadsters_task`
+--
+
+CREATE TABLE IF NOT EXISTS `pad_jpadsters_task` (
+  `task` varchar(50) NOT NULL,
+  `date` date NOT NULL,
+  `maxscore` int(11) NOT NULL,
+  PRIMARY KEY (`task`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pad_jpadsters_task`
+--
+
+INSERT INTO `pad_jpadsters_task` (`task`, `date`, `maxscore`) VALUES
+('Quiz #1', '2015-01-14', 10),
+('Quiz #2', '2015-01-16', 5);
 
 -- --------------------------------------------------------
 

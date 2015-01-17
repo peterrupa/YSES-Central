@@ -1,0 +1,33 @@
+div#spadcontainer
+  p List of tasks
+  each task in tasks
+    ul
+      li= "Name: "+task["name"]
+      li= "Date: "+task["date"]
+      li= "Max Score: "+task["maxscore"]
+  p List of Scores
+  
+  each member in scores
+    ul
+      li= "Name: "+member["name"]
+      li= "Picture url: "+member["picture"]
+      li= "Scores: "
+        each score in member["scores"]
+          ul
+            li="Task: "+score["task"]
+            li="Score: "+score["score"]
+
+  p Statistics
+  - var totalitems = 0;
+  - for(var i = 0; i < tasks.length; i++){
+  -   totalitems += tasks[i]["maxscore"];
+  - }
+  each member in scores
+    ul
+      li= "Name: "+member["name"]
+      - var total = 0;
+      - for(var i = 0; i < member["scores"].length; i++){
+      -   total += member["scores"][i]["score"];
+      - }
+      li= "Total score: "+total+"/"+totalitems
+      li= "Percentage: "+(total/totalitems*100).toFixed(2)+"%"
