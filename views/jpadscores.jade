@@ -1,0 +1,14 @@
+div#jpadcontainer
+  - var totalitems = 0;
+  - var totalscore = 0;
+  each task in scores
+    ul
+      li= "Task: "+task["task"]
+      li= "Date: "+task["date"]
+      li= "Total items: "+task["maxscore"]
+      li= "Score: "+task["score"]
+      - totalitems += task["maxscore"];
+      - totalscore += task["score"];
+  p Statistics
+  p= "Total score: "+totalscore+"/"+totalitems
+  p= "Percentage: "+(totalscore/totalitems*100).toFixed(2)+"%"
