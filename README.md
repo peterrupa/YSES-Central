@@ -1,5 +1,5 @@
 #YSES Central
-============
+
 YSES Central is a system that collects all YSES System into one web application. It incorporates basic social media elements combined with functional department-specific systems. YSERs are expected to create an account, in order to use its features and maintain an up-to-date record.
 
 ## Installation
