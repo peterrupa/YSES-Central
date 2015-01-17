@@ -1,14 +1,4 @@
-module.exports = function(app,request){
-	//database
-	var mysql = require('mysql');
-	var pool = mysql.createPool({
-		host : 'localhost',
-		user : 'root',
-		password : '',
-		database: 'yses_central'
-	});
-
-
+module.exports = function(app,pool,request){
 	function serveMain(req,res){
 		var session = req.session;
 
@@ -107,6 +97,36 @@ module.exports = function(app,request){
 	});
 
 	app.get('/jpadattendance', function(req,res){
+		var session = req.session;
+		if(session.userkey){
+			serveMain(req,res);
+		}
+		else{
+			res.redirect('/');
+		}
+	});
+
+	app.get('/padscores',function(req,res){
+		var session = req.session;
+		if(session.userkey){
+			serveMain(req,res);
+		}
+		else{
+			res.redirect('/');
+		}
+	});
+
+	app.get('/spadscores', function(req,res){
+		var session = req.session;
+		if(session.userkey){
+			serveMain(req,res);
+		}
+		else{
+			res.redirect('/');
+		}
+	});
+
+	app.get('/jpadscores', function(req,res){
 		var session = req.session;
 		if(session.userkey){
 			serveMain(req,res);

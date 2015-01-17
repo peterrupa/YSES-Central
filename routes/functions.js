@@ -1,19 +1,10 @@
-module.exports = function(app,eventEmitter,async){
+module.exports = function(app,pool,eventEmitter,async){
 	var fs = require('fs');
 	var multer = require('multer');
 
 	//for image processing
 	var im = require('gm');
 	var gm = im.subClass({imageMagic:true});
-
-	//database
-	var mysql = require('mysql');
-	var pool = mysql.createPool({
-		host : 'localhost',
-		user : 'root',
-		password : '',
-		database: 'yses_central'
-	});
 
 	//encryption
 	var crypto = require('crypto');

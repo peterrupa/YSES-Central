@@ -1,5 +1,5 @@
 module.exports = function(app,pool){
-  app.get('/padattendance/content',function(req,res){
+  app.get('/padscores/content',function(req,res){
     var session = req.session;
 
     if(session.userkey){
@@ -9,10 +9,10 @@ module.exports = function(app,pool){
 
         connection.query(query,function(err,department){
           if(department[0]["department"] == "Senior Projects and Activities"){
-            res.redirect('/spadattendance/content');
+            res.redirect('/spadscores/content');
           }
           else if(department[0]["department"] == "Junior Projects and Activities"){
-            res.redirect('/jpadattendance/content');
+            res.redirect('/jpadscores/content');
           }
           else{
             res.render('forbidden');

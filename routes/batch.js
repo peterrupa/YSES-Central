@@ -1,13 +1,4 @@
-module.exports = function(app){
-  //database
-	var mysql = require('mysql');
-	var pool = mysql.createPool({
-		host : 'localhost',
-		user : 'root',
-		password : '',
-		database: 'yses_central'
-	});
-
+module.exports = function(app,pool){
   app.get('/getBatch',function(req,res){
     pool.getConnection(function(err,connection){
       var query = "SELECT batch FROM `org_batch` WHERE 1 ORDER BY id";

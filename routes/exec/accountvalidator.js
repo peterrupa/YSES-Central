@@ -1,16 +1,7 @@
-module.exports = function(app,async){
+module.exports = function(app,pool,async){
 	//file
 	var fs = require('fs');
-
-	//database
-	var mysql = require('mysql');
-	var pool = mysql.createPool({
-		host : 'localhost',
-		user : 'root',
-		password : '',
-		database: 'yses_central'
-	});
-
+	
 	function reportError(res,err){
 		console.log(err);
 		if(!res.headersSent){

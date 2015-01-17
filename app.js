@@ -47,24 +47,35 @@ app.use(sessionMiddleware)
 
 var socket = require("./sockets/socket.js")(http,sessionMiddleware,eventEmitter);
 
-//application dependencies
-require('./routes/search')(app);
-require('./routes/functions')(app,eventEmitter,async);
-require('./routes/index-homepage')(app);
-require('./routes/profile')(app,async);
-require('./routes/public')(app,request);
-require('./routes/viewAllYSERs')(app,async);
-require('./routes/announcements')(app);
-require('./routes/logbook')(app,eventEmitter,async);
-require('./routes/batch')(app);
-//exec
-require('./routes/exec/accountvalidator')(app,async);
-require('./routes/exec/announcementposter')(app,eventEmitter,async);
-//pad
-require('./routes/pad/padattendanceportal')(app);
-require('./routes/pad/spad/spadattendance')(app,async);
-require('./routes/pad/jpad/jpadattendance')(app,async);
+//database
+var mysql = require('mysql');
+var pool = mysql.createPool({
+  host : 'localhost',
+  user : 'root',
+  password : '',
+  database: 'yses_central'
+});
 
+//application dependencies
+require('./routes/search')(app,pool);
+require('./routes/functions')(app,pool,eventEmitter,async);
+require('./routes/index-homepage')(app);
+require('./routes/profile')(app,pool,async);
+require('./routes/public')(app,pool,request);
+require('./routes/viewAllYSERs')(app,pool,async);
+require('./routes/announcements')(app,pool);
+require('./routes/logbook')(app,pool,eventEmitter,async);
+require('./routes/batch')(app,pool);
+//exec
+require('./routes/exec/accountvalidator')(app,pool,async);
+require('./routes/exec/announcementposter')(app,pool,eventEmitter,async);
+//pad
+require('./routes/pad/padattendanceportal')(app,pool);
+require('./routes/pad/padscoresportal')(app,pool);
+require('./routes/pad/spad/spadattendance')(app,pool,async);
+require('./routes/pad/jpad/jpadattendance')(app,pool,async);
+require('./routes/pad/spad/spadscores')(app,pool,async);
+require('./routes/pad/jpad/jpadscores')(app,pool,async);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
