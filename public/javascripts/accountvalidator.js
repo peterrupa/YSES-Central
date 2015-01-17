@@ -31,31 +31,39 @@ $(document).ready(function(){
 								}
 
 								if(data == "mentee"){
-									var counter = 0;
+									// var counter = '';
+									var mentee = '';
 									var temphtml = '';
-									for(var j = 0; j < res[i]["mentee"].length; j++){
-										if(counter == 0){
-											var temphtml2 = ''+
-												'<tr class="text" data-mentee="'+res[i]["mentee"][j]+'">'+
-													'<td>'+
-														'Mentees'+
-													'</td>'+
-													'<td>'+res[i]["mentee"][j]+'</td>'+
-													'<td>'+'<a class="edit">Edit</a>'+'</td>'+
-												'</tr>';
-											counter += 1;
-										} else{
-											var temphtml2 = ''+
-												'<tr class="text" data-mentee="'+res[i]["mentee"][j]+'">'+
-													'<td>'+
-													'</td>'+
-													'<td>'+res[i]["mentee"][j]+'</td>'+
-													'<td>'+'<a class="edit">Edit</a>'+'</td>'+
-												'</tr>';
+									if(0 < res[i]["mentee"].length){
+										for(var j = 0; j < res[i]["mentee"].length; j++){
+											// if(counter == 0){
+											/*	counter += 1;
+											} else{
+												var temphtml2 = ''+
+													'<tr class="text" data-mentee="'+res[i]["mentee"][j]+'">'+
+														'<td>'+
+														'</td>'+
+														'<td>'+res[i]["mentee"][j]+'</td>'+
+														'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+													'</tr>';
+											}*/
+											mentee = ''+
+												'<span id="mentee-'+(j+1)+'" class="mentee-data">'+
+													res[i]["mentee"][j]+
+												'</span>';
+											temphtml = temphtml.concat(mentee);
+											temphtml = temphtml.concat('<br>');
 										}
-										temphtml = temphtml.concat(temphtml2);
+										var temphtml2 = ''+
+											'<tr id="mentees" class="mentee-list" data-mentee>'+
+												'<td>'+
+													'Mentees'+
+												'</td>'+
+												'<td>'+temphtml+'</td>'+
+												'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+											'</tr>';
+										table_data_1 = table_data_1.concat(temphtml2);
 									}
-									table_data_1 = table_data_1.concat(temphtml);
 								}
 								else if(data == "mentor"
 									|| data == "username"
@@ -123,10 +131,12 @@ $(document).ready(function(){
 								}
 							}
 							var html = ''+
-								'<div data-username="'+res[i]['username']+'" class="to-validate">'+
+								'<div data-username="'+res[i]['username']+'" class="to-validate to-validate-'+i+'">'+
 									img+
-									'<h3 style="float:left;font-weight:bold;padding-top:0px">'+res[i]['first_name']+' '+res[i]['last_name']+'</h3>'+
-									'<span style="float:left;padding-top:29px;margin-left:10px;">'+res[i]['department']+' Department'+'</span>'+
+									'<div id="title-container">'+
+										'<h3>'+res[i]['first_name']+' '+res[i]['last_name']+'</h3>'+
+										'<span>'+res[i]['department']+' Department'+'</span>'+
+									'</div>'+
 									'<div class="account-data">'+
 										table_data_2+'</table>'+
 										table_data_1+'</table>'+
@@ -255,6 +265,7 @@ $(document).ready(function(){
 			if($(this).parent().find("input").length > 0){
 				alert("There are boxes");
 			}
+
 			else if($(this).closest('tr').hasClass('text')){
 				data.each(function(index){
 					var temphtml = ''+
@@ -262,6 +273,51 @@ $(document).ready(function(){
 					$(this).html(temphtml);
 				});
 			}
+
+			// will convert data to a mentee inputs (can add or remove mentees)
+			else if($(this).closest('tr').hasClass('mentee-list')){
+				data.find('span').each(function(){
+					var blankhtml = ''+
+					'<div class="mentee-field input-group">'+
+						'<input '+
+							'class="mentee-textfield"'+
+							'type="text" '+
+							'name="mentee"'+
+						'/>'+
+						'<span class="input-group-btn">'+
+							'<button class="add-mentee btn" type="button">'+
+								'<span>+</span>'+
+							'</button>'+
+						'</span>'+
+					'</div>';
+
+					var temphtml = ''+
+					'<div class="mentee-field input-group">'+
+						'<input '+
+							'class="mentee-textfield"'+
+							'type="text" '+
+							'value="'+$(this).text()+'"'+
+							'name="mentee"'+
+						'/>'+
+						'<span class="input-group-btn">'+
+							'<button class="remove-mentee btn" type="button">'+
+								'<span>x</span>'+
+							'</button>'+
+						'</span>'+
+					'</div>';
+
+					if($(this).parent().children().length == 2 || $(this).is(":last-child")){
+						temphtml = temphtml + blankhtml;
+					}
+
+					$(this).closest('tr').find('br').remove();
+					$(this).replaceWith(temphtml);
+					
+						
+				});
+				
+			}
+
 			// will convert data to a datepicker
 			else if($(this).closest('tr').hasClass('birthdate')){
 				data.each(function(index){
@@ -395,6 +451,22 @@ $(document).ready(function(){
 				var temphtml = ''+
 					text.find('select').val();
 				$(this).html(temphtml);
+			});
+		}
+		else if(traversed('mentee-list')){
+			var mentee = '';
+			var newLine = '';
+			var temphtml = '';
+			text.find('.mentee-textfield').each(function(index){
+				if($(this).is(':last-child')) newLine = '';
+				else newLine = '<br>';
+
+				if($(this).val() != ''){
+					mentee = '<span>'+$(this).val()+'</span>';
+					$(this).closest('.mentee-field').replaceWith(mentee+'<br>');
+				} else {
+					$(this).closest('.mentee-field').remove();
+				}
 			});
 		}
 		else if(traversed('studentnumber')){
@@ -558,5 +630,18 @@ $(document).ready(function(){
 			'</div>';
 		$("#temp").append(html);
 		alert("NEW ACCOUNT. DO SOME FANCY STUFFS");
+	});
+
+	$("body").on('click','.mentee-field .add-mentee',function(){
+		var newfield = '<div class="mentee-field input-group"><input class="mentee-textfield" type="text" name="mentee"><span class="input-group-btn"><button class="add-mentee btn" type="button"><span>+</span></span></div>'
+		$(this).find('span').remove();
+		$(this).append('<span>x</span>');
+		$(this).removeClass('add-mentee');
+		$(this).addClass('remove-mentee');
+		$(this).closest('.mentee-list').find('td').first().next().append(newfield);
+	});
+	
+	$("body").on('click','.mentee-field .remove-mentee',function(){
+		$(this).parent().parent().remove();
 	});
 });

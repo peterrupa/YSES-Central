@@ -1,3 +1,7 @@
+input{
+	width:120px;
+}
+
 #temp{
 	height:100%;
 	width:100%;
@@ -7,25 +11,51 @@
 #temp .to-validate{
 	padding:0px;
 
-	/*min-height:380px;
-	max-height:500px;*/
-	height:420px;
+	min-height:100%;
 	width:100%;
+
+	overflow:auto;
 
 	color:black;
 
 	margin-bottom:15px;
 
-	background-color:rgba(240,240,240,1);
+	background-color:rgba(200,200,200,1);
 
 	margin-bottom:10px;
 }
 
 .to-validate-button{
-	position:absolute;
-
-	margin-top:37%;
+	position:relative;
+	float:left;
 	width:100%;
+}
+
+.to-validate-button button{
+	position:relative;
+	float:left;
+
+	height:50px;
+	width:48.25%;
+	border:0px;
+
+	font-size:1.69em;
+
+	margin-top:0px;
+	margin-bottom:10px;
+	margin-left: 1%; 
+	margin-right: 0%;
+
+	top:0px;
+
+	background-color:rgba(42, 99, 189,1);
+	color:white;
+}
+
+.to-validate button:hover, .to-validate button:focus{
+	background-color:rgba(180,180,250,1);
+	font-weight:bold;
+	color:black;
 }
 
 #temp img{
@@ -57,30 +87,6 @@
 	float:left;
 }
 
-#temp button{
-	position:relative;
-	float:left;
-
-	height:40px;
-	width:50%;
-	border:0px;
-
-	font-size:1.69em;
-
-	margin-top:0px;
-	margin-bottom:0px;
-
-	top:0px;
-
-
-	background-color:rgba(240,240,240,0);
-	color:black;
-}
-
-#temp button:hover{
-	color:blue;
-}
-
 #temp a{
 	cursor:pointer;
 }
@@ -88,4 +94,80 @@
 #temp a:focus, #temp a:hover{
 	cursor:pointer;
 	color:blue;
+}
+
+#title-container{
+	position:relative;
+	background-color:rgba(42,99,189,1);
+	color:white;
+	margin-top:15px;
+	margin-left:16.5%;
+	margin-bottom:0%;
+	width:82%;
+	height:50px;
+	padding-left:15px;
+	padding-top:5px;
+}
+
+#title-container h3{
+	position:relative;
+	float:left;
+	margin-top:7px;
+	font-weight:bold;
+}
+
+#title-container span{
+	position:relative;
+	float:left;
+	margin-left: 10px;
+	margin-top:15px;
+}
+
+td{
+	height:15px;
+}
+
+.mentee-data{
+	height:20px;
+}
+
+.mentee-field{
+	margin-bottom:5px;
+	padding:0px;
+}
+
+.mentee-field span{
+	width:180px;
+}
+
+.mentee-field input{
+	float:right;
+	margin:0px;
+	padding:0px;
+	height:24px;
+}
+
+.mentee-field button{
+	float:left;
+	position:relative;
+	height:24px;
+	width:30px;
+	border:1px solid rgb(160,160,160);
+	margin:0px;
+	padding:0px;
+	top:0px;
+	color:black;
+	background-color:white;
+}
+
+.mentee-field br{
+	height:0px;
+	margin:0px;
+	padding:0px;
+	border:0px;
+	display:none;
+}
+
+.mentee-field span{
+	font-weight:bold
 }
