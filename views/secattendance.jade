@@ -1,6 +1,6 @@
 link(rel="stylesheet",href="http://localhost:8080/stylesheets/padattendance.css")
 div.title-header.profile-header
-	h2 JPad Attendance
+	h2 YSERs Attendance
 div#spadcontainer
 	div#event-buttons
 		button#addevent Add Event
@@ -23,4 +23,3 @@ div#spadcontainer
 					p= "Events present: "+member["eventsAttended"].length
 					p= "Events absent: "+(events.length-member["eventsAttended"].length)
 					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
-			//- for sample purposes only

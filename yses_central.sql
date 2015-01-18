@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2015 at 04:45 PM
+-- Generation Time: Jan 18, 2015 at 03:52 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -55,11 +55,14 @@ INSERT INTO `accounts` (`username`, `password`, `first_name`, `middle_name`, `la
 ('almermamer', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Almer', 'Taculog', 'Mendoza', 'Active', 'Junior Projects and Activities', '2013-12112', 'RAMpage', '2013', 'kath28', '1996-11-08', 'Pateros, Rizal', 'Vetmed Dorm', 'public/uploads/almermamer.jpg', 'Almer Taculog Mendoza', NULL),
 ('arvielimbo', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Arvie', 'Abrencillo', 'Limbo', 'Active', 'Finance', '2012-12321', 'rainByte', '2012', 'Angela Roscel Brojas Almoro', '1111-11-10', 'Quezon', 'New Dorm', 'public/uploads/arvielimbo.jpg', 'Arvie Abrencillo Limbo', NULL),
 ('badluckbrian', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Bad', 'Luck', 'Brian', 'Alumni', 'Scholastics', '2006-11111', 'Charter Member', '2006', 'Good Guy Greg', '1111-11-11', 'Internetz', 'Internetz', 'public/uploads/badluckbrian.png', 'Bad Luck Brian', 'Scholastics Head'),
+('getLostPanget', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Maria Theresa', 'Salvador', 'Nicdao', 'Active', 'Scholastics', '2011-56717', 'Synergy', '2011', 'Tere''s Mentor', '1994-10-29', 'Hermosa, Bataan', 'Silverios Compound', 'public/uploads/getLostPanget.jpg', 'Maria Theresa Salvador Nicdao', NULL),
 ('kath28', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Katherine', 'So', 'Villegas', 'Active', 'Senior Projects and Activities', '2012-22222', 'rainByte', '2012', 'Suzette De Torres', '1995-01-28', 'Candelaria, Quezon', 'Silverios Compound', 'public/uploads/kath28.jpg', 'Katherine So Villegas', NULL),
 ('kimini07', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Kim Joshua', 'Caicdoy', 'Advincula', 'Active', 'Senior Projects and Activities', '2011-12312', 'Jenga', '2011', 'Kim''s Mentor', '3232-12-31', 'Makati', 'Bella Cartash', 'public/uploads/kimini07.jpg', 'Kim Joshua Caicdoy Advincula', 'Deputy Executive Officer'),
+('marieflor', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Marie Flor', 'Ramos', 'Bawanan', 'Active', 'Junior Projects and Activities', '2012-12321', 'RAMpage', '2012', 'getLostPanget', '1995-04-22', 'Solano, Nueva Viscaya', 'Pearl Street', 'public/uploads/pending/marieflor.jpg', 'Marie Floe Ramos Bawanan', NULL),
 ('penguinlove', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Maria Clarissa', 'Sulit', 'Estremos', 'Active', 'Secretariat', '2011-55645', 'He-4', '2011', 'Cla''s Mentor', '5234-04-27', 'Binangonan, Rizal', 'Bella Cartash', 'public/uploads/penguinlove.jpg', 'Maria Clarissa Sulit Estremos', 'Executive Assistant'),
 ('queenjubs', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Jhubielyn', 'Go', 'Garachico', 'Active', 'Senior Projects and Activities', '2012-51343', 'rainByte', '2012', 'Idk lol', '1995-11-12', 'Somewhere', 'Silverios Compound', 'public/uploads/queenjubs.jpg', 'Jhubielyn Go Garachico', NULL),
 ('qylegeronimo', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Qyle', 'De Los Angeles', 'San Juan', 'Active', 'Junior Projects and Activities', '2012-11111', 'RAMpage', '2012', 'penguinlove', '1996-06-07', 'Naga City', 'Vetmed Dorm', 'public/uploads/qylegeronimo.jpg', 'Qyle De Los Angeles San Juan', NULL),
+('treelover', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Emerald', 'Fajutag', 'Fallarme', 'Active', 'Scholastics', '2011-43243', 'He-4', '2011', 'Ian F Del Barrio', '1994-10-12', 'Taguig', 'Women''s Dorm', 'public/uploads/treelover.jpg', 'Emerald Fajutag Fallarme', NULL),
 ('tricycle', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Peter Bernard', 'Mariano', 'Rupa', 'Active', 'Junior Projects and Activities', '2013-45106', 'RAMpage', '2013', 'arvielimbo', '1996-11-29', 'Block 1 Lot 10 Nova Romania, Deparo, Caloocan', 'Mendoza Dorm', 'public/uploads/tricycle.jpg', 'Peter Bernard Mariano Rupa', NULL),
 ('youryayness', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Desery', 'Ramos', 'Sabado', 'Active', 'Human Resources', '2011-43432', 'Jenga', '2011', 'Yay''s Mentor', '3212-12-27', 'Muntinlupa', 'Student''s Dorm', 'public/uploads/youryayness.jpg', 'Desery Ramos Sabado', 'Human Resources Head');
 
@@ -81,6 +84,8 @@ CREATE TABLE IF NOT EXISTS `accounts_mentee` (
 
 INSERT INTO `accounts_mentee` (`mentee`, `mentor`) VALUES
 ('almermamer', 'kath28'),
+('Joseph Matthew Reinoso Marcos', 'treelover'),
+('marieflor', 'getLostPanget'),
 ('Mon Cedrick Glipo Frias', 'queenjubs'),
 ('qylegeronimo', 'penguinlove'),
 ('tricycle', 'arvielimbo');
@@ -117,9 +122,7 @@ CREATE TABLE IF NOT EXISTS `accounts_pending` (
 --
 
 INSERT INTO `accounts_pending` (`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES
-('getLostPanget', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Maria Theresa', 'Salvador', 'Nicdao', 'Active', 'Scholastics', '2011-56717', 'Synergy', '2011', 'Tere''s Mentor', '1994-10-29', 'Hermosa, Bataan', 'Silverios Compound', 'public/uploads/pending/getLostPanget.jpg', 'Maria Theresa Salvador Nicdao', NULL),
-('username', '26bdbdd16f7a11eff3e5fd8b1d0590798bf6835a93df3eceb3398c98ef324ef3', 'first', 'middle', 'last', 'Active', 'Visuals and Logistics', '2012-43132', 'Charter', '2012', 'tricycle', '1111-03-21', 'home address', 'college address', 'public/uploads/pending/username.jpg', 'first middle last', 'Visuals and Logistics Head'),
-('zaiizaii', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Zion Ruth', 'Borres', 'Gragasin', 'Active', 'Junior Projects and Activities', '2013-53423', 'RAMpage', '2013', 'tricycle', '1996-06-06', 'Deparo, Caloocan', 'PUP', 'public/uploads/pending/zaiizaii.jpg', 'Zion Ruth Borres Gragasin', NULL);
+('zaiizaii', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Zion Ruth', 'Borres', 'Gragasin', 'Active', 'Junior Projects and Activities', '2013-53423', 'RAMpage', '2013', 'Peter Bernard Rupa', '1996-06-06', 'Deparo, Caloocan', 'PUP', 'public/uploads/pending/zaiizaii.jpg', 'Zion Ruth Borres Gragasin', NULL);
 
 -- --------------------------------------------------------
 
@@ -132,15 +135,6 @@ CREATE TABLE IF NOT EXISTS `accounts_pending_mentee` (
   `mentor` varchar(50) NOT NULL,
   PRIMARY KEY (`mentee`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `accounts_pending_mentee`
---
-
-INSERT INTO `accounts_pending_mentee` (`mentee`, `mentor`) VALUES
-('almermamer', 'username'),
-('Marie Flor Ramos Bawanan', 'getLostPanget'),
-('Mentee 1', 'username');
 
 -- --------------------------------------------------------
 
@@ -155,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `announcement_posts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 --
 -- Dumping data for table `announcement_posts`
@@ -191,7 +185,8 @@ INSERT INTO `announcement_posts` (`department`, `message`, `date`, `id`, `title`
 ('Secretariat', 'TEST', '2015-01-15 01:03:34', 41, 'Tset'),
 ('Secretariat', 'ds', '2015-01-15 01:05:20', 42, 'as'),
 ('Senior Projects and Activities', '2', '2015-01-15 01:07:14', 43, 'dota'),
-('Senior Projects and Activities', 'yeah', '2015-01-15 01:07:22', 44, 'fk');
+('Senior Projects and Activities', 'yeah', '2015-01-15 01:07:22', 44, 'fk'),
+('Senior Projects and Activities', 'MESSAGE', '2015-01-18 18:53:46', 45, 'Title');
 
 -- --------------------------------------------------------
 
@@ -270,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `logbook_posts` (
   `message` varchar(1000) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
 
 --
 -- Dumping data for table `logbook_posts`
@@ -292,7 +287,9 @@ INSERT INTO `logbook_posts` (`username`, `date`, `message`, `id`) VALUES
 ('penguinlove', '2015-01-15 23:15:44', 'qwewqeqw', 53),
 ('penguinlove', '2015-01-15 23:15:46', 'cxzcxzczx', 54),
 ('penguinlove', '2015-01-15 23:15:48', 'fdfsfds', 55),
-('penguinlove', '2015-01-15 23:16:48', 'sa', 56);
+('penguinlove', '2015-01-15 23:16:48', 'sa', 56),
+('kimini07', '2015-01-18 18:53:07', 'HELLO!', 57),
+('kimini07', '2015-01-18 18:55:31', 'dsadsawqeqweqw', 58);
 
 -- --------------------------------------------------------
 
@@ -398,7 +395,7 @@ CREATE TABLE IF NOT EXISTS `pad_jpadsters_scores` (
   `task` varchar(50) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `pad_jpadsters_scores`
@@ -410,7 +407,9 @@ INSERT INTO `pad_jpadsters_scores` (`username`, `score`, `task`, `id`) VALUES
 ('almermamer', 7, 'Quiz #1', 3),
 ('almermamer', 3, 'Quiz #2', 4),
 ('qylegeronimo', 0, 'Quiz #1', 5),
-('qylegeronimo', 0, 'Quiz #2', 6);
+('qylegeronimo', 0, 'Quiz #2', 6),
+('marieflor', 0, 'Quiz #1', 7),
+('marieflor', 0, 'Quiz #2', 8);
 
 -- --------------------------------------------------------
 
@@ -476,8 +475,17 @@ CREATE TABLE IF NOT EXISTS `scho_sem_list` (
 CREATE TABLE IF NOT EXISTS `sec_ysers_attendance` (
   `username` varchar(50) NOT NULL,
   `event` varchar(50) NOT NULL,
-  `did_attend` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `sec_ysers_attendance`
+--
+
+INSERT INTO `sec_ysers_attendance` (`username`, `event`, `id`) VALUES
+('tricycle', 'GA #1', 1),
+('tricycle', 'GA #2', 2);
 
 -- --------------------------------------------------------
 
@@ -487,10 +495,17 @@ CREATE TABLE IF NOT EXISTS `sec_ysers_attendance` (
 
 CREATE TABLE IF NOT EXISTS `sec_ysers_event` (
   `event` varchar(50) NOT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `date` date NOT NULL,
+  PRIMARY KEY (`event`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sec_ysers_event`
+--
+
+INSERT INTO `sec_ysers_event` (`event`, `date`) VALUES
+('GA #1', '2015-01-12'),
+('GA #2', '2015-01-15');
 
 -- --------------------------------------------------------
 

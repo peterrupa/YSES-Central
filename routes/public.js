@@ -136,6 +136,37 @@ module.exports = function(app,pool,request){
 		}
 	});
 
+	//sec system
+	app.get('/attendance',function(req,res){
+		var session = req.session;
+		if(session.userkey){
+			serveMain(req,res);
+		}
+		else{
+			res.redirect('/');
+		}
+	});
+
+	app.get('/secattendance',function(req,res){
+		var session = req.session;
+		if(session.userkey){
+			serveMain(req,res);
+		}
+		else{
+			res.redirect('/');
+		}
+	});
+
+	app.get('/nsecattendance',function(req,res){
+		var session = req.session;
+		if(session.userkey){
+			serveMain(req,res);
+		}
+		else{
+			res.redirect('/');
+		}
+	});
+
 	/* TEST */
 	app.get('/test', function(req, res) {
 		var session = req.session;

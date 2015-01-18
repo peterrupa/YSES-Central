@@ -76,6 +76,10 @@ require('./routes/pad/spad/spadattendance')(app,pool,async);
 require('./routes/pad/jpad/jpadattendance')(app,pool,async);
 require('./routes/pad/spad/spadscores')(app,pool,async);
 require('./routes/pad/jpad/jpadscores')(app,pool,async);
+//exec
+require('./routes/sec/attendanceportal')(app,pool);
+require('./routes/sec/secattendance')(app,pool,async);
+require('./routes/sec/nsecattendance')(app,pool,async);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
