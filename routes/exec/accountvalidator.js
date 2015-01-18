@@ -1,4 +1,4 @@
-module.exports = function(app,pool,async){
+module.exports = function(app,pool,eventEmitter,async){
 	//file
 	var fs = require('fs');
 
@@ -103,150 +103,158 @@ module.exports = function(app,pool,async){
 	  }
 	});
 
-	app.post('/acceptAccount', function(req,res){
-	  var session = req.session;
+	app.post('/acceptAccount',function(req,res){
+		var session = req.session;
 
-	  if(session.userkey){
-			//parse
-			req.body["mentee"] = JSON.parse(req.body["mentee"]);
-
+		if(session.userkey){
 			//add /public to picture
 			req.body["picture"] = "public/"+req.body["picture"];
-			console.log("req.body[\"mentee\"]: "+req.body["mentee"])
 
-			//insert to database
 			pool.getConnection(function(err,connection){
-				//get hashed password
-				var query = "SELECT password FROM `accounts_pending` WHERE username="+connection.escape(req.body["origusername"]);
-				connection.query(query,function(err,password){
-					if(err){
-						reportError(res,err);
-					}
-					else{
-						//convert mentor name
-						var query = 'SELECT username FROM `accounts` WHERE full_name='+connection.escape(req.body["mentor"]);
-						connection.query(query,function(err,mentor){
-							if(err){
-								reportError(res,err);
+				async.parallel([
+					function(callback){
+						//extract file extension
+						var indexExt = req.body["picture"].lastIndexOf(".");
+
+						var fileExt = req.body["picture"].substring(indexExt,req.body["picture"].length);
+
+						fs.rename("./"+req.body["picture"],"./public/uploads/"+req.body["username"]+fileExt, function(err){
+							if(err) callback(err);
+							else{
+								callback();
 							}
+						});
+					},
+					function(callback){
+						//get hashed password
+						var query = "SELECT password FROM `accounts_pending` WHERE username="+connection.escape(req.body["origusername"]);
+
+						connection.query(query,function(err,password){
+							if(err) callback(err);
+							else{
+								req.body["password"] = password[0]["password"];
+								callback();
+							}
+						});
+					},
+					function(callback){
+						//check for mentor name
+						var query = 'SELECT username FROM `accounts` WHERE full_name='+connection.escape(req.body["mentor"]);
+
+						connection.query(query,function(err,mentor){
+							if(err) callback(err);
 							else{
 								if(mentor[0]){
 									req.body["mentor"] = mentor[0]["username"];
 								}
-								//remove /pending on picture
-								var picture = req.body["picture"].replace("pending/","");
-								fs.rename("./"+req.body["picture"],"./"+picture, function(err){
-									if(err){
-										console.log(err);
-									}
-								});
-
-								//fix exec_position value
-								var exec_position;
-								req.body["exec_position"] == "null" ? exec_position = "NULL" : exec_position = connection.escape(req.body["exec_position"]);
-
-								var queryAccount = "INSERT INTO `accounts`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES ("+connection.escape(req.body["username"])+","+connection.escape(password[0]["password"])+","+connection.escape(req.body["first_name"])+","+connection.escape(req.body["middle_name"])+","+connection.escape(req.body["last_name"])+","+connection.escape(req.body["org_class"])+","+connection.escape(req.body["department"])+","+connection.escape(req.body["studentNumber"])+","+connection.escape(req.body["org_batch"])+","+connection.escape(req.body["univ_batch"])+","+connection.escape(req.body["mentor"])+","+connection.escape(req.body["bday"])+","+connection.escape(req.body["homeAdd"])+","+connection.escape(req.body["collegeAdd"])+","+connection.escape(picture)+","+connection.escape(req.body["first_name"]+" "+req.body["middle_name"]+" "+req.body["last_name"])+","+exec_position+")";
-								var account_username_mentees = "accounts_"+req.body["username"]+"_mentees";
-
-								//insert row into accounts
-								connection.query(queryAccount,function(err){
-									if(err){
-										reportError(res,err);
-									}
-									else{
-										var queryMenteesTable = "CREATE TABLE "+account_username_mentees+" (mentees VARCHAR(50))";
-
-										//insert row into accounts_username_mentees
-										connection.query(queryMenteesTable,function(err){
-											if(err){
-												reportError(res,err);
-											}
-											else{
-												//insert mentees to the newly generated table
-												if(req.body["mentee"]){
-
-													function insertMentee(mentee,i){
-														connection.query("SELECT username FROM `accounts` WHERE full_name="+connection.escape(mentee),function(err,username){
-															if(username[0]){
-																mentee = username[0]["username"];
-															}
-															var queryMenteesRow = "INSERT INTO `"+account_username_mentees+"` (`mentees`) VALUES ("+connection.escape(mentee)+")";
-
-															connection.query(queryMenteesRow,function(err){
-																if(err){
-																	reportError(res,err);
-																}
-																else if(i == req.body["mentee"].length - 1){
-																	console.log("Account "+req.body["username"]+" accepted.");
-																	res.sendStatus(200);
-																}
-															});
-														});
-													}
-
-													for(var i = 0 ; i < req.body["mentee"].length; i++){
-
-														insertMentee(req.body["mentee"][i],i);
-													}
-												}
-												else{
-													console.log("Account "+req.body["username"]+" accepted.");
-													res.sendStatus(200);
-												}
-
-												//delete table
-												connection.query("DROP TABLE `accounts_pending_"+req.body["origusername"]+"_mentees`",function(err){
-													if(err){
-														reportError(res,err);
-													}
-												});
-
-												//transfer this on account accept
-												//update already existing full name of mentors to usernames
-												connection.query("UPDATE `accounts` SET `mentor`="+connection.escape(req.body["username"])+" WHERE mentor="+connection.escape(req.body["first_name"]+" "+req.body["middle_name"]+" "+req.body["last_name"]),function(err){
-													if(err){
-														reportError(res,err);
-													}
-												});
-
-												//update already existing full name of mentees to usernames
-												connection.query("SELECT username FROM `accounts` WHERE 1",function(err,results){
-													if(err){
-														reportError(res,err);
-													}
-													else{
-														for(var j = 0; j < results.length; j++){
-															(function(username){
-																connection.query("UPDATE `accounts_"+username+"_mentees` SET `mentees`="+connection.escape(req.body["username"])+" WHERE mentees="+connection.escape(req.body["first_name"]+" "+req.body["middle_name"]+" "+req.body["last_name"]),function(err){
-																	if(err){
-																		reportError(res,err);
-																	}
-																});
-															})(results[j]["username"]);
-														}
-													}
-												});
-											}
-										});
-										//remove row in accounts_pending
-										var query = "DELETE FROM `accounts_pending` WHERE username="+connection.escape(req.body["origusername"]);
-										connection.query(query,function(err){
-											if(err){
-												reportError(res,err);
-											}
-											else{
-												console.log(req.body["origusername"]+" deleted from accounts_pending.");
-											}
-										});
-									}
-								});
-							//bracket below is for else on mentor query
+								callback();
 							}
 						});
-					//bracket below is for else on password query
+					},
+					function(callback){
+						//check for mentees name
+						async.map(req.body["mentee"],
+						function(mentee,callback){
+							var query = "SELECT `username` FROM `accounts` WHERE full_name="+connection.escape(mentee);
+
+							connection.query(query,function(err,username){
+								if(err) callback(err);
+								else{
+									if(username[0]){
+										mentee = username[0]["username"];
+									}
+									callback(null,mentee);
+								}
+							});
+						},
+						function(err,newList){
+							req.body["mentee"] = newList;
+							callback();
+						});
 					}
+				],
+				function(err){
+					async.parallel([
+						function(callback){
+							//insert to accounts
+							var query = "INSERT INTO `accounts`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES ("+connection.escape(req.body["username"])+","+connection.escape(req.body["password"])+","+connection.escape(req.body["first_name"])+","+connection.escape(req.body["middle_name"])+","+connection.escape(req.body["last_name"])+","+connection.escape(req.body["org_class"])+","+connection.escape(req.body["department"])+","+connection.escape(req.body["student_number"])+","+connection.escape(req.body["org_batch"])+","+connection.escape(req.body["univ_batch"])+","+connection.escape(req.body["mentor"])+","+connection.escape(req.body["birthday"])+","+connection.escape(req.body["home_address"])+","+connection.escape(req.body["college_address"])+","+connection.escape(req.body["picture"])+","+connection.escape(req.body["first_name"]+" "+req.body["middle_name"]+" "+req.body["last_name"])+","+connection.escape(req.body["exec_position"])+")";
+
+							connection.query(query,function(err){
+								if(err) callback(err);
+								else{
+									callback();
+								}
+							});
+						},
+						function(callback){
+							//remove from accounts_pending
+							var query = "DELETE FROM `accounts_pending` WHERE username="+connection.escape(req.body["origusername"]);
+
+							connection.query(query,function(err){
+								if(err) callback(err);
+								else{
+									callback();
+								}
+							});
+						},
+						function(callback){
+							//insert to accounts_mentees
+							var pair = [];
+
+							for(var i = 0; i < req.body["mentee"].length; i++){
+								pair.push([req.body["mentee"][i],req.body["username"]]);
+							}
+
+							var query = "INSERT INTO `accounts_mentee`(`mentee`, `mentor`) VALUES ?";
+
+							connection.query(query,[pair],function(err){
+								if(err) callback(err);
+								else{
+									callback();
+								}
+							});
+						},
+						function(callback){
+							//remove from accounts_pending
+							var query = "DELETE FROM `accounts_pending_mentee` WHERE mentor="+connection.escape(req.body["origusername"]);
+
+							connection.query(query,function(err){
+								if(err) callback(err);
+								else{
+									callback();
+								}
+							});
+						},
+						function(callback){
+							//update already existing mentor full name to username
+							var query = "UPDATE `accounts` SET `mentor`="+connection.escape(req.body["username"])+" WHERE mentor="+connection.escape(req.body["first_name"]+" "+req.body["middle_name"]+" "+req.body["last_name"]);
+
+							connection.query(query,function(err){
+								if(err) callback(err);
+								else{
+									callback();
+								}
+							});
+						},
+						function(callback){
+							//update already existing mentee full name to username
+							var query = "UPDATE `accounts_mentee` SET `mentee`=[value-1] WHERE mentee="+connection.escape(req.body["first_name"]+" "+req.body["middle_name"]+" "+req.body["last_name"]);
+
+							connection.query(query,function(err){
+								if(err) callback(err);
+								else{
+									callback();
+								}
+							});
+						}
+					],
+					function(err){
+						//trigger event new account
+						eventEmitter.emit('updateaccountvalidator',req.body["origusername"],"accepted");
+
+						res.sendStatus(200);
+					});
 				});
-				//fucking callback hell
 				connection.release();
 			});
 		}
@@ -298,6 +306,7 @@ module.exports = function(app,pool,async){
 					if(functionsDone == 3){
 						res.sendStatus(200);
 						console.log("Account "+req.body["origusername"]+" rejected.");
+						eventEmitter.emit('updateaccountvalidator',{origusername:req.body["origusername"],status:"rejected"});
 					}
 				}
 

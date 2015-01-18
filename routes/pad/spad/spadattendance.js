@@ -94,6 +94,7 @@ module.exports = function(app,pool,async){
 			        function(err,send){
 			          if(err) reportErr(res,err);
 			          else{
+									console.log(JSON.stringify(send,null,1));
 			            res.render('spadattendance',send);
 			          }
 			        });

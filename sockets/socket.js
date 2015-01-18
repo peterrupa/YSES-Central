@@ -36,6 +36,10 @@ module.exports = function(http,sessionMiddleware,eventEmitter) {
     io.to('/accountvalidator').emit("newaccount",send);
   });
 
+  eventEmitter.on('updateaccountvalidator',function(data){
+    io.to('/accountvalidator').emit("updateaccountvalidator",data);
+  });
+
   io.on("connection",function(socket){
     var currentURL;
 

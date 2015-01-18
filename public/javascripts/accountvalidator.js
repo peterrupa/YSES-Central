@@ -170,6 +170,14 @@ $(document).ready(function(){
 			}
 		});
 
+		function removePanel(origusername,status){
+			var remove = $("#temp").find("div[data-username='"+origusername+"']");
+
+			remove.remove();
+			alert(origusername+" "+status+"!");
+			//insert something fancy alert here
+		};
+
 		$("body").off("click",".accept");
 		$("body").on("click",".accept",function(){
 			var validate = $(this).closest(".to-validate");
@@ -205,41 +213,19 @@ $(document).ready(function(){
 					   picture:validate.find(".account-image").data("picture"),
 					   exec_position:validate.find('tr[data-exec_position]').children("td:nth-child(2)").html()};
 
-				console.log(data);
-
-				alert("No accept functionality yet. But you can see at console the data to be sent.");
-
-			  // $.ajax({
-				// 	url: "http://localhost:8080/acceptAccount",
-				// data: {origusername:validate.data("username"),
-				// 	   username:validate.find('tr[data-username]').children("td:nth-child(2)").html(),
-				// 	   first_name:validate.find('tr[data-first_name]').children("td:nth-child(2)").html(),
-				// 	   middle_name:validate.find('tr[data-middle_name]').children("td:nth-child(2)").html(),
-				// 	   last_name:validate.find('tr[data-last_name]').children("td:nth-child(2)").html(),
-				// 	   org_class:validate.find('tr[data-org_class]').children("td:nth-child(2)").html(),
-				// 	   department:validate.find('tr[data-department]').children("td:nth-child(2)").html(),
-				// 	   student_number:validate.find('tr[data-student_number]').children("td:nth-child(2)").html(),
-				// 	   org_batch:validate.find('tr[data-org_batch]').children("td:nth-child(2)").html(),
-				// 	   univ_batch:validate.find('tr[data-univ_batch]').children("td:nth-child(2)").html(),
-				// 	   mentor:validate.find('tr[data-mentor]').children("td:nth-child(2)").html(),
-				// 	   mentee:mentee,
-				// 	   birthday:validate.find('tr[data-birthday]').children("td:nth-child(2)").html(),
-				// 	   home_address:validate.find('tr[data-home_address]').children("td:nth-child(2)").html(),
-				// 	   college_address:validate.find('tr[data-college_address]').children("td:nth-child(2)").html(),
-				// 	   picture:validate.find(".account-image").data("picture"),
-				// 	   exec_position:validate.find('tr[data-exec_position]').children("td:nth-child(2)").html()},
-				// 		type: "POST",
-				// 		success: function(res){
-				// 			validate.remove();
-				// 			alert("Successful accept!");
-				// 			//insert success window here
-				// 		},
-				// 		error: function (e){
-				// 			console.dir(e);
-				// 		}
-				// 	});
+			  $.ajax({
+					url: "http://localhost:8080/acceptAccount",
+					data: JSON.stringify(data),
+					type: "POST",
+					contentType: "application/json",
+					error: function (e){
+						console.dir(e);
+					}
+				});
 			}
 		});
+
+
 
 		$("body").off("click",".reject");
 		$("body").on("click",".reject",function(){
@@ -256,11 +242,6 @@ $(document).ready(function(){
 					data: {origusername:validate.data('username'),
 								 picture:validate.find(".account-image").data("picture")},
 					type: "POST",
-					success: function (res){
-						validate.remove();
-						alert("Successful reject!");
-						//insert success window here
-					},
 					error: function (e){
 						console.log(e);
 					}
@@ -269,11 +250,6 @@ $(document).ready(function(){
 		});
 
 	var old_value = '';
-
-	function alertChanges(old_value, data){
-		if(old_value != data.text()) alert(data.prev().text() + " changed from " + old_value + " to " + data.text());
-		else alert("No changes for this data");
-	};
 
 	$('body').off('click','.edit');
 
@@ -358,8 +334,6 @@ $(document).ready(function(){
 
 						$(this).closest('tr').find('br').remove();
 						$(this).replaceWith(temphtml);
-
-
 					});
 				}
 			}
@@ -466,7 +440,6 @@ $(document).ready(function(){
 					$(this).closest("tr").find(".done").addClass('edit');
 					$(this).closest("tr").find(".done").removeClass('done');
 					data.html(temphtml);
-					alertChanges(old_value,data);
 				}
 			});
 	});
@@ -527,8 +500,6 @@ $(document).ready(function(){
 		$(this).html('Edit');
 		$(this).addClass('edit');
 		$(this).removeClass('done');
-
-		alertChanges(old_value,data);
 	});
 
 	// needs work. will revert input fields clicked outside it's container.
@@ -538,6 +509,12 @@ $(document).ready(function(){
 		if ( (!container.is(e.target) && container.has(e.target).length === 0)){
 
 		}
+	});
+
+	//listen for updateaccountvalidator events
+	socket.off('updateaccountvalidator');
+	socket.on('updateaccountvalidator',function(data){
+		removePanel(data["origusername"],data["status"]);
 	});
 
 	//listen for newaccount events
@@ -569,31 +546,39 @@ $(document).ready(function(){
 			}
 
 			if(data == "mentee"){
-				var counter = 0;
+				// var counter = '';
+				var mentee = '';
 				var temphtml = '';
-				for(var j = 0; j < res["mentee"].length; j++){
-					if(counter == 0){
-						var temphtml2 = ''+
-							'<tr class="text" data-mentee="'+res["mentee"][j]+'">'+
-								'<td>'+
-									'Mentees'+
-								'</td>'+
-								'<td>'+res["mentee"][j]+'</td>'+
-								'<td>'+'<a class="edit">Edit</a>'+'</td>'+
-							'</tr>';
-						counter += 1;
-					} else{
-						var temphtml2 = ''+
-							'<tr class="text" data-mentee="'+res["mentee"][j]+'">'+
-								'<td>'+
-								'</td>'+
-								'<td>'+res["mentee"][j]+'</td>'+
-								'<td>'+'<a class="edit">Edit</a>'+'</td>'+
-							'</tr>';
+				if(0 < res["mentee"].length){
+					for(var j = 0; j < res["mentee"].length; j++){
+						mentee = ''+
+							'<span id="mentee-'+(j+1)+'" class="mentee-data">'+
+								res["mentee"][j]+
+							'</span>';
+						temphtml = temphtml.concat(mentee);
+						temphtml = temphtml.concat('<br>');
 					}
-					temphtml = temphtml.concat(temphtml2);
+					var temphtml2 = ''+
+						'<tr id="mentees" class="mentee-list" data-mentee>'+
+							'<td>'+
+								'Mentees'+
+							'</td>'+
+							'<td>'+temphtml+'</td>'+
+							'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+						'</tr>';
+					table_data_1 = table_data_1.concat(temphtml2);
 				}
-				table_data_1 = table_data_1.concat(temphtml);
+				else{
+					var temphtml2 = ''+
+						'<tr id="mentees" class="mentee-list" data-mentee>'+
+							'<td>'+
+								'Mentees'+
+							'</td>'+
+							'<td></td>'+
+							'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+						'</tr>';
+					table_data_1 = table_data_1.concat(temphtml2);
+				}
 			}
 			else if(data == "mentor"
 				|| data == "username"
@@ -663,8 +648,10 @@ $(document).ready(function(){
 		var html = ''+
 			'<div data-username="'+res['username']+'" class="to-validate">'+
 				img+
-				'<h3 style="float:left;font-weight:bold;padding-top:0px">'+res['first_name']+' '+res['last_name']+'</h3>'+
-				'<span style="float:left;padding-top:29px;margin-left:10px;">'+res['department']+' Department'+'</span>'+
+				'<div id="title-container">'+
+					'<h3>'+res['first_name']+' '+res['last_name']+'</h3>'+
+					'<span>'+res['department']+' Department'+'</span>'+
+				'</div>'+
 				'<div class="account-data">'+
 					table_data_2+'</table>'+
 					table_data_1+'</table>'+

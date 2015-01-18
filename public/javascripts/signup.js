@@ -226,7 +226,7 @@ $(document).ready(function(){
 				imageCoordinates: imageCoordinates,
 			},
 			error: function(xhr) {
-				console.log('Error: ' + xhr.status);
+				console.dir(xhr);
       },
 			success: function(res) {
 				$("#signupform")[0].reset();

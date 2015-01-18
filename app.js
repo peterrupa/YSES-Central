@@ -67,7 +67,7 @@ require('./routes/announcements')(app,pool);
 require('./routes/logbook')(app,pool,eventEmitter,async);
 require('./routes/batch')(app,pool);
 //exec
-require('./routes/exec/accountvalidator')(app,pool,async);
+require('./routes/exec/accountvalidator')(app,pool,eventEmitter,async);
 require('./routes/exec/announcementposter')(app,pool,eventEmitter,async);
 //pad
 require('./routes/pad/padattendanceportal')(app,pool);

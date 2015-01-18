@@ -55,8 +55,10 @@ module.exports = function(app,pool,eventEmitter,async){
 			req.body["exec_position"]? req.body["exec_position"] = req.body["exec_position"][0] : req.body["exec_position"] = null;
 
 			//if there's only one mentee, convert it to an array
-			if(req.body["mentee"].constructor !== Array){
-				req.body["mentee"] = [req.body["mentee"]];
+			if(req.body["mentee"]){
+				if(req.body["mentee"].constructor !== Array){
+					req.body["mentee"] = [req.body["mentee"]];
+				}
 			}
 
 			async.parallel({
@@ -133,89 +135,58 @@ module.exports = function(app,pool,eventEmitter,async){
 				database: function(callback){
 					//save info to the database
 					pool.getConnection(function(err,connection){
-						async.waterfall([
-							function(callback){
-								//check for already existing mentor
-								var query = "SELECT username FROM `accounts` WHERE full_name="+connection.escape(req.body["mentor"]);
-								connection.query(query,function(err,username){
-									if(username[0]){
-										req.body["mentor"] = username[0]["username"];
-									}
-									callback(null,req.body["mentor"]);
-								});
-							},
-							function(mentor,callback){
-								async.parallel({
-									account: function(callback){
-										//get full name
-										var full_name = req.body["first_name"]+" "+req.body["middle_name"]+" "+req.body["last_name"];
+						async.parallel({
+							account: function(callback){
+								//get full name
+								var full_name = req.body["first_name"]+" "+req.body["middle_name"]+" "+req.body["last_name"];
 
-										//salt and hash password
-										var salt = "this is a rainbow unicorn";
-										var password = encrypt(salt+req.body["password"]);
+								//salt and hash password
+								var salt = "this is a rainbow unicorn";
+								var password = encrypt(salt+req.body["password"]);
 
-										var temp = {};
+								var temp = {};
 
-										//get student number
-										temp["student_number"] = req.body["sn-year"]+"-"+req.body["sn-number"];
+								//get student number
+								temp["student_number"] = req.body["sn-year"]+"-"+req.body["sn-number"];
 
-										//escape all input
+								//escape all input
 
-										for(data in req.body){
-											temp[data] = connection.escape(req.body[data]);
-										}
-										full_name = connection.escape(full_name);
-										password = connection.escape(password);
-										temp["student_number"] = connection.escape(temp["student_number"]);
+								for(data in req.body){
+									temp[data] = connection.escape(req.body[data]);
+								}
+								full_name = connection.escape(full_name);
+								password = connection.escape(password);
+								temp["student_number"] = connection.escape(temp["student_number"]);
 
-										//insert to table
-										var values = "("+temp["username"]+","+password+","+temp["first_name"]+","+temp["middle_name"]+","+temp["last_name"]+","+temp["org_class"]+","+temp["department"]+","+temp["student_number"]+","+temp["org_batch"]+","+temp["sn-year"]+","+temp["mentor"]+","+temp["birthday"]+","+temp["home_address"]+","+temp["college_address"]+",'"+newFileName+"',"+full_name+","+temp["exec_position"]+")";
-										var query = "INSERT INTO `accounts_pending`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES "+values;
+								//insert to table
+								var values = "("+temp["username"]+","+password+","+temp["first_name"]+","+temp["middle_name"]+","+temp["last_name"]+","+temp["org_class"]+","+temp["department"]+","+temp["student_number"]+","+temp["org_batch"]+","+temp["sn-year"]+","+temp["mentor"]+","+temp["birthday"]+","+temp["home_address"]+","+temp["college_address"]+",'"+newFileName+"',"+full_name+","+temp["exec_position"]+")";
+								var query = "INSERT INTO `accounts_pending`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES "+values;
 
-										connection.query(query,function(err){
-											if(err) throw err;
-											callback();
-										});
-									},
-									mentee: function(callback){
-										//insert mentees
-										if(req.body["mentee"]){
-											async.map(req.body["mentee"],
-											function(mentee,callback){
-												//check if mentee has already existing account
-												var query = "SELECT username FROM `accounts` WHERE full_name="+connection.escape(mentee);
-
-												connection.query(query,function(err,username){
-													if(username[0]){
-														mentee = username[0]["username"];
-													}
-													callback(err,mentee);
-												});
-											},
-											function(err,mentees){
-												//insert username as pair
-												var temp = [];
-												for(var i = 0; i < mentees.length; i++){
-													temp.push([mentees[i],req.body["username"]]);
-												}
-												//insert to database
-												var query = "INSERT INTO `accounts_pending_mentee` (`mentee`,`mentor`) VALUES ?";
-												connection.query(query,[temp],function(err){
-													if(err) throw err;
-													callback();
-												});
-											});
-										}
-										else{
-											callback();
-										}
-									}
-								},
-								function(err){
+								connection.query(query,function(err){
+									if(err) throw err;
 									callback();
 								});
+							},
+							mentee: function(callback){
+								//insert mentees
+								if(req.body["mentee"]){
+									//insert username as pair
+									var temp = [];
+									for(var i = 0; i < req.body["mentee"].length; i++){
+										temp.push([req.body["mentee"][i],req.body["username"]]);
+									}
+									//insert to database
+									var query = "INSERT INTO `accounts_pending_mentee` (`mentee`,`mentor`) VALUES ?";
+									connection.query(query,[temp],function(err){
+										if(err) throw err;
+										callback();
+									});
+								}
+								else{
+									callback();
+								}
 							}
-						],
+						},
 						function(err){
 							callback();
 						});
@@ -223,14 +194,17 @@ module.exports = function(app,pool,eventEmitter,async){
 					});
 				}
 			},
-			function(err,results){
-				if(err) res.sendStatus(500);
+			function(err){
+				if(err) throw err;
 				else{
 					res.sendStatus(200);
 					console.log("New pending account "+req.body["username"]+" successfully processed.");
 
 					//add picture
 					req.body["picture"] = newFileName.substring(7);
+					if(!(req.body["mentee"])){
+						req.body["mentee"] = [];
+					}
 					eventEmitter.emit('newaccount',req.body);
 				}
 			})
