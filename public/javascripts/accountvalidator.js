@@ -451,22 +451,25 @@ $(document).ready(function(){
 			data.find('input').off('keypress');
 			data.find('input').on('keypress', function(e) {
 				var code = e.keyCode || e.which;
-				if(!$(this).closest('tr').hasClass('studentnumber')){
-					var temphtml = ''+
-						$(this).val();
-				}else{
-					var temphtml = ''+
-						text.find('#stud_year').val()+
-						'-'+
-						text.find('#stud_number').val();
-					$(this).html(temphtml);
-				}
-				if(code==13){
-					$(this).closest("tr").find(".done").html('Edit');
-					$(this).closest("tr").find(".done").addClass('edit');
-					$(this).closest("tr").find(".done").removeClass('done');
-					data.html(temphtml);
-					alertChanges(old_value,data);
+				if(!$(this).closest('tr').hasClass('mentee-list')){
+					if(!$(this).closest('tr').hasClass('studentnumber')){
+						var temphtml = ''+
+							$(this).val();
+					}else{
+						var temphtml = ''+
+							text.find('#stud_year').val()+
+							'-'+
+							text.find('#stud_number').val();
+						$(this).html(temphtml);
+					}
+					if(code==13){
+						$(this).closest("tr").find(".done").html('Edit');
+						$(this).closest("tr").find(".done").addClass('edit');
+						$(this).closest("tr").find(".done").removeClass('done');
+						temphtml = safe_tags(temphtml);
+						data.html(temphtml);
+						alertChanges(old_value,data);
+					}
 				}
 			});
 	});
@@ -486,7 +489,9 @@ $(document).ready(function(){
 			data.each(function(index){
 				var temphtml = ''+
 					text.find('input').val();
+				temphtml = safe_tags(temphtml);
 				$(this).html(temphtml);
+
 			});
 		}
 		else if(traversed('org_class')
@@ -508,8 +513,9 @@ $(document).ready(function(){
 				else newLine = '<br>';
 
 				if($(this).val() != ''){
-					mentee = '<span>'+$(this).val()+'</span>';
-					$(this).closest('.mentee-field').replaceWith(mentee+'<br>');
+					mentee = $(this).val();
+					mentee = safe_tags(mentee);
+					$(this).closest('.mentee-field').replaceWith('<span>'+mentee+'</span>'+'<br>');
 				} else {
 					$(this).closest('.mentee-field').remove();
 				}
@@ -521,6 +527,7 @@ $(document).ready(function(){
 					text.find('#stud_year').val()+
 					'-'+
 					text.find('#stud_number').val();
+				temphtml = safe_tags(temphtml);
 				$(this).html(temphtml);
 			});
 		}
