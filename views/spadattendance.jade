@@ -1,13 +1,39 @@
+link(rel="stylesheet",href="http://localhost:8080/stylesheets/padattendance.css")
+div.title-header.profile-header
+	h2 JPad Attendance
 div#spadcontainer
-  button#addevent(style="color:black") Add Event
-  button#addevent(style="color:black") Edit Event
-  button#addevent(style="color:black") Remove Event
-  p= JSON.stringify(events)
-  p= JSON.stringify(attendance)
-  p= "Total Number of Events: "+events.length
-  p Statistics:
-  each member in attendance
-    p= member["name"]
-    p= "Events present: "+member["eventsAttended"].length
-    p= "Events absent: "+(events.length-member["eventsAttended"].length)
-    p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
+	div#event-buttons
+		button#addevent Add Event
+		button#addevent Edit Event
+		button#addevent Remove Event
+	div#guide
+		div.header
+			h3 Guide for debugging
+		div.guide-content
+			p= JSON.stringify(events)
+			p= JSON.stringify(attendance)
+			p(style="color:white;")= "Total Number of Events: "+events.length
+	div#stat
+		div.header 
+			h3 Statistics
+		div.stat-content
+			each member in attendance
+				div.jpad-stat.text-center
+					p.name= member["name"]
+					p= "Events present: "+member["eventsAttended"].length
+					p= "Events absent: "+(events.length-member["eventsAttended"].length)
+					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
+			//- for sample purposes only
+			each member in attendance
+				div.jpad-stat.text-center
+					p.name= member["name"]
+					p= "Events present: "+member["eventsAttended"].length
+					p= "Events absent: "+(events.length-member["eventsAttended"].length)
+					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
+			//- for sample purposes only
+			each member in attendance
+				div.jpad-stat.text-center
+					p.name= member["name"]
+					p= "Events present: "+member["eventsAttended"].length
+					p= "Events absent: "+(events.length-member["eventsAttended"].length)
+					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"

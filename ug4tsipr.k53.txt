@@ -1,0 +1,19 @@
+﻿JPAD Attendance structure.
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   public/javascripts/accountvalidator.js
+#	new file:   public/stylesheets/padattendance.css
+#	modified:   public/stylesheets/title-hover.css
+#	modified:   views/jpadattendance.jade
+#	modified:   views/spadattendance.jade
+#
+# Changes not staged for commit:
+#	deleted:    public/uploads/pending/getLostPanget.jpg
+#	deleted:    public/uploads/pending/username.jpg
+#	deleted:    public/uploads/pending/zaiizaii.jpg
+#
+

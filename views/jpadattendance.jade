@@ -1,16 +1,28 @@
+link(rel="stylesheet",href="http://localhost:8080/stylesheets/padattendance.css")
+div.title-header.profile-header
+	h2 JPad Attendance
 div#jpadcontainer
-  p= JSON.stringify(attendance)
-  p= "Total Events: "+attendance.length
-  - var present = 0;
-  - var absent = 0;
-  - for(var i = 0; i < attendance.length; i++){
-  -   if(attendance[i]["didattend"]==true){
-  -     present++;
-  -   }
-  -   else{
-  -     absent++;
-  -   }
-  - }
-  p= "Events present: "+present
-  p= "Events absent: "+absent
-  p= "Percentage: "+(present/attendance.length*100).toFixed(2)+"%"
+	div#guide
+		div.header
+			h3 Guide for debugging
+		div.guide-content
+			p= JSON.stringify(attendance)
+			p(style="color:white;")= "Total Events: "+attendance.length
+	div#stat
+		div.header
+			h3 Statistic
+		div.stat-content
+			- var present = 0;
+			- var absent = 0;
+			- for(var i = 0; i < attendance.length; i++){
+			-   if(attendance[i]["didattend"]==true){
+			-     present++;
+			-   }
+			-   else{
+			-     absent++;
+			-   }
+			- }
+			div.jpad-stat.text-center
+				p= "Events present: "+present
+				p= "Events absent: "+absent
+				p= "Percentage: "+(present/attendance.length*100).toFixed(2)+"%"
