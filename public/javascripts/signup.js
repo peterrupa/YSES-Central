@@ -229,7 +229,8 @@ $(document).ready(function(){
 				console.log('Error: ' + xhr.status);
       },
 			success: function(res) {
-				$("#signupform").reset();
+				$("#signupform")[0].reset();
+				$("#screen").remove();
 				$("#signupModal").modal('hide');
 				alert("Insert successful message here!");
 			}

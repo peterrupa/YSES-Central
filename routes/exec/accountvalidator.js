@@ -1,7 +1,7 @@
 module.exports = function(app,pool,async){
 	//file
 	var fs = require('fs');
-	
+
 	function reportError(res,err){
 		console.log(err);
 		if(!res.headersSent){
@@ -271,8 +271,9 @@ module.exports = function(app,pool,async){
 					}
 				});
 
-				//drop table pending mentees
-				connection.query("DROP TABLE `accounts_pending_"+req.body["origusername"]+"_mentees`",function(err){
+				//remove all mentees
+				var query = "DELETE FROM `accounts_pending_mentee` WHERE mentor="+connection.escape(req.body["origusername"]);
+				connection.query(query,function(err){
 					if(err){
 						reportError(res,err);
 					}
@@ -282,7 +283,7 @@ module.exports = function(app,pool,async){
 				})
 
 				//delete image file from server
-				fs.unlink("./"+req.body["picture"],function(err){
+				fs.unlink("./public/"+req.body["picture"],function(err){
 					if(err){
 						reportError(res,err);
 					}

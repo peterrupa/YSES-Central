@@ -33,7 +33,6 @@ module.exports = function(http,sessionMiddleware,eventEmitter) {
        exec_position: data["exec_position"]?data["exec_position"]:null,
        picture: data["picture"]
     };
-    console.log(send);
     io.to('/accountvalidator').emit("newaccount",send);
   });
 

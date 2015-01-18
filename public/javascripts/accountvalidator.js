@@ -172,85 +172,100 @@ $(document).ready(function(){
 
 		$("body").off("click",".accept");
 		$("body").on("click",".accept",function(){
+			var validate = $(this).closest(".to-validate");
 			//check if there are input boxes
-			if($(this).parent().find("input").length > 0){
-				$(this).parent().find("input").each(function(index){
-					var temphtml = $(this).val();
-					$(this).parent().html(temphtml);
-				});
+			if(validate.find("input, option").length > 0){
+				alert("Insert fancy error here. Please finalize all edits before clicking accept!");
 			}
+			else{
+				button = $(this);
 
-	  button = $(this);
-	  //get mentees
-	  var mentee = [];
-	  $(this).parent().find($("li[data-mentee]")).each(function(index){
-		mentee.push($(this).html());
-	  });
-	  mentee = JSON.stringify(mentee);
-	  $.ajax({
-			url: "http://localhost:8080/acceptAccount",
-		data: {origusername:$(this).parent().data("username"),
-			   username:$(this).parent().find("li[data-username]").html(),
-			   first_name:$(this).parent().find("li[data-first_name]").html(),
-			   middle_name:$(this).parent().find("li[data-middle_name]").html(),
-			   last_name:$(this).parent().find("li[data-last_name]").html(),
-			   org_class:$(this).parent().find("li[data-org_class]").html(),
-			   department:$(this).parent().find("li[data-department]").html(),
-			   studentNumber:$(this).parent().find("li[data-student_number]").html(),
-			   org_batch:$(this).parent().find("li[data-org_batch]").html(),
-			   univ_batch:$(this).parent().find("li[data-univ_batch]").html(),
-			   mentor:$(this).parent().find("li[data-mentor]").html(),
-			   mentee:mentee,
-			   bday:$(this).parent().find("li[data-birthday]").html(),
-			   homeAdd:$(this).parent().find("li[data-home_address]").html(),
-			   collegeAdd:$(this).parent().find("li[data-college_address]").html(),
-			   picture:$(this).parent().find("li[data-picture]").html(),
-			   exec_position:$(this).parent().find("li[data-exec_position]").html()},
-				type: "POST",
-				success: function(res){
-					var temphtml = ''+
-						'<ul>'+
-							'<li>'+
-								'Account '+button.parent().data("username")+' accepted.'+
-							'</li>'+
-						'</ul>';
-					button.parent().html(temphtml);
-				},
-				error: function (e){
-					console.dir(e);
-				}
-			});
+				//fetch all mentees
+				var mentee = [];
+
+				validate.find(".mentee-list").find("span").each(function(i){
+					mentee.push($(this).html());
+				});
+
+				var data = {origusername:validate.data("username"),
+					   username:validate.find('tr[data-username]').children("td:nth-child(2)").html(),
+					   first_name:validate.find('tr[data-first_name]').children("td:nth-child(2)").html(),
+					   middle_name:validate.find('tr[data-middle_name]').children("td:nth-child(2)").html(),
+					   last_name:validate.find('tr[data-last_name]').children("td:nth-child(2)").html(),
+					   org_class:validate.find('tr[data-org_class]').children("td:nth-child(2)").html(),
+					   department:validate.find('tr[data-department]').children("td:nth-child(2)").html(),
+					   student_number:validate.find('tr[data-student_number]').children("td:nth-child(2)").html(),
+					   org_batch:validate.find('tr[data-org_batch]').children("td:nth-child(2)").html(),
+					   univ_batch:validate.find('tr[data-univ_batch]').children("td:nth-child(2)").html(),
+					   mentor:validate.find('tr[data-mentor]').children("td:nth-child(2)").html(),
+					   mentee:mentee,
+					   birthday:validate.find('tr[data-birthday]').children("td:nth-child(2)").html(),
+					   home_address:validate.find('tr[data-home_address]').children("td:nth-child(2)").html(),
+					   college_address:validate.find('tr[data-college_address]').children("td:nth-child(2)").html(),
+					   picture:validate.find(".account-image").data("picture"),
+					   exec_position:validate.find('tr[data-exec_position]').children("td:nth-child(2)").html()};
+
+				console.log(data);
+
+				alert("No accept functionality yet. But you can see at console the data to be sent.");
+
+			  // $.ajax({
+				// 	url: "http://localhost:8080/acceptAccount",
+				// data: {origusername:validate.data("username"),
+				// 	   username:validate.find('tr[data-username]').children("td:nth-child(2)").html(),
+				// 	   first_name:validate.find('tr[data-first_name]').children("td:nth-child(2)").html(),
+				// 	   middle_name:validate.find('tr[data-middle_name]').children("td:nth-child(2)").html(),
+				// 	   last_name:validate.find('tr[data-last_name]').children("td:nth-child(2)").html(),
+				// 	   org_class:validate.find('tr[data-org_class]').children("td:nth-child(2)").html(),
+				// 	   department:validate.find('tr[data-department]').children("td:nth-child(2)").html(),
+				// 	   student_number:validate.find('tr[data-student_number]').children("td:nth-child(2)").html(),
+				// 	   org_batch:validate.find('tr[data-org_batch]').children("td:nth-child(2)").html(),
+				// 	   univ_batch:validate.find('tr[data-univ_batch]').children("td:nth-child(2)").html(),
+				// 	   mentor:validate.find('tr[data-mentor]').children("td:nth-child(2)").html(),
+				// 	   mentee:mentee,
+				// 	   birthday:validate.find('tr[data-birthday]').children("td:nth-child(2)").html(),
+				// 	   home_address:validate.find('tr[data-home_address]').children("td:nth-child(2)").html(),
+				// 	   college_address:validate.find('tr[data-college_address]').children("td:nth-child(2)").html(),
+				// 	   picture:validate.find(".account-image").data("picture"),
+				// 	   exec_position:validate.find('tr[data-exec_position]').children("td:nth-child(2)").html()},
+				// 		type: "POST",
+				// 		success: function(res){
+				// 			validate.remove();
+				// 			alert("Successful accept!");
+				// 			//insert success window here
+				// 		},
+				// 		error: function (e){
+				// 			console.dir(e);
+				// 		}
+				// 	});
+			}
 		});
 
 		$("body").off("click",".reject");
 		$("body").on("click",".reject",function(){
+			var validate = $(this).closest(".to-validate");
+
 			//check if there are input boxes
-			if($(this).parent().find("input").length > 0){
-				$(this).parent().find("input").each(function(index){
-					var temphtml = $(this).val();
-					$(this).parent().html(temphtml);
+			if(validate.find("input, option").length > 0){
+				alert("Insert fancy error here. Please finalize all edits before clicking reject!");
+			}
+			else{
+				button = $(this);
+				$.ajax({
+					url: "http://localhost:8080/rejectAccount",
+					data: {origusername:validate.data('username'),
+								 picture:validate.find(".account-image").data("picture")},
+					type: "POST",
+					success: function (res){
+						validate.remove();
+						alert("Successful reject!");
+						//insert success window here
+					},
+					error: function (e){
+						console.log(e);
+					}
 				});
 			}
-
-			button = $(this);
-			$.ajax({
-				url: "http://localhost:8080/rejectAccount",
-				data: {origusername:$(this).parent().data("username"),
-							 picture:$(this).parent().find("li[data-picture]").html()},
-				type: "POST",
-				success: function (res){
-					var temphtml = ''+
-						'<ul>'+
-							'<li>'+
-								'Account '+button.parent().data("username")+' rejected.'+
-							'</li>'+
-						'</ul>';
-					button.parent().html(temphtml);
-				},
-				error: function (e){
-					console.log(e);
-				}
-			});
 		});
 
 	var old_value = '';
