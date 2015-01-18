@@ -64,6 +64,17 @@ $(document).ready(function(){
 											'</tr>';
 										table_data_1 = table_data_1.concat(temphtml2);
 									}
+									else{
+										var temphtml2 = ''+
+											'<tr id="mentees" class="mentee-list" data-mentee>'+
+												'<td>'+
+													'Mentees'+
+												'</td>'+
+												'<td></td>'+
+												'<td>'+'<a class="edit">Edit</a>'+'</td>'+
+											'</tr>';
+										table_data_1 = table_data_1.concat(temphtml2);
+									}
 								}
 								else if(data == "mentor"
 									|| data == "username"
@@ -276,7 +287,8 @@ $(document).ready(function(){
 
 			// will convert data to a mentee inputs (can add or remove mentees)
 			else if($(this).closest('tr').hasClass('mentee-list')){
-				data.find('span').each(function(){
+				if(data.find('span').length == 0){
+					//case when there are no mentees
 					var blankhtml = ''+
 					'<div class="mentee-field input-group">'+
 						'<input '+
@@ -291,31 +303,50 @@ $(document).ready(function(){
 						'</span>'+
 					'</div>';
 
-					var temphtml = ''+
-					'<div class="mentee-field input-group">'+
-						'<input '+
-							'class="mentee-textfield"'+
-							'type="text" '+
-							'value="'+$(this).text()+'"'+
-							'name="mentee"'+
-						'/>'+
-						'<span class="input-group-btn">'+
-							'<button class="remove-mentee btn" type="button">'+
-								'<span>x</span>'+
-							'</button>'+
-						'</span>'+
-					'</div>';
+					data.append(blankhtml);
+				}
+				else{
+					//case when there are mentees
+					data.find('span').each(function(){
+						var blankhtml = ''+
+						'<div class="mentee-field input-group">'+
+							'<input '+
+								'class="mentee-textfield"'+
+								'type="text" '+
+								'name="mentee"'+
+							'/>'+
+							'<span class="input-group-btn">'+
+								'<button class="add-mentee btn" type="button">'+
+									'<span>+</span>'+
+								'</button>'+
+							'</span>'+
+						'</div>';
 
-					if($(this).parent().children().length == 2 || $(this).is(":last-child")){
-						temphtml = temphtml + blankhtml;
-					}
+						var temphtml = ''+
+						'<div class="mentee-field input-group">'+
+							'<input '+
+								'class="mentee-textfield"'+
+								'type="text" '+
+								'value="'+$(this).text()+'"'+
+								'name="mentee"'+
+							'/>'+
+							'<span class="input-group-btn">'+
+								'<button class="remove-mentee btn" type="button">'+
+									'<span>x</span>'+
+								'</button>'+
+							'</span>'+
+						'</div>';
 
-					$(this).closest('tr').find('br').remove();
-					$(this).replaceWith(temphtml);
-					
-						
-				});
-				
+						if($(this).parent().children().length == 2 || $(this).is(":last-child")){
+							temphtml = temphtml + blankhtml;
+						}
+
+						$(this).closest('tr').find('br').remove();
+						$(this).replaceWith(temphtml);
+
+
+					});
+				}
 			}
 
 			// will convert data to a datepicker
@@ -640,7 +671,7 @@ $(document).ready(function(){
 		$(this).addClass('remove-mentee');
 		$(this).closest('.mentee-list').find('td').first().next().append(newfield);
 	});
-	
+
 	$("body").on('click','.mentee-field .remove-mentee',function(){
 		$(this).parent().parent().remove();
 	});
