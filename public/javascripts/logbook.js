@@ -10,6 +10,8 @@ $(document).ready(function(){
 			data: "count="+index,
 			type: "GET",
 			success: function(res){
+          res = safe_tags(res); //cleans all html elements
+
 					for(var i = 0; i < res.length; i++){
 						var postClass;
 						switch(res[i]["department"]){
@@ -29,10 +31,6 @@ $(document).ready(function(){
 										break;
 							case "Executive": postClass = "Exec";
 										break;
-						}
-
-						for(data in res[i]){ //cleans all html elements
-							res[i][data] = safe_tags(res[i][data]);
 						}
 
             //convert newline to breaks
@@ -130,9 +128,7 @@ $(document).ready(function(){
             break;
     }
 
-    for(data in post){ //cleans all html elements
-      post[data] = safe_tags(post[data]);
-    }
+    post = safe_tags(post);
 
     //convert newline to breaks
     paragraph = post["message"].replace(/\n/g,"<br>");

@@ -14,6 +14,8 @@ $(document).ready(function(){
 			data: "count="+index,
 			type: "GET",
 			success: function(res){
+					res = safe_tags(res);
+
 					for(var i = 0; i < res.length; i++){
 						var postClass;
 						switch(res[i]["department"]){
@@ -32,10 +34,6 @@ $(document).ready(function(){
 							case "Executive": postClass = "Exec";
 										break;
 						}
-
-			            for(data in res[i]){
-			              res[i][data] = safe_tags(res[i][data]);
-			            }
 
 						var temphtml = ''+
 							'<li>'+
@@ -145,9 +143,7 @@ $(document).ready(function(){
 						break;
 		}
 
-		for(data in post){ //cleans all html elements
-			post[data] = safe_tags(post[data]);
-		}
+		post = safe_tags(post);
 
 		var temphtml = ''+
 			'<li class="new_post" style="display:none">'+

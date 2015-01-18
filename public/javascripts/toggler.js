@@ -70,9 +70,7 @@ $(document).ready(function(){
 					return html;
 				}
 
-				for(data in res){
-					res[data] = safe_tags(res[data]);
-				}
+				res = safe_tags(res);
 
 				$("#about-data table").append(rowHTML("First name",res["first_name"]));
 				$("#about-data table").append(rowHTML("Middle name",res["middle_name"]));
@@ -105,9 +103,7 @@ $(document).ready(function(){
 			data: "account="+location.pathname.substring(9),
 			type: "GET",
 			success: function (res) {
-				for(data in res){ //clean possible HTML tags
-					res[data] = safe_tags(res[data]);
-				}
+				res = safe_tags(res);
 
 				if(res["status"] == "None"){
 					var mentor_content =''+
@@ -240,12 +236,9 @@ $(document).ready(function(){
 					$("#mentee-data").append("No mentees");
 				}
 				else{
-					console.log(res);
+					res = safe_tags(res);
 					//mentees with accounts
 					for(var i = 0; i < res.Accounts.length; i++){
-						for(data in res.Accounts[i]){ //clean possible HTML tags
-							res.Accounts[i][data] = safe_tags(res.Accounts[i][data]);
-						}
 						var middlename = res.Accounts[i]["middle_name"].split(" ");
 						var middlenameinitials = "";
 						for(var j = 0; j < middlename.length; j++){
@@ -258,7 +251,6 @@ $(document).ready(function(){
 					}
 					//mentees without Accounts
 					for(var i = 0; i < res.noAccounts.length; i++){
-						res.noAccounts[i] = safe_tags(res.noAccounts[i]);
 						var menteeHTML = "<div class='row mentee-content'><div class='mentee-data-image'><img src='http://localhost:8080/images/unknownpic.jpg' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + res.noAccounts[i] + "</strong></div>";
 						$("#mentee-data").append(menteeHTML);
 					}

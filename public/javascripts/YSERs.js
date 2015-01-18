@@ -129,7 +129,7 @@ $(document).ready(function(){
 			data: "data="+JSON.stringify({sort:sort,batch:batch,org_class:org_class}),
 			type: "GET",
 			success: function (res) {
-				console.log(res);
+				res = safe_tags(res);
 				//clear element
 				 $("#result").empty();
 
@@ -137,11 +137,6 @@ $(document).ready(function(){
 					var batchHTML = '';
 
 					for(var j = 0; j < res[i]["data"].length; j++){
-						//clean all html elements
-						for(data in res[i]["data"][j]){ //cleans all html elements
-            	res[i]["data"][j][data] = safe_tags(res[i]["data"][j][data]);
-	          }
-
 						var memberHTML = ''+
 						'<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">'+
 							'<a class="ajax" href="http://localhost:8080/profile/'+res[i]["data"][j]["username"]+'">'+
