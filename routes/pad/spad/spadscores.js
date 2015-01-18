@@ -63,14 +63,34 @@ module.exports = function(app,pool,async){
 										connection.query(query,function(err,score){
 											if(err) callback(err);
 											else{
-												var push = {
-													task: task["name"],
-													score: score[0]["score"],
-												}
+												if(score[0]){
+													var push = {
+														task: task["name"],
+														score: score[0]["score"],
+													}
 
-												//send this score to the score array
-												jpadster["scores"].push(push);
-												callback();
+													//send this score to the score array
+													jpadster["scores"].push(push);
+													callback();
+												}
+												else{
+													//hmm, missing record. must add it
+													var query = "INSERT INTO `pad_jpadsters_scores`(`username`, `score`, `task`) VALUES ("+connection.escape(jpadster["username"])+",0,"+connection.escape(task["name"])+")";
+
+													connection.query(query,function(err){
+														if(err) callback(err);
+														else{
+															var push = {
+																task: task["name"],
+																score: 0,
+															}
+
+															//send this score to the score array
+															jpadster["scores"].push(push);
+															callback();
+														}
+													});
+												}
 											}
 										});
 									},
