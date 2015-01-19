@@ -167,6 +167,37 @@ module.exports = function(app,pool,request){
 		}
 	});
 
+	//scho system
+	app.get('/checklist',function(req,res){
+		var session = req.session;
+		if(session.userkey){
+			serveMain(req,res);
+		}
+		else{
+			res.redirect('/');
+		}
+	});
+
+	app.get('/schochecklist',function(req,res){
+		var session = req.session;
+		if(session.userkey){
+			serveMain(req,res);
+		}
+		else{
+			res.redirect('/');
+		}
+	});
+
+	app.get('/nschochecklist',function(req,res){
+		var session = req.session;
+		if(session.userkey){
+			serveMain(req,res);
+		}
+		else{
+			res.redirect('/');
+		}
+	});
+
 	/* TEST */
 	app.get('/test', function(req, res) {
 		var session = req.session;

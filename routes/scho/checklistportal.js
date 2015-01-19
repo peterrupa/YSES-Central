@@ -1,5 +1,5 @@
 module.exports = function(app,pool){
-  app.get('/padattendance/content',function(req,res){
+  app.get('/checklist/content',function(req,res){
     var session = req.session;
 
     if(session.userkey){
@@ -8,11 +8,11 @@ module.exports = function(app,pool){
         var query = "SELECT `department`, `org_class` FROM `accounts` WHERE username="+connection.escape(session.userkey);
 
         connection.query(query,function(err,department){
-          if(department[0]["department"] == "Senior Projects and Activities" && department[0]["org_class"] == "Active"){
-            res.redirect('/spadattendance/content');
+          if(department[0]["department"] == "Scholastics" && department[0]["org_class"] == "Active"){
+            res.redirect('/schochecklist/content');
           }
-          else if(department[0]["department"] == "Junior Projects and Activities" && department[0]["org_class"] == "Active"){
-            res.redirect('/jpadattendance/content');
+          else if(department[0]["org_class"] == "Active"){
+            res.redirect('/nschochecklist/content');
           }
           else{
             res.render('forbidden');

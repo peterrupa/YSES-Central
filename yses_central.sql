@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2015 at 03:52 PM
+-- Generation Time: Jan 19, 2015 at 06:22 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -55,7 +55,7 @@ INSERT INTO `accounts` (`username`, `password`, `first_name`, `middle_name`, `la
 ('almermamer', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Almer', 'Taculog', 'Mendoza', 'Active', 'Junior Projects and Activities', '2013-12112', 'RAMpage', '2013', 'kath28', '1996-11-08', 'Pateros, Rizal', 'Vetmed Dorm', 'public/uploads/almermamer.jpg', 'Almer Taculog Mendoza', NULL),
 ('arvielimbo', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Arvie', 'Abrencillo', 'Limbo', 'Active', 'Finance', '2012-12321', 'rainByte', '2012', 'Angela Roscel Brojas Almoro', '1111-11-10', 'Quezon', 'New Dorm', 'public/uploads/arvielimbo.jpg', 'Arvie Abrencillo Limbo', NULL),
 ('badluckbrian', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Bad', 'Luck', 'Brian', 'Alumni', 'Scholastics', '2006-11111', 'Charter Member', '2006', 'Good Guy Greg', '1111-11-11', 'Internetz', 'Internetz', 'public/uploads/badluckbrian.png', 'Bad Luck Brian', 'Scholastics Head'),
-('getLostPanget', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Maria Theresa', 'Salvador', 'Nicdao', 'Active', 'Scholastics', '2011-56717', 'Synergy', '2011', 'Tere''s Mentor', '1994-10-29', 'Hermosa, Bataan', 'Silverios Compound', 'public/uploads/getLostPanget.jpg', 'Maria Theresa Salvador Nicdao', NULL),
+('getLostPanget', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Maria Theresa', 'Salvador', 'Nicdao', 'Active', 'Scholastics', '2011-56717', 'rainByte', '2011', 'Tere''s Mentor', '1994-10-29', 'Hermosa, Bataan', 'Silverios Compound', 'public/uploads/getLostPanget.jpg', 'Maria Theresa Salvador Nicdao', NULL),
 ('kath28', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Katherine', 'So', 'Villegas', 'Active', 'Senior Projects and Activities', '2012-22222', 'rainByte', '2012', 'Suzette De Torres', '1995-01-28', 'Candelaria, Quezon', 'Silverios Compound', 'public/uploads/kath28.jpg', 'Katherine So Villegas', NULL),
 ('kimini07', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Kim Joshua', 'Caicdoy', 'Advincula', 'Active', 'Senior Projects and Activities', '2011-12312', 'Jenga', '2011', 'Kim''s Mentor', '3232-12-31', 'Makati', 'Bella Cartash', 'public/uploads/kimini07.jpg', 'Kim Joshua Caicdoy Advincula', 'Deputy Executive Officer'),
 ('marieflor', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Marie Flor', 'Ramos', 'Bawanan', 'Active', 'Junior Projects and Activities', '2012-12321', 'RAMpage', '2012', 'getLostPanget', '1995-04-22', 'Solano, Nueva Viscaya', 'Pearl Street', 'public/uploads/pending/marieflor.jpg', 'Marie Floe Ramos Bawanan', NULL),
@@ -435,24 +435,36 @@ INSERT INTO `pad_jpadsters_task` (`task`, `date`, `maxscore`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `scho_14151_checklist`
+-- Table structure for table `scho_checklist`
 --
 
-CREATE TABLE IF NOT EXISTS `scho_14151_checklist` (
-  `username` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `scho_14151_tricycle`
---
-
-CREATE TABLE IF NOT EXISTS `scho_14151_tricycle` (
+CREATE TABLE IF NOT EXISTS `scho_checklist` (
+  `username` varchar(50) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sem` varchar(50) NOT NULL,
   `subject` varchar(50) NOT NULL,
-  `units` int(11) NOT NULL,
-  `grade` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `grade` decimal(3,2) NOT NULL,
+  `units` decimal(2,1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `scho_checklist`
+--
+
+INSERT INTO `scho_checklist` (`username`, `id`, `sem`, `subject`, `grade`, `units`) VALUES
+('tricycle', 1, '1st Sem 2014-2015', 'CMSC 21', '1.25', '3.0'),
+('tricycle', 2, '1st Sem 2014-2015', 'CMSC 57', '1.75', '3.0'),
+('tricycle', 3, '1st Sem 2014-2015', 'HUM 2', '1.75', '3.0'),
+('tricycle', 4, '1st Sem 2014-2015', 'NASC 2', '2.00', '3.0'),
+('tricycle', 5, '1st Sem 2014-2015', 'STAT 1', '2.75', '3.0'),
+('tricycle', 6, '1st Sem 2014-2015', 'MATH 27', '2.50', '3.0'),
+('kimini07', 7, '1st Sem 2014-2015', 'CMSC 165', '1.25', '3.0'),
+('kimini07', 8, '1st Sem 2014-2015', 'CMSC 141', '1.75', '3.0'),
+('kimini07', 9, '1st Sem 2014-2015', 'MATH 28', '2.75', '3.0'),
+('kimini07', 10, '1st Sem 2014-2015', 'JAP 10', '2.00', '3.0'),
+('kimini07', 11, '1st Sem 2014-2015', 'CMSC 190', '1.50', '1.0'),
+('kimini07', 12, '1st Sem 2014-2015', 'ENG 10', '3.00', '3.0');
 
 -- --------------------------------------------------------
 
@@ -464,7 +476,16 @@ CREATE TABLE IF NOT EXISTS `scho_sem_list` (
   `sem` varchar(50) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `scho_sem_list`
+--
+
+INSERT INTO `scho_sem_list` (`sem`, `id`) VALUES
+('1st Sem 2014-2015', 1),
+('2nd Sem 2014-2015', 2),
+('Summer 2014-2015', 3);
 
 -- --------------------------------------------------------
 
