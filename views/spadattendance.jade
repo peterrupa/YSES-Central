@@ -8,19 +8,63 @@ div#spadcontainer
 		button#addevent Remove Event
 	div#guide
 		div.header
-			h3 Guide for debugging
+			h3 Table
 		div.guide-content
-			p= JSON.stringify(events)
-			p= JSON.stringify(attendance)
-			p(style="color:white;")= "Total Number of Events: "+events.length
+			table.table.table-hover
+				tr
+					- for(var x = 0; x < (events.length + 1); x+=1){
+						if x == 0
+							td 
+						else if x != 0
+							td.text-center 
+								span.event-title #{events[x-1].name}
+								span.date #{events[x-1].date}
+					- }
+						- for(var a = 0; a < attendance.length; a+=1){
+							tr
+								td 
+									img.jpad-image(src="http://localhost:8080/#{attendance[a].picture}")
+									span.jpad-name #{attendance[a].name}
+								- for(var b = 0; b < events.length; b+=1){
+									//- script if($.inArray( events[b],attendance[a].eventsAttended)){alert("Hi")};
+									- if( attendance[a].eventsAttended.indexOf(events[b].name) != -1){
+										td.text-center
+											span.glyphicon.glyphicon-ok
+									- }
+									- else{
+										td.text-center
+											span.glyphicon.glyphicon-remove
+									- }
+								- }
+					- }
 	div#stat
 		div.header 
 			h3 Statistics
 		div.stat-content
 			each member in attendance
-				div.jpad-stat.text-center
+				div.col-lg-3.jpad-stat.text-center
 					p.name= member["name"]
 					p= "Events present: "+member["eventsAttended"].length
 					p= "Events absent: "+(events.length-member["eventsAttended"].length)
 					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
 			//- for sample purposes only
+			each member in attendance
+				div.col-lg-3.jpad-stat.text-center
+					p.name= member["name"]
+					p= "Events present: "+member["eventsAttended"].length
+					p= "Events absent: "+(events.length-member["eventsAttended"].length)
+					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
+			//- for sample purposes only
+			each member in attendance
+				div.col-lg-3.jpad-stat.text-center
+					p.name= member["name"]
+					p= "Events present: "+member["eventsAttended"].length
+					p= "Events absent: "+(events.length-member["eventsAttended"].length)
+					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
+			//- for sample purposes only
+			each member in attendance
+				div.col-lg-3.jpad-stat.text-center
+					p.name= member["name"]
+					p= "Events present: "+member["eventsAttended"].length
+					p= "Events absent: "+(events.length-member["eventsAttended"].length)
+					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
