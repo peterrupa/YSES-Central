@@ -35,18 +35,42 @@ button{
 	color:white;
 }
 
-button:hover, button:focus{
+button:hover{
 	background-color:rgba(180,180,250,1);
 	font-weight:bold;
 	color:black;
 }
 
+#guide{
+	width:100%;
+}
+
 #guide .guide-content{
+	width:100%;
 	padding:30px;
 	float:left;
-	color:rgba(0,255,0,1);
+	color:rgba(255,255,255,1);
 	background-color:rgba(30,30,30,1);
 	margin-bottom:10px;
+}
+
+.event-title{
+	font-weight:bold;
+}
+
+.date{
+	margin-left:5px;
+	font-size:10px;
+}
+
+.jpad-image{
+	width:30px;
+	margin-right:15px;
+}
+
+.jpad-name{
+	position:relative;
+	top:2px;
 }
 
 .header{
@@ -54,16 +78,24 @@ button:hover, button:focus{
 	color:black;
 }
 
+.stat-content{
+	width:100%;
+}
 
 #spadcontainer .jpad-stat{
 	float:left;
 	background-color:rgba(25, 112, 187,1);
 	color:white;
-	width:24%;
 	height:130px;
 	padding-top: 19px;
-	margin-right:0.5%;
-	margin-bottom:0.5%;
+	margin-right:0.00%;
+	margin-bottom:0.1%;
+}
+
+#spadcontainer .jpad-stat:hover{
+	background-color:rgba(230,230,230,1);
+	color:black;
+	cursor:default;
 }
 
 #spadcontainer .jpad-stat p{
@@ -90,4 +122,18 @@ button:hover, button:focus{
 #jpadcontainer .jpad-stat p{
 	margin-top:0px;
 	margin-bottom:3px;
+}
+
+tr:hover{
+	color:black;
+	font-weight:bold;
+}
+
+.glyphicon{
+	top:6px;
+}
+
+table, table tr, table td{
+	border:0;
+	border-color:gray;
 }

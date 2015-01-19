@@ -52,7 +52,7 @@ input{
 	color:white;
 }
 
-.to-validate button:hover, .to-validate button:focus{
+.to-validate button:hover/*, .to-validate button:focus*/{
 	background-color:rgba(180,180,250,1);
 	font-weight:bold;
 	color:black;
