@@ -2,7 +2,7 @@
 	margin-top:0px;
 }
 
-#spadcontainer, #jpadcontainer{
+#seccontainer, #nseccontainer{
 	background-color:rgba(200,200,200,1);
 	padding:30px; 
 	margin-bottom:20px;
@@ -18,7 +18,7 @@
 	float:right;
 }
 
-#jpadcontainer button, #spadcontainer button{
+#nseccontainer button, #seccontainer button{
 	position:relative;
 	float:left;
 
@@ -39,24 +39,25 @@
 	color:white;
 }
 
-#spadcontainer button:hover, #jpadcontainer button:hover{
+#seccontainer button:hover, #nseccontainer button:hover{
 	background-color:rgba(180,180,250,1);
 	font-weight:bold;
 	color:black;
 }
 
-#jpadcontainer #guide{
+#nseccontainer #guide{
 	float:left;
 	height:100%;
 	overflow-y:auto;
 }
 
-#spadcontainer #guide{
+#seccontainer #guide{
 	width:100%;
 	height:100%;
+	float:left;
 }
 
-#jpadcontainer #guide .guide-content{
+#nseccontainer #guide .guide-content{
 	width:100%;
 	height:380px;
 	padding:30px;
@@ -68,7 +69,7 @@
 	overflow-y:auto;
 }
 
-#spadcontainer #guide .guide-content{
+#seccontainer #guide .guide-content{
 	width:100%;
 	padding:30px;
 	float:left;
@@ -87,12 +88,12 @@
 	font-size:10px;
 }
 
-.jpad-image{
+.nsec-image{
 	width:30px;
 	margin-right:15px;
 }
 
-.jpad-name{
+.nsec-name{
 	position:relative;
 	top:2px;
 }
@@ -107,7 +108,7 @@
 }
 
 /*****************************/
-#spadcontainer .jpad-stat{
+#seccontainer .nsec-stat{
 	float:left;
 	background-color:rgba(25, 112, 187,1);
 	color:white;
@@ -117,29 +118,30 @@
 	margin-bottom:0.1%;
 }
 
-#spadcontainer .jpad-stat:hover{
+#seccontainer .nsec-stat:hover{
 	background-color:rgba(230,230,230,1);
 	color:black;
 	cursor:default;
 }
 
-#spadcontainer .jpad-stat p{
+#seccontainer .nsec-stat p{
 	margin-top:0px;
 	margin-bottom:3px;
 }
 
-#spadcontainer .jpad-stat .name{
+#seccontainer .nsec-stat .name{
 	font-weight:bold;
 }
 
 /*****************************/
-#jpadcontainer #stat{
+#nseccontainer #stat{
+	float:left;
 	margin-left:5%;
 	height:100%;
 	overflow:auto;
 }
 
-#jpadcontainer .jpad-stat{
+#nseccontainer .nsec-stat{
 	float:left;
 	background-color:rgba(25, 112, 187,1);
 	color:white;
@@ -150,7 +152,7 @@
 	margin-bottom:0.5%;
 }
 
-#jpadcontainer .jpad-stat p{
+#nseccontainer .nsec-stat p{
 	margin-top:0px;
 	margin-bottom:3px;
 	font-weight:bold;
@@ -162,14 +164,14 @@ tr:hover{
 	font-weight:bold;
 }
 
-#spadcontainer .glyphicon, #jpadcontainer .glyphicon{
+#seccontainer .glyphicon, #nseccontainer .glyphicon{
 	top:6px;
 }
 
-#spadcontainer #guide span{
+#seccontainer #guide span{
 	width:100px;
 }
 
-#spadcontainer .jpad{
+#seccontainer .nsec{
 	width:130px;
 }

@@ -1,7 +1,7 @@
-link(rel="stylesheet",href="http://localhost:8080/stylesheets/padattendance.css")
+link(rel="stylesheet",href="http://localhost:8080/stylesheets/secattendance.css")
 div.title-header.profile-header
 	h2 YSERs Attendance
-div#spadcontainer
+div#seccontainer
 	div#event-buttons
 		button#addevent Add Event
 		button#addevent Edit Event
@@ -10,15 +10,39 @@ div#spadcontainer
 		div.header
 			h3 Guide for debugging
 		div.guide-content
-			p= JSON.stringify(events)
-			p= JSON.stringify(attendance)
-			p(style="color:white;")= "Total Number of Events: "+events.length
+			table.table.table-hover
+				tr
+					- for(var x = 0; x < (events.length + 1); x+=1){
+						if x == 0
+							td
+						else if x != 0
+							td.text-center 
+								span.event-title #{events[x-1].name}
+								span.date #{events[x-1].date}
+					- }
+					- for(var a = 0; a < attendance.length; a+=1){
+						tr
+							td 
+								div.jpad
+									img.nsec-image(src="http://localhost:8080/#{attendance[a].picture}")
+									span.nsec-name #{attendance[a].name}
+							- for(var b = 0; b < events.length; b+=1){
+								- if( attendance[a].eventsAttended.indexOf(events[b].name) != -1){
+									td.text-center
+										span.glyphicon.glyphicon-ok
+								- }
+								- else{
+									td.text-center
+										span.glyphicon.glyphicon-remove
+								- }
+							- }
+					- }
 	div#stat
 		div.header 
 			h3 Statistics
 		div.stat-content
 			each member in attendance
-				div.jpad-stat.text-center
+				div.col-lg-3.nsec-stat.text-center
 					p.name= member["name"]
 					p= "Events present: "+member["eventsAttended"].length
 					p= "Events absent: "+(events.length-member["eventsAttended"].length)

@@ -1,15 +1,33 @@
 link(rel="stylesheet",href="http://localhost:8080/stylesheets/padattendance.css")
 div.title-header.profile-header
 	h2 JPad Attendance
-div#jpadcontainer
-	div#guide
+div#jpadcontainer.col-lg-12
+	div#guide.col-lg-5
 		div.header
-			h3 Guide for debugging
+			h3 Events
 		div.guide-content
-			p= JSON.stringify(attendance)
-			p(style="color:white;")= "Total Events: "+attendance.length
-	div.clearfix
-	div#stat
+			table.table.table-hover
+				tr
+					td.text-center 
+						span.event-title EVENT NAME
+					td.text-center
+						span.event-title DID ATTEND
+				- for(var x = 0; x < attendance.length; x+=1){
+					tr
+						td.text-center 
+							span.event-title #{attendance[x].event}
+							span.date #{attendance[x].date}
+						- if( attendance[x].didattend != false){
+							td.text-center
+								span.glyphicon.glyphicon-ok
+						- }
+						- else{
+							td.text-center
+								span.glyphicon.glyphicon-remove
+						- }
+				- }
+		div.clearfix
+	div#stat.col-lg-6
 		div.header
 			h3 Statistic
 		div.stat-content

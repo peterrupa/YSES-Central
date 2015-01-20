@@ -1,14 +1,30 @@
+link(rel="stylesheet",href="http://localhost:8080/stylesheets/padscore.css")
+div.title-header.profile-header
+	h2 JPad Score
 div#jpadcontainer
-  - var totalitems = 0;
-  - var totalscore = 0;
-  each task in scores
-    ul
-      li= "Task: "+task["task"]
-      li= "Date: "+task["date"]
-      li= "Total items: "+task["maxscore"]
-      li= "Score: "+task["score"]
-      - totalitems += task["maxscore"];
-      - totalscore += task["score"];
-  p Statistics
-  p= "Total score: "+totalscore+"/"+totalitems
-  p= "Percentage: "+(totalscore/totalitems*100).toFixed(2)+"%"
+	div#jpad-score.col-lg-5
+		div.header
+			h3 Tasks
+		div.jpad-score-content
+			- var totalitems = 0;
+			- var totalscore = 0;
+			table.table.table-hover
+				tr.text-center
+					td.event-title Task
+					td.event-title Date
+					td.event-title Total Items
+					td.event-title Score
+				each task in scores
+					tr.text-center
+						td= task["task"]
+						td= task["date"]
+						td= task["maxscore"]
+						td= task["score"]
+						- totalitems += task["maxscore"];
+						- totalscore += task["score"];
+	div#jpad-stat.col-lg-6
+		div.header
+			h3 Statistics
+		div.jpad-stat-content.text-center
+			p= "Total score: "+totalscore+"/"+totalitems
+			p= "Percentage: "+(totalscore/totalitems*100).toFixed(2)+"%"

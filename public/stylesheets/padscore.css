@@ -1,0 +1,151 @@
+.title-header{
+	margin-top:0px;
+}
+
+.event-title{
+	font-weight:bold;
+}
+
+.header{
+	margin-left:5px;
+	color:black;
+}
+
+.jpad-image{
+	width:30px;
+	margin-right:15px;
+}
+
+.jpad-name{
+	position:relative;
+	top:2px;
+}
+
+#spadcontainer, #jpadcontainer{
+	background-color:rgba(200,200,200,1);
+	padding:30px; 
+	margin-bottom:20px;
+	overflow:auto;
+}
+
+#spadcontainer #jpad-task, #spadcontainer #jpad-score, #spadcontainer #jpad-stat{
+	clear:both;
+}
+
+.list-of-tasks{
+	height:100%;
+	background-color:rgba(255,255,255,0);
+	padding-top:10px;
+	padding-left:15px;
+}
+
+.list-of-tasks:hover{
+	background-color:white;
+}
+
+.jpad-task-content{
+	background-color:rgba(25, 112, 230,0);
+
+	height:100px;
+	padding-top:15px;
+	padding-left:5px;
+	margin-left:0px;
+	margin-bottom:10px;
+	overflow:auto;
+	color:black;
+}
+
+#spadcontainer .jpad-stat-content{
+	float:left;
+	background-color:rgba(25, 112, 187,1);
+	color:white;
+	height:130px;
+	padding-top: 28px;
+	margin-right:0.00%;
+	margin-bottom:0.1%;
+}
+
+#spadcontainer .jpad-stat-content:hover{
+	background-color:rgba(230,230,230,1);
+	color:black;
+	cursor:default;
+}
+
+#jpadcontainer #jpad-stat{
+	height:100%;
+	margin-left:40px;
+}
+
+#jpadcontainer .jpad-stat-content{
+	float:left;
+	background-color:rgba(25, 112, 187,1);
+	color:white;
+	width:100%;
+	height:380px;
+	padding-top: 33%;
+	margin-right:0.00%;
+	margin-bottom:0.1%;
+	font-size:20px;
+	font-weight:bold;
+	overflow:auto;
+}
+
+.jpad-stat-content .name{
+	font-weight:bold;
+}
+
+#spadcontainer .jpad-score-content{
+	background-color:rgba(30,30,30,1);
+
+	padding:30px;
+	height:100%;
+	margin-bottom:10px;
+	overflow:auto;
+}
+
+#jpadcontainer .jpad-score-content{
+	background-color:rgba(30,30,30,1);
+
+	padding:30px;
+	height:380px;
+	margin-bottom:10px;
+	overflow-y:auto;
+}
+
+.jpad-score-content table{
+	margin-bottom:0px;
+}
+
+#jpad-score img{
+	width:30px;
+}
+
+tr:hover{
+	color:black;
+	font-weight:bold;
+	cursor:default;
+}
+
+ul, li {
+	margin-left: 0;
+	padding-left: 0;
+	list-style-type: none;
+}
+
+td{
+	width:25%;
+}
+
+p{
+	margin-top:0px;
+	margin-bottom:3px;
+}
+
+.chevron{
+	padding-top:38px;
+	height:100%;
+	width:10px;
+	margin-right:20px;
+	color:black;
+	float:left;
+}
