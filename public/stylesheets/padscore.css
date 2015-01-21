@@ -126,6 +126,10 @@ tr:hover{
 	cursor:default;
 }
 
+.name-header:hover{
+	cursor:pointer;
+}
+
 ul, li {
 	margin-left: 0;
 	padding-left: 0;
