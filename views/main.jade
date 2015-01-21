@@ -228,36 +228,14 @@ html
 		script(src='http://localhost:8080/javascripts/bootstrap-tooltip.js')
 
 		script.
-			$(document).ready(function(){
-
-				/*$body = $("body");
-
-				$(document).on({
-				    ajaxStart: function() { $body.addClass("loading"); },
-				     ajaxStop: function() { $body.removeClass("loading"); }    
-				});
-				
-				var timeOut;
-
-				$.ajaxStart(function () {
-				    timeOut = setTimeout(function () {
-				        $('.modal').fadeIn();
-				    }, 500); // Waits for half a second before fading .modal in
-				});
-
-				$.ajaxStop(function () {
-				    clearTimeout(timeOut); // Cancels if request finished < .5 seconds
-				    $('.modal').fadeOut();
-				});
-				*/
-
-				$(document).ajaxStart(function () {
-				    timeOut = setTimeout(function () {
-				        $('.modal').show();
-				    }, 0);
-				});
-				$(document).ajaxStop(function () {
-					clearTimeout(timeOut);
-				    $('.modal').fadeOut(1500);
-				});
+			
+			$(document).ajaxStart(function () {
+				timeOut = setTimeout(function () {
+					$('.modal').show();
+				}, 0);
 			});
+			$(document).ajaxStop(function () {
+				clearTimeout(timeOut);
+				$('.modal').fadeOut(1500);
+			});
+		
