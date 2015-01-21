@@ -3,12 +3,58 @@ div.title-header.profile-header
 	h2 JPad Attendance
 div#spadcontainer.col-lg-12
 	div#event-buttons
-		button#add-event Add Event
-		button#edit-event Edit Event
-		button#remove-event Remove Event
-		div#table-buttons
-			button#next-event Next
-			button#prev-event Prev
+		button#add-event.pull-left(href="http://localhost:8080/#",data-toggle="modal",data-target="#addEventModal",data-placement="left") 
+			| Add Event
+		div#addEventModal.modal.fade.text-left
+			div.modal-dialog
+				div.modal-content.col-lg-15
+					div.modal-header
+						button.close(type="button",data-dismiss="modal")
+							span(aria-hidden="true") &times;
+							span.sr-only Close
+						h6.modal-title Add event
+					div.modal-body
+						div.header-input-group
+							h5 Event Title
+							input.form-control.input-header(type="text")
+						div.header-input-group
+							h5 Event Date
+							input.form-control.input-header(type="date")
+						div.table-content
+							table.table
+								tr
+									td JPADster
+									td.text-center Did Attend
+									- for(var a = 0; a < attendance.length; a+=1){
+										tr
+											td 
+												div.jpad
+													img.jpad-image(src="http://localhost:8080/#{attendance[a].picture}")
+													span.jpad-name #{attendance[a].name}
+											td.text-center
+												input(type="checkbox")
+									- }
+					div.modal-footer
+						input#postAddEvent.btn.btn-primary.pull-right(type="button",value="Add Event")
+		button#edit-event.edit.pull-left 
+			| Edit Event
+		//button#remove-event.pull-left Remove Event
+		div.btn-group
+			button#remove-event.pull-left.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+				| Remove Event 
+				span.caret
+			ul.dropdown-menu(role='menu')
+				- for(var x = 0; x < (events.length); x+=1){
+					li 
+						a(href='#') #{events[x].name}
+				- }
+				li.divider
+				li
+					a(href='#') Cancel
+		button#prev-event.pull-right 
+			| Prev
+		button#next-event.pull-right 
+			| Next
 	div#guide
 		div.header
 			h3 Table
@@ -31,11 +77,11 @@ div#spadcontainer.col-lg-12
 									span.jpad-name #{attendance[a].name}
 							- for(var b = 0; b < events.length; b+=1){
 								- if(attendance[a].eventsAttended.indexOf(events[b].name) != -1){
-									td.text-center
+									td.attendance-result.text-center
 										span.glyphicon.glyphicon-ok
 								- }
 								- else{
-									td.text-center
+									td.attendance-result.text-center
 										span.glyphicon.glyphicon-remove
 								- }
 							- }
@@ -50,24 +96,43 @@ div#spadcontainer.col-lg-12
 					p= "Events present: "+member["eventsAttended"].length
 					p= "Events absent: "+(events.length-member["eventsAttended"].length)
 					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
-			//- for sample purposes only
-			each member in attendance
-				div.col-lg-3.jpad-stat.text-center
-					p.name= member["name"]
-					p= "Events present: "+member["eventsAttended"].length
-					p= "Events absent: "+(events.length-member["eventsAttended"].length)
-					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
-			//- for sample purposes only
-			each member in attendance
-				div.col-lg-3.jpad-stat.text-center
-					p.name= member["name"]
-					p= "Events present: "+member["eventsAttended"].length
-					p= "Events absent: "+(events.length-member["eventsAttended"].length)
-					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
-			//- for sample purposes only
-			each member in attendance
-				div.col-lg-3.jpad-stat.text-center
-					p.name= member["name"]
-					p= "Events present: "+member["eventsAttended"].length
-					p= "Events absent: "+(events.length-member["eventsAttended"].length)
-					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
+script.
+	$(document).ready(function(){
+
+		$('body').on('click','.edit',function(){
+
+			var temphtml = ''+
+				'<input type="checkbox" value="attended">';
+			$(this).closest('body').find('.attendance-result').html(temphtml);
+			
+			$(this).html('Done with edit');
+			$(this).addClass('done');
+			$(this).removeClass('edit');
+			
+		});
+
+		$('body').on('click','.done',function(){
+
+			$('.attendance-result').each(function(){
+
+				var temphtml = '';
+
+				if($(this).children().is(':checked')){
+					temphtml = ''+
+						'<span class="glyphicon glyphicon-ok"></span>';
+				}
+				else{
+					temphtml = ''+
+						'<span class="glyphicon glyphicon-remove"></span>';
+				}
+
+				$(this).html(temphtml);
+			
+			});
+			
+			$(this).html('Edit Event');
+			$(this).addClass('edit');
+			$(this).removeClass('done');
+		});
+
+	});
