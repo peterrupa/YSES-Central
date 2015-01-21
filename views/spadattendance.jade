@@ -99,6 +99,7 @@ div#spadcontainer.col-lg-12
 script.
 	$(document).ready(function(){
 
+		$('body').off('click','.edit');
 		$('body').on('click','.edit',function(){
 
 			var temphtml = '';
@@ -124,6 +125,7 @@ script.
 			
 		});
 
+		$('body').off('click','.done');
 		$('body').on('click','.done',function(){
 
 			$('.attendance-result').each(function(){
