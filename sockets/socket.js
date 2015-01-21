@@ -40,6 +40,10 @@ module.exports = function(http,sessionMiddleware,eventEmitter) {
     io.to('/accountvalidator').emit("updateaccountvalidator",data);
   });
 
+  eventEmitter.on('spadattendanceedit',function(){
+    io.to('/padattendance').emit("spadattendanceedit");
+  });
+
   io.on("connection",function(socket){
     var currentURL;
 

@@ -36,7 +36,7 @@ div#spadcontainer.col-lg-12
 									- }
 					div.modal-footer
 						input#postAddEvent.btn.btn-primary.pull-right(type="button",value="Add Event")
-		button#edit-event.edit.pull-left 
+		button#edit-event.btn.btn-primary.edit.pull-left(data-loading="Loading")
 			| Edit Event
 		//button#remove-event.pull-left Remove Event
 		div.btn-group
@@ -70,18 +70,18 @@ div#spadcontainer.col-lg-12
 								span.date #{events[x-1].date}
 					- }
 					- for(var a = 0; a < attendance.length; a+=1){
-						tr
+						tr.jpadrow(data-name="#{attendance[a]['name']}")
 							td 
 								div.jpad
 									img.jpad-image(src="http://localhost:8080/#{attendance[a].picture}")
 									span.jpad-name #{attendance[a].name}
 							- for(var b = 0; b < events.length; b+=1){
 								- if(attendance[a].eventsAttended.indexOf(events[b].name) != -1){
-									td.attendance-result.text-center
+									td.attendance-result.text-center(data-event="#{events[b]['name']}")
 										span.glyphicon.glyphicon-ok
 								- }
 								- else{
-									td.attendance-result.text-center
+									td.attendance-result.text-center(data-event="#{events[b]['name']}")
 										span.glyphicon.glyphicon-remove
 								- }
 							- }
@@ -98,7 +98,8 @@ div#spadcontainer.col-lg-12
 					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
 script.
 	$(document).ready(function(){
-
+			
+		$('body').off('click','.edit');
 		$('body').on('click','.edit',function(){
 
 			var temphtml = '';
@@ -124,28 +125,88 @@ script.
 			
 		});
 
+		$('body').off('click','.done');
 		$('body').on('click','.done',function(){
-
-			$('.attendance-result').each(function(){
-
-				var temphtml = '';
-
-				if($(this).children().is(':checked')){
-					temphtml = ''+
-						'<span class="glyphicon glyphicon-ok"></span>';
-				}
-				else{
-					temphtml = ''+
-						'<span class="glyphicon glyphicon-remove"></span>';
-				}
-
-				$(this).html(temphtml);
+			//set loading
+			$(this).button('loading');
 			
+			var send = [];
+
+			$(".jpadrow").each(function(){
+				var jpadster = {
+					name: $(this).data('name'),
+					events: []
+				};
+				
+				$(this).children('.attendance-result').each(function(){
+					var temp = {
+						name: $(this).data('event')
+					};
+					
+					if($(this).find('input:checked').length > 0){
+						temp["value"] = true;
+					}
+					else{
+						temp["value"] = false;
+					}
+					
+					jpadster["events"].push(temp);
+				});
+				
+				send.push(jpadster);
 			});
 			
-			$(this).html('Edit Event');
-			$(this).addClass('edit');
-			$(this).removeClass('done');
+			console.log(send);
+			
+			//send data to server
+			$.ajax({
+				url: "http://localhost:8080/spadattendance/updateattendance",
+				data: JSON.stringify({data:send}),
+				contentType: "application/json",
+				type: "POST",
+				success: function(res){
+					
+				},
+				error: function (e){
+					console.dir(e);
+				}
+			});
+
+		//- 	$('.attendance-result').each(function(){
+		//- 
+		//- 		var temphtml = '';
+		//- 
+		//- 		if($(this).children().is(':checked')){
+		//- 			temphtml = ''+
+		//- 				'<span class="glyphicon glyphicon-ok"></span>';
+		//- 		}
+		//- 		else{
+		//- 			temphtml = ''+
+		//- 				'<span class="glyphicon glyphicon-remove"></span>';
+		//- 		}
+		//- 
+		//- 		$(this).html(temphtml);
+		//- 	
+		//- 	});
+		//- 	
+		//- 	$(this).html('Edit Event');
+		//- 	$(this).addClass('edit');
+		//- 	$(this).removeClass('done');
+	 });
+	
+		socket.off('spadattendanceedit');
+		socket.on('spadattendanceedit',function(){
+			//request to server for data update
+			$.ajax({
+				url: "http://localhost:8080/spadattendance/content",
+				type: "GET",
+				success: function(res){
+					$("#content").html(res);
+				},
+				error: function (e){
+					console.dir(e);
+				}
+			});
 		});
 
 	});

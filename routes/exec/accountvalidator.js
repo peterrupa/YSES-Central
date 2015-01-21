@@ -176,6 +176,9 @@ module.exports = function(app,pool,eventEmitter,async){
 				function(err){
 					async.parallel([
 						function(callback){
+							//remove pending
+							req.body["picture"] = req.body["picture"].replace(/pending\//g,"");
+
 							//insert to accounts
 							var query = "INSERT INTO `accounts`(`username`, `password`, `first_name`, `middle_name`, `last_name`, `org_class`, `department`, `student_number`, `org_batch`, `univ_batch`, `mentor`, `birthday`, `home_address`, `college_address`, `picture`, `full_name`, `exec_position`) VALUES ("+connection.escape(req.body["username"])+","+connection.escape(req.body["password"])+","+connection.escape(req.body["first_name"])+","+connection.escape(req.body["middle_name"])+","+connection.escape(req.body["last_name"])+","+connection.escape(req.body["org_class"])+","+connection.escape(req.body["department"])+","+connection.escape(req.body["student_number"])+","+connection.escape(req.body["org_batch"])+","+connection.escape(req.body["univ_batch"])+","+connection.escape(req.body["mentor"])+","+connection.escape(req.body["birthday"])+","+connection.escape(req.body["home_address"])+","+connection.escape(req.body["college_address"])+","+connection.escape(req.body["picture"])+","+connection.escape(req.body["first_name"]+" "+req.body["middle_name"]+" "+req.body["last_name"])+","+connection.escape(req.body["exec_position"])+")";
 

@@ -73,6 +73,8 @@ module.exports = function(app,pool,async){
 														};
 
 														for(var i = 0; i < members.length; i++){
+															//remove /public
+															members[i]["picture"] = members[i]["picture"].substring(7);
 															tempmembers["members"].push(members[i]);
 														}
 

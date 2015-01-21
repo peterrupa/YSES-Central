@@ -111,7 +111,6 @@ module.exports = function(app,pool,async){
 									if(err) reportError(res,err);
 									else{
 										//render page with info to client
-										console.log({tasks:results["tasks"],scores:results["jpadsters"]});
 										res.render('spadscores',{tasks:results["tasks"],scores:results["jpadsters"]});
 									}
 								});

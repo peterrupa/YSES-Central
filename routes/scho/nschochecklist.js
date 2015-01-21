@@ -34,3 +34,23 @@ module.exports = function(app,pool,async){
     }
   });
 }
+
+//fetch list of sems
+//fetch user data
+  //each sem
+    //get grades
+
+// {
+//   sems: [
+//     {
+//       name: '1st Sem 2014-2015',
+//       subjects: [
+//         {
+//           name: 'CMSC 2',
+//           grade: 1.00,
+//           units: 3.0
+//         }
+//       ]
+//     }
+//   ]
+// }

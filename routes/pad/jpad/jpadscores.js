@@ -58,7 +58,6 @@ module.exports = function(app,pool,async){
 								//render page with data!
 								if(err) reportError(res,err);
 								else{
-									console.log({scores:send});
 									res.render('jpadscores',{scores:send});
 								}
 

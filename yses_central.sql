@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2015 at 06:22 PM
+-- Generation Time: Jan 21, 2015 at 05:38 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -56,9 +56,10 @@ INSERT INTO `accounts` (`username`, `password`, `first_name`, `middle_name`, `la
 ('arvielimbo', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Arvie', 'Abrencillo', 'Limbo', 'Active', 'Finance', '2012-12321', 'rainByte', '2012', 'Angela Roscel Brojas Almoro', '1111-11-10', 'Quezon', 'New Dorm', 'public/uploads/arvielimbo.jpg', 'Arvie Abrencillo Limbo', NULL),
 ('badluckbrian', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Bad', 'Luck', 'Brian', 'Alumni', 'Scholastics', '2006-11111', 'Charter Member', '2006', 'Good Guy Greg', '1111-11-11', 'Internetz', 'Internetz', 'public/uploads/badluckbrian.png', 'Bad Luck Brian', 'Scholastics Head'),
 ('getLostPanget', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Maria Theresa', 'Salvador', 'Nicdao', 'Active', 'Scholastics', '2011-56717', 'rainByte', '2011', 'Tere''s Mentor', '1994-10-29', 'Hermosa, Bataan', 'Silverios Compound', 'public/uploads/getLostPanget.jpg', 'Maria Theresa Salvador Nicdao', NULL),
+('jdmonster', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'John Denielle', 'Flores', 'Hernandez', 'Active', 'Senior Projects and Activities', '2011-19863', 'Jenga', '2011', 'JD''s mentor', '3213-12-21', 'Bulacan', 'Bella Cartash', 'public/uploads/jdmonster.jpg', 'John Denielle Flores Hernandez', NULL),
 ('kath28', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Katherine', 'So', 'Villegas', 'Active', 'Senior Projects and Activities', '2012-22222', 'rainByte', '2012', 'Suzette De Torres', '1995-01-28', 'Candelaria, Quezon', 'Silverios Compound', 'public/uploads/kath28.jpg', 'Katherine So Villegas', NULL),
 ('kimini07', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Kim Joshua', 'Caicdoy', 'Advincula', 'Active', 'Senior Projects and Activities', '2011-12312', 'Jenga', '2011', 'Kim''s Mentor', '3232-12-31', 'Makati', 'Bella Cartash', 'public/uploads/kimini07.jpg', 'Kim Joshua Caicdoy Advincula', 'Deputy Executive Officer'),
-('marieflor', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Marie Flor', 'Ramos', 'Bawanan', 'Active', 'Junior Projects and Activities', '2012-12321', 'RAMpage', '2012', 'getLostPanget', '1995-04-22', 'Solano, Nueva Viscaya', 'Pearl Street', 'public/uploads/pending/marieflor.jpg', 'Marie Floe Ramos Bawanan', NULL),
+('marieflor', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Marie Flor', 'Ramos', 'Bawanan', 'Active', 'Junior Projects and Activities', '2012-12321', 'RAMpage', '2012', 'getLostPanget', '1995-04-22', 'Solano, Nueva Viscaya', 'Pearl Street', 'public/uploads/marieflor.jpg', 'Marie Floe Ramos Bawanan', NULL),
 ('penguinlove', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Maria Clarissa', 'Sulit', 'Estremos', 'Active', 'Secretariat', '2011-55645', 'He-4', '2011', 'Cla''s Mentor', '5234-04-27', 'Binangonan, Rizal', 'Bella Cartash', 'public/uploads/penguinlove.jpg', 'Maria Clarissa Sulit Estremos', 'Executive Assistant'),
 ('queenjubs', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Jhubielyn', 'Go', 'Garachico', 'Active', 'Senior Projects and Activities', '2012-51343', 'rainByte', '2012', 'Idk lol', '1995-11-12', 'Somewhere', 'Silverios Compound', 'public/uploads/queenjubs.jpg', 'Jhubielyn Go Garachico', NULL),
 ('qylegeronimo', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Qyle', 'De Los Angeles', 'San Juan', 'Active', 'Junior Projects and Activities', '2012-11111', 'RAMpage', '2012', 'penguinlove', '1996-06-07', 'Naga City', 'Vetmed Dorm', 'public/uploads/qylegeronimo.jpg', 'Qyle De Los Angeles San Juan', NULL),
@@ -350,17 +351,22 @@ CREATE TABLE IF NOT EXISTS `pad_jpadsters_attendance` (
   `username` varchar(50) NOT NULL,
   `event` varchar(50) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `event` (`event`,`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=228 ;
 
 --
 -- Dumping data for table `pad_jpadsters_attendance`
 --
 
 INSERT INTO `pad_jpadsters_attendance` (`username`, `event`, `id`) VALUES
-('almermamer', 'Introduction to Nodejs', 1),
 ('tricycle', 'Introduction to Nodejs', 2),
-('tricycle', 'Nodejs File Uploading', 3);
+('almermamer', 'MongoDB', 222),
+('marieflor', 'MongoDB', 171),
+('tricycle', 'MongoDB', 208),
+('almermamer', 'Nodejs File Uploading', 221),
+('qylegeronimo', 'Nodejs File Uploading', 227),
+('tricycle', 'Nodejs File Uploading', 55);
 
 -- --------------------------------------------------------
 

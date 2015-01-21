@@ -63,7 +63,6 @@ module.exports = function(app,pool,async){
               function(err,attendance){
                 if(err) reportError(res,err);
                 else{
-                  console.log({attendance:attendance});
                   res.render('nsecattendance',{attendance:attendance});
                 }
               });

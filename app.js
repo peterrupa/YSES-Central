@@ -72,7 +72,7 @@ require('./routes/exec/announcementposter')(app,pool,eventEmitter,async);
 //pad
 require('./routes/pad/padattendanceportal')(app,pool);
 require('./routes/pad/padscoresportal')(app,pool);
-require('./routes/pad/spad/spadattendance')(app,pool,async);
+require('./routes/pad/spad/spadattendance')(app,pool,async,eventEmitter);
 require('./routes/pad/jpad/jpadattendance')(app,pool,async);
 require('./routes/pad/spad/spadscores')(app,pool,async);
 require('./routes/pad/jpad/jpadscores')(app,pool,async);

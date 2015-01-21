@@ -8,7 +8,6 @@ module.exports = function(app,pool){
         var query = "SELECT `department`, `org_class` FROM `accounts` WHERE username="+connection.escape(session.userkey);
 
         connection.query(query,function(err,department){
-          console.log(department);
           if(department[0]["department"] == "Senior Projects and Activities" && department[0]["org_class"] == "Active"){
             res.redirect('/spadattendance/content');
           }
