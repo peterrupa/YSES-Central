@@ -516,7 +516,7 @@ body .overlimit{ color:red; }
 
 /* For ajax load */
 
-.modal {
+.load-screen {
     display:    none;
     position:   fixed;
     z-index:    1000;
@@ -534,6 +534,6 @@ body.loading {
     overflow: hidden;   
 }
 
-body.loading .modal {
+body.loading .load-screen {
     display: block;
 }

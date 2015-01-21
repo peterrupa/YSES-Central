@@ -219,7 +219,7 @@ html
 										img.tile-pic(src='http://localhost:8080/images/cla.jpg')
 									li.metro.half
 										img.tile-pic(src='http://localhost:8080/images/jv.jpg')
-		div.modal
+		div.load-screen
 		script(src='http://localhost:8080/javascripts/parallax.js')
 		script(src='http://localhost:8080/javascripts/chatbox.js')
 		script(src='http://localhost:8080/javascripts/department.js')
@@ -231,11 +231,11 @@ html
 			
 			$(document).ajaxStart(function () {
 				timeOut = setTimeout(function () {
-					$('.modal').show();
+					$('.load-screen').show();
 				}, 0);
 			});
 			$(document).ajaxStop(function () {
 				clearTimeout(timeOut);
-				$('.modal').fadeOut(1500);
+				$('.load-screen').fadeOut(1500);
 			});
 		
