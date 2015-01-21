@@ -101,10 +101,23 @@ script.
 
 		$('body').on('click','.edit',function(){
 
-			var temphtml = ''+
-				'<input type="checkbox" value="attended">';
-			$(this).closest('body').find('.attendance-result').html(temphtml);
+			var temphtml = '';
+
+			$('.attendance-result').each(function(){
+
+				if( $(this).children().hasClass('glyphicon-ok') ){
+					temphtml = ''+
+						'<input type="checkbox" value="attended" checked="checked">';
+				}
+				else if( $(this).children().hasClass('glyphicon-remove') ){
+					temphtml = ''+
+						'<input type="checkbox" value="attended">';
+				}
+
+				$(this).html(temphtml);
 			
+			});			
+
 			$(this).html('Done with edit');
 			$(this).addClass('done');
 			$(this).removeClass('edit');
