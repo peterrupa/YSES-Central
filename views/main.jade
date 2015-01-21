@@ -219,10 +219,23 @@ html
 										img.tile-pic(src='http://localhost:8080/images/cla.jpg')
 									li.metro.half
 										img.tile-pic(src='http://localhost:8080/images/jv.jpg')
-		
+		div.modal
 		script(src='http://localhost:8080/javascripts/parallax.js')
 		script(src='http://localhost:8080/javascripts/chatbox.js')
 		script(src='http://localhost:8080/javascripts/department.js')
 		script(src='http://localhost:8080/javascripts/postLogbook.js')
 		script(src='http://localhost:8080/javascripts/autocomplete.js')
 		script(src='http://localhost:8080/javascripts/bootstrap-tooltip.js')
+
+		script.
+			
+			$(document).ajaxStart(function () {
+				timeOut = setTimeout(function () {
+					$('.modal').show();
+				}, 0);
+			});
+			$(document).ajaxStop(function () {
+				clearTimeout(timeOut);
+				$('.modal').fadeOut(1500);
+			});
+		

@@ -98,7 +98,6 @@ div#spadcontainer.col-lg-12
 					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
 script.
 	$(document).ready(function(){
-			
 		$('body').off('click','.edit');
 		$('body').on('click','.edit',function(){
 
@@ -172,26 +171,6 @@ script.
 				}
 			});
 
-		//- 	$('.attendance-result').each(function(){
-		//- 
-		//- 		var temphtml = '';
-		//- 
-		//- 		if($(this).children().is(':checked')){
-		//- 			temphtml = ''+
-		//- 				'<span class="glyphicon glyphicon-ok"></span>';
-		//- 		}
-		//- 		else{
-		//- 			temphtml = ''+
-		//- 				'<span class="glyphicon glyphicon-remove"></span>';
-		//- 		}
-		//- 
-		//- 		$(this).html(temphtml);
-		//- 	
-		//- 	});
-		//- 	
-		//- 	$(this).html('Edit Event');
-		//- 	$(this).addClass('edit');
-		//- 	$(this).removeClass('done');
 	 });
 	
 		socket.off('spadattendanceedit');
