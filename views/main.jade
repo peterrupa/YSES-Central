@@ -21,6 +21,7 @@ html
 		script(src="/socket.io/socket.io.js")
 		script(src="http://localhost:8080/javascripts/socketlistener.js")
 		script(src='http://localhost:8080/javascripts/cleanHTML.js')
+		script(src='http://localhost:8080/javascripts/snap.svg-min.js')
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
 	body(data-type="background",data-speed="2")
 		div#header.padding-vert
@@ -169,56 +170,21 @@ html
 								form#logout(action="http://localhost:8080/logout",method="post")
 								a(href="javascript:{}",onclick="$('#logout').submit()") Log out
 					div.clearfix
+		nav#chatbar
+			svg(style="width:100%;height:100%;position:absolute")
+				line#line1(x1="0",y1="0",x2="0",y2="50%",style="stroke:rgba(255,255,255,0.7);stroke-width:8")
+				line#line2(x1="0",y1="100%",x2="0",y2="50%",style="stroke:rgba(255,255,255,0.7);stroke-width:8")
+			div(style="height:10%;position:relative;overflow:hidden")
+				svg(style="width:100%;height:100%;position:absolute")
+					line.line3(x1="50%",y1="100%",x2="95%",y2="100%",style="stroke:rgba(255,255,255,0.7);stroke-width:8")
+					line.line4(x1="50%",y1="100%",x2="5%",y2="100%",style="stroke:rgba(255,255,255,0.7);stroke-width:8")
+				h2(style="margin-left:20px;") Chat
 		div#containerMAIN
 			div.container
 				div.row
 					div#content.col-lg-10
 						// content goes here
-					// chatbox
-					div.col-lg-2.padding-vert.hidden-xs.hidden-sm.hidden-md
-						ul.no-bullets.side-menu
-							li.chat-row
-								ul.no-bullets
-									li.metro.half
-										img.tile-pic(src='http://localhost:8080/images/jv.jpg')
-									li.metro.half
-										img.tile-pic(src='http://localhost:8080/images/cla.jpg')
-							li.chat-row
-								ul.no-bullets
-									li.metro.half
-										img.tile-pic(src='http://localhost:8080/images/cla.jpg')
-									li.metro.half
-										img.tile-pic(src='http://localhost:8080/images/jv.jpg')
-							li.chat-row
-								ul.no-bullets
-									li.metro.half
-										img.tile-pic(src='http://localhost:8080/images/cla.jpg')
-									li.metro.half
-										img.tile-pic(src='http://localhost:8080/images/jv.jpg')
-							li.chat-row
-								ul.no-bullets
-									li.metro.half
-										img.tile-pic(src='http://localhost:8080/images/cla.jpg')
-									li.metro.half
-										img.tile-pic(src='http://localhost:8080/images/jv.jpg')
-							li.chat-row
-								ul.no-bullets
-									li.metro.half
-										img.tile-pic(src='http://localhost:8080/images/cla.jpg')
-									li.metro.half
-										img.tile-pic(src='http://localhost:8080/images/jv.jpg')
-							li.chat-row
-								ul.no-bullets
-									li.metro.half
-										img.tile-pic(src='http://localhost:8080/images/cla.jpg')
-									li.metro.half
-										img.tile-pic(src='http://localhost:8080/images/jv.jpg')
-							li.chat-row
-								ul.no-bullets
-									li.metro.half
-										img.tile-pic(src='http://localhost:8080/images/cla.jpg')
-									li.metro.half
-										img.tile-pic(src='http://localhost:8080/images/jv.jpg')
+		div.clearfix
 		div.load-screen
 		script(src='http://localhost:8080/javascripts/parallax.js')
 		script(src='http://localhost:8080/javascripts/chatbox.js')

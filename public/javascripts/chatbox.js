@@ -4,7 +4,7 @@ var item_height = $('ul.side-menu li a').height();
 /*
 $(document).mouseup(function (e) {
 	var container = $('ul.side-menu');
-	if ((!container.is(e.target) && container.has(e.target).length === 0) && 
+	if ((!container.is(e.target) && container.has(e.target).length === 0) &&
 		 (!($('a.menu-icon').is(e.target)) && $('a.menu-icon').has(e.target).length === 0)) {
 		container.removeClass("in");
 		$('body, ul.side-menu').removeClass("open");
@@ -12,74 +12,55 @@ $(document).mouseup(function (e) {
 		$('ul.side-menu h2').css("top", "-60px");
 	}
 });
-*/ 
- 
-$("a.menu-icon-chatbox").click(function(e) {
-	e.preventDefault();
-	if ($('ul.side-menu, body').hasClass('open')) {
-		$('ul.side-menu').removeClass('open');
-		$('body').removeClass('open');
- 
-		// Reset menu on close
-		$('ul.side-menu li').css("top", "100%");
-		$('ul.side-menu h2').css("top", "-60px");
-	}
-	else {
-		$('ul.side-menu').addClass('open');
-		$('body').addClass('open');
- 
-		$('ul.side-menu h2').css("top", 0);
-		$('ul.side-menu li').each(function() {
-				// Traditional Effect
-				if ($(this).hasClass('link')) {
-						var i = ($(this).index() - 1)
-				var fromTop = menu_head + (i * item_height);
-				var delayTime = 100 * i;
-				$(this).delay(delayTime).queue(function(){
-						$(this).css("top", fromTop);
-						$(this).dequeue();
-						});
-				}
-				// Metro Effect
-				else if ($(this).hasClass('metro')) {
-						var row_i = ($(this).parent().parent().index() - 1); // Vertical Index
-						var col_i = $(this).index(); // Horizontal Index
-						var fromTop = menu_head + (row_i * 125);
-								var fromLeft = col_i * 125;
-								var delayTime = (row_i * 200) + Math.floor((Math.random() * 200) + 1);
-					$(this).css("left", fromLeft);
-								$(this).delay(delayTime).queue(function(){
-						$(this).css("top", fromTop+125);
-						$(this).dequeue();
-						});
-				}
-		});
-	}
- 
-});
+*/
 
+//
 //scroll
 $(document).ready(function(){
 	$("ul.side-menu").niceScroll().hide();
+
+  $("body").on('click',"a.menu-icon-chatbox",function(e) {
+    e.preventDefault();
+    var line1 = Snap("#line1");
+    var line2 = Snap("#line2");
+    var line3 = Snap(".line3");
+    var line4 = Snap(".line4");
+
+    var delay = 450;
+
+    if($('#chatbar').hasClass('sidebarclosed')){
+      line1.animate({y2:"50%"},delay,mina.easein);
+      line2.animate({y2:"50%"},delay,mina.easein);
+      line3.animate({x2:"95%"},delay,mina.easein);
+      line4.animate({x2:"5%"},delay+200,mina.easein);
+    }
+    else{
+      line1.animate({y2:"0%"},delay,mina.easein);
+      line2.animate({y2:"100%"},delay,mina.easein);
+      line3.animate({x2:"50%"},delay,mina.easein);
+      line4.animate({x2:"50%"},delay+200,mina.easein);
+    }
+	  $('#chatbar').toggleClass('sidebarclosed');
+  });
 });
 
 $(function(){
 	$('a').tooltip();
 
 	$('body').tooltip({
-    delay: { show: 300, hide: 0 },
-    placement: function(tip, element) { //$this is implicit
-        var position = $(element).position();
-        if (position.left > 515) {
-            return "left";
-        }
-        if (position.left < 515) {
-            return "right";
-        }
-        if (position.top < 110){
-            return "bottom";
-        }
-        	return "top";
-    	},selector: '[rel=tooltip]:not([disabled])'
+		delay: { show: 300, hide: 0 },
+		placement: function(tip, element) { //$this is implicit
+				var position = $(element).position();
+				if (position.left > 515) {
+						return "left";
+				}
+				if (position.left < 515) {
+						return "right";
+				}
+				if (position.top < 110){
+						return "bottom";
+				}
+					return "top";
+			},selector: '[rel=tooltip]:not([disabled])'
 	});
-});
+ });
