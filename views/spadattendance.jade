@@ -46,11 +46,8 @@ div#spadcontainer.col-lg-12
 			ul.dropdown-menu(role='menu')
 				- for(var x = 0; x < (events.length); x+=1){
 					li 
-						a(href='#') #{events[x].name}
+						a.removeEventButton(href='#') #{events[x].name}
 				- }
-				li.divider
-				li
-					a(href='#') Cancel
 		button#prev-event.pull-right 
 			| Prev
 		button#next-event.pull-right 

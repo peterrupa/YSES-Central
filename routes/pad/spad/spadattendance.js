@@ -261,4 +261,56 @@ module.exports = function(app,pool,async,eventEmitter){
       res.redirect('/');
     }
   });
+
+	app.post('/spadattendance/removeevent',function(req,res){
+    var session = req.session;
+
+    if(session.userkey){
+      pool.getConnection(function(err,connection){
+				//be sure user is an SPAD member before doing stuffs!
+				var query = "SELECT department FROM `accounts` WHERE username="+connection.escape(session.userkey);
+
+				connection.query(query,function(err,department){
+					if(err) reportError(res,err);
+					else{
+						if(department[0]["department"] != "Senior Projects and Activities"){
+							res.sendStatus(403);
+						}
+						else{
+							async.parallel([
+								function(callback){
+									//remove from events table
+									var query = "DELETE FROM `pad_jpadsters_event` WHERE event="+connection.escape(req.body["name"]);
+
+									connection.query(query,function(err){
+										if(err) callback(err);
+										else callback();
+									});
+								},
+								function(callback){
+									var query = "DELETE FROM `pad_jpadsters_attendance` WHERE event="+connection.escape(req.body["name"]);
+
+									connection.query(query,function(err){
+										if(err) callback(err);
+										else callback();
+									});
+								}
+							],
+							function(err){
+								if(err) reportError(res,err);
+								else{
+									eventEmitter.emit('spadattendanceedit');
+									res.sendStatus(200)
+								}
+							});
+						}
+					}
+				});
+				connection.release();
+			});
+    }
+    else{
+      res.redirect('/');
+    }
+  });
 }

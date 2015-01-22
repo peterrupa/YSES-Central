@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  //add event
   $('body').off('click','#postAddEvent');
   $('body').on('click','#postAddEvent',function(){
     //set button to loading
@@ -41,6 +42,7 @@ $(document).ready(function(){
     });
   });
 
+  //edit event
   $('body').off('click','.edit');
   $('body').on('click','.edit',function(){
 
@@ -109,6 +111,22 @@ $(document).ready(function(){
       }
     });
 
+ });
+
+ //remove event
+ $('body').off('click','.removeEventButton');
+ $('body').on('click','.removeEventButton',function(e){
+   e.preventDefault();
+
+   //send data to server
+   $.ajax({
+     url: "http://localhost:8080/spadattendance/removeevent",
+     data: {name:$(this).text()},
+     type: "POST",
+     error: function (e){
+       console.dir(e);
+     }
+   });
  });
 
   socket.off('spadattendanceedit');
