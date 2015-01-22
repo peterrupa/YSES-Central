@@ -27,7 +27,7 @@ $(document).ready(function(){
 
     //send data to server
     $.ajax({
-      url: "http://localhost:8080/spadattendance/newevent",
+      url: "http://localhost:8080/secattendance/newevent",
       data: JSON.stringify(send),
       contentType: "application/json",
       type: "POST",
@@ -76,8 +76,8 @@ $(document).ready(function(){
 
     var send = [];
 
-    $(".jpadrow").each(function(){
-      var jpadster = {
+    $(".yserrow").each(function(){
+      var yser = {
         name: $(this).data('name'),
         events: []
       };
@@ -94,15 +94,15 @@ $(document).ready(function(){
           temp["value"] = false;
         }
 
-        jpadster["events"].push(temp);
+        yser["events"].push(temp);
       });
 
-      send.push(jpadster);
+      send.push(yser);
     });
 
     //send data to server
     $.ajax({
-      url: "http://localhost:8080/spadattendance/updateattendance",
+      url: "http://localhost:8080/secattendance/updateattendance",
       data: JSON.stringify({data:send}),
       contentType: "application/json",
       type: "POST",
@@ -120,7 +120,7 @@ $(document).ready(function(){
 
    //send data to server
    $.ajax({
-     url: "http://localhost:8080/spadattendance/removeevent",
+     url: "http://localhost:8080/secattendance/removeevent",
      data: {name:$(this).text()},
      type: "POST",
      error: function (e){
@@ -129,11 +129,11 @@ $(document).ready(function(){
    });
  });
 
-  socket.off('spadattendanceedit');
-  socket.on('spadattendanceedit',function(){
+  socket.off('secattendanceedit');
+  socket.on('secattendanceedit',function(){
     //request to server for data update
     $.ajax({
-      url: "http://localhost:8080/spadattendance/content",
+      url: "http://localhost:8080/secattendance/content",
       type: "GET",
       success: function(res){
         $("#content").html(res);

@@ -44,6 +44,10 @@ module.exports = function(http,sessionMiddleware,eventEmitter) {
     io.to('/padattendance').emit("spadattendanceedit");
   });
 
+  eventEmitter.on('secattendanceedit',function(){
+    io.to('/attendance').emit("secattendanceedit");
+  });
+
   io.on("connection",function(socket){
     var currentURL;
 

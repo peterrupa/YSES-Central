@@ -3,7 +3,7 @@ div.title-header.profile-header
 	h2 YSERs Attendance
 div#seccontainer
 	div#event-buttons
-		button#add-event.pull-left(href="http://localhost:8080/#",data-toggle="modal",data-target="#addEventModal",data-placement="left") 
+		button#add-event.pull-left(data-toggle="modal",data-target="#addEventModal",data-placement="left") 
 			| Add Event
 		div#addEventModal.modal.fade.text-left
 			div.modal-dialog
@@ -16,17 +16,17 @@ div#seccontainer
 					div.modal-body
 						div.header-input-group
 							h5 Event Title
-							input.form-control.input-header(type="text")
+							input#title.form-control.input-header(type="text")
 						div.header-input-group
 							h5 Event Date
-							input.form-control.input-header(type="date")
+							input#date.form-control.input-header(type="date")
 						div.table-content
 							table.table
 								tr
 									td YSER
 									td.text-center Did Attend
 									- for(var a = 0; a < attendance.length; a+=1){
-										tr
+										tr(data-name="#{attendance[a].name}")
 											td 
 												div.jpad
 													img.yser-image(src="http://localhost:8080/#{attendance[a].picture}")
@@ -35,8 +35,8 @@ div#seccontainer
 												input(type="checkbox")
 									- }
 					div.modal-footer
-						input#postAddEvent.btn.btn-primary.pull-right(type="button",value="Add Event")
-		button#edit-event.edit.pull-left 
+						input#postAddEvent.btn.btn-primary.pull-right(type="button",value="Add Event",data-loading="Loading")
+		button#edit-event.btn.btn-primary.edit.pull-left(data-loading="Loading")
 			| Edit Event
 		//button#remove-event.pull-left Remove Event
 		div.btn-group
@@ -46,14 +46,11 @@ div#seccontainer
 			ul.dropdown-menu(role='menu')
 				- for(var x = 0; x < (events.length); x+=1){
 					li 
-						a(href='#') #{events[x].name}
+						a.removeEventButton(href='#') #{events[x].name}
 				- }
-				li.divider
-				li
-					a(href='#') Cancel
 	div#guide
 		div.header
-			h3 Guide for debugging
+			h3 Table
 		div.guide-content
 			table.table.table-hover
 				tr
@@ -66,18 +63,18 @@ div#seccontainer
 								span.date #{events[x-1].date}
 					- }
 					- for(var a = 0; a < attendance.length; a+=1){
-						tr
+						tr.yserrow(data-name="#{attendance[a]['name']}")
 							td 
 								div.jpad
 									img.yser-image(src="http://localhost:8080/#{attendance[a].picture}")
 									span.yser-name #{attendance[a].name}
 							- for(var b = 0; b < events.length; b+=1){
 								- if( attendance[a].eventsAttended.indexOf(events[b].name) != -1){
-									td.attendance-result.text-center
+									td.attendance-result.text-center(data-event="#{events[b]['name']}")
 										span.glyphicon.glyphicon-ok
 								- }
 								- else{
-									td.attendance-result.text-center
+									td.attendance-result.text-center(data-event="#{events[b]['name']}")
 										span.glyphicon.glyphicon-remove
 								- }
 							- }
@@ -92,59 +89,4 @@ div#seccontainer
 					p= "Events present: "+member["eventsAttended"].length
 					p= "Events absent: "+(events.length-member["eventsAttended"].length)
 					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
-
-script.
-	$(document).ready(function(){
-
-		$('body').off('click','.edit');
-		$('body').on('click','.edit',function(){
-
-			var temphtml = '';
-
-			$('.attendance-result').each(function(){
-
-				if( $(this).children().hasClass('glyphicon-ok') ){
-					temphtml = ''+
-						'<input type="checkbox" value="attended" checked="checked">';
-				}
-				else if( $(this).children().hasClass('glyphicon-remove') ){
-					temphtml = ''+
-						'<input type="checkbox" value="attended">';
-				}
-
-				$(this).html(temphtml);
-			
-			});			
-
-			$(this).html('Done with edit');
-			$(this).addClass('done');
-			$(this).removeClass('edit');
-			
-		});
-
-		$('body').off('click','.done');
-		$('body').on('click','.done',function(){
-
-			$('.attendance-result').each(function(){
-
-				var temphtml = '';
-
-				if($(this).children().is(':checked')){
-					temphtml = ''+
-						'<span class="glyphicon glyphicon-ok"></span>';
-				}
-				else{
-					temphtml = ''+
-						'<span class="glyphicon glyphicon-remove"></span>';
-				}
-
-				$(this).html(temphtml);
-			
-			});
-			
-			$(this).html('Edit Event');
-			$(this).addClass('edit');
-			$(this).removeClass('done');
-		});
-
-	});
+script(src="http://localhost:8080/javascripts/secattendance.js")

@@ -78,7 +78,7 @@ require('./routes/pad/spad/spadscores')(app,pool,async);
 require('./routes/pad/jpad/jpadscores')(app,pool,async);
 //sec
 require('./routes/sec/attendanceportal')(app,pool);
-require('./routes/sec/secattendance')(app,pool,async);
+require('./routes/sec/secattendance')(app,pool,async,eventEmitter);
 require('./routes/sec/nsecattendance')(app,pool,async);
 //scho
 require('./routes/scho/checklistportal')(app,pool);
