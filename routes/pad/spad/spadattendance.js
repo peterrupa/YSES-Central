@@ -201,4 +201,64 @@ module.exports = function(app,pool,async,eventEmitter){
       res.redirect('/');
     }
   });
+
+	app.post('/spadattendance/newevent',function(req,res){
+    var session = req.session;
+
+    if(session.userkey){
+      pool.getConnection(function(err,connection){
+				//be sure user is an SPAD member before doing stuffs!
+				var query = "SELECT department FROM `accounts` WHERE username="+connection.escape(session.userkey);
+
+				connection.query(query,function(err,department){
+					if(err) reportError(res,err);
+					else{
+						if(department[0]["department"] != "Senior Projects and Activities"){
+							res.sendStatus(403);
+						}
+						else{
+							async.parallel([
+								function(callback){
+									//insert event to events table
+									var query = "INSERT INTO `pad_jpadsters_event`(`event`, `date`) VALUES ("+connection.escape(req.body["name"])+","+connection.escape(req.body["date"])+")";
+
+									connection.query(query,function(err){
+										if(err) callback(err);
+										else callback();
+									});
+								},
+								function(callback){
+									//iterate each attendees
+									async.each(req.body["attendees"],
+									function(attendee,callback){
+										var query = "INSERT INTO `pad_jpadsters_attendance`(`username`, `event`) VALUES ((SELECT username FROM `accounts` WHERE first_name="+connection.escape(attendee)+"),"+connection.escape(req.body["name"])+")";
+
+										connection.query(query,function(err){
+											if(err) callback(err);
+											else callback();
+										});
+									},
+									function(err){
+										if(err) callback(err);
+										else callback();
+									});
+								}
+							],
+							function(err){
+								if(err) reportError(req,err);
+								else{
+									eventEmitter.emit('spadattendanceedit');
+									res.sendStatus(200);
+								}
+							});
+						}
+					}
+				});
+				connection.release();
+			});
+    }
+    else{
+      res.redirect('/');
+    }
+  });
 }

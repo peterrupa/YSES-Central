@@ -3,7 +3,7 @@ div.title-header.profile-header
 	h2 JPad Attendance
 div#spadcontainer.col-lg-12
 	div#event-buttons
-		button#add-event.pull-left(href="http://localhost:8080/#",data-toggle="modal",data-target="#addEventModal",data-placement="left") 
+		button#add-event.pull-left(data-toggle="modal",data-target="#addEventModal",data-placement="left") 
 			| Add Event
 		div#addEventModal.modal.fade.text-left
 			div.modal-dialog
@@ -16,17 +16,17 @@ div#spadcontainer.col-lg-12
 					div.modal-body
 						div.header-input-group
 							h5 Event Title
-							input.form-control.input-header(type="text")
+							input#title.form-control.input-header(type="text")
 						div.header-input-group
 							h5 Event Date
-							input.form-control.input-header(type="date")
+							input#date.form-control.input-header(type="date")
 						div.table-content
 							table.table
 								tr
 									td JPADster
 									td.text-center Did Attend
 									- for(var a = 0; a < attendance.length; a+=1){
-										tr
+										tr(data-name="#{attendance[a].name}")
 											td 
 												div.jpad
 													img.jpad-image(src="http://localhost:8080/#{attendance[a].picture}")
@@ -35,7 +35,7 @@ div#spadcontainer.col-lg-12
 												input(type="checkbox")
 									- }
 					div.modal-footer
-						input#postAddEvent.btn.btn-primary.pull-right(type="button",value="Add Event")
+						input#postAddEvent.btn.btn-primary.pull-right(type="button",value="Add Event",data-loading="Loading")
 		button#edit-event.btn.btn-primary.edit.pull-left(data-loading="Loading")
 			| Edit Event
 		//button#remove-event.pull-left Remove Event
@@ -96,96 +96,4 @@ div#spadcontainer.col-lg-12
 					p= "Events present: "+member["eventsAttended"].length
 					p= "Events absent: "+(events.length-member["eventsAttended"].length)
 					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
-script.
-	$(document).ready(function(){
-		$('body').off('click','.edit');
-		$('body').on('click','.edit',function(){
-
-			var temphtml = '';
-
-			$('.attendance-result').each(function(){
-
-				if( $(this).children().hasClass('glyphicon-ok') ){
-					temphtml = ''+
-						'<input type="checkbox" value="attended" checked="checked">';
-				}
-				else if( $(this).children().hasClass('glyphicon-remove') ){
-					temphtml = ''+
-						'<input type="checkbox" value="attended">';
-				}
-
-				$(this).html(temphtml);
-			
-			});			
-
-			$(this).html('Done with edit');
-			$(this).addClass('done');
-			$(this).removeClass('edit');
-			
-		});
-
-		$('body').off('click','.done');
-		$('body').on('click','.done',function(){
-			//set loading
-			$(this).button('loading');
-			
-			var send = [];
-
-			$(".jpadrow").each(function(){
-				var jpadster = {
-					name: $(this).data('name'),
-					events: []
-				};
-				
-				$(this).children('.attendance-result').each(function(){
-					var temp = {
-						name: $(this).data('event')
-					};
-					
-					if($(this).find('input:checked').length > 0){
-						temp["value"] = true;
-					}
-					else{
-						temp["value"] = false;
-					}
-					
-					jpadster["events"].push(temp);
-				});
-				
-				send.push(jpadster);
-			});
-			
-			console.log(send);
-			
-			//send data to server
-			$.ajax({
-				url: "http://localhost:8080/spadattendance/updateattendance",
-				data: JSON.stringify({data:send}),
-				contentType: "application/json",
-				type: "POST",
-				success: function(res){
-					
-				},
-				error: function (e){
-					console.dir(e);
-				}
-			});
-
-	 });
-	
-		socket.off('spadattendanceedit');
-		socket.on('spadattendanceedit',function(){
-			//request to server for data update
-			$.ajax({
-				url: "http://localhost:8080/spadattendance/content",
-				type: "GET",
-				success: function(res){
-					$("#content").html(res);
-				},
-				error: function (e){
-					console.dir(e);
-				}
-			});
-		});
-
-	});
+script(src="http://localhost:8080/javascripts/spadattendance.js")
