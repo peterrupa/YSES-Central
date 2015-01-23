@@ -1,4 +1,4 @@
-link(rel="stylesheet",href="http://localhost:8080/stylesheets/secattendance.css")
+link(rel="stylesheet",href="/stylesheets/secattendance.css")
 div.title-header.profile-header
 	h2 YSERs Attendance
 div#seccontainer
@@ -29,7 +29,7 @@ div#seccontainer
 										tr(data-name="#{attendance[a].name}")
 											td 
 												div.jpad
-													img.yser-image(src="http://localhost:8080/#{attendance[a].picture}")
+													img.yser-image(src="/#{attendance[a].picture}")
 													span.yser-name #{attendance[a].name}
 											td.text-center
 												input(type="checkbox")
@@ -66,7 +66,7 @@ div#seccontainer
 						tr.yserrow(data-name="#{attendance[a]['name']}")
 							td 
 								div.jpad
-									img.yser-image(src="http://localhost:8080/#{attendance[a].picture}")
+									img.yser-image(src="/#{attendance[a].picture}")
 									span.yser-name #{attendance[a].name}
 							- for(var b = 0; b < events.length; b+=1){
 								- if( attendance[a].eventsAttended.indexOf(events[b].name) != -1){
@@ -89,4 +89,4 @@ div#seccontainer
 					p= "Events present: "+member["eventsAttended"].length
 					p= "Events absent: "+(events.length-member["eventsAttended"].length)
 					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
-script(src="http://localhost:8080/javascripts/secattendance.js")
+script(src="/javascripts/secattendance.js")

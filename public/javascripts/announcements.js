@@ -9,7 +9,7 @@ $(document).ready(function(){
 	//fetch announcements function
 	function fetchAnnouncements(index){
 		$.ajax({
-			url: "http://localhost:8080/getAnnouncements",
+			url: "/getAnnouncements",
 			data: "count="+index,
 			type: "GET",
 			success: function(res){

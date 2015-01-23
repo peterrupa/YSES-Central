@@ -1,4 +1,4 @@
-link(rel="stylesheet",href="http://localhost:8080/stylesheets/padscore.css")
+link(rel="stylesheet",href="/stylesheets/padscore.css")
 div.title-header.profile-header
 	h2 JPad Score
 div#spadcontainer.col-lg-12
@@ -21,7 +21,7 @@ div#spadcontainer.col-lg-12
 				each member in scores
 					tr.name-header
 						td
-							img.jpad-image(src="http://localhost:8080/"+member["picture"])
+							img.jpad-image(src="/"+member["picture"])
 							span.jpad-name= member["name"]
 						td.text-right(style="font-size:9px;",colspan=2) CLICK ME
 					tr.score-list.text-center.hidden

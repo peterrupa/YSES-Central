@@ -10,7 +10,7 @@ $(document).ready(function(){
 	//fetch announcements function
 	function fetchAnnouncements(index){
 		$.ajax({
-			url: "http://localhost:8080/getAnnouncements",
+			url: "/getAnnouncements",
 			data: "count="+index,
 			type: "GET",
 			success: function(res){
@@ -109,7 +109,7 @@ $(document).ready(function(){
   $("#submit").on('click',function(){
     //insert validation here
     $.ajax({
-			url: "http://localhost:8080/postAnnouncements",
+			url: "/postAnnouncements",
 			data: {title:$("#title").val(),message:$("#message").val()},
 			type: "POST",
 			success: function(res){

@@ -125,7 +125,7 @@ $(document).ready(function(){
 
 	function doOption(sort,batch,org_class,callback){
 		$.ajax({
-			url: "http://localhost:8080/getYSERs",
+			url: "/getYSERs",
 			data: "data="+JSON.stringify({sort:sort,batch:batch,org_class:org_class}),
 			type: "GET",
 			success: function (res) {
@@ -139,9 +139,9 @@ $(document).ready(function(){
 					for(var j = 0; j < res[i]["data"].length; j++){
 						var memberHTML = ''+
 						'<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">'+
-							'<a class="ajax" href="http://localhost:8080/profile/'+res[i]["data"][j]["username"]+'">'+
+							'<a class="ajax" href="/profile/'+res[i]["data"][j]["username"]+'">'+
 								'<div class="pic">'+
-									'<img class="img-responsive" src="http://localhost:8080/'+res[i]["data"][j]["picture"]+'">'+
+									'<img class="img-responsive" src="/'+res[i]["data"][j]["picture"]+'">'+
 									'<div class="btm-label">'+
 										'<div class="btm-label-gradient"></div>'+
 										'<div class="btm-label-text">'+
@@ -188,7 +188,7 @@ $(document).ready(function(){
 
 	//fetch batch list
 	$.ajax({
-		url: "http://localhost:8080/getBatch",
+		url: "/getBatch",
 		type: "GET",
 		success: function (res) {
 			//console.log(res);

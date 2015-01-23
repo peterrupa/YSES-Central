@@ -153,7 +153,7 @@ $(document).ready(function(){
 		var availableTags = (function(){
 			return $.ajax({
 				async: false,
-				url: "http://localhost:8080/search",
+				url: "/search",
 				data: "",
 				type: "GET",
 				success: function (res) {
@@ -171,7 +171,7 @@ $(document).ready(function(){
 		$('.accountsAutocomplete').each(function() {
 			$(this).autocomplete( "instance" )._renderItem = function (ul, item) {
 				return $( "<li>" )
-				.append( "<a>" + "<img src='http://localhost:8080/" + item.picture +"' style='width:25px;margin-right:15px;'>" + item.value + "</a>" )
+				.append( "<a>" + "<img src='/" + item.picture +"' style='width:25px;margin-right:15px;'>" + item.value + "</a>" )
 				.appendTo( ul );
 			};
 		});

@@ -10,18 +10,16 @@ html
 		link(rel='stylesheet', href='/stylesheets/search-bar.css')
 		link(rel="stylesheet",href="/stylesheets/profile-page.css")
 		link(rel="stylesheet",href="/stylesheets/title-hover.css")
-		script(src='http://localhost:8080/javascripts/jquery-2.1.1.min.js')
-		script(src='http://localhost:8080/javascripts/onload.js')
-		script(src='http://localhost:8080/javascripts/jquery-ui.min.js')
-		script(src='http://localhost:8080/javascripts/jquery.mousewheel.min.js')
-		script(src='http://localhost:8080/javascripts/jquery.simplr.smoothscroll.min.js')
-		script(src='http://localhost:8080/javascripts/bootstrap.min.js')
-		script(src='http://localhost:8080/javascripts/jquery.nicescroll.js')
-		script(src='http://localhost:8080/javascripts/content-request.js')
+		script(src='/javascripts/jquery-2.1.1.min.js')
+		script(src='/javascripts/onload.js')
+		script(src='/javascripts/jquery-ui.min.js')
+		script(src='/javascripts/jquery.mousewheel.min.js')
+		script(src='/javascripts/bootstrap.min.js')
+		script(src='/javascripts/content-request.js')
 		script(src="/socket.io/socket.io.js")
-		script(src="http://localhost:8080/javascripts/socketlistener.js")
-		script(src='http://localhost:8080/javascripts/cleanHTML.js')
-		script(src='http://localhost:8080/javascripts/snap.svg-min.js')
+		script(src="/javascripts/socketlistener.js")
+		script(src='/javascripts/cleanHTML.js')
+		script(src='/javascripts/snap.svg-min.js')
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
 	body(data-type="background",data-speed="2")
 		div#header.padding-vert
@@ -34,8 +32,8 @@ html
 							span.icon-bar
 							span.icon-bar
 						div#central-title
-							a.ajax.navbar-brand(href="http://localhost:8080",data-target="tooltip",data-placement="bottom",title="Back to home")
-								img#logo.img-responsive(src="http://localhost:8080/images/logoAllWhite.png")
+							a.ajax.navbar-brand(href="/",data-target="tooltip",data-placement="bottom",title="Back to home")
+								img#logo.img-responsive(src="/images/logoAllWhite.png")
 								h2(style="position:relative;margin:0px;top:-7px;") YSES Central
 						div#search-bar.right-inner-addon.hidden-xs.hidden-sm.hidden-md
 							// label(for="tags")
@@ -45,21 +43,21 @@ html
 							div#navigation-buttons
 								button.btn-name.dropdown-toggle(type="button",data-toggle="dropdown")
 									h3#name #{name}
-										img(src='http://localhost:8080/#{picture}',style='width:40px;margin-left:15px;')
+										img(src='/#{picture}',style='width:40px;margin-left:15px;')
 								ul.dropdown-menu.metro-dropdown(role="menu")
 									li
-										a.ajax.bold(href="http://localhost:8080/profile/#{username}") View Profile
+										a.ajax.bold(href="/profile/#{username}") View Profile
 									li
-										a.ajax.bold(href="http://localhost:8080/YSERs") View YSERs
+										a.ajax.bold(href="/YSERs") View YSERs
 									li
-										a.ajax.bold(href="http://localhost:8080/3") Something else here
+										a.ajax.bold(href="/3") Something else here
 									li.divider
 									li
-										form#logout(action="http://localhost:8080/logout",method="post")
+										form#logout(action="/logout",method="post")
 										a(href="javascript:{}",onclick="$('#logout').submit()") Log out
 								div#nav-button-group.text-center
 									div#logbook-icon.hidden-sm.hidden-md
-										a(href="http://localhost:8080/#",data-toggle="modal",data-target="#logbookModal,tooltip",data-placement="left",title="Write In Logbook")
+										a(href="/#",data-toggle="modal",data-target="#logbookModal,tooltip",data-placement="left",title="Write In Logbook")
 											span.glyphicon.glyphicon-pencil
 										div#logbookModal.modal.fade
 											div.modal-dialog
@@ -75,51 +73,51 @@ html
 														span#counter
 														input#postLogbook.btn.btn-default(type="button",value="Post")
 									div#chatbox-icon.hidden-sm.hidden-md
-										a.menu-icon-chatbox(href="http://localhost:8080/#",data-target="tooltip",data-placement="left",title="Open Chatbox")
+										a.menu-icon-chatbox(href="/#",data-target="tooltip",data-placement="left",title="Open Chatbox")
 											span.glyphicon.glyphicon-send
 									div#department-icon.hidden-sm.hidden-md
-										a.menu-icon-department(href="http://localhost:8080/#",data-target="tooltip",data-placement="left",title="Access Department Systems")
+										a.menu-icon-department(href="/#",data-target="tooltip",data-placement="left",title="Access Department Systems")
 											span.glyphicon.glyphicon-list
 										div#department-button-container
 											div.wrapper.clearfix
 												figure.gallery-item
-													img.department-logo(src="http://localhost:8080/images/button/exec.png")
-													a(href="http://localhost:8080/#")
+													img.department-logo(src="/images/button/exec.png")
+													a(href="/#")
 														figcaption.img-title.exec-title
 															h3 EXEC
 													ul.wheel.text-center
 														li.item.exec-title
-															a.ajax(href="http://localhost:8080/announcementposter")
+															a.ajax(href="/announcementposter")
 																h5 Announcement
 														li.item.exec-title
-															a.ajax(href="http://localhost:8080/accountvalidator")
+															a.ajax(href="/accountvalidator")
 																h5 Validate
 											div.wrapper.clearfix
 												figure.gallery-item
-													img.department-logo(src="http://localhost:8080/images/button/pad.png")
+													img.department-logo(src="/images/button/pad.png")
 													a(href="#")
 														figcaption.img-title.pad-title
 															h3 PAD
 													ul.wheel.text-center
 														li.item.pad-title
-															a.ajax(href="http://localhost:8080/padattendance")
+															a.ajax(href="/padattendance")
 																h5(style="font-size:9.8px;") JPAD Attendance
 														li.item.pad-title
-															a.ajax(href="http://localhost:8080/padscores")
+															a.ajax(href="/padscores")
 																h5 JPAD Scores
 											div.wrapper.clearfix
 												figure.gallery-item
-													img.department-logo(src="http://localhost:8080/images/button/sec.png")
+													img.department-logo(src="/images/button/sec.png")
 													a(href="#")
 														figcaption.img-title.sec-title
 															h3 SEC
 													ul.wheel.text-center
 														li.item.sec-title
-															a.ajax(href="http://localhost:8080/attendance")
+															a.ajax(href="/attendance")
 																h5 Attendance
 											div.wrapper.clearfix
 												figure.gallery-item
-													img.department-logo(src="http://localhost:8080/images/button/vl.png")
+													img.department-logo(src="/images/button/vl.png")
 													a(href="#")
 														figcaption.img-title.vl-title
 															h3 VL
@@ -129,17 +127,17 @@ html
 																h5 VL Inventory
 											div.wrapper.clearfix
 												figure.gallery-item
-													img.department-logo(src="http://localhost:8080/images/button/SCHO.png")
+													img.department-logo(src="/images/button/SCHO.png")
 													a(href="#")
 														figcaption.img-title.scho-title
 															h3 SCHO
 													ul.wheel.text-center
 														li.item.scho-title
-															a.ajax(href="http://localhost:8080/checklist")
+															a.ajax(href="/checklist")
 																h5 Checklist
 											div.wrapper.clearfix
 												figure.gallery-item
-													img.department-logo(src="http://localhost:8080/images/button/hr.png")
+													img.department-logo(src="/images/button/hr.png")
 													a(href="#")
 														figcaption.img-title.hr-title
 															h3 HR
@@ -149,7 +147,7 @@ html
 																h5 Family Tree
 											div.wrapper.clearfix
 												figure.gallery-item
-													img.department-logo(src="http://localhost:8080/images/button/fin.png")
+													img.department-logo(src="/images/button/fin.png")
 													a(href="#")
 														figcaption.img-title.fin-title
 															h3 FIN
@@ -161,13 +159,13 @@ html
 					div#navbar.collapse
 						ul.nav.navbar-nav.navbar-collapse.hidden-lg
 							li.navbutton
-								a.ajax.bold(href="http://localhost:8080/profile/#{username}") View Profile
+								a.ajax.bold(href="/profile/#{username}") View Profile
 							li.navbutton
-								a.ajax.bold(href="http://localhost:8080/YSERs") View YSERs
+								a.ajax.bold(href="/YSERs") View YSERs
 							li.navbutton
-								a.ajax.bold(href="http://localhost:8080/3") Something else here
+								a.ajax.bold(href="/3") Something else here
 							li.navbutton
-								form#logout(action="http://localhost:8080/logout",method="post")
+								form#logout(action="/logout",method="post")
 								a(href="javascript:{}",onclick="$('#logout').submit()") Log out
 					div.clearfix
 		nav#chatbar.hidden-xm.hidden-sm.hidden-md
@@ -191,6 +189,7 @@ html
 						i.searchbaricon.glyphicon.glyphicon-search
 					foreignObject(width="80%",height="100%",x="10%")
 						input.searchbar(type="text",style="width:100%;height:100%;background:none;border:0;",placeholder="Search")
+			div#chatcontainer
 						
 		div#containerMAIN
 			div.container
@@ -199,12 +198,12 @@ html
 						// content goes here
 		div.clearfix
 		div.load-screen
-		script(src='http://localhost:8080/javascripts/parallax.js')
-		script(src='http://localhost:8080/javascripts/chatbox.js')
-		script(src='http://localhost:8080/javascripts/department.js')
-		script(src='http://localhost:8080/javascripts/postLogbook.js')
-		script(src='http://localhost:8080/javascripts/autocomplete.js')
-		script(src='http://localhost:8080/javascripts/bootstrap-tooltip.js')
+		script(src='/javascripts/parallax.js')
+		script(src='/javascripts/chatbox.js')
+		script(src='/javascripts/department.js')
+		script(src='/javascripts/postLogbook.js')
+		script(src='/javascripts/autocomplete.js')
+		script(src='/javascripts/bootstrap-tooltip.js')
 
 		script.
 			

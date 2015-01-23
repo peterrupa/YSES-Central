@@ -233,7 +233,7 @@ ul.ui-autocomplete {
 	background-color: #f00;
 }
 
-.red-tooltip + .tooltip > .tooltip-arrow { 
+.red-tooltip + .tooltip > .tooltip-arrow {
 	border-bottom-color:#f00;
 }
 

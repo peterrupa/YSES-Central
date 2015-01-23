@@ -17,7 +17,7 @@ $(document).mouseup(function (e) {
 //
 //scroll
 $(document).ready(function(){
-	$("ul.side-menu").niceScroll().hide();
+	//$("ul.side-menu").niceScroll().hide();
 
 	//chat bar toggle
   $("body").on('click',"a.menu-icon-chatbox",function(e) {

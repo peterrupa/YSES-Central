@@ -21,8 +21,9 @@ module.exports = function(app,pool,request){
 			serveMain(req,res);
 		}
 		else{
+			var url = req.protocol + '://' + req.get('host') + req.originalUrl.substring(1);
 			//get list of batches for signup
-			request('http://localhost:8080/getBatch',function(error,response,body){
+			request(url + '/getBatch',function(error,response,body){
 				if (!error && response.statusCode == 200) {
 			    res.render('index',{batch:body});
 			  }

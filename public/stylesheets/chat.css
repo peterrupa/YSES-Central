@@ -2,7 +2,7 @@
 	position:fixed;
 	margin-top:60px;
 	width:275px;
-	height:100%;
+	height:calc(100vh - 60px);
 	right:0;
 	background-color:rgba(0,0,0,0.2);
 	-webkit-transition:all 0.75s ease;
@@ -29,20 +29,25 @@
 }
 
 .searchbar:focus	{
-    outline: none;
+	outline: none;
 }
 
 .searchbar::-webkit-input-placeholder { /* WebKit browsers */
-    color:    #CFCFCF;
+	color:    #CFCFCF;
 }
 .searchbar:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #CFCFCF;
-   opacity:  1;
+  color:    #CFCFCF;
+	opacity:  1;
 }
 .searchbar::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #CFCFCF;
-   opacity:  1;
+	color:    #CFCFCF;
+	opacity:  1;
 }
 .searchbar:-ms-input-placeholder { /* Internet Explorer 10+ */
-   color:    #CFCFCF;
+	color:    #CFCFCF;
+}
+
+#chatcontainer	{
+	height:calc(100vh - 160px);
+	overflow-y: auto;
 }

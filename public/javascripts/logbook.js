@@ -6,7 +6,7 @@ $(document).ready(function(){
 	//fetch logbook function
 	function fetchLogbook(index){
 		$.ajax({
-			url: "http://localhost:8080/getLogbook",
+			url: "/getLogbook",
 			data: "count="+index,
 			type: "GET",
 			success: function(res){
@@ -40,8 +40,8 @@ $(document).ready(function(){
                 '<div class="post post-'+postClass+'">'+
                   '<button class="close hoverClose" type="button" aria-hidden="true">&times;</button>'+
                   '<div class="row">'+
-                    '<a href="http://localhost:8080/profile/'+res[i]["username"]+'"><img class="mini-pic" src="'+res[i]["picture"]+'"></a>'+
-                    '<h3 class="title"><a href="http://localhost:8080/profile/'+res[i]["username"]+'">'+res[i]["first_name"]+'</a></h3>'+
+                    '<a href="/profile/'+res[i]["username"]+'"><img class="mini-pic" src="'+res[i]["picture"]+'"></a>'+
+                    '<h3 class="title"><a href="/profile/'+res[i]["username"]+'">'+res[i]["first_name"]+'</a></h3>'+
                     '<p class="date">'+res[i]["date"]+'</p>'+
                   '</div>'+
                   '<div class"row">'+
@@ -137,8 +137,8 @@ $(document).ready(function(){
         '<div style="display:none;" class="newPost post post-'+postClass+'">'+
           '<button class="close hoverClose" type="button" aria-hidden="true">&times;</button>'+
           '<div class="row">'+
-            '<a href="http://localhost:8080/profile/'+post["username"]+'"><img class="mini-pic" src="'+post["picture"]+'"></a>'+
-            '<h3 class="title"><a href="http://localhost:8080/profile/'+post["username"]+'">'+post["first_name"]+'</a></h3>'+
+            '<a href="/profile/'+post["username"]+'"><img class="mini-pic" src="'+post["picture"]+'"></a>'+
+            '<h3 class="title"><a href="/profile/'+post["username"]+'">'+post["first_name"]+'</a></h3>'+
             '<p class="date">'+post["date"]+'</p>'+
           '</div>'+
           '<div class"row">'+

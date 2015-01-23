@@ -1,4 +1,4 @@
-link(rel="stylesheet",href="http://localhost:8080/stylesheets/padattendance.css")
+link(rel="stylesheet",href="/stylesheets/padattendance.css")
 div.title-header.profile-header
 	h2 JPad Attendance
 div#spadcontainer.col-lg-12
@@ -29,7 +29,7 @@ div#spadcontainer.col-lg-12
 										tr(data-name="#{attendance[a].name}")
 											td 
 												div.jpad
-													img.jpad-image(src="http://localhost:8080/#{attendance[a].picture}")
+													img.jpad-image(src="/#{attendance[a].picture}")
 													span.jpad-name #{attendance[a].name}
 											td.text-center
 												input(type="checkbox")
@@ -70,7 +70,7 @@ div#spadcontainer.col-lg-12
 						tr.jpadrow(data-name="#{attendance[a]['name']}")
 							td 
 								div.jpad
-									img.jpad-image(src="http://localhost:8080/#{attendance[a].picture}")
+									img.jpad-image(src="/#{attendance[a].picture}")
 									span.jpad-name #{attendance[a].name}
 							- for(var b = 0; b < events.length; b+=1){
 								- if(attendance[a].eventsAttended.indexOf(events[b].name) != -1){
@@ -93,4 +93,4 @@ div#spadcontainer.col-lg-12
 					p= "Events present: "+member["eventsAttended"].length
 					p= "Events absent: "+(events.length-member["eventsAttended"].length)
 					p= "Percentage: "+(member["eventsAttended"].length/events.length*100).toFixed(2)+"%"
-script(src="http://localhost:8080/javascripts/spadattendance.js")
+script(src="/javascripts/spadattendance.js")

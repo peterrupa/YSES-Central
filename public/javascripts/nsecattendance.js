@@ -3,7 +3,7 @@ $(document).ready(function(){
   socket.on('secattendanceedit',function(){
     //request to server for data update
     $.ajax({
-      url: "http://localhost:8080/nsecattendance/content",
+      url: "/nsecattendance/content",
       type: "GET",
       success: function(res){
         $("#content").html(res);

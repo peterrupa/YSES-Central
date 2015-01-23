@@ -27,7 +27,7 @@ $(document).ready(function(){
   $("body").on("click","#postLogbook",function(){
     var button = $(this);
     	$.ajax({
-  			url: "http://localhost:8080/postLogbook",
+  			url: "/postLogbook",
         data: {message:$("#logbook-input").val()},
   			type: "POST",
   			success: function(res){

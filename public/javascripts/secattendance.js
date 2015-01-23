@@ -27,7 +27,7 @@ $(document).ready(function(){
 
     //send data to server
     $.ajax({
-      url: "http://localhost:8080/secattendance/newevent",
+      url: "/secattendance/newevent",
       data: JSON.stringify(send),
       contentType: "application/json",
       type: "POST",
@@ -102,7 +102,7 @@ $(document).ready(function(){
 
     //send data to server
     $.ajax({
-      url: "http://localhost:8080/secattendance/updateattendance",
+      url: "/secattendance/updateattendance",
       data: JSON.stringify({data:send}),
       contentType: "application/json",
       type: "POST",
@@ -120,7 +120,7 @@ $(document).ready(function(){
 
    //send data to server
    $.ajax({
-     url: "http://localhost:8080/secattendance/removeevent",
+     url: "/secattendance/removeevent",
      data: {name:$(this).text()},
      type: "POST",
      error: function (e){
@@ -133,7 +133,7 @@ $(document).ready(function(){
   socket.on('secattendanceedit',function(){
     //request to server for data update
     $.ajax({
-      url: "http://localhost:8080/secattendance/content",
+      url: "/secattendance/content",
       type: "GET",
       success: function(res){
         $("#content").html(res);

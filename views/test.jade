@@ -10,13 +10,13 @@ html
 		link(rel='stylesheet', href='/stylesheets/search-bar.css')
 		link(rel="stylesheet",href="/stylesheets/profile-page.css")
 		link(rel="stylesheet",href="/stylesheets/title-hover.css")
-		script(src='http://localhost:8080/javascripts/jquery-2.1.1.min.js')
-		script(src='http://localhost:8080/javascripts/onload.js')
-		script(src='http://localhost:8080/javascripts/jquery-ui.min.js')
-		script(src='http://localhost:8080/javascripts/jquery.mousewheel.min.js')
-		script(src='http://localhost:8080/javascripts/jquery.simplr.smoothscroll.min.js')
-		script(src='http://localhost:8080/javascripts/bootstrap.min.js')
-		script(src='http://localhost:8080/javascripts/jquery.nicescroll.js')
+		script(src='/javascripts/jquery-2.1.1.min.js')
+		script(src='/javascripts/onload.js')
+		script(src='/javascripts/jquery-ui.min.js')
+		script(src='/javascripts/jquery.mousewheel.min.js')
+		script(src='/javascripts/jquery.simplr.smoothscroll.min.js')
+		script(src='/javascripts/bootstrap.min.js')
+		script(src='/javascripts/jquery.nicescroll.js')
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
 	body(data-type="background",data-speed="2")
 		div#header.padding-vert
@@ -75,7 +75,7 @@ html
 											figcaption.img-title.fin-title
 												h3 FIN
 						div#central-title
-							a.ajax.navbar-brand(href="http://localhost:8080")
+							a.ajax.navbar-brand(href="/")
 								img#logo.img-responsive(src="../images/logoAllWhite.png")
 								h2(style="position:relative;margin:0px;top:-7px;") YSES Central
 						div#search-bar.right-inner-addon.hidden-xs.hidden-sm.hidden-md
@@ -89,14 +89,14 @@ html
 										img(src='#{picture}',style='width:40px;margin-left:15px;')
 								ul.dropdown-menu.metro-dropdown(role="menu")
 									li
-										a.ajax.bold(href="http://localhost:8080/profile/#{name}") View Profile
+										a.ajax.bold(href="/profile/#{name}") View Profile
 									li
-										a.ajax.bold(href="http://localhost:8080/YSERs") View YSERs
+										a.ajax.bold(href="/YSERs") View YSERs
 									li
-										a.ajax.bold(href="http://localhost:8080/3") Something else here
+										a.ajax.bold(href="/3") Something else here
 									li.divider
 									li
-										form#logout(action="http://localhost:8080/logout",method="post")
+										form#logout(action="/logout",method="post")
 										a(href="javascript:{}",onclick="$('#logout').submit()") Log out
 								div#chatbox-icon.hidden-sm.hidden-md
 									a.menu-icon-chatbox(href="#")
@@ -105,13 +105,13 @@ html
 					div#navbar.collapse
 						ul.nav.navbar-nav.navbar-collapse.hidden-lg
 							li.navbutton
-								a.ajax.bold(href="http://localhost:8080/profile/#{name}") View Profile
+								a.ajax.bold(href="/profile/#{name}") View Profile
 							li.navbutton
-								a.ajax.bold(href="http://localhost:8080/YSERs") View YSERs
+								a.ajax.bold(href="/YSERs") View YSERs
 							li.navbutton
-								a.ajax.bold(href="http://localhost:8080/3") Something else here
+								a.ajax.bold(href="/3") Something else here
 							li.navbutton
-								form#logout(action="http://localhost:8080/logout",method="post")
+								form#logout(action="/logout",method="post")
 								a(href="javascript:{}",onclick="$('#logout').submit()") Log out
 					div.clearfix
 		div#containerMAIN
@@ -166,9 +166,9 @@ html
 										img.tile-pic(src='images/jv.jpg')
 		
 		
-		script(src='http://localhost:8080/javascripts/content-request.js')
-		script(src='http://localhost:8080/javascripts/parallax.js')
-		script(src='http://localhost:8080/javascripts/announcements.js')
-		script(src='http://localhost:8080/javascripts/chatbox.js')
-		script(src='http://localhost:8080/javascripts/department.js')
-		script(src='http://localhost:8080/javascripts/autocomplete.js')\
+		script(src='/javascripts/content-request.js')
+		script(src='/javascripts/parallax.js')
+		script(src='/javascripts/announcements.js')
+		script(src='/javascripts/chatbox.js')
+		script(src='/javascripts/department.js')
+		script(src='/javascripts/autocomplete.js')\

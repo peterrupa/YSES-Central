@@ -2,8 +2,11 @@ $(document).ready(function(){
 	$("body").on("click",".ajax",function(){
 		// use this for requested url: $(this).attr('href')
 		//insert ajax part here
+
+		var root = location.href.replace(location.pathname,"");
+
 		$.ajax({
-			url: $(this).attr('href')+"/content",
+			url: $(this).attr('href') == "/"?root + $(this).attr('href')+"content":$(this).attr('href')+"/content",
 			data: "",
 			type: "GET",
 			success: function (res) {
@@ -21,7 +24,7 @@ $(document).ready(function(){
 
 	window.addEventListener("popstate", function(e) {
 		$.ajax({
-			url: location.pathname=="/"?"http://localhost:8080/content":location.pathname+"/content",
+			url: location.pathname=="/"?"/content":location.pathname+"/content",
 			data: "",
 			type: "GET",
 			success: function (res) {

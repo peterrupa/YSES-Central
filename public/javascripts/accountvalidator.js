@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 		$.ajax({
-			url: "http://localhost:8080/getPendingAccounts",
+			url: "/getPendingAccounts",
 			type: "GET",
 			success: function(res){
 						for(var i = 0; i < res.length; i++){
@@ -101,7 +101,7 @@ $(document).ready(function(){
 									} else if(data == "picture"){
 										var temphtml = ''+
 											'<div data-'+data+'="'+res[i]["picture"]+'" class="account-image">'+
-												'<img src="http://localhost:8080/'+res[i]["picture"]+'"/>'+
+												'<img src="/'+res[i]["picture"]+'"/>'+
 											'</div>';
 										img = img.concat(temphtml);
 									} else{
@@ -214,7 +214,7 @@ $(document).ready(function(){
 					   exec_position:validate.find('tr[data-exec_position]').children("td:nth-child(2)").html()};
 
 			  $.ajax({
-					url: "http://localhost:8080/acceptAccount",
+					url: "/acceptAccount",
 					data: JSON.stringify(data),
 					type: "POST",
 					contentType: "application/json",
@@ -238,7 +238,7 @@ $(document).ready(function(){
 			else{
 				button = $(this);
 				$.ajax({
-					url: "http://localhost:8080/rejectAccount",
+					url: "/rejectAccount",
 					data: {origusername:validate.data('username'),
 								 picture:validate.find(".account-image").data("picture")},
 					type: "POST",
@@ -612,7 +612,7 @@ $(document).ready(function(){
 				} else if(data == "picture"){
 					var temphtml = ''+
 						'<div data-'+data+'="'+res["picture"]+'" class="account-image">'+
-							'<img src="http://localhost:8080/'+res["picture"]+'"/>'+
+							'<img src="/'+res["picture"]+'"/>'+
 						'</div>';
 					img = img.concat(temphtml);
 				} else{

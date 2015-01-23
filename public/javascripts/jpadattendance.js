@@ -3,7 +3,7 @@ $(document).ready(function(){
   socket.on('spadattendanceedit',function(){
     //request to server for data update
     $.ajax({
-      url: "http://localhost:8080/jpadattendance/content",
+      url: "/jpadattendance/content",
       type: "GET",
       success: function(res){
         $("#content").html(res);

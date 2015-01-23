@@ -33,7 +33,7 @@ $(document).ready(function(){
 
 		//about
 		$.ajax({
-			url: "http://localhost:8080/getdetails",
+			url: "/getdetails",
 			data: "account="+location.pathname.substring(9),
 			type: "GET",
 			success: function (res) {
@@ -99,7 +99,7 @@ $(document).ready(function(){
 
 		//fetch mentee content via ajax
 		$.ajax({
-			url: "http://localhost:8080/getmentor",
+			url: "/getmentor",
 			data: "account="+location.pathname.substring(9),
 			type: "GET",
 			success: function (res) {
@@ -119,7 +119,7 @@ $(document).ready(function(){
 							'<div class="row">'+
 								'<div class="mentor-data-content">'+
 									'<div class="mentor-data-content-image">'+
-										'<img src="http://localhost:8080/images/unknownpic.jpg" class="img-responsive"/>'+
+										'<img src="/images/unknownpic.jpg" class="img-responsive"/>'+
 									'</div>'+
 									'<div class="mentor-data-content-text">'+
 										'<table class="table table-hover">'+
@@ -154,7 +154,7 @@ $(document).ready(function(){
 							'<div class="row">'+
 								'<div class="mentor-data-content">'+
 									'<div class="mentor-data-content-image">'+
-										'<img src="http://localhost:8080/'+ res["picture"] +'" class="img-responsive"/>'+
+										'<img src="/'+ res["picture"] +'" class="img-responsive"/>'+
 									'</div>'+
 									'<div class="mentor-data-content-text">'+
 										'<table class="table table-hover">'+
@@ -199,7 +199,7 @@ $(document).ready(function(){
 											'<p>Semtheng Here</p>'+
 										'</div>'+
 									'</a>'+
-									'<a id="mentor-profile" href="http://localhost:8080/profile/'+ res["username"] +'">'+
+									'<a id="mentor-profile" href="/profile/'+ res["username"] +'">'+
 										'<div class="mentor-link">'+
 											'<p>Go to profile</p>'+
 										'</div>'+
@@ -227,7 +227,7 @@ $(document).ready(function(){
 
 		//fetch mentee content via ajax
 		$.ajax({
-			url: "http://localhost:8080/getmentees",
+			url: "/getmentees",
 			data: "account="+location.pathname.substring(9),
 			type: "GET",
 			success: function (res) {
@@ -246,12 +246,12 @@ $(document).ready(function(){
 						}
 						var fullname = res.Accounts[i]["first_name"] + " " + middlenameinitials + ". " + res.Accounts[i]["last_name"];
 
-						var menteeHTML = "<div class='row mentee-content'><a class='ajax' href='http://localhost:8080/profile/" + res.Accounts[i]["username"] +"'><div class='mentee-data-image'><img src='http://localhost:8080/" + res.Accounts[i]["picture"] + "' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + fullname + "</strong><p>" + res.Accounts[i]["org_class"] + "</p><p>" + res.Accounts[i]["department"] + "</p></div></a></div>";
+						var menteeHTML = "<div class='row mentee-content'><a class='ajax' href='/profile/" + res.Accounts[i]["username"] +"'><div class='mentee-data-image'><img src='/" + res.Accounts[i]["picture"] + "' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + fullname + "</strong><p>" + res.Accounts[i]["org_class"] + "</p><p>" + res.Accounts[i]["department"] + "</p></div></a></div>";
 						$("#mentee-data").append(menteeHTML);
 					}
 					//mentees without Accounts
 					for(var i = 0; i < res.noAccounts.length; i++){
-						var menteeHTML = "<div class='row mentee-content'><div class='mentee-data-image'><img src='http://localhost:8080/images/unknownpic.jpg' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + res.noAccounts[i] + "</strong></div>";
+						var menteeHTML = "<div class='row mentee-content'><div class='mentee-data-image'><img src='/images/unknownpic.jpg' class='img-responsive'></div><div class='mentee-data-content text-left'><strong>" + res.noAccounts[i] + "</strong></div>";
 						$("#mentee-data").append(menteeHTML);
 					}
 				}
@@ -277,7 +277,7 @@ $(document).ready(function(){
 		if(old_value != data.text()){
 			//send ajax request to edit data in the database
 			$.ajax({
-				url: "http://localhost:8080/editprofile",
+				url: "/editprofile",
 				data: {
 					account: location.pathname.substring(9),
 					dataname: data.parent().data('name'),
@@ -555,7 +555,7 @@ $(document).ready(function(){
 				} else if(data == "picture"){
 					var temphtml = ''+
 						'<div data-'+data+'="'+res["picture"]+'" class="account-image">'+
-							'<img src="http://localhost:8080/'+res["picture"]+'"/>'+
+							'<img src="/'+res["picture"]+'"/>'+
 						'</div>';
 					img = img.concat(temphtml);
 				} else{

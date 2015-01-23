@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $.ajax({
-    url: "http://localhost:8080"+(location.pathname=="/"?"":location.pathname)+"/content",
+    url: (location.pathname=="/"?"":location.pathname)+"/content",
     type: "GET",
     success: function (res) {
       $("#content").html(res);

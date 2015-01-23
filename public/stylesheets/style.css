@@ -21,7 +21,7 @@ a:hover, a:focus {
 
 @font-face {
 	font-family: headerText;
-	src: url('http://localhost:8080/fonts/slabo.ttf');
+	src: url('/fonts/slabo.ttf');
 }
 
 .title-header{
@@ -524,14 +524,14 @@ body .overlimit{ color:red; }
     left:       0;
     height:     100%;
     width:      100%;
-    background: rgba( 0, 0, 0, 1 ) 
-                url('http://localhost:8080/images/circle-tri.gif') 
-                50% 50% 
+    background: rgba( 0, 0, 0, 1 )
+                url('/images/circle-tri.gif')
+                50% 50%
                 no-repeat;
 }
 
 body.loading {
-    overflow: hidden;   
+    overflow: hidden;
 }
 
 body.loading .load-screen {
