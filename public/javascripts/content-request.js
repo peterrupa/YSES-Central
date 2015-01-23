@@ -3,7 +3,15 @@ $(document).ready(function(){
 		// use this for requested url: $(this).attr('href')
 		//insert ajax part here
 
-		var root = location.href.replace(location.pathname,"");
+		if(location.pathname == "/"){
+			var root = location.href.substring(0,location.href.length-1);
+		}
+		else{
+			var root = location.href.replace(location.pathname,"");
+		}
+
+
+		console.log(root);
 
 		$.ajax({
 			url: $(this).attr('href') == "/"?root + $(this).attr('href')+"content":$(this).attr('href')+"/content",
