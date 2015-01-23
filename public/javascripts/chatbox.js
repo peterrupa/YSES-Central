@@ -83,7 +83,20 @@ $(document).ready(function(){
 		});
 	});
 
+  //onclick chat contact
+  $('body').on('click',".chatcontact a",function(e){
+    e.preventDefault();
+    alert("HI");
+  });
 
+  //socket listener
+
+  socket.on("updatechat",function(data){
+    $("#chatcontainer").html("");
+    $("#chatcontainer").html(data);
+    //set chatcontact tile height
+    $('.chatcontact').css("height",$(".chatcontact").width()+"px");
+  });
 });
 
 $(function(){

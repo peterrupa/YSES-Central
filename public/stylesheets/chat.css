@@ -5,10 +5,12 @@
 	height:calc(100vh - 60px);
 	right:0;
 	background-color:rgba(0,0,0,0.2);
-	-webkit-transition:all 0.75s ease;
-	-ms-transition:all 0.75s ease;
-	-moz-transition:all 0.75s ease;
-	transition:all 0.75s ease;
+	-webkit-transition:right 0.75s ease;
+	-ms-transition:right 0.75s ease;
+	-moz-transition:right 0.75s ease;
+	transition:right 0.75s ease;
+	top:0;
+	bottom:0;
 }
 
 .sidebarclosed	{
@@ -48,6 +50,67 @@
 }
 
 #chatcontainer	{
+	position:relative;
 	height:calc(100vh - 160px);
 	overflow-y: auto;
+	padding: 0 25px 0 25px;
+	margin-top:10px;
+	padding-bottom:10px;
+}
+
+.chatcontact	{
+	padding:1px;
+}
+
+.chatcontact .chatpicture	{
+	width:100%;
+	height:100%;
+	background-image:url('/uploads/tricycle.jpg');
+	background-size:cover;
+}
+
+.chatcontact .online	{
+	background-color:rgba(0,255,0,0.4);
+	background-blend-mode:multiply;
+}
+
+.chatcontact .offline	{
+	-webkit-filter:grayscale(75%);
+	-moz-filter:grayscale(75%);
+	-ms-filter:grayscale(75%);
+	-o-filter:grayscale(75%);
+	filter:grayscale(75%);
+
+}
+
+.chatpicture span	{
+	color:white;
+	font-size:12px;
+	bottom:0;
+	position:absolute;
+	max-width:70px;
+	overflow:hidden;
+	white-space:nowrap;
+}
+
+.chatpicture .right	{
+	right:0;
+}
+
+.chatpicture .mask	{
+	width:100%;
+	height:17%;
+	background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 28%, rgba(0,0,0,0.65) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(28%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 28%,rgba(0,0,0,0.65) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 28%,rgba(0,0,0,0.65) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 28%,rgba(0,0,0,0.65) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 28%,rgba(0,0,0,0.65) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); /* IE6-9 */
+	bottom:0;
+	position:absolute;
+}
+
+.chatpicture .green	{
+	color:#26FC23;
 }

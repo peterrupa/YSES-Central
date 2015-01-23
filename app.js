@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var request = require('request');
+var jade = require('jade');
 
 var sessionMiddleware = session({
   secret: 'keyboard cat',
@@ -45,8 +46,6 @@ var http = app.listen(8080, function(){
 app.use(cookieParser());
 app.use(sessionMiddleware)
 
-var socket = require("./sockets/socket.js")(http,sessionMiddleware,eventEmitter);
-
 //database
 var mysql = require('mysql');
 var pool = mysql.createPool({
@@ -55,6 +54,10 @@ var pool = mysql.createPool({
   password : '',
   database: 'yses_central'
 });
+
+//sockets
+
+var socket = require("./sockets/socket.js")(http,sessionMiddleware,eventEmitter,pool,async,jade);
 
 //application dependencies
 require('./routes/search')(app,pool);
