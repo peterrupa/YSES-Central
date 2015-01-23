@@ -170,15 +170,28 @@ html
 								form#logout(action="http://localhost:8080/logout",method="post")
 								a(href="javascript:{}",onclick="$('#logout').submit()") Log out
 					div.clearfix
-		nav#chatbar
+		nav#chatbar.hidden-xm.hidden-sm.hidden-md
 			svg(style="width:100%;height:100%;position:absolute")
 				line#line1(x1="0",y1="0",x2="0",y2="50%",style="stroke:rgba(255,255,255,0.7);stroke-width:8")
 				line#line2(x1="0",y1="100%",x2="0",y2="50%",style="stroke:rgba(255,255,255,0.7);stroke-width:8")
-			div(style="height:10%;position:relative;overflow:hidden")
+			div(style="height:70px;position:relative;overflow:hidden")
 				svg(style="width:100%;height:100%;position:absolute")
-					line.line3(x1="50%",y1="100%",x2="95%",y2="100%",style="stroke:rgba(255,255,255,0.7);stroke-width:8")
-					line.line4(x1="50%",y1="100%",x2="5%",y2="100%",style="stroke:rgba(255,255,255,0.7);stroke-width:8")
-				h2(style="margin-left:20px;") Chat
+					line.line3(x1="50%",y1="100%",x2="95%",y2="100%",style="stroke:rgba(255,255,255,0.7);stroke-width:6")
+					line.line4(x1="50%",y1="100%",x2="5%",y2="100%",style="stroke:rgba(255,255,255,0.7);stroke-width:6")
+				h2(style="margin-left:20px;font-size:") Chat
+			div(style="height:30px;position:relative;overflow:hidden;margin-top:10px;")
+				svg(style="width:100%;height:100%;position:absolute")
+					line(x1="10%",y1="100%",x2="90%",y2="100%",style="stroke:rgba(255,255,255,0.5);stroke-width:3")
+					line.linesearchbarright(x1="90%",y1="100%",x2="90%",y2="100%",style="stroke:rgba(255,255,255,0.5);stroke-width:2")
+					line.linesearchbarleft(x1="10%",y1="100%",x2="10%",y2="100%",style="stroke:rgba(255,255,255,0.5);stroke-width:2")
+					line.linesearchbartop1(x1="10%",y1="0",x2="10%",y2="0",style="stroke:rgba(255,255,255,0.5);stroke-width:3")
+					line.linesearchbartop2(x1="90%",y1="0",x2="90%",y2="0",style="stroke:rgba(255,255,255,0.5);stroke-width:3")
+					
+					foreignObject(width="80%",height="100%",x="10%")
+						i.searchbaricon.glyphicon.glyphicon-search
+					foreignObject(width="80%",height="100%",x="10%")
+						input.searchbar(type="text",style="width:100%;height:100%;background:none;border:0;",placeholder="Search")
+						
 		div#containerMAIN
 			div.container
 				div.row

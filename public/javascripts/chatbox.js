@@ -19,6 +19,7 @@ $(document).mouseup(function (e) {
 $(document).ready(function(){
 	$("ul.side-menu").niceScroll().hide();
 
+	//chat bar toggle
   $("body").on('click',"a.menu-icon-chatbox",function(e) {
     e.preventDefault();
     var line1 = Snap("#line1");
@@ -42,6 +43,47 @@ $(document).ready(function(){
     }
 	  $('#chatbar').toggleClass('sidebarclosed');
   });
+
+
+	var searchbardelay = 150;
+	var searchbarease = mina.linear;
+	//search bar focus
+	$("body").on('focus',".searchbar",function(){
+		$(this).attr("placeholder","");
+
+		var lineleft = Snap(".linesearchbarleft");
+		var lineright = Snap(".linesearchbarright");
+		var linetop1 = Snap(".linesearchbartop1");
+		var linetop2 = Snap(".linesearchbartop2");
+
+		lineleft.animate({y2:"0"},searchbardelay,searchbarease,function(){
+			linetop1.animate({x2:"50%"},searchbardelay,searchbarease);
+		});
+		lineright.animate({y2:"0"},searchbardelay,searchbarease,function(){
+			linetop2.animate({x2:"50%"},searchbardelay,searchbarease);
+		});
+
+	});
+
+	//search bar blur
+	$("body").on('blur',".searchbar",function(){
+		$(this).attr("placeholder","Search");
+
+		var lineleft = Snap(".linesearchbarleft");
+		var lineright = Snap(".linesearchbarright");
+		var linetop1 = Snap(".linesearchbartop1");
+		var linetop2 = Snap(".linesearchbartop2");
+
+		linetop1.animate({x2:"10%"},searchbardelay,searchbarease,function(){
+			lineleft.animate({y2:"100%"},searchbardelay,searchbarease);
+		});
+
+		linetop2.animate({x2:"90%"},searchbardelay,searchbarease,function(){
+			lineright.animate({y2:"100%"},searchbardelay,searchbarease);
+		});
+	});
+
+
 });
 
 $(function(){
