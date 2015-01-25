@@ -16,7 +16,7 @@
 	width:100%;
 }
 
-#add-task , #edit-task, #prev-task, #next-task{
+#add-task , #edit-task, #prev-task, #next-task, #edit-score{
 	position:relative;
 	float:left;
 
@@ -58,7 +58,7 @@
 	color:white;
 }
 
-#add-task:hover , #edit-task:hover, #remove-task:hover, #prev-task:hover, #next-task:hover{
+#add-task:hover , #edit-score:hover, #edit-task:hover, #remove-task:hover, #prev-task:hover, #next-task:hover{
 	background-color:rgba(180,180,250,1);
 	font-weight:bold;
 	color:black;
@@ -99,7 +99,7 @@
 .jpad-task-content{
 	background-color:rgba(25, 112, 230,0);
 
-	height:100px;
+	min-height:100px;
 	padding-top:15px;
 	padding-left:5px;
 	margin-left:0px;
