@@ -1,17 +1,19 @@
 - for(var i = 0; i < online.length; i++){
-    div.chatcontact.col-lg-6
+    div.chatcontact.col-lg-6(data-name="#{online[i]['first_name']}")
       a(href="#")
         div.chatpicture(style="background-image:url(\'/#{online[i]['picture']}\');")
+          div.filter
           div.mask
-          span= online[i]["first_name"]
+          span.left= online[i]["first_name"]
           span.green.right Online
 - }
 - for(var i = 0; i < offline.length; i++){
-    div.chatcontact.col-lg-6
+    div.chatcontact.col-lg-6(data-name="#{offline[i]['first_name']}")
       a(href="#")
         div.chatpicture(style="background-image:url(\'/#{offline[i]['picture']}\');")
+          div.filter.offline
           div.mask
-          span= offline[i]["first_name"]
+          span.left= offline[i]["first_name"]
           span.right Offline
 - }
 div.clearfix
