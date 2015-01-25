@@ -69,18 +69,14 @@
 	background-size:cover;
 }
 
-.chatcontact .online	{
-	background-color:rgba(0,255,0,0.4);
-	background-blend-mode:multiply;
+.chatcontact .filter	{
+	width:100%;
+	height:100%;
 }
 
-.chatcontact .offline	{
-	-webkit-filter:grayscale(75%);
-	-moz-filter:grayscale(75%);
-	-ms-filter:grayscale(75%);
-	-o-filter:grayscale(75%);
-	filter:grayscale(75%);
 
+.chatcontact .offline	{
+	background-color:rgba(0,0,0,0.5);
 }
 
 .chatpicture span	{
@@ -93,12 +89,17 @@
 	white-space:nowrap;
 }
 
+.chatpicture .left	{
+	margin-left:2px;
+}
+
 .chatpicture .right	{
 	right:0;
+	margin-right:2px;
 }
 
 .chatpicture .mask	{
-	width:100%;
+	width:calc(100% - 2px);
 	height:17%;
 	background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 28%, rgba(0,0,0,0.65) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(28%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */

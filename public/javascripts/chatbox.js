@@ -89,8 +89,29 @@ $(document).ready(function(){
     alert("HI");
   });
 
-  //socket listener
+  //search
+  $('body').on('keyup',".searchbar",function(){
+    var search = $(this).val().toLowerCase(); //lowercased version
 
+    if(search == ""){
+      $(".chatcontact").fadeIn(200);
+    }
+    else{
+      $(".chatcontact").each(function(){
+        //get lowercase version for case insensitive searching
+        var nameLowercase = $(this).data("name").toLowerCase();
+
+        if(nameLowercase.lastIndexOf(search) != -1 && (nameLowercase[nameLowercase.lastIndexOf(search) - 1] == null || nameLowercase[nameLowercase.lastIndexOf(search) - 1] == ' ')){
+          $(this).fadeIn(200);
+        }
+        else{
+          $(this).fadeOut(100);
+        }
+      });
+    }
+  });
+
+  //socket listener
   socket.on("updatechat",function(data){
     $("#chatcontainer").html("");
     $("#chatcontainer").html(data);
