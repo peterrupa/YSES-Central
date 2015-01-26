@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2015 at 05:38 PM
+-- Generation Time: Jan 26, 2015 at 09:49 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -63,7 +63,7 @@ INSERT INTO `accounts` (`username`, `password`, `first_name`, `middle_name`, `la
 ('penguinlove', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Maria Clarissa', 'Sulit', 'Estremos', 'Active', 'Secretariat', '2011-55645', 'He-4', '2011', 'Cla''s Mentor', '5234-04-27', 'Binangonan, Rizal', 'Bella Cartash', 'public/uploads/penguinlove.jpg', 'Maria Clarissa Sulit Estremos', 'Executive Assistant'),
 ('queenjubs', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Jhubielyn', 'Go', 'Garachico', 'Active', 'Senior Projects and Activities', '2012-51343', 'rainByte', '2012', 'Idk lol', '1995-11-12', 'Somewhere', 'Silverios Compound', 'public/uploads/queenjubs.jpg', 'Jhubielyn Go Garachico', NULL),
 ('qylegeronimo', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Qyle', 'De Los Angeles', 'San Juan', 'Active', 'Junior Projects and Activities', '2012-11111', 'RAMpage', '2012', 'penguinlove', '1996-06-07', 'Naga City', 'Vetmed Dorm', 'public/uploads/qylegeronimo.jpg', 'Qyle De Los Angeles San Juan', NULL),
-('treelover', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Emerald', 'Fajutag', 'Fallarme', 'Active', 'Scholastics', '2011-43243', 'He-4', '2011', 'Ian F Del Barrio', '1994-10-12', 'Taguig', 'Women''s Dorm', 'public/uploads/treelover.jpg', 'Emerald Fajutag Fallarme', NULL),
+('treelover', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Emerald', 'Fajutag', 'Fallarme', 'Active', 'Scholastics', '2011-43243', 'He-4', '2011', 'Ian F Del Barrio', '1994-10-12', 'Taguig', 'Women''s Dorm', 'public/uploads/treelover.jpg', 'Emerald Fajutag Fallarme', 'Scholastics Head'),
 ('tricycle', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Peter Bernard', 'Mariano', 'Rupa', 'Active', 'Junior Projects and Activities', '2013-45106', 'RAMpage', '2013', 'arvielimbo', '1996-11-29', 'Block 1 Lot 10 Nova Romania, Deparo, Caloocan', 'Mendoza Dorm', 'public/uploads/tricycle.jpg', 'Peter Bernard Mariano Rupa', NULL),
 ('youryayness', '247a3394f50d50c119f9f846a1853433df83b0f3922a71154ece4bb5eb6c666f', 'Desery', 'Ramos', 'Sabado', 'Active', 'Human Resources', '2011-43432', 'Jenga', '2011', 'Yay''s Mentor', '3212-12-27', 'Muntinlupa', 'Student''s Dorm', 'public/uploads/youryayness.jpg', 'Desery Ramos Sabado', 'Human Resources Head');
 
@@ -197,12 +197,29 @@ INSERT INTO `announcement_posts` (`department`, `message`, `date`, `id`, `title`
 
 CREATE TABLE IF NOT EXISTS `chat_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sender` varchar(50) NOT NULL,
   `recipient` varchar(50) NOT NULL,
+  `sender` varchar(50) NOT NULL,
   `message` varchar(500) NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data for table `chat_log`
+--
+
+INSERT INTO `chat_log` (`id`, `recipient`, `sender`, `message`, `date`) VALUES
+(1, 'tricycle', 'almermamer', 'Hi Peter. Updates?', '2015-01-26 18:52:19'),
+(2, 'almermamer', 'tricycle', 'Hi. For now, ginagawa ko ang chat functionality. Both front and backend. Meanwhile, I suggest that you work on the Scho system.', '2015-01-26 18:53:36'),
+(3, 'tricycle', 'almermamer', 'Okay. Will do.', '2015-01-26 18:53:55'),
+(4, 'tricycle', 'almermamer', 'Pano exactly nagkakaron ng ''OK'' sa scho system (as head)? Kinda lost. Redirect? Render? Some kind add()?', '2015-01-26 18:55:46'),
+(5, 'almermamer', 'tricycle', 'Http status yun haha (200). Line 139, res.sendStatus. palitan mo ng res.render(''jadenamehere'',data) para magawan ng jade file.', '2015-01-26 18:56:47'),
+(6, 'tricycle', 'almermamer', 'Peter. Ok lang ba sayo magovernight ngayon? Request ni Marie, since nasa LB na sya ngayon.', '2015-01-26 18:58:20'),
+(7, 'almermamer', 'tricycle', 'Oh sure, walang problema. Anong oras?', '2015-01-26 18:58:39'),
+(8, 'tricycle', 'almermamer', '8:30 daw. G?', '2015-01-26 19:03:03'),
+(9, 'almermamer', 'tricycle', 'Okays. G!', '2015-01-26 19:03:14'),
+(10, 'tricycle', 'almermamer', 'Hey. Sunduin na natin si Marie.', '2015-01-27 01:25:57'),
+(11, 'almermamer', 'tricycle', 'Okay, will go', '2015-01-27 01:28:50');
 
 -- --------------------------------------------------------
 
@@ -266,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `logbook_posts` (
   `message` varchar(1000) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
 
 --
 -- Dumping data for table `logbook_posts`
@@ -290,17 +307,11 @@ INSERT INTO `logbook_posts` (`username`, `date`, `message`, `id`) VALUES
 ('penguinlove', '2015-01-15 23:15:48', 'fdfsfds', 55),
 ('penguinlove', '2015-01-15 23:16:48', 'sa', 56),
 ('kimini07', '2015-01-18 18:53:07', 'HELLO!', 57),
-('kimini07', '2015-01-18 18:55:31', 'dsadsawqeqweqw', 58);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `logbook_tricycle_hidden_posts`
---
-
-CREATE TABLE IF NOT EXISTS `logbook_tricycle_hidden_posts` (
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+('kimini07', '2015-01-18 18:55:31', 'dsadsawqeqweqw', 58),
+('kimini07', '2015-01-22 00:51:46', 'omg', 59),
+('tricycle', '2015-01-23 17:46:39', 'TESTING!', 60),
+('tricycle', '2015-01-23 18:14:01', 'test', 61),
+('tricycle', '2015-01-23 18:14:17', 'HELLO', 62);
 
 -- --------------------------------------------------------
 
@@ -353,20 +364,29 @@ CREATE TABLE IF NOT EXISTS `pad_jpadsters_attendance` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   UNIQUE KEY `event` (`event`,`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=228 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=668 ;
 
 --
 -- Dumping data for table `pad_jpadsters_attendance`
 --
 
 INSERT INTO `pad_jpadsters_attendance` (`username`, `event`, `id`) VALUES
-('tricycle', 'Introduction to Nodejs', 2),
-('almermamer', 'MongoDB', 222),
-('marieflor', 'MongoDB', 171),
-('tricycle', 'MongoDB', 208),
-('almermamer', 'Nodejs File Uploading', 221),
+('marieflor', 'AngularJS', 659),
+('tricycle', 'AngularJS', 560),
+('almermamer', 'Async JS', 500),
+('marieflor', 'Async JS', 501),
+('qylegeronimo', 'Async JS', 667),
+('tricycle', 'Async JS', 502),
+('almermamer', 'Introduction to Nodejs', 283),
+('tricycle', 'Introduction to Nodejs', 466),
+('almermamer', 'MongoDB', 317),
+('marieflor', 'MongoDB', 657),
+('qylegeronimo', 'MongoDB', 341),
+('tricycle', 'MongoDB', 468),
+('almermamer', 'Nodejs File Uploading', 262),
+('marieflor', 'Nodejs File Uploading', 270),
 ('qylegeronimo', 'Nodejs File Uploading', 227),
-('tricycle', 'Nodejs File Uploading', 55);
+('tricycle', 'Nodejs File Uploading', 467);
 
 -- --------------------------------------------------------
 
@@ -385,6 +405,8 @@ CREATE TABLE IF NOT EXISTS `pad_jpadsters_event` (
 --
 
 INSERT INTO `pad_jpadsters_event` (`event`, `date`) VALUES
+('AngularJS', '2015-01-23'),
+('Async JS', '2015-01-20'),
 ('Introduction to Nodejs', '2015-01-14'),
 ('MongoDB', '2015-01-16'),
 ('Nodejs File Uploading', '2015-01-15');
@@ -504,15 +526,80 @@ CREATE TABLE IF NOT EXISTS `sec_ysers_attendance` (
   `event` varchar(50) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=143 ;
 
 --
 -- Dumping data for table `sec_ysers_attendance`
 --
 
 INSERT INTO `sec_ysers_attendance` (`username`, `event`, `id`) VALUES
-('tricycle', 'GA #1', 1),
-('tricycle', 'GA #2', 2);
+('almermamer', 'YSES Photoshoot', 75),
+('arvielimbo', 'YSES Photoshoot', 76),
+('treelover', 'YSES Photoshoot', 77),
+('queenjubs', 'YSES Photoshoot', 78),
+('jdmonster', 'YSES Photoshoot', 79),
+('kath28', 'YSES Photoshoot', 80),
+('kimini07', 'YSES Photoshoot', 81),
+('penguinlove', 'YSES Photoshoot', 82),
+('getLostPanget', 'YSES Photoshoot', 83),
+('marieflor', 'YSES Photoshoot', 84),
+('tricycle', 'YSES Photoshoot', 85),
+('qylegeronimo', 'YSES Photoshoot', 86),
+('almermamer', 'YSES Sem Starter', 87),
+('arvielimbo', 'YSES Sem Starter', 88),
+('youryayness', 'YSES Sem Starter', 89),
+('treelover', 'YSES Sem Starter', 90),
+('queenjubs', 'YSES Sem Starter', 91),
+('kath28', 'YSES Sem Starter', 92),
+('penguinlove', 'YSES Sem Starter', 93),
+('getLostPanget', 'YSES Sem Starter', 94),
+('marieflor', 'YSES Sem Starter', 95),
+('qylegeronimo', 'YSES Sem Starter', 97),
+('almermamer', 'YSES Photoshoot', 98),
+('almermamer', 'YSES Sem Starter', 99),
+('arvielimbo', 'YSES Photoshoot', 100),
+('arvielimbo', 'YSES Sem Starter', 101),
+('youryayness', 'YSES Sem Starter', 102),
+('treelover', 'YSES Photoshoot', 103),
+('treelover', 'YSES Sem Starter', 104),
+('queenjubs', 'YSES Photoshoot', 105),
+('queenjubs', 'YSES Sem Starter', 106),
+('jdmonster', 'YSES Photoshoot', 107),
+('kath28', 'YSES Photoshoot', 108),
+('kath28', 'YSES Sem Starter', 109),
+('kimini07', 'YSES Photoshoot', 110),
+('penguinlove', 'YSES Photoshoot', 111),
+('penguinlove', 'YSES Sem Starter', 112),
+('getLostPanget', 'YSES Photoshoot', 113),
+('getLostPanget', 'YSES Sem Starter', 114),
+('marieflor', 'YSES Photoshoot', 115),
+('marieflor', 'YSES Sem Starter', 116),
+('tricycle', 'YSES Photoshoot', 117),
+('qylegeronimo', 'YSES Photoshoot', 118),
+('qylegeronimo', 'YSES Sem Starter', 119),
+('almermamer', 'YSES Photoshoot', 120),
+('almermamer', 'YSES Sem Starter', 121),
+('arvielimbo', 'YSES Photoshoot', 122),
+('arvielimbo', 'YSES Sem Starter', 123),
+('youryayness', 'YSES Sem Starter', 124),
+('treelover', 'YSES Photoshoot', 125),
+('treelover', 'YSES Sem Starter', 126),
+('queenjubs', 'YSES Photoshoot', 127),
+('queenjubs', 'YSES Sem Starter', 128),
+('jdmonster', 'YSES Photoshoot', 129),
+('kath28', 'YSES Photoshoot', 130),
+('kath28', 'YSES Sem Starter', 131),
+('kimini07', 'YSES Photoshoot', 132),
+('penguinlove', 'YSES Photoshoot', 133),
+('penguinlove', 'YSES Sem Starter', 134),
+('getLostPanget', 'YSES Photoshoot', 135),
+('getLostPanget', 'YSES Sem Starter', 136),
+('marieflor', 'YSES Photoshoot', 137),
+('marieflor', 'YSES Sem Starter', 138),
+('tricycle', 'YSES Photoshoot', 139),
+('tricycle', 'YSES Sem Starter', 140),
+('qylegeronimo', 'YSES Photoshoot', 141),
+('qylegeronimo', 'YSES Sem Starter', 142);
 
 -- --------------------------------------------------------
 
@@ -531,8 +618,8 @@ CREATE TABLE IF NOT EXISTS `sec_ysers_event` (
 --
 
 INSERT INTO `sec_ysers_event` (`event`, `date`) VALUES
-('GA #1', '2015-01-12'),
-('GA #2', '2015-01-15');
+('YSES Photoshoot', '2015-01-25'),
+('YSES Sem Starter', '2015-01-27');
 
 -- --------------------------------------------------------
 
