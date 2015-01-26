@@ -24,7 +24,7 @@ module.exports = function(app,pool,async){
 							async.parallel({
 								tasks: function(callback){
 									//fetch list of tasks
-									var query = "SELECT `task` AS name, DATE_FORMAT(`date`,'%c/%e/%Y') AS date, `maxscore` FROM `pad_jpadsters_task` WHERE 1 ORDER BY date";
+									var query = "SELECT `task` AS name, DATE_FORMAT(`date`,'%Y-%m-%d') AS date, `maxscore` FROM `pad_jpadsters_task` WHERE 1 ORDER BY date";
 
 									connection.query(query,function(err,tasks){
 										if(err) callback(err);

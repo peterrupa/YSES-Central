@@ -36,7 +36,7 @@ div#spadcontainer.col-lg-12
 									- }
 					div.modal-footer
 						input#postAddEvent.btn.btn-primary.pull-right(type="button",value="Add Event",data-loading="Loading")
-		button#edit-event.btn.btn-primary.edit.pull-left(data-loading="Loading")
+		button#edit-event.edit.pull-left(data-loading="Loading")
 			| Edit Event
 		//button#remove-event.pull-left Remove Event
 		div.btn-group
@@ -48,9 +48,9 @@ div#spadcontainer.col-lg-12
 					li 
 						a.removeEventButton(href='#') #{events[x].name}
 				- }
-		button#prev-event.pull-right 
+		//button#prev-event.pull-right 
 			| Prev
-		button#next-event.pull-right 
+		//button#next-event.pull-right 
 			| Next
 	div#guide
 		div.header

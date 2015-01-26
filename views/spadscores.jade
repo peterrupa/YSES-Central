@@ -2,35 +2,91 @@ link(rel="stylesheet",href="/stylesheets/padscore.css")
 div.title-header.profile-header
 	h2 JPad Score
 div#spadcontainer.col-lg-12
+	div#task-buttons
+		button#add-task.pull-left(data-toggle="modal",data-target="#addTaskModal",data-placement="left") 
+			| Add Task
+		div#addTaskModal.modal.fade.text-left
+			div.modal-dialog
+				div.modal-content.col-lg-15
+					div.modal-header
+						button.close(type="button",data-dismiss="modal")
+							span(aria-hidden="true") &times;
+							span.sr-only Close
+						h6.modal-title Add task
+					div.modal-body
+						div.header-input-group
+							h5 Task Title
+							input#title.form-control.input-header(type="text")
+						div.header-input-group
+							h5 Task Date
+							input#date.form-control.input-header(type="date")
+						div.header-input-group
+							h5 Task Max Score
+							input#max-score.form-control.input-header(type="number",max=100,min=0,value=0)
+						div.table-content
+							table.table
+								tr
+									td JPADster
+									td.text-center Score
+									- for(var a = 0; a < scores.length; a+=1){
+										tr(data-name="#{scores[a].name}")
+											td 
+												div.jpad
+													img.jpad-image(src="/#{scores[a].picture}")
+													span.jpad-name #{scores[a].name}
+											td.text-center
+												input.add-task-score.form-control(type="number",min=0,max=0,value=0)
+									- }
+					div.modal-footer
+						input#postAddEvent.btn.btn-primary.pull-right(type="button",value="Add Task",data-loading="Loading")
+		button#edit-task.edittask.pull-left(data-loading="Loading")
+			| Edit Task
+		button#edit-score.editscore.pull-left(data-loading="Loading")
+			| Edit Score
+		//button#remove-event.pull-left Remove Task
+		div.btn-group
+			button#remove-task.pull-left.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+				| Remove Task 
+				span.caret
+			ul.dropdown-menu(role='menu')
+				- for(var x = 0; x < (tasks.length); x+=1){
+					li 
+						a.removeEventButton(href='#') #{tasks[x].name}
+				- }
 	div#jpad-task
 		div.header
 			h3 List of tasks
-		each task in tasks
+		- for(var a = 0; a < tasks.length; a += 1){
 			div.list-of-tasks.col-lg-2
 				div.chevron.text-center
 					span.glyphicon.glyphicon-chevron-right
 				div.jpad-task-content.text-left
-					p.event-title= task["name"]
-					p= task["date"]
-					p= "Max Score: "+task["maxscore"]
+					p.task-name.event-title= tasks[a].name
+					p.task-date= tasks[a].date
+					p.task-maxscore= "Max Score: "
+						span= tasks[a].maxscore
+		- }
 	div#jpad-score
 		div.header
 			h3 List of Scores
 		div.jpad-score-content.col-lg-12
 			table.table.table-hover
-				each member in scores
+				- for(var x = 0; x < scores.length; x += 1){
 					tr.name-header
 						td
-							img.jpad-image(src="/"+member["picture"])
-							span.jpad-name= member["name"]
-						td.text-right(style="font-size:9px;",colspan=2) CLICK ME
+							img.jpad-image(src="/"+"#{scores[x].picture}")
+							span.jpad-name= scores[x].name
+						td.click-me.text-right(style="font-size:9px;",colspan=2) CLICK ME
 					tr.score-list.text-center.hidden
 						td Task
 						td Score		
-							each score in member["scores"]
+							//each score in member["scores"]
+							- for(var i  = 0; i < tasks.length; i += 1){
 								tr.score-list.text-center.hidden
-									td= score["task"]
-									td= score["score"]
+									td= tasks[i].name
+									td.jpad-current-score(data-maxscore='#{tasks[i].maxscore}')= scores[x].scores[i].score
+							- }
+				- }
 	div#jpad-stat
 		div.header
 			h3 Statistics
@@ -47,8 +103,10 @@ div#spadcontainer.col-lg-12
 				- }
 				p= "Total score: "+total+"/"+totalitems
 				p= "Percentage: "+(total/totalitems*100).toFixed(2)+"%"
+
 script.
 	$(document).ready(function(){
+		
 		/*$('.name-header').on('click',function(){
 			var next = $(this).next();
 			callNext(next);
@@ -69,10 +127,156 @@ script.
 
 		}*/
 
-		$('.name-header').on('click',function(){
+		$('#max-score').on('keyup mouseup',function(){
+			
+			var max = $(this).val();
+			$('body').find('.add-task-score').each(function(){
+				$(this).prop('max',max);
+			});
+			
+		});
+
+		var clickJPAD = function(){
 			var next = $(this).nextUntil('.name-header');
 			next.show('fast');
 			next.toggleClass('hidden');
+		};
+
+		$('.name-header').on('click',clickJPAD);
+
+		//edit jpad score
+		$('body').off('click','.editscore');
+		$('body').on('click','.editscore',function(){
+
+			$('.name-header').off('click',clickJPAD);
+
+			var next = $('.score-list');
+			next.show('fast');
+			next.removeClass('hidden');
+			$('body').find('.click-me').html(' ');
+
+			var temphtml = '';
+			//var a = 0;
+
+			$('.jpad-current-score').each(function(){
+
+				temphtml = ''+
+					'<input type="number" style="margin-left:39.8%;width:20%;" class="text-left form-control" min=0 max=' + $(this).data('maxscore') + ' value=' + $(this).text() + '>';
+				
+				$(this).html(temphtml);
+
+				//a += 1;
+			});
+
+			$(this).html('Done with edit');
+			$(this).addClass('donescore');
+			$(this).removeClass('editscore');
+
+		});
+
+		//edit jpad task
+		$('body').off('click','.edittask');
+		$('body').on('click','.edittask',function(){
+
+			var temphtml = '';
+			
+			$('.jpad-task-content').each(function(){
+
+				tempname = ''+
+					'<div class="task-name">'+
+						'Task Name:'+
+						'<input style="margin-bottom:10px;width:150px" type="text" class="form-control" value="' + $(this).find('.task-name').text() + '">'+
+					'</div>';
+				//var date  = $(this).find('.task-date').text();
+				//var year  = date.substring();
+				//var month = ;
+				//var day   = ;
+				tempdate = ''+
+					'<div class="task-date">'+
+						'Date'+
+						'<input style="margin-bottom:10px;width:150px" type="date" class="form-control" value=' + $(this).find('.task-date').text() + '>'+
+					'</div>';
+				tempmaxscore = ''+
+					'<div class="task-maxscore">'+
+						'Maxscore'+
+						'<input style="margin-bottom:30px;width:150px" type="number" class="form-control" min=0 value=' + $(this).find('.task-maxscore').find('span').text() + '>'+
+					'</div>';
+				$(this).find('.task-name').html(tempname);
+				$(this).find('.task-date').html(tempdate);
+				$(this).find('.task-maxscore').html(tempmaxscore);
+
+			});
+
+			$('body').find('.list-of-tasks').each(function(){
+				$(this).removeClass('col-lg-2');
+				$(this).addClass('col-lg-3');
+			});
+
+			$(this).html('Done with edit');
+			$(this).addClass('donetask');
+			$(this).removeClass('edittask');
+
+		});
+
+		//done score
+		$('body').off('click','.donescore');
+		$('body').on('click','.donescore',function(){
+			//set loading
+			//$(this).button('loading');
+
+			$('.name-header').on('click',clickJPAD);
+	
+			var next = $('.score-list');
+			next.addClass('hidden');
+			$('body').find('.click-me').html('CLICK ME');
+
+			var temphtml = '';
+
+			$('.jpad-current-score').each(function(){
+
+				temphtml = $(this).children().val();
+
+				$(this).html(temphtml);
+
+			});
+
+			$(this).html('Edit score');
+			$(this).addClass('editscore');
+			$(this).removeClass('donescore');
+
+		});
+
+		//done task
+		$('body').off('click','.donetask');
+		$('body').on('click','.donetask',function(){
+			//set loading
+			//$(this).button('loading');
+
+			var temphtml = '';
+
+			$('.jpad-task-content').each(function(){
+
+				tempname = '<p class="task-name event-title">' + $(this).find('.task-name').find('input').val() + '</p>';
+				
+				tempdate = '<p class="task-date">' + $(this).find('.task-date').find('input').val() + '</p>';
+
+				tempmaxscore = '<p class="task-maxscore"> Max Score: <span>' + $(this).find('.task-maxscore').find('input').val() + '</span></p>';
+
+				$(this).find('.task-name').replaceWith(tempname);
+				$(this).find('.task-date').replaceWith(tempdate);
+				$(this).find('.task-maxscore').replaceWith(tempmaxscore);
+
+			});
+
+			$('body').find('.list-of-tasks').each(function(){
+				$(this).removeClass('col-lg-3');
+				$(this).addClass('col-lg-2');
+			});
+
+			$(this).html('Edit task');
+			$(this).addClass('edittask');
+			$(this).removeClass('donetask');
+
 		});
 
 	});
