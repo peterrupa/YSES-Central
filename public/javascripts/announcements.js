@@ -97,8 +97,8 @@ $(document).ready(function(){
     if (evalType === "above") return ((y < (vpH + st)));
 	}
 
-	$(window).off('scroll');
-	$(window).on('scroll',function(){
+	$(window).off('scroll.announcements');
+	$(window).on('scroll.announcements',function(){
 		if($('.announcementsViewMore').length > 0){
 			if(checkVisible($('.announcementsViewMore'))){
 				fetchAnnouncements(announcementIndex);

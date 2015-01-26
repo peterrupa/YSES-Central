@@ -1,5 +1,5 @@
 - for(var i = 0; i < online.length; i++){
-    div.chatcontact.col-lg-6(data-name="#{online[i]['first_name']}")
+    div.chatcontact.col-lg-6(data-firstname="#{online[i]['first_name']}",data-username="#{online[i]['username']}")
       a(href="#")
         div.chatpicture(style="background-image:url(\'/#{online[i]['picture']}\');")
           div.filter
@@ -8,7 +8,7 @@
           span.green.right Online
 - }
 - for(var i = 0; i < offline.length; i++){
-    div.chatcontact.col-lg-6(data-name="#{offline[i]['first_name']}")
+    div.chatcontact.col-lg-6(data-firstname="#{offline[i]['first_name']}",data-username="#{offline[i]['username']}")
       a(href="#")
         div.chatpicture(style="background-image:url(\'/#{offline[i]['picture']}\');")
           div.filter.offline

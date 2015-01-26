@@ -1,4 +1,17 @@
 module.exports = function(http,sessionMiddleware,eventEmitter,pool,async,jade) {
+  //stack overflow
+  Array.prototype.min = function () {
+    return this.reduce(function (p, v) {
+      return ( p < v ? p : v );
+    });
+  }
+
+  Array.prototype.max = function () {
+    return this.reduce(function (p, v) {
+      return ( p > v ? p : v );
+    });
+  }
+
   var io = require('socket.io').listen(http);
 
   pool.getConnection(function(err,connection){
@@ -67,6 +80,7 @@ module.exports = function(http,sessionMiddleware,eventEmitter,pool,async,jade) {
 
           for(var i = 0; i < ysers.length; i++){
             var push = {
+              username: ysers[i]["username"],
               first_name: ysers[i]["first_name"],
               picture: ysers[i]["picture"].substring(7)
             };
@@ -79,26 +93,26 @@ module.exports = function(http,sessionMiddleware,eventEmitter,pool,async,jade) {
               send.offline.push(push);
             }
           }
-
           callback(null,send);
         }
       ],
       function(err,send){
         var html = jade.renderFile('views/chatcontainer.jade',send);
-        io.emit("updatechat",html);
+        io.emit("updatechat",html,send);
       });
     });
 
     global.online = [];
 
     io.on("connection",function(socket){
-      if(socket.request.session.userkey){
+      var session = socket.request.session;
+      if(session.userkey){
         var currentURL;
 
-        console.log(socket.request.session.userkey+" connected to the server.");
+        console.log(session.userkey+" connected to the server.");
 
-        socket.join(socket.request.session.userkey);
-        online.push(socket.request.session.userkey);
+        socket.join(session.userkey);
+        online.push(session.userkey);
 
         eventEmitter.emit("updatechat",online);
 
@@ -113,9 +127,79 @@ module.exports = function(http,sessionMiddleware,eventEmitter,pool,async,jade) {
           currentURL = url;
         });
 
+        socket.on("fetchchat",function(account,lastId){
+          console.log(session.userkey+" request chat for "+account);
+          var subquery = "";
+          if(lastId){
+            subquery = " && id<"+lastId;
+          }
+
+          var query = "SELECT `id`, `recipient`, `sender`, `message`, DATE_FORMAT(`date`,'%b %e %Y %T') AS date FROM `chat_log` WHERE (recipient="+connection.escape(session.userkey)+" || recipient="+connection.escape(account)+") && (sender="+connection.escape(session.userkey)+" || sender="+connection.escape(account)+")"+subquery+" ORDER BY date DESC LIMIT 10";
+
+          console.log(query);
+
+          connection.query(query,function(err,chat){
+            if(!err){
+              if(chat[0]){
+                var send = [];
+
+                //categorize by day
+                for(var i = 0; i < chat.length; i++){
+                  //find day
+                  var temp = chat[i].date.split(" ");
+                  var date = temp[0]+" "+temp[1]+" "+temp[2];
+
+                  var hasDate = false;
+
+                  for(var j = 0; j < send.length; j++){
+                    if(send[j]["date"] == date){
+                      hasDate = true;
+                      var index = j;
+                      break;
+                    }
+                  }
+
+                  if(!hasDate){
+                    var push = {
+                      date: date,
+                      messages: [chat[i]]
+                    };
+
+                    send.push(push);
+                  }
+                  else{
+                    send[j]["messages"].push(chat[i]);
+                  }
+
+                  //var day =
+                }
+
+                console.log(JSON.stringify(send,null,1));
+
+                //store ids in temp array
+                var id = [];
+
+                for(var i = 0; i < chat.length; i++){
+                  id.push(chat[i]["id"]);
+                }
+
+                var lastIndex = id.min();
+
+                //console.log(chat);
+
+                socket.emit("fetchchat",account,send,lastIndex);
+              }
+              else{
+                socket.emit("fetchchat",account);
+              }
+
+            }
+          });
+        });
+
         socket.on("disconnect",function(){
-          console.log(socket.request.session.userkey+" disconnected from the server.");
-          online.splice(online.lastIndexOf(socket.request.session.userkey),1);
+          console.log(session.userkey+" disconnected from the server.");
+          online.splice(online.lastIndexOf(session.userkey),1);
           eventEmitter.emit("updatechat");
         });
       }

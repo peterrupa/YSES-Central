@@ -18,10 +18,13 @@
 	background-color:rgba(0,0,0,0);
 }
 
-.searchbaricon	{
+.center	{
 	position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.searchbaricon	{
 	color:white !important;
 	margin-left:8px;
 }
@@ -112,6 +115,127 @@
 	position:absolute;
 }
 
-.chatpicture .green	{
-	color:#26FC23;
+.green	{
+	color:#26FC23 !important;
+}
+
+.gray	{
+	color:gray !important;
+}
+
+#chatwindowcontainer	{
+	position:fixed;
+	bottom:0;
+	right:300px;
+	color:white;
+}
+
+#chatwindowcontainer > div	{
+	float:right;
+	margin-left:5px;
+	margin-right:5px;
+	position:relative;
+	width:250px;
+}
+
+.chatwindow	{
+	height:28px;
+	background:rgba(0,0,100,0.8);
+}
+
+.chatwindowopen	{
+	position:relative;
+	width:250px;
+}
+
+.chathead	{
+	background:rgba(0,0,100,0.8);
+	height:35px;
+	width:250px;
+	position:relative;
+}
+
+.chathead span	{
+	color:white;
+}
+
+.chatbody	{
+	height:237px;
+	background:rgba(0,0,100,0.8);
+	position:relative;
+}
+
+.chatbottom	{
+	height:28px;
+	background:rgba(0,0,100,0.8);
+}
+
+.chatbottom	input	{
+	position:absolute;
+	z-index:1;
+	color:white;
+	width:100%;
+	height:100%;
+	background:none;
+	border:none;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.chatbottom	input:focus	{
+	outline: none;
+}
+
+.fly	{
+	position:absolute;
+	top:-270px;
+}
+
+.no-margin	{
+	margin:0;
+}
+
+.chatwindowbutton	{
+	right:9px;
+	position:absolute;
+}
+
+.chatwindowstatus	{
+	margin-left:10px;
+}
+
+.chatwindowname	{
+	color:white;
+	overflow:hidden;
+	white-space:nowrap;
+}
+
+.anchorfix	{
+	display:block;
+	height:100%;
+}
+
+.datetitle	{
+	text-align:center;
+	clear:both;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
+.chatsection	{
+	max-width:200px;
+	clear:both;
+	padding:4px 7px 4px 7px;
+}
+
+.chatself	{
+	float:right;
+}
+
+.chatmessages	{
+	width:calc(100% - 3px);
+	height:100%;
+	overflow-y:auto;
+	position:relative;
+	font-size:13px;
 }

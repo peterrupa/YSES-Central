@@ -20,6 +20,8 @@ html
 		script(src="/javascripts/socketlistener.js")
 		script(src='/javascripts/cleanHTML.js')
 		script(src='/javascripts/snap.svg-min.js')
+		script.
+			userkey = "#{username}";
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
 	body(data-type="background",data-speed="2")
 		div#header.padding-vert
@@ -168,7 +170,7 @@ html
 								form#logout(action="/logout",method="post")
 								a(href="javascript:{}",onclick="$('#logout').submit()") Log out
 					div.clearfix
-		nav#chatbar.hidden-xm.hidden-sm.hidden-md
+		nav#chatbar.sidebarclosed.hidden-xm.hidden-sm.hidden-md
 			svg(style="width:100%;height:100%;position:absolute")
 				line#line1(x1="0",y1="0",x2="0",y2="50%",style="stroke:rgba(255,255,255,0.7);stroke-width:8")
 				line#line2(x1="0",y1="100%",x2="0",y2="50%",style="stroke:rgba(255,255,255,0.7);stroke-width:8")
@@ -186,17 +188,17 @@ html
 					line.linesearchbartop2(x1="90%",y1="0",x2="90%",y2="0",style="stroke:rgba(255,255,255,0.5);stroke-width:3")
 					
 					foreignObject(width="80%",height="100%",x="10%")
-						i.searchbaricon.glyphicon.glyphicon-search
+						i.searchbaricon.glyphicon.glyphicon-search.center
 					foreignObject(width="80%",height="100%",x="10%")
 						input.searchbar(type="text",style="width:100%;height:100%;background:none;border:0;",placeholder="Search")
 			div#chatcontainer
-				
 		div#containerMAIN
 			div.container
 				div.row
 					div#content.col-lg-10
 						// content goes here
 		div.clearfix
+		div#chatwindowcontainer.hidden-xm.hidden-sm.hidden-md
 		div.load-screen
 		script(src='/javascripts/parallax.js')
 		script(src='/javascripts/chatbox.js')
@@ -206,7 +208,6 @@ html
 		script(src='/javascripts/bootstrap-tooltip.js')
 
 		script.
-			
 			$(document).ajaxStart(function () {
 				timeOut = setTimeout(function () {
 					$('.load-screen').show();
