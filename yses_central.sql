@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2015 at 09:49 PM
+-- Generation Time: Jan 28, 2015 at 01:56 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `announcement_posts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
 
 --
 -- Dumping data for table `announcement_posts`
@@ -187,7 +187,11 @@ INSERT INTO `announcement_posts` (`department`, `message`, `date`, `id`, `title`
 ('Secretariat', 'ds', '2015-01-15 01:05:20', 42, 'as'),
 ('Senior Projects and Activities', '2', '2015-01-15 01:07:14', 43, 'dota'),
 ('Senior Projects and Activities', 'yeah', '2015-01-15 01:07:22', 44, 'fk'),
-('Senior Projects and Activities', 'MESSAGE', '2015-01-18 18:53:46', 45, 'Title');
+('Senior Projects and Activities', 'MESSAGE', '2015-01-18 18:53:46', 45, 'Title'),
+('Senior Projects and Activities', '123123', '2015-01-27 14:00:56', 46, 'TESTUNG'),
+('Senior Projects and Activities', 'HELLO POWSZXC', '2015-01-27 14:01:53', 47, 'TESTIIING...'),
+('Senior Projects and Activities', 'great message: ', '2015-01-28 11:07:59', 48, 'an awesome title'),
+('Secretariat', '</3', '2015-01-28 14:42:25', 49, 'Hello powsz');
 
 -- --------------------------------------------------------
 
@@ -202,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `chat_log` (
   `message` varchar(500) NOT NULL,
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `chat_log`
@@ -219,7 +223,17 @@ INSERT INTO `chat_log` (`id`, `recipient`, `sender`, `message`, `date`) VALUES
 (8, 'tricycle', 'almermamer', '8:30 daw. G?', '2015-01-26 19:03:03'),
 (9, 'almermamer', 'tricycle', 'Okays. G!', '2015-01-26 19:03:14'),
 (10, 'tricycle', 'almermamer', 'Hey. Sunduin na natin si Marie.', '2015-01-27 01:25:57'),
-(11, 'almermamer', 'tricycle', 'Okay, will go', '2015-01-27 01:28:50');
+(11, 'almermamer', 'tricycle', 'Okay, will go', '2015-01-27 01:28:50'),
+(12, 'tricycle', 'almermamer', 'Peter. Magoovernight ba ulet tayo mamaya?', '2015-01-27 10:30:34'),
+(16, 'tricycle', 'almermamer', 'And if so, what time and where?', '2015-01-27 10:31:19'),
+(17, 'almermamer', 'tricycle', 'I do suggest na oo.', '2015-01-27 10:31:32'),
+(18, 'almemamer', 'tricycle', 'Kulang na kasi sa time and kelangan pa natin ihabol yung scho system and index overhaul.', '2015-01-27 10:31:56'),
+(19, 'tricycle', 'almermamer', 'Okay. Anong part idedev ko ngayon?', '2015-01-27 10:32:10'),
+(20, 'tricycle', 'almermamer', 'Just finish the scho system first for scho members.', '2015-01-27 10:32:31'),
+(21, 'tricycle', 'almermamer', 'Oh, I just finished it', '2015-01-27 10:32:47'),
+(22, 'almermamer', 'tricycle', 'Ohhhh, okay, hindi ko pa kasi nagagawa backend ng non scho members sa scho system. How about collaborate kela Marie and Celyne for index overhaul? Magdesign muna kayo.', '2015-01-27 10:33:25'),
+(23, 'tricycle', 'almermamer', 'Okay, will do that.', '2015-01-27 10:33:38'),
+(24, 'almermamer', 'tricycle', 'Hey. Overnight bukas :)', '2015-01-28 15:13:57');
 
 -- --------------------------------------------------------
 
@@ -283,7 +297,7 @@ CREATE TABLE IF NOT EXISTS `logbook_posts` (
   `message` varchar(1000) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=73 ;
 
 --
 -- Dumping data for table `logbook_posts`
@@ -311,7 +325,17 @@ INSERT INTO `logbook_posts` (`username`, `date`, `message`, `id`) VALUES
 ('kimini07', '2015-01-22 00:51:46', 'omg', 59),
 ('tricycle', '2015-01-23 17:46:39', 'TESTING!', 60),
 ('tricycle', '2015-01-23 18:14:01', 'test', 61),
-('tricycle', '2015-01-23 18:14:17', 'HELLO', 62);
+('tricycle', '2015-01-23 18:14:17', 'HELLO', 62),
+('tricycle', '2015-01-27 05:12:35', 'hghgfhgh', 63),
+('tricycle', '2015-01-27 05:12:46', 'hkjhkj', 64),
+('almermamer', '2015-01-27 13:56:39', 'HELLO!', 65),
+('penguinlove', '2015-01-27 17:07:38', 'TESTING HIHI <3', 66),
+('penguinlove', '2015-01-27 17:13:45', 'HELLO', 67),
+('kimini07', '2015-01-28 11:06:20', 'BITCHHHH', 68),
+('tricycle', '2015-01-28 11:06:31', 'FUCK YOU MATT', 69),
+('kimini07', '2015-01-28 11:06:36', 'FUCK YOU ALLLLLL', 70),
+('tricycle', '2015-01-28 11:07:03', 'SI MATT GUMAGAMIT NG ACC NI KUYA KIM', 71),
+('kimini07', '2015-01-28 11:07:04', 'whoops! Wrong account', 72);
 
 -- --------------------------------------------------------
 
@@ -364,13 +388,14 @@ CREATE TABLE IF NOT EXISTS `pad_jpadsters_attendance` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   UNIQUE KEY `event` (`event`,`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=668 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=675 ;
 
 --
 -- Dumping data for table `pad_jpadsters_attendance`
 --
 
 INSERT INTO `pad_jpadsters_attendance` (`username`, `event`, `id`) VALUES
+('almermamer', 'AngularJS', 672),
 ('marieflor', 'AngularJS', 659),
 ('tricycle', 'AngularJS', 560),
 ('almermamer', 'Async JS', 500),
@@ -386,7 +411,9 @@ INSERT INTO `pad_jpadsters_attendance` (`username`, `event`, `id`) VALUES
 ('almermamer', 'Nodejs File Uploading', 262),
 ('marieflor', 'Nodejs File Uploading', 270),
 ('qylegeronimo', 'Nodejs File Uploading', 227),
-('tricycle', 'Nodejs File Uploading', 467);
+('tricycle', 'Nodejs File Uploading', 467),
+('almermamer', 'Pad Presentation', 673),
+('marieflor', 'Pad Presentation', 674);
 
 -- --------------------------------------------------------
 
@@ -409,7 +436,8 @@ INSERT INTO `pad_jpadsters_event` (`event`, `date`) VALUES
 ('Async JS', '2015-01-20'),
 ('Introduction to Nodejs', '2015-01-14'),
 ('MongoDB', '2015-01-16'),
-('Nodejs File Uploading', '2015-01-15');
+('Nodejs File Uploading', '2015-01-15'),
+('Pad Presentation', '2015-01-29');
 
 -- --------------------------------------------------------
 

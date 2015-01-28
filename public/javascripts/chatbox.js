@@ -268,84 +268,168 @@ $(document).ready(function(){
   });
 
   socket.on("fetchchat",function(name,log,lastIndex){
-    var inChatStorage = false;
+    if(log){
+      var inChatStorage = false;
 
-    //check if already exists in storage
-    for(var i = 0; i < chatstorage.length; i++){
-      if(chatstorage[i]["name"] == name){
-        inChatStorage = true;
-        break;
+      //check if already exists in storage
+      for(var i = 0; i < chatstorage.length; i++){
+        if(chatstorage[i]["name"] == name){
+          inChatStorage = true;
+          break;
+        }
       }
-    }
 
-    if(inChatStorage){
-      console.log(log);
-      console.log(lastIndex);
-    }
-    else{
-      if(!log){
-        var log = [];
-      }
-      var push = {
-        name: name,
-        lastId: lastIndex,
-        messages: log
-      };
+      //for dates in log
+        //fetch boolean value if date is in chatstorage
+        //if this date is in storage
+        //else
 
-      chatstorage.push(push);
+      if(inChatStorage){
+        console.log(log);
 
-      //append to DOM
-      var append = "";
+        var mainPrepend = "";
 
-      for(var i = 0; i < push["messages"].length; i++){
-        var tempdate = push["messages"][i]["messages"][0]["date"].split(" ");
-        tempdate = tempdate[0]+" "+tempdate[1]+" "+tempdate[2];
+        //find each date if it is in chatstorage[i]
+        for(var j = 0; j < log.length; j++){
+          var inChatStorageMessages = false;
+          for(var k = 0; k < chatstorage[i].messages.length; k++){
+            if(chatstorage[i].messages[k].date == log[j].date){
+              inChatStorageMessages = true;
+              break;
+            }
+          }
 
-        var date = ''+
-          '<div class="datetitle">'+
-            '<strong>'+tempdate+'</strong>'+
-          '</div>';
-
-        var chatappend = "";
-
-        //iterate each chat messages
-        for(var j = 0; j < push["messages"][i]["messages"].length; j++){
-          var sender = "";
-
-          if(push["messages"][i]["messages"][j]["sender"] == name){
-            sender = "chatother";
+          if(inChatStorageMessages){
+            //exists
+            chatstorage[i].messages[k].messages = chatstorage[i].messages[k].messages.concat(log[j].messages);
+            $(".chatwindowopen[data-username='"+name+"']").find(".chatmessages").children()[0].remove();
           }
           else{
-            sender = "chatself";
+            chatstorage[i].messages.push(log[j]);
+            console.log("Pushed: "+log[j]);
           }
 
-          var label = "";
+          /////////////////////////
 
-          if(sender == "chatself"){
-            label = "You";
+          //get first child of chatbody before prepending. We'll need its coordinates after prepending.
+          var firstChild = $(".chatwindowopen[data-username='"+name+"']").find(".chatsection").first();
+
+          var prependMain = "";
+          for(var l = 0; l < log.length; l++){
+            var temp = "";
+            var prependDate = ''+
+              '<div class="datetitle">'+
+                '<strong>'+log[l].date+'</strong>'+
+              '</div>';
+
+            //iterate each chat messages and append them
+            for(var j = 0; j < log[l].messages.length; j++){
+              var sender = "";
+
+              if(log[l]["messages"][j]["sender"] == name){
+                sender = "chatother";
+              }
+              else{
+                sender = "chatself";
+              }
+
+              var label = "";
+
+              if(sender == "chatself"){
+                label = "You";
+              }
+              else{
+                label = $(".chatwindowopen[data-username='"+name+"']").data("firstname");
+              }
+
+              var chat = ''+
+              '<div class="chatsection '+sender+'">'+
+                '<span><strong>'+label+': </strong>'+log[l]["messages"][j]["message"]+'</span>'+
+              '</div>';
+
+              temp = chat + temp;
+
+              console.log(chat);
+            }
+            temp = prependDate + temp;
+
+            prependMain = temp + prependMain;
           }
-          else{
-            label = $(".chatwindowopen[data-username='"+name+"']").data("firstname");
-          }
 
-          var chat = ''+
-          '<div class="chatsection '+sender+'">'+
-            '<span><strong>'+label+': </strong>'+push["messages"][i]["messages"][j]["message"]+'</span>'+
-          '</div>';
+          $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').prepend(prependMain);
 
-          chatappend = chat + chatappend;
+          //after prepending, put the scroll back to the first child defined before
+          $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').scrollTop((firstChild.prev().position())["top"]);
         }
 
-        var finalappend = date + chatappend;
+        //update lowest index
+        chatstorage[i].lastId = lastIndex;
 
-        append = finalappend + append;
+        console.log(chatstorage);
       }
+      else{
+        if(!log){
+          var log = [];
+        }
+        var push = {
+          name: name,
+          lastId: lastIndex,
+          messages: log
+        };
 
-      console.log(chatstorage);
+        chatstorage.push(push);
 
-      $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').append(append+"<div style='height:10px;clear:both'></div>");
-      $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').scrollTop($(".chatwindowopen[data-username='"+name+"']").find('.chatmessages')[0].scrollHeight);
-      $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').bindScroll(name);
+        //append to DOM
+        var append = "";
+
+        for(var i = 0; i < push["messages"].length; i++){
+          var tempdate = push["messages"][i]["messages"][0]["date"].split(" ");
+          tempdate = tempdate[0]+" "+tempdate[1]+" "+tempdate[2];
+
+          var date = ''+
+            '<div class="datetitle">'+
+              '<strong>'+tempdate+'</strong>'+
+            '</div>';
+
+          var chatappend = "";
+
+          //iterate each chat messages
+          for(var j = 0; j < push["messages"][i]["messages"].length; j++){
+            var sender = "";
+
+            if(push["messages"][i]["messages"][j]["sender"] == name){
+              sender = "chatother";
+            }
+            else{
+              sender = "chatself";
+            }
+
+            var label = "";
+
+            if(sender == "chatself"){
+              label = "You";
+            }
+            else{
+              label = $(".chatwindowopen[data-username='"+name+"']").data("firstname");
+            }
+
+            var chat = ''+
+            '<div class="chatsection '+sender+'">'+
+              '<span><strong>'+label+': </strong>'+push["messages"][i]["messages"][j]["message"]+'</span>'+
+            '</div>';
+
+            chatappend = chat + chatappend;
+          }
+
+          var finalappend = date + chatappend;
+
+          append = finalappend + append;
+        }
+
+        $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').append(append+"<div style='height:10px;clear:both'></div>");
+        $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').scrollTop($(".chatwindowopen[data-username='"+name+"']").find('.chatmessages')[0].scrollHeight);
+        $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').bindScroll(name);
+      }
     }
   });
 
@@ -362,7 +446,6 @@ $(document).ready(function(){
           }
         }
         socket.emit("fetchchat",name,lastId);
-        alert('socket.emit("fetchchat",'+name+','+lastId+')')
       }
     });
   }
