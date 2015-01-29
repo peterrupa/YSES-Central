@@ -1,0 +1,61 @@
+	design theme
+
+	brainstorm content
+
+	log in somewhere
+	sign up somewhere
+
+	headline
+		tagline
+			Connected. Centralized. Convenient.
+		short description for tagline/system
+		  The next level tool for YSES is now here. YSES Central contains features that solve the organization's problem in collecting, organizing, and analyzing data.
+
+		application name
+
+		logo
+
+	features
+		announcements
+			Be updated with the latest announcements from the executive department. Announcements have its own section to ensure that all important announcements are easily accessed and read by the users.
+
+		logbook
+			Have something in your mind? Logbook lets you put your thoughts into words. Similar to Facebook's status posting feature, logbook allows you to post which can be viewed by other users.
+
+		chat
+			Real time chatting is here. Send and receive chat messages instantly and reliably.
+
+		department systems
+			The main heart and soul of YSES Central. Department systems are specialized and tailored to each department needs.
+
+			PAD
+				JPAD Progress record
+					Track JPADsters' attendance and score records. Easily identify those with alarming absences. Recognize outstanding JPADsters.
+
+			Sec
+				Events Attendance
+					Record attendance of YSERs on required events
+
+			VL
+				VL Inventory System
+					View and borrow materials from VL
+
+			Fin
+				Finance System
+					Our beloved Fin System, also in YSES Central. With more features, such as automatic weekly fees, dynamic fee allocation, and the ability for users to view their own current, unpaid fees and previous paid fees.
+
+			Scho
+				Checklist System
+					No more hand computing GWA of members. This system allows Scho members to encode YSERs subject and grades, and the system takes care of the hassle computations such as members' GWA, overall org GWA, and GWA trends!
+
+			HR
+				Family Tree
+					The whole family tree, displayed in one page. Know your great-great-great grandfather!
+
+			Exec
+				Account validator
+					Members must only be YSERs. The Executive Department Members can review pending signed up accounts and can modify details for errors. Accept it or reject it!
+
+
+		YSERs list
+			Never forget your orgmates again. YSERs list show all members of the organization, from Charter members to present! Filter by batch, filter by org classification, use this tool to fit your recording needs.

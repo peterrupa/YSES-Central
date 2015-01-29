@@ -91,7 +91,7 @@ $(document).ready(function(){
     else{
       $(".chatcontact").each(function(){
         //get lowercase version for case insensitive searching
-        var nameLowercase = $(this).data("name").toLowerCase();
+        var nameLowercase = $(this).data("firstname").toLowerCase();
 
         if(nameLowercase.lastIndexOf(search) != -1 && (nameLowercase[nameLowercase.lastIndexOf(search) - 1] == null || nameLowercase[nameLowercase.lastIndexOf(search) - 1] == ' ')){
           $(this).fadeIn(200);
@@ -106,35 +106,13 @@ $(document).ready(function(){
   //declare chat messages storage.
   var chatstorage = [];
 
-  /*
-    Sample storage object
-    [
-      {
-        name: "almermamer",
-        lastId: 87,
-        messages: [
-          {
-            date: datebyday,
-            messages: [
-              {
-                sender: "almermamer",
-                message: "Hi!",
-                date: dateheremotherfucker
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  */
-
   function openHTML(username,state,firstname){
     var color = state == "Online"?"green":"gray";
 
     var html = ''+
       '<div data-username="'+username+'" data-state="'+state+'" data-firstname="'+firstname+'" class="chatwindowopen">'+
         '<div class="chatbottom">'+
-          '<input type="text"/>'+
+          '<input class="chatsend" type="text"/>'+
           '<svg style="width:100%;height:100%;position:absolute">'+
             '<line x1="0" y1="0" x2="100%" y2="0" style="stroke:rgba(255,255,255,1);stroke-width:5"></line>'+
             '<line x1="100%" y1="0" x2="100%" y2="100%" style="stroke:rgba(255,255,255,1);stroke-width:5"></line>'+
@@ -196,9 +174,12 @@ $(document).ready(function(){
     if($(".chatwindow[data-username='"+username+"']").length > 0){
       $(".chatwindowopen[data-username='"+username+"']").show();
       $(".chatwindow[data-username='"+username+"']").hide();
+
+      $(".chatwindowopen[data-username='"+username+"']").find('.chatmessages').scrollTop($(".chatwindowopen[data-username='"+username+"']").find('.chatmessages')[0].scrollHeight);
     }
     else{
       var state = $(this).find("span.right").text();
+
       var firstname = $(this).closest(".chatcontact").data("firstname");
 
       $("#chatwindowcontainer").append("<div class='chatmainwindow'>"+openHTML(username,state,firstname)+closeHTML(username,state,firstname)+"</div>");
@@ -207,6 +188,7 @@ $(document).ready(function(){
       //request for messages
       socket.emit("fetchchat",username);
     }
+    $(".chatwindowopen[data-username='"+username+"']").find(".chatsend").focus();
   });
 
   //window toggle
@@ -217,6 +199,8 @@ $(document).ready(function(){
 
     $(".chatwindowopen[data-username='"+username+"']").show();
     $(".chatwindow[data-username='"+username+"']").hide();
+
+    $(".chatwindowopen[data-username='"+username+"']").find('.chatmessages').scrollTop($(".chatwindowopen[data-username='"+username+"']").find('.chatmessages')[0].scrollHeight);
   });
 
   $('body').on('click','.open',function(e){
@@ -226,6 +210,10 @@ $(document).ready(function(){
 
     $(".chatwindowopen[data-username='"+username+"']").hide();
     $(".chatwindow[data-username='"+username+"']").show();
+  });
+
+  $('body').on('click','.unread',function(){
+    $(this).removeClass("unread");
   });
 
   //close window
@@ -268,179 +256,222 @@ $(document).ready(function(){
   });
 
   socket.on("fetchchat",function(name,log,lastIndex){
-    if(log){
-      var inChatStorage = false;
+    if(!log){
+      return;
+    }
 
-      //check if already exists in storage
-      for(var i = 0; i < chatstorage.length; i++){
-        if(chatstorage[i]["name"] == name){
-          inChatStorage = true;
-          break;
-        }
+    log = safe_tags(log);
+
+    if($(".chatwindowopen[data-username='"+name+"']").find(".chatmessages").children(".chatsection")[0]){
+      var scrollTarget = $(".chatwindowopen[data-username='"+name+"']").find(".chatmessages").children(".chatsection").first();
+    }
+    else{
+      var scrollTarget = false;
+    }
+
+    //check if username exists in chatstorage
+    var usernameInChatStorage = false;
+    for(var i = 0; i < chatstorage.length; i++){
+      if(chatstorage[i]["username"] == name){
+        usernameInChatStorage = true;
+        var usernameIndex = i;
+        break;
       }
+    }
 
-      //for dates in log
-        //fetch boolean value if date is in chatstorage
-        //if this date is in storage
-        //else
+    if(!usernameInChatStorage){
+      //push to chat append a new username object
+      var push = {
+        username: name,
+        dates: []
+      };
 
-      if(inChatStorage){
-        console.log(log);
+      chatstorage.push(push);
 
-        var mainPrepend = "";
+      var usernameIndex = chatstorage.length-1;
+    }
 
-        //find each date if it is in chatstorage[i]
-        for(var j = 0; j < log.length; j++){
-          var inChatStorageMessages = false;
-          for(var k = 0; k < chatstorage[i].messages.length; k++){
-            if(chatstorage[i].messages[k].date == log[j].date){
-              inChatStorageMessages = true;
-              break;
-            }
-          }
-
-          if(inChatStorageMessages){
-            //exists
-            chatstorage[i].messages[k].messages = chatstorage[i].messages[k].messages.concat(log[j].messages);
-            $(".chatwindowopen[data-username='"+name+"']").find(".chatmessages").children()[0].remove();
-          }
-          else{
-            chatstorage[i].messages.push(log[j]);
-            console.log("Pushed: "+log[j]);
-          }
-
-          /////////////////////////
-
-          //get first child of chatbody before prepending. We'll need its coordinates after prepending.
-          var firstChild = $(".chatwindowopen[data-username='"+name+"']").find(".chatsection").first();
-
-          var prependMain = "";
-          for(var l = 0; l < log.length; l++){
-            var temp = "";
-            var prependDate = ''+
-              '<div class="datetitle">'+
-                '<strong>'+log[l].date+'</strong>'+
-              '</div>';
-
-            //iterate each chat messages and append them
-            for(var j = 0; j < log[l].messages.length; j++){
-              var sender = "";
-
-              if(log[l]["messages"][j]["sender"] == name){
-                sender = "chatother";
-              }
-              else{
-                sender = "chatself";
-              }
-
-              var label = "";
-
-              if(sender == "chatself"){
-                label = "You";
-              }
-              else{
-                label = $(".chatwindowopen[data-username='"+name+"']").data("firstname");
-              }
-
-              var chat = ''+
-              '<div class="chatsection '+sender+'">'+
-                '<span><strong>'+label+': </strong>'+log[l]["messages"][j]["message"]+'</span>'+
-              '</div>';
-
-              temp = chat + temp;
-
-              console.log(chat);
-            }
-            temp = prependDate + temp;
-
-            prependMain = temp + prependMain;
-          }
-
-          $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').prepend(prependMain);
-
-          //after prepending, put the scroll back to the first child defined before
-          $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').scrollTop((firstChild.prev().position())["top"]);
-        }
-
-        //update lowest index
-        chatstorage[i].lastId = lastIndex;
-
-        console.log(chatstorage);
+    for(var i = 0; i < log.length; i++){
+      if(chatstorage[usernameIndex]["dates"].lastIndexOf(log[i]["date"]) != -1){
+        //remove date title
+        $(".chatwindowopen[data-username='"+name+"']").find(".chatmessages").children()[0].remove();
       }
       else{
-        if(!log){
-          var log = [];
+        //add date to chatstorage[usernameIndex]
+        chatstorage[usernameIndex]["dates"].push(log[i]["date"]);
+      }
+
+      //date html
+      var dateHTML = ''+
+        '<div class="datetitle">'+
+          '<strong>'+log[i]["date"]+'</strong>'+
+        '</div>';
+
+      var chatHTML = '';
+      for(var j = 0; j < log[i]["messages"].length; j++){
+        var sender = "";
+
+        if(log[i]["messages"][j]["sender"] == name){
+          sender = "chatother";
         }
-        var push = {
-          name: name,
-          lastId: lastIndex,
-          messages: log
-        };
-
-        chatstorage.push(push);
-
-        //append to DOM
-        var append = "";
-
-        for(var i = 0; i < push["messages"].length; i++){
-          var tempdate = push["messages"][i]["messages"][0]["date"].split(" ");
-          tempdate = tempdate[0]+" "+tempdate[1]+" "+tempdate[2];
-
-          var date = ''+
-            '<div class="datetitle">'+
-              '<strong>'+tempdate+'</strong>'+
-            '</div>';
-
-          var chatappend = "";
-
-          //iterate each chat messages
-          for(var j = 0; j < push["messages"][i]["messages"].length; j++){
-            var sender = "";
-
-            if(push["messages"][i]["messages"][j]["sender"] == name){
-              sender = "chatother";
-            }
-            else{
-              sender = "chatself";
-            }
-
-            var label = "";
-
-            if(sender == "chatself"){
-              label = "You";
-            }
-            else{
-              label = $(".chatwindowopen[data-username='"+name+"']").data("firstname");
-            }
-
-            var chat = ''+
-            '<div class="chatsection '+sender+'">'+
-              '<span><strong>'+label+': </strong>'+push["messages"][i]["messages"][j]["message"]+'</span>'+
-            '</div>';
-
-            chatappend = chat + chatappend;
-          }
-
-          var finalappend = date + chatappend;
-
-          append = finalappend + append;
+        else{
+          sender = "chatself";
         }
 
-        $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').append(append+"<div style='height:10px;clear:both'></div>");
-        $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').scrollTop($(".chatwindowopen[data-username='"+name+"']").find('.chatmessages')[0].scrollHeight);
-        $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').bindScroll(name);
+        var label = "";
+
+        if(sender == "chatself"){
+          label = "You";
+        }
+        else{
+          label = $(".chatwindowopen[data-username='"+name+"']").data("firstname");
+        }
+
+        var chat = ''+
+        '<div class="chatsection '+sender+'">'+
+          '<span><strong>'+label+': </strong>'+log[i]["messages"][j]["message"]+'</span>'+
+        '</div>';
+
+        chatHTML = chat + chatHTML;
+      }
+
+      var finalHTML = dateHTML + chatHTML;
+
+      //prepend to .chatbody
+      $(".chatwindowopen[data-username='"+name+"']").find(".chatmessages").prepend(finalHTML);
+    }
+
+    //adjust scroll
+    if(scrollTarget){
+      $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').scrollTop(scrollTarget.prev().position()["top"]);
+    }
+    else{
+      $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').scrollTop($(".chatwindowopen[data-username='"+name+"']").find('.chatmessages')[0].scrollHeight);
+    }
+
+
+    //bind scroll listener
+    $(".chatwindowopen[data-username='"+name+"']").find('.chatmessages').bindScroll(name);
+
+    //insertlastIndex
+    chatstorage[usernameIndex]["lastId"] = lastIndex;
+  });
+
+  socket.on('sendchat',function(sender,recipient,msg,date){
+    msg = safe_tags(msg);
+
+    //find partner
+    if(userkey == recipient){
+      var opposite = sender;
+    }
+    else{
+      var opposite = recipient;
+    }
+
+    //check if username exists in chatstorage
+    var usernameInChatStorage = false;
+    for(var i = 0; i < chatstorage.length; i++){
+      if(chatstorage[i]["username"] == opposite){
+        usernameInChatStorage = true;
+        var usernameIndex = i;
+        break;
+      }
+    }
+
+    if(usernameInChatStorage){
+      if(chatstorage[usernameIndex]["dates"].indexOf(date) == -1){
+        chatstorage[usernameIndex]["dates"].push(date);
+        //insert date title here
+        var dateHTML = ''+
+          '<div class="datetitle">'+
+            '<strong>'+date+'</strong>'+
+          '</div>';
+
+        $(".chatwindowopen[data-username='"+opposite+"']").find('.chatmessages').append(dateHTML);
+
+
+
+      }
+    }
+    else{
+      //push to chat append a new username object
+      var push = {
+        username: name,
+        dates: []
+      };
+
+      chatstorage.push(push);
+
+      var usernameIndex = chatstorage.length-1;
+
+      //should fetch shit here
+      if(userkey == recipient){
+        var state = $('.chatcontact[data-username="'+opposite+'"]').find("span.right").text();
+        var firstname = $('.chatcontact[data-username="'+opposite+'"]').data("firstname");
+        $("#chatwindowcontainer").append("<div class='chatmainwindow'>"+openHTML(opposite,state,firstname)+closeHTML(opposite,state,firstname)+"</div>");
+
+        socket.emit("fetchchat",opposite,null,true);
+      }
+    }
+
+    //append html to chatmessages
+    var senderClass = "";
+
+    if(sender != userkey){
+      senderClass = "chatother";
+    }
+    else{
+      senderClass = "chatself";
+    }
+
+    var label = "";
+
+    if(senderClass == "chatself"){
+      label = "You";
+    }
+    else{
+      label = $(".chatwindowopen[data-username='"+opposite+"']").data("firstname");
+    }
+
+    var chat = ''+
+    '<div class="chatsection '+senderClass+'">'+
+      '<span><strong>'+label+': </strong>'+msg+'</span>'+
+    '</div>';
+
+    $(".chatwindowopen[data-username='"+opposite+"']").find('.chatmessages').append(chat);
+
+    $(".chatwindowopen[data-username='"+opposite+"']").show();
+    $(".chatwindow[data-username='"+opposite+"']").hide();
+
+    //scroll down
+    if($(".chatwindowopen[data-username='"+opposite+"']").find('.chatmessages')[0]){
+      $(".chatwindowopen[data-username='"+opposite+"']").find('.chatmessages').scrollTop($(".chatwindowopen[data-username='"+opposite+"']").find('.chatmessages')[0].scrollHeight);
+    }
+  });
+
+  $('body').on('keyup','.chatsend',function(e){
+    if(e.keyCode == 13){
+      //check if it has value
+      if($(this).val() != ""){
+        //emit socket event
+
+        socket.emit('sendchat',$(this).closest(".chatwindowopen").data("username"),$('.chatsend').val());
+
+        //clear val
+        $(this).val("");
       }
     }
   });
 
   $.fn.bindScroll = function(name){
+    $(this).off('scroll');
     $(this).on('scroll', function(){
       var scrollTop = $(this).scrollTop();
       if(scrollTop == 0){
         //select object with relevant username
         var lastId;
         for(var i = 0; i < chatstorage.length; i++){
-          if(chatstorage[i].name == name){
+          if(chatstorage[i].username == name){
             lastId = chatstorage[i].lastId;
             break;
           }

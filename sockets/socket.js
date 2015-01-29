@@ -127,14 +127,20 @@ module.exports = function(http,sessionMiddleware,eventEmitter,pool,async,jade) {
           currentURL = url;
         });
 
-        socket.on("fetchchat",function(account,lastId){
-          console.log(session.userkey+" request chat for "+account);
+        socket.on("fetchchat",function(account,lastId,first){
           var subquery = "";
           if(lastId){
             subquery = " && id<"+lastId;
           }
 
-          var query = "SELECT `id`, `recipient`, `sender`, `message`, DATE_FORMAT(`date`,'%b %e %Y %T') AS date FROM `chat_log` WHERE (recipient="+connection.escape(session.userkey)+" || recipient="+connection.escape(account)+") && (sender="+connection.escape(session.userkey)+" || sender="+connection.escape(account)+")"+subquery+" ORDER BY date DESC LIMIT 10";
+          if(first){
+            var subsubquery =  "1,9";
+          }
+          else{
+            var subsubquery = "10";
+          }
+
+          var query = "SELECT `id`, `recipient`, `sender`, `message`, DATE_FORMAT(`date`,'%b %e %Y %T') AS date FROM `chat_log` WHERE (recipient="+connection.escape(session.userkey)+" || recipient="+connection.escape(account)+") && (sender="+connection.escape(session.userkey)+" || sender="+connection.escape(account)+")"+subquery+" ORDER BY date DESC LIMIT "+subsubquery+"";
 
           console.log(query);
 
@@ -174,8 +180,6 @@ module.exports = function(http,sessionMiddleware,eventEmitter,pool,async,jade) {
                   //var day =
                 }
 
-                console.log(JSON.stringify(send,null,1));
-
                 //store ids in temp array
                 var id = [];
 
@@ -185,8 +189,6 @@ module.exports = function(http,sessionMiddleware,eventEmitter,pool,async,jade) {
 
                 var lastIndex = id.min();
 
-                //console.log(chat);
-
                 socket.emit("fetchchat",account,send,lastIndex);
               }
               else{
@@ -195,6 +197,42 @@ module.exports = function(http,sessionMiddleware,eventEmitter,pool,async,jade) {
 
             }
           });
+        });
+
+        socket.on("sendchat",function(recipient,msg){
+          console.log(session.userkey+" sending chat to "+recipient+":");
+
+          async.waterfall([
+            function(callback){
+              //save to database
+              var query = "INSERT INTO `chat_log`(`recipient`, `sender`, `message`, `date`) VALUES ("+connection.escape(recipient)+","+connection.escape(session.userkey)+","+connection.escape(msg)+",CURRENT_TIMESTAMP)";
+
+              connection.query(query,function(err,id){
+                if(err) console.log(err);
+                else{
+                  callback(null,id.insertId);
+                }
+              });
+            },
+            function(id,callback){
+              //get inserted date
+              var query = "SELECT DATE_FORMAT(`date`,'%b %e %Y') AS date FROM `chat_log` WHERE id="+id;
+
+              connection.query(query,function(err,date){
+                callback(null,date[0]["date"]);
+              });
+            }
+          ],
+          function(err,date){
+            if(err) console.log(err);
+            else{
+              console.log("emitting..");
+              socket.emit('sendchat',session.userkey,recipient,msg,date);
+              io.to(recipient).emit('sendchat',session.userkey,recipient,msg,date);
+            }
+          });
+
+
         });
 
         socket.on("disconnect",function(){

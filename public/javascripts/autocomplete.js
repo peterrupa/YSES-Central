@@ -1,21 +1,10 @@
-$(function() {
-		var availableTags = (function(){
-			return $.ajax({
-				async: false,
-				url: "/search",
-				data: "",
-				type: "GET",
-				success: function (res) {
-					return res;
-				},
-				error: function (e){
-					console.dir(e);
-				}
-			})["responseJSON"];
-		})();
-
+$.ajax({
+	url: "/search",
+	data: "",
+	type: "GET",
+	success: function (res) {
 		$( "#tags" ).autocomplete({
-			source: availableTags,
+			source: res,
 			select: function(event,ui){
 				//redirect to page via ajax
 				$.ajax({
@@ -41,4 +30,8 @@ $(function() {
 			.append( "<a>" + "<img src='/" + item.picture +"' style='width:50px;margin-right:15px;'>" + item.value + "</a>" )
 			.appendTo( ul );
 		};
-	});
+	},
+	error: function (e){
+		console.dir(e);
+	}
+});

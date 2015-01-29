@@ -12,7 +12,7 @@ module.exports = function(app,pool){
 				else{
 					for(var i = 0; i < rows.length; i++){
 						rows[i]["picture"] = rows[i]["picture"].substring(7);
-						rows[i]["url"] = "//profile/" + rows[i]["username"];
+						rows[i]["url"] = "/profile/" + rows[i]["username"];
 					}
 					res.send(rows);
 				}

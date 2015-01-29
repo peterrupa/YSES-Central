@@ -143,6 +143,10 @@
 	background:rgba(0,0,100,0.8);
 }
 
+.unread	{
+	background:rgba(0,0,0,0.95);
+}
+
 .chatwindowopen	{
 	position:relative;
 	width:250px;

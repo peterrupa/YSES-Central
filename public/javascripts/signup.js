@@ -150,30 +150,25 @@ $(document).ready(function(){
 
 	//autocomplete for mentees
 	function menteesAutocomplete(){
-		var availableTags = (function(){
-			return $.ajax({
-				async: false,
-				url: "/search",
-				data: "",
-				type: "GET",
-				success: function (res) {
-					return res;
-				},
-				error: function (e){
-					console.dir(e);
-				}
-			})["responseJSON"];
-		})();
-
-		$( ".accountsAutocomplete" ).autocomplete({
-			source: availableTags
-		});
-		$('.accountsAutocomplete').each(function() {
-			$(this).autocomplete( "instance" )._renderItem = function (ul, item) {
-				return $( "<li>" )
-				.append( "<a>" + "<img src='/" + item.picture +"' style='width:25px;margin-right:15px;'>" + item.value + "</a>" )
-				.appendTo( ul );
-			};
+		$.ajax({
+			url: "/search",
+			data: "",
+			type: "GET",
+			success: function (res) {
+				$( ".accountsAutocomplete" ).autocomplete({
+					source: res
+				});
+				$('.accountsAutocomplete').each(function() {
+					$(this).autocomplete( "instance" )._renderItem = function (ul, item) {
+						return $( "<li>" )
+						.append( "<a>" + "<img src='/" + item.picture +"' style='width:25px;margin-right:15px;'>" + item.value + "</a>" )
+						.appendTo( ul );
+					};
+				});
+			},
+			error: function (e){
+				console.dir(e);
+			}
 		});
 	}
 	menteesAutocomplete();
