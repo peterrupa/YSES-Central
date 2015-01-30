@@ -24,7 +24,7 @@ html
 			userkey = "#{username}";
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
 	body(data-type="background",data-speed="2")
-		div#header.padding-vert
+		//div#header.padding-vert
 			nav.navbar.navbar-default.navbar-fixed-top
 				div.container
 					div.navbar-header
@@ -75,16 +75,16 @@ html
 														span#counter
 														input#postLogbook.btn.btn-default(type="button",value="Post")
 									div#chatbox-icon.hidden-sm.hidden-md
-										a.menu-icon-chatbox(href="/#",data-target="tooltip",data-placement="left",title="Open Chatbox")
+										a.menu-icon-chatbox(href="/#",data-target="tooltip",data-placement="left",title="Chatbox")
 											span.glyphicon.glyphicon-send
 									div#department-icon.hidden-sm.hidden-md
 										a.menu-icon-department(href="/#",data-target="tooltip",data-placement="left",title="Access Department Systems")
 											span.glyphicon.glyphicon-list
 										div#department-button-container
-											div.wrapper.clearfix
+											div.link.wrapper.clearfix
 												figure.gallery-item
 													img.department-logo(src="/images/button/exec.png")
-													a(href="/#")
+													a(style="cursor:pointer;")
 														figcaption.img-title.exec-title
 															h3 EXEC
 													ul.wheel.text-center
@@ -94,10 +94,10 @@ html
 														li.item.exec-title
 															a.ajax(href="/accountvalidator")
 																h5 Validate
-											div.wrapper.clearfix
+											div.link.wrapper.clearfix
 												figure.gallery-item
 													img.department-logo(src="/images/button/pad.png")
-													a(href="#")
+													a(style="cursor:pointer;")
 														figcaption.img-title.pad-title
 															h3 PAD
 													ul.wheel.text-center
@@ -107,50 +107,50 @@ html
 														li.item.pad-title
 															a.ajax(href="/padscores")
 																h5 JPAD Scores
-											div.wrapper.clearfix
+											div.link.wrapper.clearfix
 												figure.gallery-item
 													img.department-logo(src="/images/button/sec.png")
-													a(href="#")
+													a(style="cursor:pointer;")
 														figcaption.img-title.sec-title
 															h3 SEC
 													ul.wheel.text-center
 														li.item.sec-title
 															a.ajax(href="/attendance")
 																h5 Attendance
-											div.wrapper.clearfix
+											div.link.wrapper.clearfix
 												figure.gallery-item
 													img.department-logo(src="/images/button/vl.png")
-													a(href="#")
+													a(style="cursor:pointer;")
 														figcaption.img-title.vl-title
 															h3 VL
 													ul.wheel.text-center
 														li.item.vl-title
 															a.ajax(href="#")
 																h5 VL Inventory
-											div.wrapper.clearfix
+											div.link.wrapper.clearfix
 												figure.gallery-item
 													img.department-logo(src="/images/button/SCHO.png")
-													a(href="#")
+													a(style="cursor:pointer;")
 														figcaption.img-title.scho-title
 															h3 SCHO
 													ul.wheel.text-center
 														li.item.scho-title
 															a.ajax(href="/checklist")
 																h5 Checklist
-											div.wrapper.clearfix
+											div.link.wrapper.clearfix
 												figure.gallery-item
 													img.department-logo(src="/images/button/hr.png")
-													a(href="#")
+													a(style="cursor:pointer;")
 														figcaption.img-title.hr-title
 															h3 HR
 													ul.wheel.text-center
 														li.item.hr-title
 															a.ajax(href="#")
 																h5 Family Tree
-											div.wrapper.clearfix
+											div.link.wrapper.clearfix
 												figure.gallery-item
 													img.department-logo(src="/images/button/fin.png")
-													a(href="#")
+													a(style="cursor:pointer;")
 														figcaption.img-title.fin-title
 															h3 FIN
 													ul.wheel.text-center
@@ -208,13 +208,17 @@ html
 		script(src='/javascripts/bootstrap-tooltip.js')
 
 		script.
-			$(document).ajaxStart(function () {
+			$(document).on('click',function(){
+
+			});
+			
+			/*$(window).ajaxStart(function () {
 				timeOut = setTimeout(function () {
 					$('.load-screen').show();
 				}, 0);
 			});
-			$(document).ajaxStop(function () {
+			
+			$(window).ajaxStop(function () {
 				clearTimeout(timeOut);
-				$('.load-screen').fadeOut(1500);
-			});
-		
+				$('.load-screen').fadeOut(800);
+			});*/

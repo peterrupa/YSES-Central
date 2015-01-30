@@ -12,16 +12,18 @@ $(document).ready(function(){
 	// hover animation
 	$('.gallery-item').hover(
 		function() {
-			$(this).find('ul').slideDown(500);
-		}, function() {
-			$(this).find('ul').slideUp(300);
-		}
-	);
-	$('.gallery-item').hover(
-		function() {
 			$(this).find('.img-title').fadeIn(200);
 		}, function() {
 			$(this).find('.img-title').fadeOut(100);
+		}
+	);
+	$('.link').on('click',
+		function() {
+			if($(this).find('.wheel').is(':visible') != 0){
+				$(this).find('.wheel').slideUp(500);
+			} else {
+				$(this).find('.wheel').slideDown(500);
+			}
 		}
 	);
 
@@ -33,6 +35,16 @@ $(document).ready(function(){
 	        && container.has(e.target).length === 0) // ... nor a descendant of the container
 	    {
 	        container.slideUp();
+	    }
+	});
+
+	$(document).click(function (e){
+	    var container = $(".link");
+
+	    if (!container.is(e.target) // if the target of the click isn't the container...
+	        && container.has(e.target).length === 0) // ... nor a descendant of the container
+	    {
+	        container.find('.wheel').slideUp();
 	    }
 	});
 });

@@ -21,6 +21,7 @@ module.exports = function(app,pool,async){
 							res.sendStatus(403);
 						}
 						else{
+							//will fetch sems and members
 							async.parallel({
 								sems: function(callback){
 									//fetch list of sems
@@ -135,8 +136,10 @@ module.exports = function(app,pool,async){
 									function(err){
 										if(err) reportError(res,err);
 										else{
-											console.log(JSON.stringify(data,null,1));
-											res.sendStatus(200);
+											//console.log(data);
+											//console.log( JSON.stringify(data));
+											res.render('schochecklist',data);
+											//res.sendStatus(200);
 										}
 									});
 								}

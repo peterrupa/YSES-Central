@@ -9,8 +9,121 @@ html
 		meta(name="viewport",content="width=device-width, initial-scale=1.0 user-scalable=no")
 
 	body(data-type="background",data-speed="2")
+		div#first-landing.col-lg-12
+			div#central-header.text-center.row
+				img#central-logo.img-responsive(src="../images/logoAllWhite.png")
+				span#central-title YSES-Central
+			div#central-tagline.row
+				span COMPACT . CONVENIENT . CONNECTED
+			div#central-description.row.text-center
+				span The next level tool for YSES is now here. YSES Central contains features that solve the organization's problem in collecting, organizing, and analyzing data.
+			div#central-redir.row
+				a#central-signup.central-button(href="#",data-toggle="modal",data-target="#signupModal") Sign Up
+				div#signupModal.modal.fade
+					div.modal-dialog
+						div.modal-content.text-center
+							form#signupform(action="signup",method="post",enctype="multipart/form-data")
+								div.text-left.modal-header
+									button.close(type="button",data-dismiss="modal")
+										span(aria-hidden="true") &times;
+										span.sr-only Close
+									h4.modal-title(style='margin-bottom:10px;') Sign Up
+								div.modal-body
+									div.first-column
+										span#picture-div
+											input#photo.form-control(type="file",name="photo",style='display:none')
+											div#upfile1.text-center
+												span Profile Picture: 
+												span.glyphicon.glyphicon-picture
+											div#bottom-input-file.text-center NO FILE SELECTED
+											div#preview
+									div.second-column
+										ul.no-bullets.container
+											li First name:
+												input.input-text.form-control(type="text",name="first_name")
+											li Middle name:
+												input.input-text.form-control(type="text",name="middle_name")
+											li Last name:
+												input.input-text.form-control(type="text",name="last_name")
+											li Org Classification:
+												br
+												select.form-control(form="signupform",name="org_class")
+													option(value="Active") Active
+													option(value="Inactive") Inactive
+													option(value="Alumni") Alumni
+											li Department:
+												select.form-control(form="signupform",name="department")
+													optgroup(label="Projects and Activities")
+														option(value="Junior Projects and Activities") Junior
+														option(value="Senior Projects and Activities") Senior
+													option(value="Visuals and Logistics") Visuals and Logistics
+													option(value="Secretariat") Secretariat
+													option(value="Scholastics") Scholastics
+													option(value="Finance") Finance
+													option(value="Human Resources") Human Resources
+													option(value="Executive") Executive (EO Only)
+												input#isExec(type="checkbox",name="isExec" disabled)
+												span Executive
+											li Student Number:
+												br
+												div#student-number.input-group
+													input#sn-year.form-control.sn(type="text",maxlength="4",name="sn-year",placeholder="20XX")
+													span.glyphicon.glyphicon-minus.input-group-addon(style="top:0px;")
+													input#sn-number.form-control.sn(type="text",maxlength="5",name="sn-number",placeholder="XXXXX")
+											li Username:
+												br
+												input#username.form-control(type="text",name="username")
+											li Password:
+												input#password.form-control(type="password",name="password")
+											li Retype Password:
+												input#retype-password.form-control(type="password",name="retype-password")
+											li Organization Batch:
+												select.form-control(form="signupform",name="org_batch")
+													each item in JSON.parse(batch)
+														option(value=item)= item
+											li Mentor:
+												br
+												input.accountsAutocomplete.input-text.form-control(type="text",name="mentor")
+											li#mentees
+												span Mentees:
+												div.mentee-field.input-group
+													input.accountsAutocomplete.mentee-textfield.form-control(type="text",name="mentee")
+													span.input-group-btn
+														button.add-mentee.btn.btn-default(type="button",value="+")
+															span.glyphicon.glyphicon-plus
+											li Birthday:
+												input.form-control(type="date",name="birthday")
+											li Home Address
+												input.input-text.form-control(type="text",name="home_address")
+											li College Address
+												input.input-text.form-control(type="text",name="college_address")
+								div.modal-footer
+										button.btn.btn-warning(type="button",data-dismiss="modal",data-toggle="modal",data-target="#loginModal") Existing user?
+										button.btn.btn-default(type="submit") Submit
+				a#central-login.central-button(href="#",data-toggle="modal",data-target="#loginModal") Log In
+				div#loginModal.modal.fade
+					div.modal-dialog
+						div.modal-content.text-center
+							form#loginform(action='login',method="post")
+								div.text-left.modal-header
+									button.close(type="button",data-dismiss="modal")
+										span(aria-hidden="true") &times;
+										span.sr-only Close
+									h4.modal-title Log In
+								div.modal-body
+									div.form-group
+											ul.list-inline.container
+												li Username:
+													input.form-control(type="text",name="username")
+												br
+												li Password:
+													input.form-control(type="password",name="password")
+								div.modal-footer
+										button.btn.btn-warning(type="button",data-dismiss="modal",data-toggle="modal",data-target="#signupModal") No account yet?
+										input.btn.btn-default(type="submit",value="Submit")
+
 		// top bar
-		nav.navbar.navbar-default.navbar-fixed-top
+		//nav.navbar.navbar-default.navbar-fixed-top
 			div.container
 				div.navbar-header
 					button.navbar-toggle.collapsed(type="button",data-toggle="collapse",data-target="#navbar",aria-expanded="false",aria-controls="navbar")
@@ -25,7 +138,6 @@ html
 					ul.nav.navbar-nav
 						li.navbutton
 							a(href="#",data-toggle="modal",data-target="#signupModal") Sign Up
-							// modal for sign up
 							div#signupModal.modal.fade
 								div.modal-dialog
 									div.modal-content.text-center
@@ -109,7 +221,6 @@ html
 												button.btn.btn-default(type="submit") Submit
 						li.navbutton
 							a(href="#",data-toggle="modal",data-target="#loginModal") Log In
-							// modal for log in
 							div#loginModal.modal.fade
 								div.modal-dialog
 									div.modal-content.text-center
@@ -131,8 +242,7 @@ html
 												button.btn.btn-warning(type="button",data-dismiss="modal",data-toggle="modal",data-target="#signupModal") No account yet?
 												input.btn.btn-default(type="submit",value="Submit")
 		// image carousel
-		div.encloseall.container-fluid.hidden-xs.hidden-sm.hidden-md
-			// image gallery
+		//div.encloseall.container-fluid.hidden-xs.hidden-sm.hidden-md
 			div.gallery
 				div#myCarousel.carousel.slide(data-ride="carousel")
 					div.carousel-inner
@@ -150,12 +260,11 @@ html
 						span.glyphicon.glyphicon-chevron-right
 					ol.carousel-indicators
 						li.active(data-target="#myCarousel",data-slide-to="0")
-							//img(src='../images/eventbutton.png')
 						li(data-target="#myCarousel",data-slide-to="1")
 						li(data-target="#myCarousel",data-slide-to="2")
 						li(data-target="#myCarousel",data-slide-to="3")
 		// content
-		div.encloseall.container
+		//div.encloseall.container
 			div.row
 				div.col-lg-12
 					div.col-lg-6.padding-vert

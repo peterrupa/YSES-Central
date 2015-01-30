@@ -1,0 +1,100 @@
+link(rel="stylesheet",href="/stylesheets/schochecklist.css")
+div.title-header.profile-header
+	h2 YSERs Checklist
+div#schocontainer.col-lg-12
+	div#sem-menu.col-lg-4
+		h3.title-scho Semesters
+		- for(var x = 0; x < checklist.length; x += 1){
+			div(data-index=x).batch-member
+				a= checklist[x].sem
+		- }
+	div#yser-grade.col-lg-8
+script.
+	$(document).ready(function(){
+		var checklist = !{JSON.stringify(checklist)};
+		$('.batch-member').on('click',function(){
+			var currentSemIndex = $(this).data('index');
+			if(checklist[currentSemIndex].subjects.length != 0){
+				var tempdataheader = ''+
+					'<tr>'+
+						'<td>Subject</td>'+
+						'<td>Grade</td>'+
+						'<td>Unit</td>'+
+						'<td></td>'+
+					'</tr>';
+				var tempdatacontent = '';
+				//alert(checklist[currentSemIndex].subjects[0].subject);
+				for(var k = 0; k < checklist[currentSemIndex].subjects.length; k += 1){
+					tempdatacontent += ''+
+					'<tr>'+
+						'<td class="subject-name">'+checklist[currentSemIndex].subjects[k].name+'</td>'+
+						'<td class="subject-grade">'+checklist[currentSemIndex].subjects[k].grade+'</td>'+
+						'<td class="subject-units">'+checklist[currentSemIndex].subjects[k].units+'</td>'+
+						'<td><a class="edit" style="cursor:pointer">Edit</a></td>'+
+					'</tr>';
+				}
+				var temphtml = ''+
+					'<h3 class="title-scho">Subjects for '+checklist[currentSemIndex].sem+'</h3>'+
+					'<table class="table table-hover">'+
+						tempdataheader+
+						tempdatacontent+
+					'</table>';
+				if(checklist[currentSemIndex].subjects.length != 0) $('#yser-grade').html(temphtml);
+				else $('#yser-grade').html(temphtml);
+			} else{
+				var temphtml = ''+
+					'<div class="no-subjects">'+
+						'<h3 class="title-scho">No subjects found for '+checklist[currentSemIndex].sem+'!</h3>'+
+					'</div>';
+				$('#yser-grade').html(temphtml);
+			}
+		});
+
+		$('body').on('click','.edit',function(){
+			$(this).html('Done');
+			$(this).addClass('done');
+			$(this).removeClass('edit');
+			var tempcode;
+			
+			tempcode = ''+
+				'<input class="form-control" type="text" value="' + $(this).closest('tr').find('.subject-name').text() + '"/>';
+			$(this).closest('tr').find('.subject-name').html(tempcode);
+
+			var option = 0.75;
+			var tempoption = '';
+			for(var z = 0; z < 11; z += 1){
+				if(option < 3) option += 0.25;
+				else option += 1;
+				if(option==$(this).closest('tr').find('.subject-grade').text()) tempoption += '<option selected="selected" value=' + option + '>' + option + '</option>';
+				else tempoption += '<option value=' + option + '>' + option + '</option>';
+			}
+			tempcode = ''+
+				'<select class="form-control">'+
+					tempoption +
+				'</select>';
+			$(this).closest('tr').find('.subject-grade').html(tempcode);
+
+			tempcode = '' +
+				'<input class="form-control" type="number" min=0 max=10 value='+ $(this).closest('tr').find('.subject-units').text() +' />';
+			$(this).closest('tr').find('.subject-units').html(tempcode);
+
+		});
+
+		$('body').on('click','.done',function(){
+			$(this).html('Edit');
+			$(this).addClass('edit');
+			$(this).removeClass('done');
+			var tempcode;
+			
+			tempcode = $(this).closest('tr').find('.subject-name').find('input').val();
+			$(this).closest('tr').find('.subject-name').html(tempcode);
+
+			tempcode = $(this).closest('tr').find('.subject-grade').find('select').val();
+			$(this).closest('tr').find('.subject-grade').html(tempcode);
+
+			tempcode = $(this).closest('tr').find('.subject-units').find('input').val();
+			$(this).closest('tr').find('.subject-units').html(tempcode);
+
+		});
+		
+	});

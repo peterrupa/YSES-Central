@@ -1,0 +1,179 @@
+link(rel="stylesheet",href="/stylesheets/schochecklist.css")
+div.title-header.profile-header
+	h2 YSERs Checklist
+div#schocontainer.col-lg-12
+	div#ysers-per-batch.col-lg-4
+		- for(var x = 0; x < members.length; x += 1){
+			div.batch-container
+				h3.title-scho= members[x].batch
+				- for(var y = 0; y < members[x].members.length; y += 1){
+					div(data-batchindex=x,data-memberindex=y).batch-member
+						a= members[x].members[y].first_name
+				- }
+		- }
+	div#scho-stat.col-lg-8
+		
+script.
+	$(document).ready(function(){
+		var currentBatchIndex;
+		var currentMemberIndex;
+		var members = !{JSON.stringify(members)};
+		var sems = !{JSON.stringify(sems)};
+		
+		var tempheader = '';
+		var tempcontent = '';
+		var tempfooter = '';
+		var temphtml = '';
+		var subjectnum = 0;
+		$('body').on('click','.batch-member',function(){
+
+			currentBatchIndex = $(this).data('batchindex');
+			currentMemberIndex = $(this).data('memberindex');
+
+			var templist = '';
+
+			for(var m = 0; m < sems.length; m += 1){
+				templist += ''+
+					'<li data-sem='+sems[m]+'><a href="#">' + sems[m] + '</a></li>';
+			}
+
+			var tempbuttons = ''+
+				'<div class="event-buttons">'+
+					'<button id="add-event" data-toggle="modal" data-target="#addEventModal" data-placement="left">'+
+						'Add Semester'+
+					'</button>'+
+					'<div id="addEventModal" class="modal fade text-left">'+
+						'<div class="modal-dialog">'+
+							'<div class="modal-content col-lg-15">'+
+								'<div class="modal-header">'+
+									'<button class="close" type="button" data-dismiss="modal">'+
+										'<span aria-hidden="true"> &times; </span>'+
+										'<span class="sr-only Close"></span>'+
+									'</button>'+
+									'<h6 class="modal-title"> Add event </h6>'+
+								'</div>'+
+								'<div class="modal-body">'+
+									'<div class="header-input-group">'+
+										'<h5> Semester </h5>'+
+										'<select class="form-control">'+
+											'<option>1st Semester</option>'+
+											'<option>2nd Semester</option>'+
+											'<option>Summer</option>'+
+										'</select>'+
+									'</div>'+
+									'<div style="overflow:auto;" class="header-input-group">'+
+										'<h5> Academic Year </h5>'+
+										'<input style="float:left;width:48%;" class="form-control input-header" type="number" max="1996" min="2500" value="2015"/>'+
+										'<span style="float:left;"> &nbsp - &nbsp </span>'+
+										'<input style="float:left;width:48.1%;" class="form-control input-header" type="number" max="1996" min="2500" value="2015"/>'+
+									'</div>'+
+								'</div>'+
+								'<div class="modal-footer">'+
+									'<input id="postAddEvent" class="btn btn-primary pull-right" type="button" value="Add Semesters" data-loading="Loading"/>'+
+								'</div>'+
+							'</div>'+
+						'</div>'+
+					'</div>'+
+					'<div class="btn-group">'+
+						'<button id="remove-event" type="button" data-toggle="dropdown" aria-expanded="false" class="pull-left dropdown-toggle">'+
+							'Remove Event'+
+							'<span class="caret"></span></button>'+
+							'<ul role="menu" class="dropdown-menu">'+
+								templist+
+							'</ul>'+
+					'</div>'+
+				'</div>';
+			for(var a = 0; a < sems.length; a += 1){
+				if(members[currentBatchIndex].members[currentMemberIndex].checklist[a].subjects.length != 0){
+					temphtml += '' + 
+						'<div>'+
+							'<div class="data-header">'+
+								'<h3 class="title-scho col-lg-12">' + sems[a] + '</h3>' +
+							'</div>';
+
+					temphtml += ''+
+						'<table class="table table-hover">'+
+							'<tr>'+
+								'<td>Subject</td>'+
+								'<td>Grade</td>'+
+								'<td>Units</td>'+
+								'<td></td>'+
+							'</tr>';
+					
+					for(var i = 0; i < members[currentBatchIndex].members[currentMemberIndex].checklist[a].subjects.length; i += 1){
+						temphtml += '' + 
+							'<tr class="yser-subject">' +
+								'<td class="subject-name">' + members[currentBatchIndex].members[currentMemberIndex].checklist[a].subjects[i].subject + '</td>' +
+								'<td class="subject-grade">' + members[currentBatchIndex].members[currentMemberIndex].checklist[a].subjects[i].grade + '</td>' +
+								'<td class="subject-units">' + members[currentBatchIndex].members[currentMemberIndex].checklist[a].subjects[i].units + '</td>' +
+								'<td><a class="edit" style="cursor:pointer">Edit</a></td>'+
+							'</tr>';
+					}
+
+					temphtml += "</table></div>";
+					//temphtml += tempheader + temptableheader + tempcontent + tempfooter;
+				} else {
+					temphtml += ''+
+						'<div class="text-left no-subjects">'+
+							'<h3 class="text-left title-scho">No subjects found for '+ sems[a] +'!</h3>'+
+						'</div>';
+
+				}
+			}
+
+			temphtml = tempbuttons + temphtml
+			tempheader = '';
+			tempcontent = '';
+			tempfooter = '';
+			templist = '';
+			$('#scho-stat').html(temphtml);
+			temphtml = '';
+		});
+	
+		$('body').on('click','.edit',function(){
+			$(this).html('Done');
+			$(this).addClass('done');
+			$(this).removeClass('edit');
+			var tempcode;
+			
+			tempcode = ''+
+				'<input class="form-control" type="text" value="' + $(this).closest('tr').find('.subject-name').text() + '"/>';
+			$(this).closest('tr').find('.subject-name').html(tempcode);
+
+			var option = 0.75;
+			var tempoption = '';
+			for(var z = 0; z < 11; z += 1){
+				if(option < 3) option += 0.25;
+				else option += 1;
+				if(option==$(this).closest('tr').find('.subject-grade').text()) tempoption += '<option selected="selected" value=' + option + '>' + option + '</option>';
+				else tempoption += '<option value=' + option + '>' + option + '</option>';
+			}
+			tempcode = ''+
+				'<select class="form-control">'+
+					tempoption +
+				'</select>';
+			$(this).closest('tr').find('.subject-grade').html(tempcode);
+
+			tempcode = '' +
+				'<input class="form-control" type="number" min=0 max=10 value='+ $(this).closest('tr').find('.subject-units').text() +' />';
+			$(this).closest('tr').find('.subject-units').html(tempcode);
+
+		});
+
+		$('body').on('click','.done',function(){
+			$(this).html('Edit');
+			$(this).addClass('edit');
+			$(this).removeClass('done');
+			var tempcode;
+			
+			tempcode = $(this).closest('tr').find('.subject-name').find('input').val();
+			$(this).closest('tr').find('.subject-name').html(tempcode);
+
+			tempcode = $(this).closest('tr').find('.subject-grade').find('select').val();
+			$(this).closest('tr').find('.subject-grade').html(tempcode);
+
+			tempcode = $(this).closest('tr').find('.subject-units').find('input').val();
+			$(this).closest('tr').find('.subject-units').html(tempcode);
+
+		});
+	});

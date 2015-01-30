@@ -1,0 +1,150 @@
+#ysers-per-batch{
+	background-color:rgba(200,200,200,1);
+	color:black;
+	padding:20px;
+	overflow:auto;
+	height:500px;
+}
+
+#ysers-per-batch .batch-container{
+	margin-bottom:5px;
+}
+
+.batch-member{
+	width:100%;
+	height:30px;
+	padding-top:5px;
+	padding-left:10px;
+	margin-bottom:2px;
+}
+
+.batch-member:hover{
+	background-color:rgba(0,0,0,0.1);
+	cursor:pointer;
+}
+
+#ysers-per-batch h1, 
+	#scho-stat h1,
+	#sem-menu h1,
+	#ysers-per-batch h2,
+	#scho-stat h2, 
+	#sem-menu h2, 
+	#ysers-per-batch h3, 
+	#scho-stat h3, 
+	#sem-menu h3,
+	#ysers-per-batch h4, 
+	#scho-stat h4,
+	#sem-menu h4{
+		margin-top:0px;
+}
+
+
+
+#scho-stat{
+	background-color:rgba(200,200,200,1);
+	color:black;
+	padding:20px;
+	height:500px;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+
+
+.title-header{
+	margin-top:0px;
+}
+
+
+
+.data-header{
+	width:100%;
+	float:left;
+}
+
+.data-header h3{
+	position:relative;
+	top: 8px;
+	margin-right:10px;
+	float:left;
+}
+
+.event-buttons{
+	width:100%;
+	height:11.3%;
+	clear:both;
+	float:none;
+	margin-bottom:10px;
+}
+
+#add-event{
+	position:relative;
+	float:left;
+
+	height:50px;
+	width:20%;
+	border:0px;
+
+	font-size:1em;
+
+	margin-top:0px;
+	margin-bottom:10px;
+	margin-left: 0%; 
+	margin-right: 1%;
+
+	top:0px;
+
+	background-color:rgba(42, 99, 189,1);
+	color:white;
+}
+
+#remove-event{
+	position:relative;
+	float:left;
+
+	height:50px;
+	width:120%;
+	border:0px;
+
+	font-size:1em;
+
+	margin-top:0px;
+	margin-bottom:10px;
+	margin-left: 0%; 
+	margin-right: 1%;
+
+	top:0px;
+
+	background-color:rgba(42, 99, 189,1);
+	color:white;
+}
+
+#add-event:hover , #edit-event:hover, #remove-event:hover, #prev-event:hover, #next-event:hover{
+	background-color:rgba(180,180,250,1);
+	font-weight:bold;
+	color:black;
+}
+
+#sem-menu{
+	height:500px;
+	background-color:rgba(200,200,200,1);
+	overflow:auto;
+	color:black;
+	padding:20px;
+}
+
+#yser-grade{
+	height:500px;
+	background-color:rgba(200,200,200,1);
+	overflow:auto;
+	color:black;
+	padding-right:20px;
+}
+
+.title-scho{
+	background-color:rgba(42, 99, 189,1);
+	color:white;
+	height:36px;
+	padding-left:10px;
+	padding-top:3px;
+}

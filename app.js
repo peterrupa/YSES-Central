@@ -53,7 +53,7 @@ var pool = mysql.createPool({
   user : 'root',
   password : '',
   database: 'yses_central'
-});
+});      
 
 //sockets
 
