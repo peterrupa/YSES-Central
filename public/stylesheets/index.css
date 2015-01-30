@@ -6,7 +6,7 @@ body{
 	-moz-background-size: 100%;
 	-o-background-size: 100%;
 	background-size: 100%;
-	background-color: #133c7b;
+	background-color: white;
 
 	overflow: visible;
 }
@@ -14,7 +14,6 @@ body{
 #first-landing{
 	height:676.5px;
 	padding-left:30px;
-	background-color:rgba(0,0,0,0.5);
 }
 
 #central-header{
@@ -86,6 +85,10 @@ body{
 	text-decoration:none;
 }
 
+#features{
+	background-color:white;
+}
+
 #screen {
 	overflow:hidden;
 	width:250px;
@@ -106,12 +109,6 @@ body{
 	margin:	2px;
 }
 
-.encloseall{
-	color:white;
-	margin-top: 100px;
-	margin-bottom: 70px;
-}
-
 .box{
 	background-color: 	rgba(0,0,50,1);
 	height:				250px;
@@ -125,13 +122,32 @@ body{
 
 .gallery{
 	width:100%;
-	height:100%;
+	height:150px;
 	margin:0px;
-	background-color: rgba(100,100,100,1);
+	color:black;
+}
+
+.carousel-control.left, .carousel-control.right{
+	background:none;
+	height:100%;
+	box-shadow:none;
+	color:rgba(0,0,0,0.1);
+}
+
+.carousel-indicators{
+	padding-top:0px;
+	margin:0px;
+	bottom:0px;
+	color:black;
+	background-color:rgba(0,0,0,0.4);
+	height:15%;
+	width:100%;
+	top:100%;
+	left:0;
 }
 
 div.item{
-	height:520px;
+	height:100px;
 }
 
 img.image{
@@ -158,7 +174,7 @@ img.image{
 .modal-content{
 	color: white;
 	padding:9px 15px;
-	background-color: rgba(30,30,30,0.99);
+	background-color: rgba(42, 42, 44,0.99);
 	-webkit-border-top-left-radius: 0px;
 	-webkit-border-top-right-radius: 0px;
 	-moz-border-radius-topleft: 0px;
@@ -327,12 +343,12 @@ ul.ui-autocomplete {
 }
 
 /*normal size*/
-@media screen and (min-width:769px) and (max-width: 1400px){
+/*@media screen and (min-width:769px) and (max-width: 1400px){
 	ul.nav{
 		float:right;
 	}
 }
-
+*/
 ::-webkit-scrollbar-track {
 	background-color:rgba(255,255,255,1);
 	border-radius: 0px;
