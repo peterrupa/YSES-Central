@@ -201,21 +201,7 @@ module.exports = function(app,pool,request){
 
 	/* TEST */
 	app.get('/test', function(req, res) {
-		var session = req.session;
-		if(session.userkey){
-			pool.getConnection(function(err,connection){
-				connection.query("SELECT first_name, picture, exec_position FROM `accounts` WHERE username="+connection.escape(session.userkey),function(err,rows){
-					if(err) console.log(err);
-					else{
-						res.render('test',{name: rows[0]["first_name"],picture: rows[0]["picture"].substring(7),exec_position: rows[0]["exec_position"]});
-					}
-				});
-				connection.release();
-			});
-		}
-		else{
-			res.render('index');
-		}
+		res.render('test');
 	});
 
 	app.get('/3/content', function(req, res) {

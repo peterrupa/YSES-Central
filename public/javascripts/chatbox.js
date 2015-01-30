@@ -182,13 +182,20 @@ $(document).ready(function(){
 
       var firstname = $(this).closest(".chatcontact").data("firstname");
 
-      $("#chatwindowcontainer").append("<div class='chatmainwindow'>"+openHTML(username,state,firstname)+closeHTML(username,state,firstname)+"</div>");
-      $(".chatwindow[data-username='"+username+"']").hide();
+      if($('.chatwindow[data-username="'+username+'"]').length == 0){
+        $("#chatwindowcontainer").append("<div class='chatmainwindow'>"+openHTML(username,state,firstname)+closeHTML(username,state,firstname)+"</div>");
+        $(".chatwindow[data-username='"+username+"']").hide();
+      }
+
 
       //request for messages
       socket.emit("fetchchat",username);
     }
     $(".chatwindowopen[data-username='"+username+"']").find(".chatsend").focus();
+
+    //remove search val and blur it
+    $('.searchbar').val("");
+    $('.searchbar').keyup();
   });
 
   //window toggle
@@ -408,7 +415,9 @@ $(document).ready(function(){
       if(userkey == recipient){
         var state = $('.chatcontact[data-username="'+opposite+'"]').find("span.right").text();
         var firstname = $('.chatcontact[data-username="'+opposite+'"]').data("firstname");
-        $("#chatwindowcontainer").append("<div class='chatmainwindow'>"+openHTML(opposite,state,firstname)+closeHTML(opposite,state,firstname)+"</div>");
+        if($('.chatmainwindow').find('.chatwindow[data-username="'+opposite+'"]').length == 0){
+          $("#chatwindowcontainer").append("<div class='chatmainwindow'>"+openHTML(opposite,state,firstname)+closeHTML(opposite,state,firstname)+"</div>");
+        }
 
         socket.emit("fetchchat",opposite,null,true);
       }
@@ -455,7 +464,7 @@ $(document).ready(function(){
       if($(this).val() != ""){
         //emit socket event
 
-        socket.emit('sendchat',$(this).closest(".chatwindowopen").data("username"),$('.chatsend').val());
+        socket.emit('sendchat',$(this).closest(".chatwindowopen").data("username"),$(this).val());
 
         //clear val
         $(this).val("");
