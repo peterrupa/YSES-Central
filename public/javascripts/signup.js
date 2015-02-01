@@ -369,13 +369,13 @@ $(document).ready(function(){
 				borderColor: "red",
 				borderWidth: "1px",
 				borderStyle: "solid"
-		});*/
+		});
 
 		if (this.value.length <= 3 && this.value.length > 0) {
 			$this.tooltip("show");
 		} else {
 			$this.tooltip("hide");
 		}
-	});
+	});*/
 
 });
