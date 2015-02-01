@@ -234,7 +234,7 @@ $(document).ready(function(){
 
 	//make this dynamic and for all cases
 
-	$(".input-text").tooltip({
+	/*$(".input-text").tooltip({
 		placement: "right",
 		trigger: "focus",
 		title: "invalid"
@@ -369,7 +369,7 @@ $(document).ready(function(){
 				borderColor: "red",
 				borderWidth: "1px",
 				borderStyle: "solid"
-		});
+		});*/
 
 		if (this.value.length <= 3 && this.value.length > 0) {
 			$this.tooltip("show");
